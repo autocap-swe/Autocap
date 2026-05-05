@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: 'Contact · AutoCap Group',
   description: 'Get in touch — for workshop owners, investors, media, or general enquiries.',
 };
+<<<<<<< HEAD
 
 const fallbackContent: ContactContent = {
   hero: {
