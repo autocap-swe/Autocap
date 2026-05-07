@@ -70,6 +70,7 @@ export async function sendInvestorEmail(params: InvestorEmailParams) {
   });
 }
 
+
 interface EntrepreneurEmailParams {
   name: string;
   workshopName: string;
