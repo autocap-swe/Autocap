@@ -1,17 +1,17 @@
-'use client'
+'use client';
 
-import Image from 'next/image'
-import Link from 'next/link'
-import { motion } from 'framer-motion'
+import Image from 'next/image';
+import { Link } from '@/i18n/navigation';
+import { motion } from 'framer-motion';
 
 interface HeroProps {
-  headline: string
-  subheadline: string
-  backgroundImage: string
-  cta1Text: string
-  cta1Link: string
-  cta2Text: string
-  cta2Link: string
+  headline: string;
+  subheadline: string;
+  backgroundImage: string;
+  cta1Text: string;
+  cta1Link: string;
+  cta2Text: string;
+  cta2Link: string;
 }
 
 export function Hero({
@@ -27,13 +27,7 @@ export function Hero({
     <section className="relative flex h-screen min-h-[600px] items-center justify-center overflow-hidden">
       {/* Background Video with Overlay */}
       <div className="absolute inset-0 z-0">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="h-full w-full object-cover"
-        >
+        <video autoPlay loop muted playsInline className="h-full w-full object-cover">
           <source src="/Landing video.mp4" type="video/mp4" />
           {/* Fallback image if video doesn't load */}
           <Image
@@ -84,5 +78,5 @@ export function Hero({
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

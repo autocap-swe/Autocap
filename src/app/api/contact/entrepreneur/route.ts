@@ -25,7 +25,6 @@ export async function POST(request: NextRequest) {
   try {
     body = await request.json();
   } catch {
-<<<<<<< HEAD
     return NextResponse.json({ error: 'invalid_json' }, { status: 400, headers: rlHeaders });
   }
 
@@ -48,13 +47,6 @@ export async function POST(request: NextRequest) {
 
   const { status, body: responseBody } = await handleEntrepreneurForm(body);
   return NextResponse.json(responseBody, { status, headers: rlHeaders });
-=======
-    return NextResponse.json({ error: 'invalid_json' }, { status: 400 });
-  }
-
-  const { status, body: responseBody } = await handleEntrepreneurForm(body);
-  return NextResponse.json(responseBody, { status });
->>>>>>> feat: Entrepreneurs form
 }
 
 export async function GET() {

@@ -7,13 +7,26 @@ export async function getWorkshopsContent(
   revalidate = REVALIDATE_LOW,
   locale?: string
 ): Promise<Workshop[]> {
-  return getContent<CmsWorkshop[], Workshop[]>('workshops', {
+  const options = {
     revalidate,
-    locale,
     tags: ['workshops'],
     params: { 'pagination[pageSize]': '100' },
     mapper: workshopsMapper,
+  };
+
+  const results = await getContent<CmsWorkshop[], Workshop[]>('workshops', {
+    ...options,
+    locale,
   });
+
+  if (results.length === 0 && locale && locale !== 'en') {
+    return getContent<CmsWorkshop[], Workshop[]>('workshops', {
+      ...options,
+      locale: 'en',
+    });
+  }
+
+  return results;
 }
 
 export async function getWorkshopBySlugContent(
@@ -21,15 +34,28 @@ export async function getWorkshopBySlugContent(
   revalidate = REVALIDATE_LOW,
   locale?: string
 ): Promise<Workshop | null> {
-  const results = await getContent<CmsWorkshop[], Workshop[]>('workshops', {
+  const options = {
     revalidate,
-    locale,
     tags: ['workshops', `workshop:${slug}`],
     params: {
       'filters[slug][$eq]': slug,
       'pagination[pageSize]': '1',
     },
     mapper: workshopsMapper,
+  };
+
+  const results = await getContent<CmsWorkshop[], Workshop[]>('workshops', {
+    ...options,
+    locale,
   });
+
+  if (!results[0] && locale && locale !== 'en') {
+    const enResults = await getContent<CmsWorkshop[], Workshop[]>('workshops', {
+      ...options,
+      locale: 'en',
+    });
+    return enResults[0] ?? null;
+  }
+
   return results[0] ?? null;
 }
