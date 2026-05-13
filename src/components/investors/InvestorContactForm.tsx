@@ -1,17 +1,21 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { investorFormSchema, type InvestorFormData } from '@/lib/validation/investorForm'
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import {
+  investorFormSchema,
+  ENQUIRY_TYPES,
+  type InvestorFormData,
+} from '@/lib/validation/investorForm';
 
 interface InvestorContactFormProps {
-  successMessage: string
+  successMessage: string;
 }
 
 export function InvestorContactForm({ successMessage }: InvestorContactFormProps) {
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSuccess, setIsSuccess] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const {
     register,
@@ -20,19 +24,32 @@ export function InvestorContactForm({ successMessage }: InvestorContactFormProps
     reset,
   } = useForm<InvestorFormData>({
     resolver: zodResolver(investorFormSchema),
-  })
+  });
 
   const onSubmit = async (data: InvestorFormData) => {
-    setIsSubmitting(true)
+    setIsSubmitting(true);
 
-    // Simulate API call (prototype mode - log to console)
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    console.log('Investor enquiry submitted:', data)
+    const res = await fetch('/api/contact/investor', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        fullName: data.name,
+        organisation: data.organization,
+        role: data.role,
+        enquiryType: data.enquiryType,
+        email: data.email,
+        message: data.message,
+        gdprConsent: data.gdprConsent,
+      }),
+    });
 
-    setIsSubmitting(false)
-    setIsSuccess(true)
-    reset()
-  }
+    setIsSubmitting(false);
+
+    if (res.ok) {
+      setIsSuccess(true);
+      reset();
+    }
+  };
 
   if (isSuccess) {
     return (
@@ -54,9 +71,7 @@ export function InvestorContactForm({ successMessage }: InvestorContactFormProps
             </svg>
           </div>
           <h3 className="mb-4 text-2xl font-semibold text-[#1C1C1E]">Thank you</h3>
-          <p className="mx-auto max-w-md text-lg leading-relaxed text-gray-700">
-            {successMessage}
-          </p>
+          <p className="mx-auto max-w-md text-lg leading-relaxed text-gray-700">{successMessage}</p>
           <button
             onClick={() => setIsSuccess(false)}
             className="mt-6 text-[#C8102E] hover:underline"
@@ -65,7 +80,7 @@ export function InvestorContactForm({ successMessage }: InvestorContactFormProps
           </button>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -118,6 +133,28 @@ export function InvestorContactForm({ successMessage }: InvestorContactFormProps
           {errors.role && <p className="mt-2 text-sm text-[#C8102E]">{errors.role.message}</p>}
         </div>
 
+        {/* Enquiry Type */}
+        <div>
+          <label htmlFor="enquiryType" className="mb-2 block text-sm font-medium text-gray-700">
+            Enquiry type <span className="text-[#C8102E]">*</span>
+          </label>
+          <select
+            {...register('enquiryType')}
+            id="enquiryType"
+            className="w-full rounded-md border border-gray-300 px-4 py-3 text-gray-900 focus:border-[#C8102E] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
+          >
+            <option value="">Select enquiry type</option>
+            {ENQUIRY_TYPES.map(type => (
+              <option key={type} value={type}>
+                {type}
+              </option>
+            ))}
+          </select>
+          {errors.enquiryType && (
+            <p className="mt-2 text-sm text-[#C8102E]">{errors.enquiryType.message}</p>
+          )}
+        </div>
+
         {/* Email */}
         <div>
           <label htmlFor="email" className="mb-2 block text-sm font-medium text-gray-700">
@@ -160,7 +197,9 @@ export function InvestorContactForm({ successMessage }: InvestorContactFormProps
             className="w-full rounded-md border border-gray-300 px-4 py-3 text-gray-900 focus:border-[#C8102E] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
             placeholder="Tell us about your investment focus or specific areas of interest..."
           />
-          {errors.message && <p className="mt-2 text-sm text-[#C8102E]">{errors.message.message}</p>}
+          {errors.message && (
+            <p className="mt-2 text-sm text-[#C8102E]">{errors.message.message}</p>
+          )}
         </div>
 
         {/* GDPR Consent */}
@@ -192,5 +231,5 @@ export function InvestorContactForm({ successMessage }: InvestorContactFormProps
         </button>
       </div>
     </form>
-  )
+  );
 }

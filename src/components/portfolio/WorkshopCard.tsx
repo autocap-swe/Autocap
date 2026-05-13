@@ -1,15 +1,15 @@
-'use client'
+'use client';
 
-import Link from 'next/link'
-import Image from 'next/image'
-import { motion } from 'framer-motion'
-import { MapPin, Calendar } from 'lucide-react'
-import type { Workshop } from '@/content/workshops'
-import { WorkshopImagePlaceholder } from './WorkshopImagePlaceholder'
+import Link from 'next/link';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { MapPin, Calendar } from 'lucide-react';
+import type { Workshop } from '@/lib/cms/workshop/types';
+import { WorkshopImagePlaceholder } from './WorkshopImagePlaceholder';
 
 interface WorkshopCardProps {
-  workshop: Workshop
-  index?: number
+  workshop: Workshop;
+  index?: number;
 }
 
 export function WorkshopCard({ workshop, index = 0 }: WorkshopCardProps) {
@@ -67,5 +67,5 @@ export function WorkshopCard({ workshop, index = 0 }: WorkshopCardProps) {
         </div>
       </Link>
     </motion.div>
-  )
+  );
 }

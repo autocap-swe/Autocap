@@ -1,5 +1,5 @@
-import Link from 'next/link'
-import type { ContactCardData } from '@/content/contact'
+import Link from 'next/link';
+import type { ContactCardData } from '@/lib/cms/contact/types';
 
 export function ContactCard({ title, description, ctaText, ctaLink, bgColor }: ContactCardData) {
   return (
@@ -11,5 +11,5 @@ export function ContactCard({ title, description, ctaText, ctaLink, bgColor }: C
       <p className="mb-6 text-lg leading-relaxed text-gray-700">{description}</p>
       <span className="inline-block font-semibold text-[#C8102E] hover:underline">{ctaText}</span>
     </Link>
-  )
+  );
 }

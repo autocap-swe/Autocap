@@ -5,5 +5,4 @@
  * Import content using: import { workshops } from '@/content'
  */
 
-export * from './workshops'
-export * from './entrepreneurs'
+export * from './entrepreneurs';

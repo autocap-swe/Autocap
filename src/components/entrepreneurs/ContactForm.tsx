@@ -1,18 +1,21 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { entrepreneurFormSchema, type EntrepreneurFormData } from '@/lib/validation/entrepreneurForm'
-import { revenueOptions } from '@/content/entrepreneurs'
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import {
+  entrepreneurFormSchema,
+  type EntrepreneurFormData,
+} from '@/lib/validation/entrepreneurForm';
+import { revenueOptions } from '@/content/entrepreneurs';
 
 interface ContactFormProps {
-  successMessage: string
+  successMessage: string;
 }
 
 export function ContactForm({ successMessage }: ContactFormProps) {
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
@@ -21,34 +24,30 @@ export function ContactForm({ successMessage }: ContactFormProps) {
     reset,
   } = useForm<EntrepreneurFormData>({
     resolver: zodResolver(entrepreneurFormSchema),
-  })
+  });
 
   const onSubmit = async (data: EntrepreneurFormData) => {
-    setIsSubmitting(true)
+    setIsSubmitting(true);
 
-    // Prototype mode: Log data to console
-    console.log('📧 Entrepreneur Enquiry Received:', {
-      timestamp: new Date().toISOString(),
-      data,
-    })
+    try {
+      const response = await fetch('/api/contact/entrepreneur', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
 
-    // Simulate API call delay
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
 
-    // Show success message
-    setIsSubmitted(true)
-    setIsSubmitting(false)
-
-    // Clear form
-    reset()
-
-    // Production TODO: Send to API endpoint
-    // const response = await fetch('/api/entrepreneurs/contact', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(data),
-    // })
-  }
+      setIsSubmitted(true);
+      reset();
+    } catch (err) {
+      console.error('[Entrepreneur form] Submission failed:', err);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   if (isSubmitted) {
     return (
@@ -70,9 +69,7 @@ export function ContactForm({ successMessage }: ContactFormProps) {
             </svg>
           </div>
           <h3 className="mb-4 text-2xl font-semibold text-[#1C1C1E]">Thank you</h3>
-          <p className="mx-auto max-w-md text-lg leading-relaxed text-gray-700">
-            {successMessage}
-          </p>
+          <p className="mx-auto max-w-md text-lg leading-relaxed text-gray-700">{successMessage}</p>
           <button
             onClick={() => setIsSubmitted(false)}
             className="mt-6 text-[#C8102E] hover:underline"
@@ -81,7 +78,7 @@ export function ContactForm({ successMessage }: ContactFormProps) {
           </button>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -99,9 +96,7 @@ export function ContactForm({ successMessage }: ContactFormProps) {
             className="w-full rounded-md border border-gray-300 px-4 py-3 text-gray-900 focus:border-[#C8102E] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
             placeholder="Anders Svensson"
           />
-          {errors.name && (
-            <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
-          )}
+          {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>}
         </div>
 
         {/* Workshop Name */}
@@ -149,15 +144,13 @@ export function ContactForm({ successMessage }: ContactFormProps) {
             className="w-full rounded-md border border-gray-300 px-4 py-3 text-gray-900 focus:border-[#C8102E] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
           >
             <option value="">Select revenue range</option>
-            {revenueOptions.map((option) => (
+            {revenueOptions.map(option => (
               <option key={option.value} value={option.value}>
                 {option.label}
               </option>
             ))}
           </select>
-          {errors.revenue && (
-            <p className="mt-1 text-sm text-red-600">{errors.revenue.message}</p>
-          )}
+          {errors.revenue && <p className="mt-1 text-sm text-red-600">{errors.revenue.message}</p>}
         </div>
 
         {/* Email */}
@@ -172,9 +165,7 @@ export function ContactForm({ successMessage }: ContactFormProps) {
             className="w-full rounded-md border border-gray-300 px-4 py-3 text-gray-900 focus:border-[#C8102E] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
             placeholder="anders@svensson-dack.se"
           />
-          {errors.email && (
-            <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
-          )}
+          {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>}
         </div>
 
         {/* Phone */}
@@ -189,9 +180,7 @@ export function ContactForm({ successMessage }: ContactFormProps) {
             className="w-full rounded-md border border-gray-300 px-4 py-3 text-gray-900 focus:border-[#C8102E] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
             placeholder="+46 70 123 4567"
           />
-          {errors.phone && (
-            <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>
-          )}
+          {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>}
         </div>
 
         {/* Message */}
@@ -236,5 +225,5 @@ export function ContactForm({ successMessage }: ContactFormProps) {
         </button>
       </div>
     </form>
-  )
+  );
 }

@@ -1,32 +1,31 @@
-import type { Metadata } from 'next'
-import Link from 'next/link'
-import { Building2, CheckCircle2 } from 'lucide-react'
-import { aboutContent } from '@/content/about'
-import { ValueCard } from '@/components/about/ValueCard'
+import type { Metadata } from 'next';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Building2, CheckCircle2 } from 'lucide-react';
+import { aboutContent } from '@/content/about';
+import { ValueCard } from '@/components/about/ValueCard';
 
 export const metadata: Metadata = {
   title: 'About AutoCap Group · Built by entrepreneurs, run with discipline',
   description:
     'Nordic consolidation platform for tire service centres — founder-led, privately held, and built to grow.',
-}
+};
 
 export default function AboutPage() {
-  const { hero, story, mission, values, differentiators, closing } = aboutContent
+  const { hero, story, mission, values, differentiators, closing } = aboutContent;
 
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative min-h-[85vh] overflow-hidden bg-gradient-to-br from-[#EDE4D8] via-[#DDD3C8] to-[#EDE4D8]">
-        {/* Subtle Pattern Overlay */}
-        <div className="absolute inset-0 opacity-[0.03]">
-          <div
-            className="h-full w-full"
-            style={{
-              backgroundImage: 'radial-gradient(circle, #1C1C1E 1px, transparent 1px)',
-              backgroundSize: '32px 32px',
-            }}
-          />
-        </div>
+      <section className="relative min-h-[85vh] overflow-hidden">
+        <Image
+          src="/images/Company%20Overview.webp"
+          alt="AutoCap company overview"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/10" />
 
         <div className="relative flex min-h-[85vh] items-center justify-center px-6 py-24 md:px-8">
           <div className="mx-auto max-w-5xl text-center">
@@ -38,7 +37,7 @@ export default function AboutPage() {
             </div>
 
             {/* Headline */}
-            <h1 className="mb-8 text-5xl font-black leading-[1.1] text-[#1C1C1E] md:text-6xl lg:text-7xl xl:text-8xl">
+            <h1 className="mb-8 text-5xl font-black leading-[1.1] text-white md:text-6xl lg:text-7xl xl:text-8xl">
               {hero.headline}
             </h1>
 
@@ -46,12 +45,12 @@ export default function AboutPage() {
             <div className="mx-auto mb-8 h-1 w-24 bg-[#C8102E]" />
 
             {/* Subheadline */}
-            <p className="mx-auto mb-12 max-w-3xl text-xl leading-relaxed text-gray-700 md:text-2xl md:leading-relaxed">
+            <p className="mx-auto mb-12 max-w-3xl text-xl leading-relaxed text-white md:text-2xl md:leading-relaxed">
               {hero.subheadline}
             </p>
 
             {/* Trust Indicator */}
-            <div className="mt-16 flex items-center justify-center gap-3 text-sm text-gray-600">
+            <div className="mt-16 flex items-center justify-center gap-3 text-sm text-white">
               <div className="h-2 w-2 rounded-full bg-green-500" />
               <span className="font-medium">12 Workshops · ~50 Employees · ~200 MSEK Revenue</span>
             </div>
@@ -97,9 +96,7 @@ export default function AboutPage() {
           {/* Vision */}
           <div className="rounded-2xl bg-white/50 p-8 md:p-12">
             <h3 className="mb-4 text-2xl font-bold text-[#1C1C1E] md:text-3xl">Our Vision</h3>
-            <p className="text-lg leading-relaxed text-gray-700 md:text-xl">
-              {mission.vision}
-            </p>
+            <p className="text-lg leading-relaxed text-gray-700 md:text-xl">{mission.vision}</p>
           </div>
         </div>
       </section>
@@ -120,11 +117,8 @@ export default function AboutPage() {
 
           {/* Differentiators Grid */}
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-            {differentiators.items.map((item) => (
-              <div
-                key={item.id}
-                className="rounded-2xl border border-gray-200 bg-white p-6 md:p-8"
-              >
+            {differentiators.items.map(item => (
+              <div key={item.id} className="rounded-2xl border border-gray-200 bg-white p-6 md:p-8">
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#C8102E]/10">
                   <CheckCircle2 className="h-6 w-6 text-[#C8102E]" strokeWidth={2.5} />
                 </div>
@@ -173,5 +167,5 @@ export default function AboutPage() {
         </div>
       </section>
     </main>
-  )
+  );
 }

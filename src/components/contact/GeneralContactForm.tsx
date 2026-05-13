@@ -1,17 +1,22 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { generalContactFormSchema, type GeneralContactFormData } from '@/lib/validation/generalContactForm'
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import {
+  generalContactFormSchema,
+  type GeneralContactFormData,
+} from '@/lib/validation/generalContactForm';
+import type { ContactFormLabels } from '@/lib/cms/contact/types';
 
 interface GeneralContactFormProps {
-  successMessage: string
+  successMessage: string;
+  formLabels: ContactFormLabels;
 }
 
-export function GeneralContactForm({ successMessage }: GeneralContactFormProps) {
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false)
+export function GeneralContactForm({ successMessage, formLabels }: GeneralContactFormProps) {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
@@ -20,34 +25,30 @@ export function GeneralContactForm({ successMessage }: GeneralContactFormProps) 
     reset,
   } = useForm<GeneralContactFormData>({
     resolver: zodResolver(generalContactFormSchema),
-  })
+  });
 
   const onSubmit = async (data: GeneralContactFormData) => {
-    setIsSubmitting(true)
+    setIsSubmitting(true);
 
-    // Prototype mode: Log data to console
-    console.log('📧 General Contact Enquiry Received:', {
-      timestamp: new Date().toISOString(),
-      data,
-    })
+    try {
+      const response = await fetch('/api/contact/general', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
 
-    // Simulate API call delay
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+      if (!response.ok) {
+        throw new Error(`Request failed with status ${response.status}`);
+      }
 
-    // Show success message
-    setIsSubmitted(true)
-    setIsSubmitting(false)
-
-    // Clear form
-    reset()
-
-    // Production TODO: Send to API endpoint
-    // const response = await fetch('/api/contact/general', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(data),
-    // })
-  }
+      setIsSubmitted(true);
+      reset();
+    } catch (err) {
+      console.error('[Contact] Submission failed:', err);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   if (isSubmitted) {
     return (
@@ -69,9 +70,7 @@ export function GeneralContactForm({ successMessage }: GeneralContactFormProps) 
             </svg>
           </div>
           <h3 className="mb-4 text-2xl font-semibold text-[#1C1C1E]">Thank you</h3>
-          <p className="mx-auto max-w-md text-lg leading-relaxed text-gray-700">
-            {successMessage}
-          </p>
+          <p className="mx-auto max-w-md text-lg leading-relaxed text-gray-700">{successMessage}</p>
           <button
             onClick={() => setIsSubmitted(false)}
             className="mt-6 text-[#C8102E] hover:underline"
@@ -80,7 +79,7 @@ export function GeneralContactForm({ successMessage }: GeneralContactFormProps) 
           </button>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -89,41 +88,37 @@ export function GeneralContactForm({ successMessage }: GeneralContactFormProps) 
         {/* Name */}
         <div>
           <label htmlFor="name" className="mb-2 block text-sm font-medium text-gray-700">
-            Name <span className="text-[#C8102E]">*</span>
+            {formLabels.nameLabel} <span className="text-[#C8102E]">*</span>
           </label>
           <input
             {...register('name')}
             type="text"
             id="name"
             className="w-full rounded-md border border-gray-300 px-4 py-3 text-gray-900 focus:border-[#C8102E] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
-            placeholder="Your name"
+            placeholder={formLabels.namePlaceholder}
           />
-          {errors.name && (
-            <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
-          )}
+          {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>}
         </div>
 
         {/* Email */}
         <div>
           <label htmlFor="email" className="mb-2 block text-sm font-medium text-gray-700">
-            Email <span className="text-[#C8102E]">*</span>
+            {formLabels.emailLabel} <span className="text-[#C8102E]">*</span>
           </label>
           <input
             {...register('email')}
             type="email"
             id="email"
             className="w-full rounded-md border border-gray-300 px-4 py-3 text-gray-900 focus:border-[#C8102E] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
-            placeholder="your.email@example.com"
+            placeholder={formLabels.emailPlaceholder}
           />
-          {errors.email && (
-            <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
-          )}
+          {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>}
         </div>
 
         {/* Subject */}
         <div>
           <label htmlFor="subject" className="mb-2 block text-sm font-medium text-gray-700">
-            Subject <span className="text-[#C8102E]">*</span>
+            {formLabels.subjectLabel} <span className="text-[#C8102E]">*</span>
           </label>
           <input
             {...register('subject')}
@@ -131,17 +126,15 @@ export function GeneralContactForm({ successMessage }: GeneralContactFormProps) 
             id="subject"
             maxLength={200}
             className="w-full rounded-md border border-gray-300 px-4 py-3 text-gray-900 focus:border-[#C8102E] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
-            placeholder="What is this about?"
+            placeholder={formLabels.subjectPlaceholder}
           />
-          {errors.subject && (
-            <p className="mt-1 text-sm text-red-600">{errors.subject.message}</p>
-          )}
+          {errors.subject && <p className="mt-1 text-sm text-red-600">{errors.subject.message}</p>}
         </div>
 
         {/* Message */}
         <div>
           <label htmlFor="message" className="mb-2 block text-sm font-medium text-gray-700">
-            Message <span className="text-[#C8102E]">*</span>
+            {formLabels.messageLabel} <span className="text-[#C8102E]">*</span>
           </label>
           <textarea
             {...register('message')}
@@ -149,11 +142,9 @@ export function GeneralContactForm({ successMessage }: GeneralContactFormProps) 
             rows={5}
             maxLength={2000}
             className="w-full rounded-md border border-gray-300 px-4 py-3 text-gray-900 focus:border-[#C8102E] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
-            placeholder="Tell us more..."
+            placeholder={formLabels.messagePlaceholder}
           />
-          {errors.message && (
-            <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
-          )}
+          {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>}
         </div>
 
         {/* GDPR Consent */}
@@ -165,8 +156,7 @@ export function GeneralContactForm({ successMessage }: GeneralContactFormProps) 
               className="mt-1 h-4 w-4 rounded border-gray-300 text-[#C8102E] focus:ring-[#C8102E]"
             />
             <span className="ml-3 text-sm text-gray-700">
-              I agree to the processing of my personal data in accordance with AutoCap&apos;s
-              privacy policy. <span className="text-[#C8102E]">*</span>
+              {formLabels.gdprConsentText} <span className="text-[#C8102E]">*</span>
             </span>
           </label>
           {errors.gdprConsent && (
@@ -180,9 +170,9 @@ export function GeneralContactForm({ successMessage }: GeneralContactFormProps) 
           disabled={isSubmitting}
           className="w-full rounded-md bg-[#C8102E] px-8 py-4 text-lg font-semibold text-white transition-all hover:bg-[#A00D25] disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {isSubmitting ? 'Sending...' : 'Send Message'}
+          {isSubmitting ? 'Sending...' : formLabels.submitButtonText}
         </button>
       </div>
     </form>
-  )
+  );
 }

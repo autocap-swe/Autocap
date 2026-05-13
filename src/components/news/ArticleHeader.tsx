@@ -1,19 +1,19 @@
-import { NewsArticle } from '@/content/news'
-import { NewsCategoryBadge } from './NewsCategoryBadge'
+import type { NewsArticle } from '@/lib/cms/article/types';
+import { NewsCategoryBadge } from './NewsCategoryBadge';
 
 interface ArticleHeaderProps {
-  article: NewsArticle
+  article: NewsArticle;
 }
 
 export function ArticleHeader({ article }: ArticleHeaderProps) {
   const formatDate = (dateString: string): string => {
-    const date = new Date(dateString)
+    const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
-    })
-  }
+    });
+  };
 
   return (
     <header className="bg-gradient-to-br from-[#F5F0EB] to-[#EDE8E3] py-16">
@@ -37,5 +37,5 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
         <div className="mt-8 h-1 w-24 rounded-full border-4 border-[#C8102E]" />
       </div>
     </header>
-  )
+  );
 }

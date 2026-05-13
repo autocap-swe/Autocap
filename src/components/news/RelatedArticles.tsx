@@ -1,15 +1,13 @@
-import { getRelatedArticles } from '@/content/news'
-import { NewsCard } from './NewsCard'
+import { NewsCard } from './NewsCard';
+import type { NewsArticle } from '@/lib/cms/article/types';
 
 interface RelatedArticlesProps {
-  articleId: string
+  articles: NewsArticle[];
 }
 
-export function RelatedArticles({ articleId }: RelatedArticlesProps) {
-  const relatedArticles = getRelatedArticles(articleId, 3)
-
-  if (relatedArticles.length === 0) {
-    return null
+export function RelatedArticles({ articles }: RelatedArticlesProps) {
+  if (articles.length === 0) {
+    return null;
   }
 
   return (
@@ -18,11 +16,11 @@ export function RelatedArticles({ articleId }: RelatedArticlesProps) {
         <h2 className="mb-8 text-3xl font-bold text-[#1C1C1E]">Related Reading</h2>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {relatedArticles.map((article) => (
+          {articles.map(article => (
             <NewsCard key={article.id} article={article} />
           ))}
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -1,4 +1,4 @@
-import type { CompanyContactInfo } from '@/content/contact'
+import type { CompanyContactInfo } from '@/lib/cms/contact/types';
 
 export function CompanyInfo({ email, address, businessHours }: CompanyContactInfo) {
   return (
@@ -8,10 +8,7 @@ export function CompanyInfo({ email, address, businessHours }: CompanyContactInf
       <div className="space-y-4">
         <div>
           <p className="text-sm font-medium text-gray-500">Email</p>
-          <a
-            href={`mailto:${email}`}
-            className="text-lg text-[#C8102E] hover:underline"
-          >
+          <a href={`mailto:${email}`} className="text-lg text-[#C8102E] hover:underline">
             {email}
           </a>
         </div>
@@ -31,5 +28,5 @@ export function CompanyInfo({ email, address, businessHours }: CompanyContactInf
         )}
       </div>
     </div>
-  )
+  );
 }

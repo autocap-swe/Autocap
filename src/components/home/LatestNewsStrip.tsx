@@ -1,11 +1,14 @@
-import { newsContent } from '@/content/news'
-import { NewsCard } from '@/components/news/NewsCard'
+import { NewsCard } from '@/components/news/NewsCard';
+import type { NewsArticle } from '@/lib/cms/article/types';
 
-export function LatestNewsStrip() {
-  // Sort articles by publishDate descending and take first 3
-  const latestArticles = [...newsContent.articles]
+interface LatestNewsStripProps {
+  articles: NewsArticle[];
+}
+
+export function LatestNewsStrip({ articles }: LatestNewsStripProps) {
+  const latestArticles = [...articles]
     .sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime())
-    .slice(0, 3)
+    .slice(0, 3);
 
   return (
     <section className="w-full bg-gray-50 py-20 md:py-28">
@@ -20,11 +23,11 @@ export function LatestNewsStrip() {
 
         {/* News Grid */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-          {latestArticles.map((article) => (
+          {latestArticles.map(article => (
             <NewsCard key={article.id} article={article} />
           ))}
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -1,13 +1,13 @@
-import { ArticleContentBlock } from '@/content/news'
-import { ContentParagraph } from './content/ContentParagraph'
-import { ContentHeading } from './content/ContentHeading'
-import { ContentImage } from './content/ContentImage'
-import { ContentQuote } from './content/ContentQuote'
-import { ContentList } from './content/ContentList'
-import { ContentCallout } from './content/ContentCallout'
+import type { ArticleContentBlock } from '@/lib/cms/article/types';
+import { ContentParagraph } from './content/ContentParagraph';
+import { ContentHeading } from './content/ContentHeading';
+import { ContentImage } from './content/ContentImage';
+import { ContentQuote } from './content/ContentQuote';
+import { ContentList } from './content/ContentList';
+import { ContentCallout } from './content/ContentCallout';
 
 interface ArticleBodyProps {
-  content: ArticleContentBlock[]
+  content: ArticleContentBlock[];
 }
 
 export function ArticleBody({ content }: ArticleBodyProps) {
@@ -16,7 +16,7 @@ export function ArticleBody({ content }: ArticleBodyProps) {
       {content.map((block, index) => {
         switch (block.type) {
           case 'paragraph':
-            return <ContentParagraph key={index} content={block.content} />
+            return <ContentParagraph key={index} content={block.content} />;
           case 'heading':
             return (
               <ContentHeading
@@ -25,7 +25,7 @@ export function ArticleBody({ content }: ArticleBodyProps) {
                 content={block.content}
                 id={block.id}
               />
-            )
+            );
           case 'image':
             return (
               <ContentImage
@@ -35,7 +35,7 @@ export function ArticleBody({ content }: ArticleBodyProps) {
                 caption={block.caption}
                 credit={block.credit}
               />
-            )
+            );
           case 'quote':
             return (
               <ContentQuote
@@ -44,27 +44,15 @@ export function ArticleBody({ content }: ArticleBodyProps) {
                 attribution={block.attribution}
                 role={block.role}
               />
-            )
+            );
           case 'list':
-            return (
-              <ContentList
-                key={index}
-                style={block.style}
-                items={block.items}
-              />
-            )
+            return <ContentList key={index} style={block.style} items={block.items} />;
           case 'callout':
-            return (
-              <ContentCallout
-                key={index}
-                variant={block.variant}
-                content={block.content}
-              />
-            )
+            return <ContentCallout key={index} variant={block.variant} content={block.content} />;
           default:
-            return null
+            return null;
         }
       })}
     </article>
-  )
+  );
 }

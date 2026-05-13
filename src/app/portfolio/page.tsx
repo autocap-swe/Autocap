@@ -1,28 +1,29 @@
-import { MapPin, Building2 } from 'lucide-react'
-import { WorkshopMap } from '@/components/portfolio/WorkshopMap'
-import { WorkshopGrid } from '@/components/portfolio/WorkshopGrid'
-import { workshops } from '@/content/workshops'
+import Image from 'next/image';
+import { MapPin, Building2 } from 'lucide-react';
+import { WorkshopMap } from '@/components/portfolio/WorkshopMap';
+import { WorkshopGrid } from '@/components/portfolio/WorkshopGrid';
+import { getWorkshopsContent } from '@/lib/cms/workshop';
 
 export const metadata = {
   title: 'Our Portfolio · AutoCap Group',
-  description: "12 tire service workshops across Sweden. Explore AutoCap Group's growing portfolio.",
-}
+  description:
+    "12 tire service workshops across Sweden. Explore AutoCap Group's growing portfolio.",
+};
 
-export default function PortfolioPage() {
+export default async function PortfolioPage() {
+  const workshops = await getWorkshopsContent().catch(() => []);
   return (
     <>
       {/* Page Header */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#E4E2DE] via-[#D8D6D2] to-[#E4E2DE] py-20 md:py-28">
-        {/* Subtle Pattern Overlay */}
-        <div className="absolute inset-0 opacity-[0.02]">
-          <div
-            className="h-full w-full"
-            style={{
-              backgroundImage: 'radial-gradient(circle, #1C1C1E 1px, transparent 1px)',
-              backgroundSize: '32px 32px',
-            }}
-          />
-        </div>
+      <section className="relative overflow-hidden py-20 md:py-28">
+        <Image
+          src="/images/Portfolio.webp"
+          alt="AutoCap portfolio workshop"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/10" />
 
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           {/* Icon Badge */}
@@ -31,14 +32,14 @@ export default function PortfolioPage() {
             <span className="text-sm font-semibold text-[#C8102E]">12 Workshops</span>
           </div>
 
-          <h1 className="mb-6 text-5xl font-black text-[#1C1C1E] md:text-6xl lg:text-7xl">
+          <h1 className="mb-6 text-5xl font-black text-white md:text-6xl lg:text-7xl">
             Our Portfolio
           </h1>
 
           {/* Decorative Line */}
           <div className="mb-8 h-1 w-24 bg-[#C8102E]" />
 
-          <p className="max-w-3xl text-xl leading-relaxed text-gray-700 md:text-2xl">
+          <p className="max-w-3xl text-xl leading-relaxed text-white md:text-2xl">
             AutoCap Group&apos;s portfolio spans 12 tire service centres across Sweden — from
             Stockholm&apos;s northern suburbs to Gothenburg&apos;s industrial zones. Every workshop
             keeps its local name, its team, and its customer relationships. What changes is what
@@ -66,5 +67,5 @@ export default function PortfolioPage() {
       {/* Workshop Grid */}
       <WorkshopGrid workshops={workshops} />
     </>
-  )
+  );
 }

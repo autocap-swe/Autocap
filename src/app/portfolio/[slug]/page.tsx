@@ -1,40 +1,43 @@
-import { notFound } from 'next/navigation'
-import Link from 'next/link'
-import { ArrowLeft, ExternalLink, MapPin, Calendar, Building2 } from 'lucide-react'
-import { workshops, getWorkshopBySlug } from '@/content/workshops'
+import { notFound } from 'next/navigation';
+import Link from 'next/link';
+import { ArrowLeft, ExternalLink, MapPin, Calendar, Building2 } from 'lucide-react';
+import { getWorkshopsContent, getWorkshopBySlugContent } from '@/lib/cms/workshop';
 
 interface WorkshopDetailPageProps {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
-  return workshops.map((workshop) => ({
-    slug: workshop.slug,
-  }))
+  try {
+    const workshops = await getWorkshopsContent();
+    return workshops.map(workshop => ({ slug: workshop.slug }));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: WorkshopDetailPageProps) {
-  const { slug } = await params
-  const workshop = getWorkshopBySlug(slug)
+  const { slug } = await params;
+  const workshop = await getWorkshopBySlugContent(slug);
 
   if (!workshop) {
     return {
       title: 'Workshop Not Found',
-    }
+    };
   }
 
   return {
     title: `${workshop.name} · AutoCap Group`,
     description: workshop.description,
-  }
+  };
 }
 
 export default async function WorkshopDetailPage({ params }: WorkshopDetailPageProps) {
-  const { slug } = await params
-  const workshop = getWorkshopBySlug(slug)
+  const { slug } = await params;
+  const workshop = await getWorkshopBySlugContent(slug);
 
   if (!workshop) {
-    notFound()
+    notFound();
   }
 
   return (
@@ -169,5 +172,5 @@ export default async function WorkshopDetailPage({ params }: WorkshopDetailPageP
         </div>
       </div>
     </article>
-  )
+  );
 }

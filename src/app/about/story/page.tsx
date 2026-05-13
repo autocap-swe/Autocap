@@ -1,21 +1,30 @@
-import type { Metadata } from 'next'
-import { storyContent } from '@/content/story'
-import { StorySection } from '@/components/about/StorySection'
-import { PullQuote } from '@/components/about/PullQuote'
-import { SteppedTimeline } from '@/components/about/SteppedTimeline'
+import type { Metadata } from 'next';
+import Image from 'next/image';
+import { storyContent } from '@/content/story';
+import { StorySection } from '@/components/about/StorySection';
+import { PullQuote } from '@/components/about/PullQuote';
+import { SteppedTimeline } from '@/components/about/SteppedTimeline';
 
 export const metadata: Metadata = {
   title: storyContent.metadata.title,
   description: storyContent.metadata.description,
-}
+};
 
 export default function StoryPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="w-full bg-gradient-to-br from-[#EDE4D8] to-[#F5F0EB] py-20 md:py-32">
-        <div className="mx-auto max-w-5xl px-6 text-center lg:px-8">
-          <h1 className="text-4xl font-black text-[#1C1C1E] md:text-5xl lg:text-6xl">
+      <section className="relative flex min-h-[50vh] w-full items-center justify-center overflow-hidden py-20 md:py-32">
+        <Image
+          src="/images/Our%20Story.webp"
+          alt="AutoCap our story"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/10" />
+        <div className="relative mx-auto max-w-5xl px-6 text-center lg:px-8">
+          <h1 className="text-4xl font-black text-white md:text-5xl lg:text-6xl">
             {storyContent.hero.headline}
           </h1>
           <div className="mx-auto mt-8 h-1 w-24 bg-[#C8102E]" />
@@ -72,5 +81,5 @@ export default function StoryPage() {
         </div>
       </section>
     </main>
-  )
+  );
 }

@@ -1,39 +1,36 @@
-'use client'
+'use client';
 
-import { useState, useMemo } from 'react'
-import { Building2 } from 'lucide-react'
-import { WorkshopCard } from './WorkshopCard'
-import { WorkshopSearchInput } from './WorkshopSearchInput'
-import type { Workshop } from '@/content/workshops'
-import { getCities } from '@/content/workshops'
+import { useState, useMemo } from 'react';
+import { Building2 } from 'lucide-react';
+import { WorkshopCard } from './WorkshopCard';
+import { WorkshopSearchInput } from './WorkshopSearchInput';
+import type { Workshop } from '@/lib/cms/workshop/types';
 
 interface WorkshopGridProps {
-  workshops: Workshop[]
+  workshops: Workshop[];
 }
 
 export function WorkshopGrid({ workshops }: WorkshopGridProps) {
-  const [searchTerm, setSearchTerm] = useState('')
-  const [selectedCity, setSelectedCity] = useState('All')
-  const cities = useMemo(() => getCities(), [])
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCity, setSelectedCity] = useState('All');
+  const cities = useMemo(() => [...new Set(workshops.map(w => w.city))].sort(), [workshops]);
 
   const filteredWorkshops = useMemo(() => {
-    let result = workshops
+    let result = workshops;
 
     // Apply city filter
     if (selectedCity !== 'All') {
-      result = result.filter(w => w.city === selectedCity)
+      result = result.filter(w => w.city === selectedCity);
     }
 
     // Apply search filter (case-insensitive partial match)
     if (searchTerm.trim()) {
-      const lowerSearch = searchTerm.toLowerCase()
-      result = result.filter(w =>
-        w.name.toLowerCase().includes(lowerSearch)
-      )
+      const lowerSearch = searchTerm.toLowerCase();
+      result = result.filter(w => w.name.toLowerCase().includes(lowerSearch));
     }
 
-    return result
-  }, [selectedCity, searchTerm, workshops])
+    return result;
+  }, [selectedCity, searchTerm, workshops]);
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-[#E4E2DE] via-[#D8D6D2] to-[#E4E2DE] py-20 md:py-28">
@@ -75,16 +72,13 @@ export function WorkshopGrid({ workshops }: WorkshopGridProps) {
         {filteredWorkshops.length === 0 ? (
           <div className="col-span-full py-20 text-center">
             <Building2 className="mx-auto mb-4 h-16 w-16 text-gray-300" />
-            <h3 className="mb-2 text-xl font-semibold text-gray-700">
-              No workshops found
-            </h3>
+            <h3 className="mb-2 text-xl font-semibold text-gray-700">No workshops found</h3>
             <p className="text-gray-500">
               {searchTerm && selectedCity !== 'All'
                 ? `No results for "${searchTerm}" in ${selectedCity}`
                 : searchTerm
-                ? `No results for "${searchTerm}"`
-                : `No workshops in ${selectedCity}`
-              }
+                  ? `No results for "${searchTerm}"`
+                  : `No workshops in ${selectedCity}`}
             </p>
           </div>
         ) : (
@@ -96,5 +90,5 @@ export function WorkshopGrid({ workshops }: WorkshopGridProps) {
         )}
       </div>
     </section>
-  )
+  );
 }

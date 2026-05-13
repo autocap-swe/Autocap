@@ -1,34 +1,33 @@
-import type { Metadata } from 'next'
-import Link from 'next/link'
-import { Handshake } from 'lucide-react'
-import { entrepreneursContent } from '@/content/entrepreneurs'
-import { TestimonialsSection } from '@/components/entrepreneurs/TestimonialsSection'
+import type { Metadata } from 'next';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Handshake } from 'lucide-react';
+import { entrepreneursContent } from '@/content/entrepreneurs';
+import { TestimonialsSection } from '@/components/entrepreneurs/TestimonialsSection';
 
 export const metadata: Metadata = {
   title: 'For Workshop Owners · AutoCap Group',
   description:
     'Thinking of selling? AutoCap preserves your brand, keeps your team, and offers fair value.',
-}
+};
 
 export default function EntrepreneursPage() {
-  const { landing } = entrepreneursContent
+  const { landing } = entrepreneursContent;
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#D8E4DC] via-[#C8D5CC] to-[#D8E4DC]">
-      {/* Subtle Pattern Overlay */}
-      <div className="absolute inset-0 opacity-[0.03]">
-        <div
-          className="h-full w-full"
-          style={{
-            backgroundImage: 'radial-gradient(circle, #1C1C1E 1px, transparent 1px)',
-            backgroundSize: '32px 32px',
-          }}
-        />
-      </div>
-
+    <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative flex min-h-[85vh] items-center justify-center px-6 py-24 md:px-8">
-        <div className="mx-auto max-w-5xl text-center">
+      <section className="relative flex min-h-[85vh] items-center justify-center overflow-hidden px-6 py-24 md:px-8">
+        <Image
+          src="/images/Entrepreneurs.webp"
+          alt="AutoCap tire workshop"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/10" />
+
+        <div className="relative mx-auto max-w-5xl text-center">
           {/* Icon Badge */}
           <div className="mb-8 inline-flex items-center justify-center">
             <div className="rounded-2xl bg-white p-4">
@@ -37,7 +36,7 @@ export default function EntrepreneursPage() {
           </div>
 
           {/* Headline */}
-          <h1 className="mb-8 text-5xl font-black leading-[1.1] text-[#1C1C1E] md:text-6xl lg:text-7xl xl:text-8xl">
+          <h1 className="mb-8 text-5xl font-black leading-[1.1] text-white md:text-6xl lg:text-7xl xl:text-8xl">
             {landing.headline}
           </h1>
 
@@ -45,7 +44,7 @@ export default function EntrepreneursPage() {
           <div className="mx-auto mb-8 h-1 w-24 bg-[#C8102E]" />
 
           {/* Subheadline */}
-          <p className="mx-auto mb-12 max-w-3xl text-xl leading-relaxed text-gray-700 md:text-2xl md:leading-relaxed">
+          <p className="mx-auto mb-12 max-w-3xl text-xl leading-relaxed text-white md:text-2xl md:leading-relaxed">
             {landing.subheadline}
           </p>
 
@@ -58,7 +57,7 @@ export default function EntrepreneursPage() {
           </Link>
 
           {/* Trust Indicator */}
-          <div className="mt-16 flex items-center justify-center gap-3 text-sm text-gray-600">
+          <div className="mt-16 flex items-center justify-center gap-3 text-sm text-white">
             <div className="h-2 w-2 rounded-full bg-green-500" />
             <span className="font-medium">Confidential · No obligation · Free consultation</span>
           </div>
@@ -68,5 +67,5 @@ export default function EntrepreneursPage() {
       {/* Testimonials Section */}
       <TestimonialsSection />
     </main>
-  )
+  );
 }

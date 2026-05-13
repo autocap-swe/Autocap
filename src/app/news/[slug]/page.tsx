@@ -1,30 +1,31 @@
-import { notFound } from 'next/navigation'
-import Link from 'next/link'
-import type { Metadata } from 'next'
-import { newsContent, getArticleBySlug } from '@/content/news'
-import { ArticleHeader } from '@/components/news/ArticleHeader'
-import { ArticleBody } from '@/components/news/ArticleBody'
-import { RelatedArticles } from '@/components/news/RelatedArticles'
-import { ArticleActions } from '@/components/news/ArticleActions'
+import { notFound } from 'next/navigation';
+import Link from 'next/link';
+import type { Metadata } from 'next';
+import { getArticlesContent, getArticleBySlugContent } from '@/lib/cms/article';
+import { ArticleHeader } from '@/components/news/ArticleHeader';
+import { ArticleBody } from '@/components/news/ArticleBody';
+import { RelatedArticles } from '@/components/news/RelatedArticles';
+import { ArticleActions } from '@/components/news/ArticleActions';
 
 interface ArticleDetailPageProps {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
-  return newsContent.articles.map((article) => ({
-    slug: article.slug,
-  }))
+  try {
+    const articles = await getArticlesContent();
+    return articles.map(article => ({ slug: article.slug }));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: ArticleDetailPageProps): Promise<Metadata> {
-  const { slug } = await params
-  const article = getArticleBySlug(slug)
+  const { slug } = await params;
+  const article = await getArticleBySlugContent(slug);
 
   if (!article) {
-    return {
-      title: 'Article Not Found',
-    }
+    return { title: 'Article Not Found' };
   }
 
   return {
@@ -37,18 +38,17 @@ export async function generateMetadata({ params }: ArticleDetailPageProps): Prom
       publishedTime: article.publishDate,
       images: article.imageUrl ? [article.imageUrl] : [],
     },
-  }
+  };
 }
 
 export default async function ArticleDetailPage({ params }: ArticleDetailPageProps) {
-  const { slug } = await params
-  const article = getArticleBySlug(slug)
+  const { slug } = await params;
+  const article = await getArticleBySlugContent(slug);
 
   if (!article) {
-    notFound()
+    notFound();
   }
 
-  // JSON-LD structured data for SEO
   const articleJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -68,7 +68,7 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
         url: 'https://autocapgroup.se/logo.png',
       },
     },
-  }
+  };
 
   return (
     <article className="bg-white">
@@ -111,7 +111,7 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
       {article.fullContent && <ArticleBody content={article.fullContent} />}
 
       {/* Related Articles */}
-      <RelatedArticles articleId={article.id} />
+      <RelatedArticles articles={article.relatedArticles ?? []} />
     </article>
-  )
+  );
 }
