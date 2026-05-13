@@ -9,7 +9,7 @@ import { getArticlesContent } from '@/lib/cms/article';
 import { REVALIDATE_HIGH } from '@/lib/cms/revalidate';
 
 export default async function HomePage() {
-  const articles = await getArticlesContent(REVALIDATE_HIGH);
+  const articles = await getArticlesContent(REVALIDATE_HIGH).catch(() => []);
 
   return (
     <>

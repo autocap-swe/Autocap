@@ -7,6 +7,6 @@ export const metadata = {
 };
 
 export default async function NewsPage() {
-  const articles = await getArticlesContent();
+  const articles = await getArticlesContent().catch(() => []);
   return <NewsPageContent articles={articles} />;
 }

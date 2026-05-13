@@ -1,27 +1,26 @@
-import type { Metadata } from 'next'
-import { Leaf } from 'lucide-react'
-import { sustainabilityContent } from '@/content/sustainability'
+import type { Metadata } from 'next';
+import Image from 'next/image';
+import { Leaf } from 'lucide-react';
+import { sustainabilityContent } from '@/content/sustainability';
 
 export const metadata: Metadata = {
   title: sustainabilityContent.metadata.title,
   description: sustainabilityContent.metadata.description,
-}
+};
 
 export default function SustainabilityPage() {
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative min-h-[85vh] overflow-hidden bg-gradient-to-br from-[#F5F0EB] via-[#E5E0DB] to-[#F5F0EB]">
-        {/* Subtle Pattern Overlay */}
-        <div className="absolute inset-0 opacity-[0.03]">
-          <div
-            className="h-full w-full"
-            style={{
-              backgroundImage: 'radial-gradient(circle, #1C1C1E 1px, transparent 1px)',
-              backgroundSize: '32px 32px',
-            }}
-          />
-        </div>
+      <section className="relative min-h-[85vh] overflow-hidden">
+        <Image
+          src="/images/Sustainability.webp"
+          alt="AutoCap sustainability workshop"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/10" />
 
         <div className="relative flex min-h-[85vh] items-center justify-center px-6 py-24 md:px-8">
           <div className="mx-auto max-w-5xl text-center">
@@ -33,7 +32,7 @@ export default function SustainabilityPage() {
             </div>
 
             {/* Headline */}
-            <h1 className="mb-8 text-5xl font-black leading-[1.1] text-[#1C1C1E] md:text-6xl lg:text-7xl xl:text-8xl">
+            <h1 className="mb-8 text-5xl font-black leading-[1.1] text-white md:text-6xl lg:text-7xl xl:text-8xl">
               {sustainabilityContent.hero.headline}
             </h1>
 
@@ -41,7 +40,7 @@ export default function SustainabilityPage() {
             <div className="mx-auto mb-8 h-1 w-24 bg-[#C8102E]" />
 
             {/* Subheadline/Intro */}
-            <p className="mx-auto max-w-3xl text-xl leading-relaxed text-gray-700 md:text-2xl md:leading-relaxed">
+            <p className="mx-auto max-w-3xl text-xl leading-relaxed text-white md:text-2xl md:leading-relaxed">
               {sustainabilityContent.hero.intro}
             </p>
           </div>
@@ -62,13 +61,17 @@ export default function SustainabilityPage() {
           </p>
 
           <div>
-            <p className="mb-6 text-lg font-bold text-[#1C1C1E] md:text-xl">
-              Current focus areas:
-            </p>
+            <p className="mb-6 text-lg font-bold text-[#1C1C1E] md:text-xl">Current focus areas:</p>
             <ul className="space-y-4">
               {sustainabilityContent.whereWeAre.focusAreas.map((area, index) => (
-                <li key={index} className="flex gap-x-4 text-lg leading-relaxed text-gray-700 md:text-xl">
-                  <span className="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-[#C8102E]" aria-hidden="true" />
+                <li
+                  key={index}
+                  className="flex gap-x-4 text-lg leading-relaxed text-gray-700 md:text-xl"
+                >
+                  <span
+                    className="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-[#C8102E]"
+                    aria-hidden="true"
+                  />
                   <span>{area}</span>
                 </li>
               ))}
@@ -124,5 +127,5 @@ export default function SustainabilityPage() {
         </div>
       </section>
     </main>
-  )
+  );
 }

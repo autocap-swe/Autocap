@@ -8,10 +8,12 @@ interface WorkshopDetailPageProps {
 }
 
 export async function generateStaticParams() {
-  const workshops = await getWorkshopsContent();
-  return workshops.map(workshop => ({
-    slug: workshop.slug,
-  }));
+  try {
+    const workshops = await getWorkshopsContent();
+    return workshops.map(workshop => ({ slug: workshop.slug }));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: WorkshopDetailPageProps) {

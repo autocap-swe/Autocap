@@ -12,10 +12,12 @@ interface ArticleDetailPageProps {
 }
 
 export async function generateStaticParams() {
-  const articles = await getArticlesContent();
-  return articles.map(article => ({
-    slug: article.slug,
-  }));
+  try {
+    const articles = await getArticlesContent();
+    return articles.map(article => ({ slug: article.slug }));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: ArticleDetailPageProps): Promise<Metadata> {
