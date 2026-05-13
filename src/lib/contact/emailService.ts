@@ -1,6 +1,10 @@
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getResend() {
+  const key = process.env.RESEND_API_KEY;
+  if (!key) throw new Error('RESEND_API_KEY is not configured');
+  return new Resend(key);
+}
 
 interface ContactEmailParams {
   name: string;
@@ -11,7 +15,7 @@ interface ContactEmailParams {
 export async function sendContactEmail({ name, email, message }: ContactEmailParams) {
   const to = process.env.CONTACT_EMAIL_TO ?? 'kontakt@autocapgroup.se';
 
-  await resend.emails.send({
+  await getResend().emails.send({
     from: 'AutoCap Contact Form <onboarding@resend.dev>', // TODO: replace with no-reply@autocapgroup.se once SPF/DKIM configured in Resend
     to,
     subject: `New enquiry from ${name}`,
@@ -45,7 +49,7 @@ export async function sendInvestorEmail(params: InvestorEmailParams) {
   const { fullName, organisation, role, enquiryType, email, message } = params;
   const to = investorRecipients[enquiryType] ?? 'amar.smajlovic@ministryofprogramming.com';
 
-  await resend.emails.send({
+  await getResend().emails.send({
     from: 'AutoCap Contact Form <onboarding@resend.dev>', // TODO: replace with no-reply@autocapgroup.se once SPF/DKIM configured in Resend
     to,
     subject: `[INVESTOR ENQUIRY] ${enquiryType} — ${fullName} (${organisation})`,
@@ -75,7 +79,7 @@ export async function sendEntrepreneurEmail(params: EntrepreneurEmailParams) {
   const to = process.env.ENTREPRENEUR_EMAIL_TO ?? 'amar.smajlovic@ministryofprogramming.com';
   const { name, workshopName, cityRegion, revenue, email, phone, message } = params;
 
-  await resend.emails.send({
+  await getResend().emails.send({
     from: 'AutoCap Contact Form <onboarding@resend.dev>', // TODO: replace with no-reply@autocapgroup.se once SPF/DKIM configured in Resend
     to,
     subject: `[ACQUISITION ENQUIRY] ${name} — ${workshopName} (${cityRegion})`,
