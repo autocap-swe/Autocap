@@ -14,7 +14,7 @@ export async function getArticlesContent(
     params: {
       'pagination[pageSize]': '100',
       'sort[0]': 'publishDate:desc',
-      'populate[heroImage]': '*',
+      'populate[heroImage]': 'true',
     },
     mapper: articlesMapper,
   });
@@ -37,7 +37,7 @@ export async function getArticleBySlugContent(
       'populate[fullContent][on][article.quote][populate]': '*',
       'populate[fullContent][on][article.list][populate]': '*',
       'populate[fullContent][on][article.callout][populate]': '*',
-      'populate[heroImage]': '*',
+      'populate[heroImage]': 'true',
       'pagination[pageSize]': '1',
     },
     mapper: articlesMapper,
