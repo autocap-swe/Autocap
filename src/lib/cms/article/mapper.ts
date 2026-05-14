@@ -1,6 +1,6 @@
 import type { CmsArticle, CmsArticleBlock, NewsArticle, ArticleContentBlock } from './types';
 
-const CMS_URL = process.env.CMS_API_URL ?? 'http://localhost:1337';
+const CMS_URL = (process.env.CMS_API_URL ?? 'http://localhost:1337').replace(/\/$/, '');
 
 function resolveUrl(url: string | undefined): string | undefined {
   if (!url) return undefined;
