@@ -22,7 +22,7 @@ export default function StoryPage() {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-black/10" />
+        <div className="absolute inset-0 bg-black/15" />
         <div className="relative mx-auto max-w-5xl px-6 text-center lg:px-8">
           <h1 className="text-4xl font-black text-white md:text-5xl lg:text-6xl">
             {storyContent.hero.headline}
