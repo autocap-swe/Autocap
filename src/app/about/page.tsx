@@ -25,7 +25,7 @@ export default function AboutPage() {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-black/10" />
+        <div className="absolute inset-0 bg-black/15" />
 
         <div className="relative flex min-h-[85vh] items-center justify-center px-6 py-24 md:px-8">
           <div className="mx-auto max-w-5xl text-center">

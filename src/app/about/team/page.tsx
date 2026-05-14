@@ -21,7 +21,7 @@ export default function TeamPage() {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-black/10" />
+        <div className="absolute inset-0 bg-black/15" />
         <div className="relative mx-auto max-w-4xl text-center">
           <h1 className="mb-6 text-4xl font-bold text-white md:text-5xl">
             {teamContent.hero.title}

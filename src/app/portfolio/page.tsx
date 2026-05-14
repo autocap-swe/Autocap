@@ -23,7 +23,7 @@ export default async function PortfolioPage() {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-black/10" />
+        <div className="absolute inset-0 bg-black/15" />
 
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           {/* Icon Badge */}
