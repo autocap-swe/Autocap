@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { rateLimit, getClientIp } from '@/lib/rate-limit';
+import { verifyTurnstileToken } from '@/lib/captcha/turnstile';
 import { handleContactForm } from './handler';
 
-const LIMIT = 10;
+const LIMIT = 5;
 
 export async function POST(request: NextRequest) {
   const ip = getClientIp(request);
@@ -25,6 +26,23 @@ export async function POST(request: NextRequest) {
     body = await request.json();
   } catch {
     return NextResponse.json({ error: 'invalid_json' }, { status: 400, headers: rlHeaders });
+  }
+
+  const token = (body as Record<string, unknown>)?.cfTurnstileToken;
+  if (!token || typeof token !== 'string') {
+    return NextResponse.json({ error: 'invalid_captcha' }, { status: 403, headers: rlHeaders });
+  }
+
+  try {
+    const valid = await verifyTurnstileToken(token);
+    if (!valid) {
+      return NextResponse.json({ error: 'invalid_captcha' }, { status: 403, headers: rlHeaders });
+    }
+  } catch {
+    return NextResponse.json(
+      { error: 'captcha_misconfigured' },
+      { status: 500, headers: rlHeaders }
+    );
   }
 
   const { status, body: responseBody } = await handleContactForm(body);

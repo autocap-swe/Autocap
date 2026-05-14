@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -8,6 +8,7 @@ import {
   ENQUIRY_TYPES,
   type InvestorFormData,
 } from '@/lib/validation/investorForm';
+import { TurnstileWidget, type TurnstileInstance } from '@/components/contact/TurnstileWidget';
 
 interface InvestorContactFormProps {
   successMessage: string;
@@ -16,6 +17,8 @@ interface InvestorContactFormProps {
 export function InvestorContactForm({ successMessage }: InvestorContactFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const turnstileRef = useRef<TurnstileInstance>(null);
 
   const {
     register,
@@ -40,6 +43,7 @@ export function InvestorContactForm({ successMessage }: InvestorContactFormProps
         email: data.email,
         message: data.message,
         gdprConsent: data.gdprConsent,
+        cfTurnstileToken: turnstileToken,
       }),
     });
 
@@ -48,6 +52,9 @@ export function InvestorContactForm({ successMessage }: InvestorContactFormProps
     if (res.ok) {
       setIsSuccess(true);
       reset();
+    } else {
+      turnstileRef.current?.reset();
+      setTurnstileToken('');
     }
   };
 
@@ -220,6 +227,13 @@ export function InvestorContactForm({ successMessage }: InvestorContactFormProps
             <p className="mt-1 text-sm text-red-600">{errors.gdprConsent.message}</p>
           )}
         </div>
+
+        {/* Turnstile */}
+        <TurnstileWidget
+          ref={turnstileRef}
+          onToken={setTurnstileToken}
+          onExpire={() => setTurnstileToken('')}
+        />
 
         {/* Submit Button */}
         <button
