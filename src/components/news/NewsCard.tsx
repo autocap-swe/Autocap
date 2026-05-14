@@ -26,11 +26,11 @@ export function NewsCard({ article }: NewsCardProps) {
   };
 
   return (
-    <Link href={`/news/${article.slug}`} className="cursor-pointer">
+    <Link href={`/news/${article.slug}`} className="block w-full cursor-pointer">
       <article
         ref={ref as React.RefObject<HTMLElement>}
         className={cn(
-          'group overflow-hidden rounded-lg border-2 border-gray-200 bg-white',
+          'group flex h-full flex-col overflow-hidden rounded-lg border-2 border-gray-200 bg-white',
           'transition-all duration-300 hover:-translate-y-1 hover:border-[#C8102E]',
           'opacity-0 translate-y-4',
           isInView && 'opacity-100 translate-y-0'
@@ -54,7 +54,7 @@ export function NewsCard({ article }: NewsCardProps) {
         </div>
 
         {/* Content Section */}
-        <div className="p-6">
+        <div className="flex flex-1 flex-col p-6">
           {/* Category Badge */}
           <div className="mb-3">
             <NewsCategoryBadge category={article.category} />
@@ -67,7 +67,7 @@ export function NewsCard({ article }: NewsCardProps) {
           <p className="mb-4 text-gray-600 line-clamp-3">{article.excerpt}</p>
 
           {/* Footer */}
-          <div className="flex items-center text-sm text-gray-600">
+          <div className="mt-auto flex items-center text-sm text-gray-600">
             <span>{article.author}</span>
             <span className="mx-2">•</span>
             <span>{formatDate(article.publishDate)}</span>

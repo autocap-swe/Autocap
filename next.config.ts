@@ -9,6 +9,10 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'autocap-strapi.fra1.cdn.digitaloceanspaces.com',
+      },
+      {
+        protocol: 'https',
         hostname: 'cms.autocapgroup.se',
       },
     ],
