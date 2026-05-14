@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -8,6 +8,7 @@ import {
   type GeneralContactFormData,
 } from '@/lib/validation/generalContactForm';
 import type { ContactFormLabels } from '@/lib/cms/contact/types';
+import { TurnstileWidget, type TurnstileInstance } from './TurnstileWidget';
 
 interface GeneralContactFormProps {
   successMessage: string;
@@ -17,6 +18,8 @@ interface GeneralContactFormProps {
 export function GeneralContactForm({ successMessage, formLabels }: GeneralContactFormProps) {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const turnstileRef = useRef<TurnstileInstance>(null);
 
   const {
     register,
@@ -34,10 +37,12 @@ export function GeneralContactForm({ successMessage, formLabels }: GeneralContac
       const response = await fetch('/api/contact/general', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, cfTurnstileToken: turnstileToken }),
       });
 
       if (!response.ok) {
+        turnstileRef.current?.reset();
+        setTurnstileToken('');
         throw new Error(`Request failed with status ${response.status}`);
       }
 
@@ -163,6 +168,13 @@ export function GeneralContactForm({ successMessage, formLabels }: GeneralContac
             <p className="mt-1 text-sm text-red-600">{errors.gdprConsent.message}</p>
           )}
         </div>
+
+        {/* Turnstile */}
+        <TurnstileWidget
+          ref={turnstileRef}
+          onToken={setTurnstileToken}
+          onExpire={() => setTurnstileToken('')}
+        />
 
         {/* Submit Button */}
         <button

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -8,6 +8,7 @@ import {
   type EntrepreneurFormData,
 } from '@/lib/validation/entrepreneurForm';
 import { revenueOptions } from '@/content/entrepreneurs';
+import { TurnstileWidget, type TurnstileInstance } from '@/components/contact/TurnstileWidget';
 
 interface ContactFormProps {
   successMessage: string;
@@ -16,6 +17,8 @@ interface ContactFormProps {
 export function ContactForm({ successMessage }: ContactFormProps) {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const turnstileRef = useRef<TurnstileInstance>(null);
 
   const {
     register,
@@ -33,10 +36,12 @@ export function ContactForm({ successMessage }: ContactFormProps) {
       const response = await fetch('/api/contact/entrepreneur', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, cfTurnstileToken: turnstileToken }),
       });
 
       if (!response.ok) {
+        turnstileRef.current?.reset();
+        setTurnstileToken('');
         throw new Error(`HTTP ${response.status}`);
       }
 
@@ -214,6 +219,13 @@ export function ContactForm({ successMessage }: ContactFormProps) {
             <p className="mt-1 text-sm text-red-600">{errors.gdprConsent.message}</p>
           )}
         </div>
+
+        {/* Turnstile */}
+        <TurnstileWidget
+          ref={turnstileRef}
+          onToken={setTurnstileToken}
+          onExpire={() => setTurnstileToken('')}
+        />
 
         {/* Submit Button */}
         <button
