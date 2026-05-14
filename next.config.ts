@@ -1,6 +1,14 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'autocap-strapi.fra1.digitaloceanspaces.com',
+      },
+    ],
+  },
   async redirects() {
     return [
       {
@@ -8,7 +16,7 @@ const nextConfig: NextConfig = {
         destination: '/investors/why',
         permanent: true,
       },
-    ]
+    ];
   },
 };
 
