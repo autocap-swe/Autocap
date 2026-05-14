@@ -17,10 +17,9 @@ function mapBlock(block: CmsArticleBlock): ArticleContentBlock | null {
     case 'article.image':
       return {
         type: 'image',
-        src: block.src,
+        src: resolveUrl(block.image?.url),
         alt: block.alt,
         caption: block.caption,
-        credit: block.credit,
       };
     case 'article.quote':
       return {
@@ -30,7 +29,14 @@ function mapBlock(block: CmsArticleBlock): ArticleContentBlock | null {
         role: block.role,
       };
     case 'article.list':
-      return { type: 'list', style: block.style, items: block.items };
+      return {
+        type: 'list',
+        style: block.style,
+        items: block.items
+          .split('\n')
+          .map(i => i.trim())
+          .filter(Boolean),
+      };
     case 'article.callout':
       return { type: 'callout', variant: block.variant, content: block.content };
     default:

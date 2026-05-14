@@ -28,13 +28,7 @@ export function ArticleBody({ content }: ArticleBodyProps) {
             );
           case 'image':
             return (
-              <ContentImage
-                key={index}
-                src={block.src}
-                alt={block.alt}
-                caption={block.caption}
-                credit={block.credit}
-              />
+              <ContentImage key={index} src={block.src} alt={block.alt} caption={block.caption} />
             );
           case 'quote':
             return (
