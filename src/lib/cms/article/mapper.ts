@@ -1,5 +1,13 @@
 import type { CmsArticle, CmsArticleBlock, NewsArticle, ArticleContentBlock } from './types';
 
+const CMS_URL = process.env.CMS_API_URL ?? 'http://localhost:1337';
+
+function resolveUrl(url: string | undefined): string | undefined {
+  if (!url) return undefined;
+  if (url.startsWith('http')) return url;
+  return `${CMS_URL}${url}`;
+}
+
 function mapBlock(block: CmsArticleBlock): ArticleContentBlock | null {
   switch (block.__component) {
     case 'article.paragraph':
@@ -39,7 +47,7 @@ export function articleMapper(cms: CmsArticle): NewsArticle {
     publishDate: cms.publishDate,
     author: cms.author,
     category: cms.category,
-    imageUrl: cms.heroImage?.url,
+    imageUrl: resolveUrl(cms.heroImage?.url),
     readTimeMinutes: cms.readTimeMinutes,
     order: cms.order,
     tags: cms.tags ?? undefined,

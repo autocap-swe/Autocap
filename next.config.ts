@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'autocap-strapi.fra1.digitaloceanspaces.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'cms.autocapgroup.se',
+      },
     ],
   },
   async redirects() {
