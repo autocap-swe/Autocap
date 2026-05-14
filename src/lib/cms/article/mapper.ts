@@ -49,8 +49,6 @@ export function articleMapper(cms: CmsArticle): NewsArticle {
     category: cms.category,
     imageUrl: resolveUrl(cms.heroImage?.url),
     readTimeMinutes: cms.readTimeMinutes,
-    order: cms.order,
-    tags: cms.tags ?? undefined,
     fullContent: cms.fullContent
       ? cms.fullContent.map(mapBlock).filter((b): b is ArticleContentBlock => b !== null)
       : undefined,
