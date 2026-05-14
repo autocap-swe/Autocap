@@ -15,10 +15,9 @@ interface CmsHeadingBlock {
 interface CmsImageBlock {
   __component: 'article.image';
   id: number;
-  src: string;
+  image: { url: string } | null;
   alt: string;
   caption?: string;
-  credit?: string;
 }
 
 interface CmsQuoteBlock {
@@ -33,7 +32,7 @@ interface CmsListBlock {
   __component: 'article.list';
   id: number;
   style: 'bullet' | 'numbered';
-  items: string[];
+  items: string;
 }
 
 interface CmsCalloutBlock {
@@ -82,10 +81,9 @@ export interface HeadingBlock {
 
 export interface ImageBlock {
   type: 'image';
-  src: string;
+  src?: string;
   alt: string;
   caption?: string;
-  credit?: string;
 }
 
 export interface QuoteBlock {
