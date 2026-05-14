@@ -13,11 +13,12 @@ interface ContactEmailParams {
 }
 
 export async function sendContactEmail({ name, email, message }: ContactEmailParams) {
-  const to = process.env.CONTACT_EMAIL_TO ?? 'kontakt@autocapgroup.se';
+  const to = process.env.CONTACT_EMAIL_TO ?? 'amar.smajlovic@ministryofprogramming.com';
 
   await getResend().emails.send({
-    from: 'AutoCap Contact Form <onboarding@resend.dev>', // TODO: replace with no-reply@autocapgroup.se once SPF/DKIM configured in Resend
+    from: 'AutoCap Contact Form <onboarding@resend.dev>',
     to,
+
     subject: `New enquiry from ${name}`,
     html: `
       <h2>New Contact Form Submission</h2>
@@ -50,8 +51,9 @@ export async function sendInvestorEmail(params: InvestorEmailParams) {
   const to = investorRecipients[enquiryType] ?? 'amar.smajlovic@ministryofprogramming.com';
 
   await getResend().emails.send({
-    from: 'AutoCap Contact Form <onboarding@resend.dev>', // TODO: replace with no-reply@autocapgroup.se once SPF/DKIM configured in Resend
+    from: 'AutoCap Contact Form <onboarding@resend.dev>',
     to,
+
     subject: `[INVESTOR ENQUIRY] ${enquiryType} — ${fullName} (${organisation})`,
     html: `
       <h2>[INVESTOR ENQUIRY] ${enquiryType} Enquiry</h2>
@@ -80,8 +82,9 @@ export async function sendEntrepreneurEmail(params: EntrepreneurEmailParams) {
   const { name, workshopName, cityRegion, revenue, email, phone, message } = params;
 
   await getResend().emails.send({
-    from: 'AutoCap Contact Form <onboarding@resend.dev>', // TODO: replace with no-reply@autocapgroup.se once SPF/DKIM configured in Resend
+    from: 'AutoCap Contact Form <onboarding@resend.dev>',
     to,
+
     subject: `[ACQUISITION ENQUIRY] ${name} — ${workshopName} (${cityRegion})`,
     html: `
       <h2>[ACQUISITION ENQUIRY] New Workshop Owner Enquiry</h2>

@@ -63,8 +63,6 @@ export interface CmsArticle {
   category: 'Company News' | 'Press Release' | 'Industry Insights' | 'Media Coverage';
   heroImage: { url: string } | null;
   readTimeMinutes: number;
-  order: number;
-  tags: string[] | null;
   fullContent?: CmsArticleBlock[];
   relatedArticles?: CmsArticle[];
 }
@@ -128,8 +126,6 @@ export interface NewsArticle {
   imageUrl?: string;
   slug: string;
   readTimeMinutes: number;
-  order: number;
   fullContent?: ArticleContentBlock[];
-  tags?: string[];
   relatedArticles?: NewsArticle[];
 }
