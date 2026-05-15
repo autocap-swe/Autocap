@@ -13,14 +13,15 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   }
 
-  let body: { contentType?: string; slug?: string };
+  let body: { contentType?: string; slug?: string; model?: string; entry?: { slug?: string } };
   try {
-    body = (await request.json()) as { contentType?: string; slug?: string };
+    body = (await request.json()) as typeof body;
   } catch {
     return NextResponse.json({ error: 'invalid_json' }, { status: 400 });
   }
 
-  const { contentType, slug } = body;
+  const contentType = body.contentType ?? body.model;
+  const slug = body.slug ?? body.entry?.slug;
 
   if (!contentType || !(contentType in CONTENT_TYPE_TAGS)) {
     return NextResponse.json(
