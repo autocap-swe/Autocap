@@ -37,6 +37,7 @@ interface InvestorEmailParams {
   role: string;
   enquiryType: string;
   email: string;
+  phone: string;
   message?: string;
 }
 
@@ -48,7 +49,7 @@ const investorRecipients: Record<string, string> = {
 };
 
 export async function sendInvestorEmail(params: InvestorEmailParams) {
-  const { fullName, organisation, role, enquiryType, email, message } = params;
+  const { fullName, organisation, role, enquiryType, email, phone, message } = params;
   const to = investorRecipients[enquiryType] ?? 'amar.smajlovic@ministryofprogramming.com';
 
   await getResend().emails.send({
@@ -63,6 +64,7 @@ export async function sendInvestorEmail(params: InvestorEmailParams) {
       <p><strong>Role:</strong> ${role}</p>
       <p><strong>Enquiry Type:</strong> ${enquiryType}</p>
       <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Phone:</strong> ${phone}</p>
       ${message ? `<p><strong>Message:</strong></p><p>${message.replace(/\n/g, '<br>')}</p>` : ''}
     `,
   });

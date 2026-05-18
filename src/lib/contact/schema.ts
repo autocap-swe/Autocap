@@ -29,7 +29,12 @@ export const AnnualRevenue = z.enum(['<5 MSEK', '5-15 MSEK', '15-50 MSEK', '>50 
 });
 
 export const EntrepreneurSchema = z.object({
-  name: z.string().trim().min(1, 'Name is required').max(100, 'Name is too long'),
+  name: z
+    .string()
+    .trim()
+    .min(1, 'Name is required')
+    .max(100, 'Name is too long')
+    .regex(NAME_REGEX, 'Name can only contain letters, spaces, hyphens, and apostrophes'),
   workshopName: z
     .string()
     .trim()
@@ -41,7 +46,12 @@ export const EntrepreneurSchema = z.object({
     .min(1, 'City/region is required')
     .max(100, 'City/region is too long'),
   revenue: AnnualRevenue,
-  email: z.string().trim().email('Invalid email address').max(254, 'Email is too long'),
+  email: z
+    .string()
+    .trim()
+    .toLowerCase()
+    .email('Invalid email address')
+    .max(254, 'Email is too long'),
   phone: z.string().trim().min(1, 'Phone is required').max(30, 'Phone number is too long'),
   message: z.string().trim().max(5000, 'Message is too long').optional(),
   gdprConsent: z.literal(true, { error: 'You must accept the privacy policy' }),
@@ -54,7 +64,12 @@ export const EnquiryType = z.enum(['Investment', 'Partnership', 'Media', 'Other'
 });
 
 export const InvestorSchema = z.object({
-  fullName: z.string().trim().min(1, 'Full name is required').max(100, 'Name is too long'),
+  fullName: z
+    .string()
+    .trim()
+    .min(1, 'Full name is required')
+    .max(100, 'Name is too long')
+    .regex(NAME_REGEX, 'Name can only contain letters, spaces, hyphens, and apostrophes'),
   organisation: z
     .string()
     .trim()
@@ -62,7 +77,13 @@ export const InvestorSchema = z.object({
     .max(200, 'Organisation is too long'),
   role: z.string().trim().min(1, 'Role is required').max(100, 'Role is too long'),
   enquiryType: EnquiryType,
-  email: z.string().trim().email('Invalid email address').max(254, 'Email is too long'),
+  email: z
+    .string()
+    .trim()
+    .toLowerCase()
+    .email('Invalid email address')
+    .max(254, 'Email is too long'),
+  phone: z.string().trim().min(1, 'Phone is required').max(30, 'Phone number is too long'),
   message: z.string().trim().max(5000, 'Message is too long').optional(),
   gdprConsent: z.literal(true, { error: 'You must accept the privacy policy' }),
 });

@@ -25,9 +25,12 @@ export function InvestorContactForm({ successMessage }: InvestorContactFormProps
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
   } = useForm<InvestorFormData>({
     resolver: zodResolver(investorFormSchema),
   });
+
+  const messageValue = watch('message', '');
 
   const onSubmit = async (data: InvestorFormData) => {
     setIsSubmitting(true);
@@ -41,6 +44,7 @@ export function InvestorContactForm({ successMessage }: InvestorContactFormProps
         role: data.role,
         enquiryType: data.enquiryType,
         email: data.email,
+        phone: data.phone,
         message: data.message,
         gdprConsent: data.gdprConsent,
         cfTurnstileToken: turnstileToken,
@@ -204,9 +208,18 @@ export function InvestorContactForm({ successMessage }: InvestorContactFormProps
             className="w-full rounded-md border border-gray-300 px-4 py-3 text-gray-900 focus:border-[#C8102E] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
             placeholder="Tell us about your investment focus or specific areas of interest..."
           />
-          {errors.message && (
-            <p className="mt-2 text-sm text-[#C8102E]">{errors.message.message}</p>
-          )}
+          <div className="mt-1 flex items-start justify-between gap-2">
+            {errors.message ? (
+              <p className="text-sm text-red-600">{errors.message.message}</p>
+            ) : (
+              <span />
+            )}
+            <span
+              className={`shrink-0 text-xs ${(messageValue?.length ?? 0) >= 2000 ? 'text-red-600 font-medium' : 'text-gray-400'}`}
+            >
+              {messageValue?.length ?? 0}/2000
+            </span>
+          </div>
         </div>
 
         {/* GDPR Consent */}
