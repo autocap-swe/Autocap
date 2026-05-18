@@ -43,6 +43,26 @@ describe('ContactSchema', () => {
     const result = ContactSchema.safeParse({ ...validPayload, message: '' });
     expect(result.success).toBe(false);
   });
+
+  it('rejects name with numbers', () => {
+    const result = ContactSchema.safeParse({ ...validPayload, name: 'Anna123' });
+    expect(result.success).toBe(false);
+  });
+
+  it('rejects name with special characters', () => {
+    const result = ContactSchema.safeParse({ ...validPayload, name: 'Anna@Doe!' });
+    expect(result.success).toBe(false);
+  });
+
+  it('rejects name with only spaces', () => {
+    const result = ContactSchema.safeParse({ ...validPayload, name: '   ' });
+    expect(result.success).toBe(false);
+  });
+
+  it('accepts name with Nordic characters and hyphens', () => {
+    const result = ContactSchema.safeParse({ ...validPayload, name: 'Åsa-Maria Björk' });
+    expect(result.success).toBe(true);
+  });
 });
 
 const validInvestorPayload = {
