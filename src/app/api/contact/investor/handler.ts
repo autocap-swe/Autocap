@@ -10,9 +10,10 @@ async function saveToStrapi(data: {
   organisation: string;
   role: string;
   enquiryType: string;
+  phone: string;
 }) {
   const token = process.env.STRAPI_API_TOKEN;
-  const { fullName, email, message, organisation, role, enquiryType } = data;
+  const { fullName, email, message, organisation, role, enquiryType, phone } = data;
 
   const res = await fetch(`${CMS_API_URL}/api/contact-submissions`, {
     method: 'POST',
@@ -27,7 +28,7 @@ async function saveToStrapi(data: {
         message: message ?? '',
         gdprConsent: true,
         type: 'investor',
-        metadata: { organisation, role, enquiryType },
+        metadata: { organisation, role, enquiryType, phone },
       },
     }),
   });
@@ -53,17 +54,17 @@ export async function handleInvestorForm(body: unknown): Promise<HandlerResult> 
     return { status: 422, body: { error: 'validation', fields } };
   }
 
-  const { fullName, email, message, organisation, role, enquiryType } = result.data;
+  const { fullName, email, message, organisation, role, enquiryType, phone } = result.data;
 
   try {
-    await saveToStrapi({ fullName, email, message, organisation, role, enquiryType });
+    await saveToStrapi({ fullName, email, message, organisation, role, enquiryType, phone });
   } catch (err) {
     console.error('[Investor] Strapi save failed:', err);
     return { status: 500, body: { error: 'db_failed' } };
   }
 
   try {
-    await sendInvestorEmail({ fullName, email, message, organisation, role, enquiryType });
+    await sendInvestorEmail({ fullName, email, message, organisation, role, enquiryType, phone });
   } catch (err) {
     console.error('[Investor] Email send failed:', err);
     return { status: 500, body: { error: 'send_failed' } };

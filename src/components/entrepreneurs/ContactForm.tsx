@@ -25,9 +25,12 @@ export function ContactForm({ successMessage }: ContactFormProps) {
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
   } = useForm<EntrepreneurFormData>({
     resolver: zodResolver(entrepreneurFormSchema),
   });
+
+  const messageValue = watch('message', '');
 
   const onSubmit = async (data: EntrepreneurFormData) => {
     setIsSubmitting(true);
@@ -200,6 +203,18 @@ export function ContactForm({ successMessage }: ContactFormProps) {
             className="w-full rounded-md border border-gray-300 px-4 py-3 text-gray-900 focus:border-[#C8102E] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
             placeholder="Tell us more about your workshop or what you're looking for..."
           />
+          <div className="mt-1 flex items-start justify-between gap-2">
+            {errors.message ? (
+              <p className="text-sm text-red-600">{errors.message.message}</p>
+            ) : (
+              <span />
+            )}
+            <span
+              className={`shrink-0 text-xs ${(messageValue?.length ?? 0) >= 2000 ? 'text-red-600 font-medium' : 'text-gray-400'}`}
+            >
+              {messageValue?.length ?? 0}/2000
+            </span>
+          </div>
         </div>
 
         {/* GDPR Consent */}
