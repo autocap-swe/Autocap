@@ -1,7 +1,14 @@
 import { z } from 'zod';
 
+const NAME_REGEX = /^[a-zA-ZäöåÄÖÅæøÆØéèêëàâüùûïîÿœ'\- ]+$/;
+
 export const ContactSchema = z.object({
-  name: z.string().trim().min(1, 'Name is required').max(100, 'Name is too long'),
+  name: z
+    .string()
+    .trim()
+    .min(1, 'Name is required')
+    .max(100, 'Name is too long')
+    .regex(NAME_REGEX, 'Name can only contain letters, spaces, hyphens, and apostrophes'),
   email: z.string().trim().email('Invalid email address').max(254, 'Email is too long'),
   message: z.string().trim().min(1, 'Message is required').max(5000, 'Message is too long'),
   gdprConsent: z.literal(true, {

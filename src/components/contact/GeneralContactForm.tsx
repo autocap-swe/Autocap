@@ -26,9 +26,13 @@ export function GeneralContactForm({ successMessage, formLabels }: GeneralContac
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
   } = useForm<GeneralContactFormData>({
     resolver: zodResolver(generalContactFormSchema),
   });
+
+  const subjectValue = watch('subject', '');
+  const messageValue = watch('message', '');
 
   const onSubmit = async (data: GeneralContactFormData) => {
     setIsSubmitting(true);
@@ -129,11 +133,21 @@ export function GeneralContactForm({ successMessage, formLabels }: GeneralContac
             {...register('subject')}
             type="text"
             id="subject"
-            maxLength={200}
             className="w-full rounded-md border border-gray-300 px-4 py-3 text-gray-900 focus:border-[#C8102E] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
             placeholder={formLabels.subjectPlaceholder}
           />
-          {errors.subject && <p className="mt-1 text-sm text-red-600">{errors.subject.message}</p>}
+          <div className="mt-1 flex items-start justify-between gap-2">
+            {errors.subject ? (
+              <p className="text-sm text-red-600">{errors.subject.message}</p>
+            ) : (
+              <span />
+            )}
+            <span
+              className={`shrink-0 text-xs ${subjectValue.length >= 200 ? 'text-red-600 font-medium' : 'text-gray-400'}`}
+            >
+              {subjectValue.length}/200
+            </span>
+          </div>
         </div>
 
         {/* Message */}
@@ -145,11 +159,21 @@ export function GeneralContactForm({ successMessage, formLabels }: GeneralContac
             {...register('message')}
             id="message"
             rows={5}
-            maxLength={2000}
             className="w-full rounded-md border border-gray-300 px-4 py-3 text-gray-900 focus:border-[#C8102E] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
             placeholder={formLabels.messagePlaceholder}
           />
-          {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>}
+          <div className="mt-1 flex items-start justify-between gap-2">
+            {errors.message ? (
+              <p className="text-sm text-red-600">{errors.message.message}</p>
+            ) : (
+              <span />
+            )}
+            <span
+              className={`shrink-0 text-xs ${messageValue.length >= 2000 ? 'text-red-600 font-medium' : 'text-gray-400'}`}
+            >
+              {messageValue.length}/2000
+            </span>
+          </div>
         </div>
 
         {/* GDPR Consent */}
