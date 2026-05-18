@@ -9,21 +9,22 @@ function getResend() {
 interface ContactEmailParams {
   name: string;
   email: string;
+  subject?: string;
   message: string;
 }
 
-export async function sendContactEmail({ name, email, message }: ContactEmailParams) {
+export async function sendContactEmail({ name, email, subject, message }: ContactEmailParams) {
   const to = process.env.CONTACT_EMAIL_TO ?? 'amar.smajlovic@ministryofprogramming.com';
 
   await getResend().emails.send({
     from: 'AutoCap Contact Form <onboarding@resend.dev>',
     to,
-
     subject: `New enquiry from ${name}`,
     html: `
       <h2>New Contact Form Submission</h2>
       <p><strong>Name:</strong> ${name}</p>
       <p><strong>Email:</strong> ${email}</p>
+      ${subject ? `<p><strong>Subject:</strong> ${subject}</p>` : ''}
       <p><strong>Message:</strong></p>
       <p>${message.replace(/\n/g, '<br>')}</p>
     `,
