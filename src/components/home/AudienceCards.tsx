@@ -1,11 +1,11 @@
-'use client'
+'use client';
 
-import Link from 'next/link'
-import { motion } from 'framer-motion'
-import type { AudienceCard } from '@/content/homepage'
+import { Link } from '@/i18n/navigation';
+import { motion } from 'framer-motion';
+import type { AudienceCard } from '@/content/homepage';
 
 interface AudienceCardsProps {
-  cards: AudienceCard[]
+  cards: AudienceCard[];
 }
 
 export function AudienceCards({ cards }: AudienceCardsProps) {
@@ -27,9 +27,7 @@ export function AudienceCards({ cards }: AudienceCardsProps) {
                 style={{ backgroundColor: card.backgroundColor }}
               >
                 <div className="flex h-full flex-col">
-                  <h3 className="text-2xl font-bold text-[#1C1C1E] mb-4">
-                    {card.headline}
-                  </h3>
+                  <h3 className="text-2xl font-bold text-[#1C1C1E] mb-4">{card.headline}</h3>
                   <p className="text-[#1C1C1E]/80 leading-relaxed mb-6 flex-grow">
                     {card.description}
                   </p>
@@ -43,5 +41,5 @@ export function AudienceCards({ cards }: AudienceCardsProps) {
         </div>
       </div>
     </section>
-  )
+  );
 }

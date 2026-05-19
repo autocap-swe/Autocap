@@ -1,3 +1,6 @@
+'use client';
+
+import { useTranslations } from 'next-intl';
 import type { NewsArticle } from '@/lib/cms/article/types';
 import { NewsCategoryBadge } from './NewsCategoryBadge';
 
@@ -6,6 +9,8 @@ interface ArticleHeaderProps {
 }
 
 export function ArticleHeader({ article }: ArticleHeaderProps) {
+  const t = useTranslations('news');
+
   const formatDate = (dateString: string): string => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
@@ -31,7 +36,7 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
           <span className="text-gray-400">•</span>
           <span>{formatDate(article.publishDate)}</span>
           <span className="text-gray-400">•</span>
-          <span>{article.readTimeMinutes} min read</span>
+          <span>{t('minRead', { minutes: article.readTimeMinutes })}</span>
         </div>
 
         <div className="mt-8 h-1 w-24 rounded-full border-4 border-[#C8102E]" />

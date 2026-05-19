@@ -1,3 +1,6 @@
+'use client';
+
+import { useTranslations } from 'next-intl';
 import { NewsCard } from './NewsCard';
 import type { NewsArticle } from '@/lib/cms/article/types';
 
@@ -6,17 +9,17 @@ interface NewsGridProps {
 }
 
 export function NewsGrid({ articles }: NewsGridProps) {
-  // Sort articles by publishDate descending (newest first)
+  const t = useTranslations('news');
+
   const sortedArticles = [...articles].sort((a, b) => {
     return new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime();
   });
 
-  // Empty state
   if (sortedArticles.length === 0) {
     return (
       <div className="mx-auto max-w-7xl px-6 py-24 text-center lg:px-8">
-        <p className="text-xl text-gray-600">No news articles available at the moment.</p>
-        <p className="mt-2 text-gray-500">Check back soon for updates!</p>
+        <p className="text-xl text-gray-600">{t('emptyState')}</p>
+        <p className="mt-2 text-gray-500">{t('emptyStateSubtext')}</p>
       </div>
     );
   }

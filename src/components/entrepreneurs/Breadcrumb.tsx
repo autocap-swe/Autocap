@@ -1,13 +1,13 @@
-import Link from 'next/link'
-import { ChevronRight } from 'lucide-react'
+import { Link } from '@/i18n/navigation';
+import { ChevronRight } from 'lucide-react';
 
 interface BreadcrumbItem {
-  label: string
-  href?: string // undefined means current page (not clickable)
+  label: string;
+  href?: string; // undefined means current page (not clickable)
 }
 
 interface BreadcrumbProps {
-  items: BreadcrumbItem[]
+  items: BreadcrumbItem[];
 }
 
 export function Breadcrumb({ items }: BreadcrumbProps) {
@@ -15,7 +15,7 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
     <nav aria-label="Breadcrumb" className="mb-8">
       <ol className="flex items-center gap-2 text-sm">
         {items.map((item, index) => {
-          const isLast = index === items.length - 1
+          const isLast = index === items.length - 1;
 
           return (
             <li key={index} className="flex items-center gap-2">
@@ -32,9 +32,9 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
 
               {!isLast && <ChevronRight className="h-4 w-4 text-gray-400" />}
             </li>
-          )
+          );
         })}
       </ol>
     </nav>
-  )
+  );
 }

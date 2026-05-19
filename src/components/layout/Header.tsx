@@ -1,11 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { NAVIGATION_LINKS } from '@/lib/constants';
-import { usePathname } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import { Link, usePathname } from '@/i18n/navigation';
 import { LanguageSelector } from './LanguageSelector';
 
 type NavLink = {
@@ -18,6 +18,33 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState<string | null>(null);
   const pathname = usePathname();
+  const t = useTranslations('nav');
+
+  const navLabel: Record<string, string> = {
+    '/': t('home'),
+    '/about': t('about.label'),
+    '/portfolio': t('portfolio'),
+    '/entrepreneurs': t('entrepreneurs'),
+    '/investors': t('investors'),
+    '/news': t('newsMedia'),
+    '/sustainability': t('sustainability'),
+    '/contact': t('contact'),
+  };
+
+  const submenuLabel: Record<string, string> = {
+    '/about': t('about.companyOverview'),
+    '/about/story': t('about.ourStory'),
+    '/about/team': t('about.leadershipBoard'),
+  };
+
+  const translatedLinks = NAVIGATION_LINKS.map(link => ({
+    ...link,
+    label: navLabel[link.href] ?? link.label,
+    submenu:
+      'submenu' in link && link.submenu
+        ? link.submenu.map(sub => ({ ...sub, label: submenuLabel[sub.href] ?? sub.label }))
+        : undefined,
+  }));
 
   const toggleMobileSubmenu = (label: string) => {
     setMobileSubmenuOpen(mobileSubmenuOpen === label ? null : label);
@@ -58,7 +85,7 @@ export function Header() {
               className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
-              <span className="sr-only">{mobileMenuOpen ? 'Close menu' : 'Open menu'}</span>
+              <span className="sr-only">{mobileMenuOpen ? t('closeMenu') : t('openMenu')}</span>
               {mobileMenuOpen ? (
                 <X className="h-6 w-6" aria-hidden="true" />
               ) : (
@@ -69,7 +96,7 @@ export function Header() {
 
           {/* Desktop navigation */}
           <div className="hidden lg:flex lg:items-center lg:gap-x-8">
-            {NAVIGATION_LINKS.map(link => {
+            {translatedLinks.map(link => {
               const isActive = isLinkActive(link);
 
               if ('submenu' in link && link.submenu) {
@@ -137,7 +164,7 @@ export function Header() {
         {mobileMenuOpen && (
           <div className="lg:hidden">
             <div className="space-y-2 pb-6 pt-6">
-              {NAVIGATION_LINKS.map(link => {
+              {translatedLinks.map(link => {
                 const isActive = isLinkActive(link);
 
                 if ('submenu' in link && link.submenu) {

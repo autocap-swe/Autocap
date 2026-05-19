@@ -1,0 +1,819 @@
+{
+  "nav": {
+    "home": "swe_Home",
+    "about": {
+      "label": "swe_About",
+      "companyOverview": "swe_Company Overview",
+      "ourStory": "swe_Our Story",
+      "leadershipBoard": "swe_Leadership & Board"
+    },
+    "portfolio": "swe_Our Portfolio",
+    "entrepreneurs": "swe_Entrepreneurs",
+    "investors": "swe_Investors",
+    "newsMedia": "swe_News & Media",
+    "sustainability": "swe_Sustainability",
+    "contact": "swe_Contact",
+    "openMenu": "swe_Open menu",
+    "closeMenu": "swe_Close menu"
+  },
+  "homepage": {
+    "hero": {
+      "headline": "swe_The Nordic Tire Services Platform",
+      "subheadline": "swe_We acquire, operate and grow independent tire service centres across Sweden — preserving the brands that customers trust and the entrepreneurs who built them.",
+      "cta1Text": "swe_For Entrepreneurs",
+      "cta2Text": "swe_For Investors"
+    },
+    "kpis": {
+      "0": {
+        "suffix": "swe_ Workshops",
+        "label": "swe_Service centres and growing"
+      },
+      "1": {
+        "prefix": "swe_~",
+        "label": "swe_People across Sweden"
+      },
+      "2": {
+        "prefix": "swe_~",
+        "suffix": "swe_ MSEK",
+        "label": "swe_Revenue from Mälardalen to Västra Götaland"
+      },
+      "3": {
+        "label": "swe_Targeted workshops by 2028"
+      }
+    },
+    "ceoQuote": {
+      "text": "swe_We're building something that didn't exist in this industry — a group where local workshop owners keep their identity, gain real operational support, and share in the upside of building something bigger together.",
+      "attribution": "swe_David Knape, CEO & Co-Founder, AutoCap Group"
+    },
+    "footerCta": {
+      "headline": "swe_Ready to start a conversation?",
+      "subtext": "swe_Whether you're a workshop owner, an investor, or simply curious — we'd like to hear from you.",
+      "ctaText": "swe_Get in touch"
+    },
+    "audienceCards": {
+      "0": {
+        "headline": "swe_Thinking of selling your workshop?",
+        "description": "swe_You built something valuable. We're here to help it grow - with your name still on the door.",
+        "ctaText": "swe_Learn more "
+      },
+      "1": {
+        "headline": "swe_A platform built for returns",
+        "description": "swe_Fragmented market. Proven playbook. Founder-led execution. Explore the investment case.",
+        "ctaText": "swe_View investment case "
+      },
+      "2": {
+        "headline": "swe_12 workshops. One shared ambition.",
+        "description": "swe_From Mölndal to Täby — meet the workshops that make up AutoCap Group.",
+        "ctaText": "swe_See our portfolio "
+      }
+    }
+  },
+  "about": {
+    "hero": {
+      "headline": "swe_Building Sweden's tire services platform",
+      "subheadline": "swe_We're operators, not financial engineers. AutoCap Group is consolidating the tire workshop industry - but we do it differently. We preserve what makes each workshop special while building the operational scale that creates value for everyone."
+    },
+    "story": {
+      "title": "swe_Our Story",
+      "paragraphs": {
+        "0": "swe_Sweden's tire services market is fragmented. Around 500 independent workshops serve customers across the country. Many are well-run businesses built over decades - but their owners face challenges with procurement, back-office operations, and succession planning.",
+        "1": "swe_Consolidation makes sense in this market. But most consolidators follow the same playbook: acquire workshops, rebrand them under a corporate banner, replace local teams, and extract value. They destroy what makes these businesses special - the local brand, customer relationships, and team culture.",
+        "2": "swe_AutoCap Group does it differently. We preserve local brands. We keep teams intact. We add value through shared procurement, centralized support services, and operational expertise - not by destroying what workshop owners built. We're operators who understand the business, not financial buyers looking for a quick exit.",
+        "3": "swe_Since founding, we've grown to 12 workshops across Stockholm and Västra Götaland, employing ~50 people and generating ~200 MSEK in revenue. Our vision: build Sweden's leading tire services platform where workshops thrive with their identity intact while gaining the benefits of scale."
+      }
+    },
+    "mission": {
+      "title": "swe_Our Mission",
+      "statement": "swe_To build the leading tire services platform in Sweden by preserving local brands, empowering teams, and delivering operational excellence.",
+      "vision": "swe_A future where independent workshops thrive as part of a larger network - keeping their identity while gaining the benefits of scale.",
+      "ourVision": "swe_Our Vision"
+    },
+    "values": {
+      "0": {
+        "title": "swe_Preserve Local Brands",
+        "description": "swe_We don't rebrand. Your workshop keeps its name, identity, and customer relationships. What you built over the years stays yours."
+      },
+      "1": {
+        "title": "swe_Empower Local Teams",
+        "description": "swe_We don't replace management. Your team stays, and we give them better tools, support, and resources to succeed."
+      },
+      "2": {
+        "title": "swe_Operational Excellence",
+        "description": "swe_We're operators first. We know tire services inside and out - from procurement to customer service to seasonal demand patterns."
+      },
+      "3": {
+        "title": "swe_Long-Term Thinking",
+        "description": "swe_We're building a business, not flipping assets. Sustainable growth and long-term value creation over quick exits."
+      },
+      "4": {
+        "title": "swe_Transparency and Trust",
+        "description": "swe_Honest conversations, fair deals, and confidential processes. We treat workshop owners with the respect they deserve."
+      }
+    },
+    "timeline": {
+      "title": "swe_Our Journey",
+      "milestones": {
+        "0": {
+          "year": "swe_Founding",
+          "title": "swe_AutoCap Group Founded",
+          "description": "swe_Launched with a vision to consolidate the tire services market differently"
+        },
+        "1": {
+          "year": "swe_First Acquisition",
+          "title": "swe_Stockholm Expansion",
+          "description": "swe_Acquired first workshops in the Stockholm region"
+        },
+        "2": {
+          "year": "swe_Geographic Growth",
+          "title": "swe_Västra Götaland",
+          "description": "swe_Expanded to Västra Götaland, establishing regional presence"
+        },
+        "3": {
+          "year": "swe_Today",
+          "title": "swe_12 Workshops",
+          "description": "swe_12 workshops, ~50 employees, ~200 MSEK revenue run-rate"
+        },
+        "4": {
+          "year": "swe_2028 Target",
+          "title": "swe_50+ Workshops",
+          "description": "swe_Ambitious but achievable target for continued growth"
+        }
+      }
+    },
+    "differentiators": {
+      "title": "swe_What Makes Us Different",
+      "items": {
+        "0": {
+          "title": "swe_We Preserve Brands",
+          "description": "swe_Typical consolidators rebrand everything under their corporate banner. We keep your workshop name and identity."
+        },
+        "1": {
+          "title": "swe_We Keep Teams",
+          "description": "swe_Typical consolidators replace management. We keep your team and give them better tools and support."
+        },
+        "2": {
+          "title": "swe_We're Operators",
+          "description": "swe_Typical consolidators are financial buyers. We're operators with deep industry experience."
+        },
+        "3": {
+          "title": "swe_We Think Long-Term",
+          "description": "swe_Typical consolidators flip and sell. We build sustainable businesses for the long term."
+        }
+      }
+    },
+    "closing": {
+      "title": "swe_Want to learn more?",
+      "description": "swe_Whether you own a workshop, are considering an investment, or have a general enquiry - we'd like to hear from you.",
+      "ctas": {
+        "0": {
+          "label": "swe_For Workshop Owners"
+        },
+        "1": {
+          "label": "swe_For Investors"
+        },
+        "2": {
+          "label": "swe_General Enquiries"
+        }
+      }
+    },
+    "trustIndicator": "swe_12 Workshops · ~50 Employees · ~200 MSEK Revenue"
+  },
+  "entrepreneurs": {
+    "landing": {
+      "headline": "swe_You built something worth keeping. Let's build on it together.",
+      "subheadline": "swe_If you own a tire service workshop and you're thinking about the next chapter — whether that's retirement, growth, or simply having a stronger partner - we'd like to have a conversation.",
+      "ctaText": "swe_Learn why workshop owners choose AutoCap "
+    },
+    "benefits": {
+      "0": {
+        "title": "swe_Your name stays on the door",
+        "description": "swe_We don't rebrand your workshop. Your brand — built on years of trust and reputation — is valuable. We preserve it. Customers who've known your business for decades will see the same name, the same quality, the same commitment. We grow what you built, not replace it."
+      },
+      "1": {
+        "title": "swe_Your people stay",
+        "description": "swe_The team you've trained, the mechanics and service staff who know your customers — they're essential. We don't clean house. We invest in your people, offering training, better tools, and career growth. Their expertise stays. Your culture stays."
+      },
+      "2": {
+        "title": "swe_Stay and grow with us",
+        "description": "swe_Many founders choose to stay on after acquisition — leading their workshop with the backing of a larger group. You gain resources, purchasing power, and modern systems, while keeping the operational freedom that made you successful. Or, if you're ready to step back, we'll ensure a smooth transition that respects what you've built."
+      },
+      "3": {
+        "title": "swe_You gain what you couldn't build alone",
+        "description": "swe_Joining AutoCap means access to group-wide benefits: centralized purchasing, shared marketing, IT systems, and a network of peer workshop owners. You keep local decision-making, but gain the advantages of scale. It's the best of both worlds."
+      },
+      "4": {
+        "title": "swe_Fair value. Clear process.",
+        "description": "swe_We make fair offers based on transparent valuation. Our acquisition process is designed to be clear, respectful, and efficient. From first conversation to signed deal, we move quickly but never rush you. You'll know exactly where you stand at every step."
+      }
+    },
+    "closingBlock": {
+      "title": "swe_We're entrepreneurs too",
+      "description": "swe_AutoCap's founders understand what it means to build and run a business. We're not a private equity firm looking for quick returns. We're operators who respect the craft, the relationships, and the years of effort that go into building a successful workshop. We're building something long-term, and we want you to be part of it."
+    },
+    "process": {
+      "intro": "swe_Our acquisition process is designed to be clear, respectful, and efficient.",
+      "steps": {
+        "0": {
+          "title": "swe_First Conversation",
+          "description": "swe_A relaxed, confidential discussion about your business, your goals, and what you're looking for. No pressure, no obligation — just a conversation about what might be possible.",
+          "timeline": "swe_1-2 weeks"
+        },
+        "1": {
+          "title": "swe_Indicative Offer",
+          "description": "swe_If there's mutual interest, we'll provide a preliminary valuation and offer based on the information shared. This gives you a clear sense of value before moving forward.",
+          "timeline": "swe_1-2 weeks"
+        },
+        "2": {
+          "title": "swe_Letter of Intent",
+          "description": "swe_A non-binding agreement outlining the key terms, timeline, and next steps. This formalizes our intent to move forward while giving both sides clarity and commitment.",
+          "timeline": "swe_1 week"
+        },
+        "3": {
+          "title": "swe_Due Diligence",
+          "description": "swe_A detailed but respectful review of your business — financials, operations, legal matters. We move quickly and keep disruption minimal. Everything shared is treated in strict confidence.",
+          "timeline": "swe_3-5 weeks"
+        },
+        "4": {
+          "title": "swe_Final Agreement",
+          "description": "swe_We finalize terms, sign the purchase agreement, and prepare for transition. Legal, financial, and operational details are locked in. You'll have full transparency and support throughout.",
+          "timeline": "swe_1-2 weeks"
+        },
+        "5": {
+          "title": "swe_Welcome to the Group",
+          "description": "swe_The deal closes, and your workshop joins the AutoCap family. We support you through the transition, ensuring continuity for customers and staff. Then we focus on growth — together.",
+          "timeline": "swe_Ongoing"
+        }
+      },
+      "totalTimeline": "swe_8-12 weeks from first conversation to signed deal",
+      "ctaText": "swe_Start with Step 1  Have a confidential conversation with us"
+    },
+    "contact": {
+      "title": "swe_Let's Talk",
+      "subtext": "swe_This is confidential. We don't share your information with anyone outside our core acquisition team. There's no obligation — just a conversation about what might be possible.",
+      "successMessage": "swe_Thank you. Your enquiry has been received. A member of our team will be in touch within two business days. Everything you've shared is treated in strict confidence."
+    },
+    "trustIndicator": "swe_Confidential · No obligation · Free consultation",
+    "whyPage": {
+      "badge": "swe_5 Key Differences",
+      "title": "swe_Why AutoCap",
+      "intro": "swe_If you're considering selling your workshop, you've likely heard from chains that want to rebrand everything under their banner.",
+      "introBold": "swe_We're different.",
+      "closingCta": "swe_Ready to explore? Start a confidential conversation"
+    },
+    "processPage": {
+      "badge": "swe_6-Step Process",
+      "title": "swe_How It Works",
+      "closingTitle": "swe_Ready to take the first step?",
+      "closingDescription": "swe_Every acquisition begins with a simple, confidential conversation. No pressure, no obligation — just an honest discussion about your business and what you're looking for."
+    },
+    "breadcrumb": {
+      "home": "swe_Home",
+      "entrepreneurs": "swe_Entrepreneurs",
+      "letsTalk": "swe_Let's Talk",
+      "whyAutocap": "swe_Why AutoCap",
+      "howItWorks": "swe_How It Works"
+    }
+  },
+  "investors": {
+    "landing": {
+      "headline": "swe_A platform built for returns in a fragmented market",
+      "subheadline": "swe_AutoCap Group is consolidating Sweden's independent tire service industry - acquiring proven local businesses, applying operational discipline, and building a platform positioned for institutional partnership.",
+      "ctaText": "swe_View the investment case"
+    },
+    "pillars": {
+      "0": {
+        "title": "swe_Fragmented market, consolidation opportunity",
+        "description": "swe_Sweden has ~500 independent tire workshops with top players holding <5% market share. This presents a classic roll-up thesis: acquire local market leaders and add value through operational scale while preserving the local brands that customers trust."
+      },
+      "1": {
+        "title": "swe_Resilient, recurring revenue business",
+        "description": "swe_Tire services are non-discretionary and safety-critical. Seasonal demand for winter and summer tire changes creates predictable, recurring revenue patterns. Weather happens every year - this is a stable, cash-generative business with natural resilience."
+      },
+      "2": {
+        "title": "swe_Roll-up playbook with proven economics",
+        "description": "swe_We acquire profitable workshops at reasonable multiples, improve margins through shared procurement and centralized back-office functions, and retain local brands and teams to preserve customer relationships. Growth through acquisition, value through integration."
+      },
+      "3": {
+        "title": "swe_Founder-led execution",
+        "description": "swe_We are operators, not financial engineers. The founding team brings deep industry experience and operational know-how. Our incentives are aligned with long-term value creation, not short-term extraction. We are building a business, not flipping assets."
+      }
+    },
+    "closingBlock": {
+      "title": "swe_Built for the long term",
+      "description": "swe_We're not chasing the next trend. We're building a durable business in an essential industry. AutoCap Group is a platform for sustainable growth - through disciplined acquisition, operational improvement, and a relentless focus on serving customers well."
+    },
+    "metrics": {
+      "intro": "swe_Our track record since founding",
+      "kpis": {
+        "0": {
+          "label": "swe_Workshops acquired"
+        },
+        "1": {
+          "label": "swe_Employees across Sweden"
+        },
+        "2": {
+          "label": "swe_MSEK revenue run-rate"
+        },
+        "3": {
+          "label": "swe_Workshop target by 2028"
+        },
+        "4": {
+          "label": "swe_Regions: Stockholm, Västra Götaland"
+        }
+      },
+      "roadmap": "swe_We're in the early innings. The next phase focuses on deepening our presence in existing regions, expanding to new geographies, and continuing to build operational capabilities that create value for workshop owners, employees, and investors."
+    },
+    "contact": {
+      "title": "swe_Investor Relations",
+      "subtext": "swe_Interested in the AutoCap opportunity? We'd like to hear from you. All enquiries are treated confidentially.",
+      "successMessage": "swe_Thank you for your interest. A member of our investor relations team will be in touch within two business days. All enquiries are treated confidentially."
+    },
+    "trustIndicator": "swe_Confidential · Professional · Institutional-grade",
+    "whyPage": {
+      "badge": "swe_4 Investment Pillars",
+      "title": "swe_The Investment Case",
+      "intro": "swe_A proven playbook in an overlooked sector.",
+      "introBold": "swe_Built for sustainable, long-term value creation.",
+      "closingCta": "swe_Interested in learning more? Contact our investor relations team"
+    },
+    "metricsPage": {
+      "badge": "swe_Track Record",
+      "title": "swe_Growth Metrics",
+      "roadAhead": "swe_The Road Ahead",
+      "closingCta": "swe_Ready to discuss the opportunity? Contact us"
+    },
+    "breadcrumb": {
+      "home": "swe_Home",
+      "investmentCase": "swe_The Investment Case",
+      "growthMetrics": "swe_Growth Metrics",
+      "investorRelations": "swe_Investor Relations"
+    }
+  },
+  "team": {
+    "hero": {
+      "title": "swe_Leadership & Board",
+      "description": "swe_AutoCap Group is led by a team with deep experience in M&A, company building, automotive aftermarket, and operational execution. Our board brings additional expertise in investment, governance, and strategic growth."
+    },
+    "managementTeam": {
+      "title": "swe_Management Team"
+    },
+    "board": {
+      "title": "swe_Board of Directors"
+    },
+    "members": {
+      "david-knape": {
+        "title": "swe_CEO & Co-Founder",
+        "bio": "swe_Serial entrepreneur with extensive experience in company building, finance, acquisition strategy, and brand development. Previously CEO of a Nasdaq First North-listed company. Has built and managed investments across e-commerce, FMCG, and technology. David leads AutoCap's overall strategy, capital structure, and stakeholder relationships.",
+        "education": "swe_B.Sc. Business Economics, M.Sc. Marketing"
+      },
+      "niklas-noren": {
+        "title": "swe_CFO",
+        "bio": "swe_Seasoned financial executive with two decades of experience as CFO and Group Controller across listed companies, PE-backed groups, and high-growth platforms. Track record includes building financial reporting infrastructure, preparing companies for PE exit (Adven/EQT), and coordinating M&A integration (Eltel Networks, Cybercom). Previous roles span IBM, Nobina, Eniro, and JNE Invest. Niklas leads AutoCap's financial operations, reporting, and banking relationships.",
+        "education": "swe_M.Sc. Business Economics (Civilekonom), Stockholm University. Graduate studies at HEC Lausanne."
+      },
+      "nicklas-knape": {
+        "title": "swe_COO & Head of M&A",
+        "bio": "swe_Over fifteen years in the Nordic tire and automotive aftermarket. Career spans Pirelli, Goodyear (managing key Nordic accounts), and Gundlach Automotive (European aftermarket responsibility for Volvo Cars, Polestar, Ford, and Nio). Nicklas leads AutoCap's acquisition pipeline, operational integration, and supplier relationships - combining deep industry knowledge with hands-on commercial execution.",
+        "education": "swe_B.Sc. Business Economics"
+      },
+      "gustav-berggren": {
+        "title": "swe_Chairman of the Board",
+        "bio": "swe_Entrepreneur with a background in financing, property management, M&A, and real estate development across residential and commercial segments. Active investor and company builder with multiple board positions.",
+        "education": "swe_B.Sc. Business Economics"
+      },
+      "thomas-petren": {
+        "title": "swe_Board Member & Partner",
+        "bio": "swe_Owner and CEO of Seved Invest AB. Entrepreneurial background building and supporting multiple companies, including the publicly listed FMCG group Humble Group."
+      },
+      "mats-johansson": {
+        "title": "swe_Partner & Board Advisor",
+        "bio": "swe_Entrepreneur and investor based in Falköping. Former Partner at PwC with specialist expertise in corporate structuring and tax. Extensive board experience and co-owner of companies across property, IT, and agriculture."
+      }
+    }
+  },
+  "sustainability": {
+    "hero": {
+      "headline": "swe_Practical steps. Honest progress.",
+      "intro": "swe_Sustainability in the tire service industry is not about grand gestures - it's about consistent, practical improvements across every workshop, every day. We're building a framework for environmental responsibility that grows with our group."
+    },
+    "whereWeAre": {
+      "title": "swe_Where we are",
+      "description": "swe_AutoCap Group is in an early stage of formalising our sustainability practices. As we acquire and integrate workshops across Sweden, we are establishing group-wide standards for waste management, energy efficiency, and responsible sourcing. We don't yet have all the answers - but we have a clear commitment to finding them.",
+      "focusAreas": {
+        "0": "swe_Standardising tire recycling and disposal processes across all workshops",
+        "1": "swe_Evaluating energy consumption and identifying reduction opportunities",
+        "2": "swe_Consolidating logistics to reduce unnecessary transport",
+        "3": "swe_Assessing the environmental impact of products and chemicals used in daily operations"
+      },
+      "currentFocusAreas": "swe_Current focus areas:"
+    },
+    "whereWeAreGoing": {
+      "title": "swe_Where we're going",
+      "description": "swe_As our portfolio grows, so does our ability to drive meaningful environmental improvements at scale. Our ambition is to establish measurable sustainability targets across the group by end of 2027, including carbon footprint benchmarking per workshop, waste reduction metrics, and supplier sustainability assessments.",
+      "statement": "swe_We believe that operational efficiency and environmental responsibility are not in conflict - they reinforce each other. A workshop that wastes less, transports smarter, and uses fewer chemicals is both greener and more profitable."
+    },
+    "governance": {
+      "title": "swe_Governance",
+      "description": "swe_Sustainability oversight sits with AutoCap Group's management team. As the group matures, we intend to establish a formal ESG reporting framework aligned with institutional investor expectations.",
+      "contactText": "swe_For questions about our sustainability work, contact"
+    }
+  },
+  "story": {
+    "hero": {
+      "headline": "swe_Two brothers. One industry. A clear opportunity."
+    },
+    "opening": {
+      "headline": "swe_Two brothers. One industry. A clear opportunity.",
+      "paragraphs": {
+        "0": "swe_AutoCap Group was founded by David and Nicklas Knape - one with a background in company building, finance and tech, the other with over fifteen years inside the Nordic tire and automotive aftermarket.",
+        "1": "swe_The insight was straightforward. Sweden has roughly 2,000 independent tire service workshops. Most are well-run, profitable, and deeply rooted in their local communities. But they operate alone - without purchasing power, shared systems, or a plan for succession when the owner is ready to step back.",
+        "2": "swe_At the same time, the industry is consolidating. International players backed by institutional capital are entering the market, acquiring workshops and folding them into corporate structures. For many independent owners, the choice has become binary: sell to a large chain and lose your identity, or keep going alone and hope for the best.",
+        "3": "swe_We saw a third option."
+      },
+      "quote": {
+        "text": "swe_We didn't want to build another chain. We wanted to build a group where every workshop keeps its name, its people, and its customers - but gains the backing to compete with anyone.",
+        "attribution": "swe_Nicklas Knape",
+        "title": "swe_COO & Head of M&A"
+      }
+    },
+    "model": {
+      "title": "swe_The model: local brands, central strength",
+      "paragraphs": {
+        "0": "swe_AutoCap acquires workshops and keeps them operating under their own names. Tumba Gummiverkstad is still Tumba Gummiverkstad. Däckpoint i Mölndal is still Däckpoint i Mölndal. The customers see the same faces, the same service, the same sign above the door.",
+        "1": "swe_Behind the scenes, AutoCap provides what no independent workshop can build alone: consolidated procurement that lowers cost, shared financial and HR administration, and a network of peers who learn from each other. A workshop owner in Vänersborg can share operational insights with a colleague in Täby - not as competitors, but as partners in the same group.",
+        "2": "swe_This is not a franchise model. AutoCap acquires the business outright, and the entrepreneur typically stays - as a manager, a co-investor, or both. The knowledge stays. The relationships stay. The ambition grows."
+      }
+    },
+    "vision": {
+      "title": "swe_Where we're going",
+      "paragraphs": {
+        "0": "swe_AutoCap Group's ambition is to build one of the leading independent tire service platforms in the Nordics. We are targeting approximately 50 workshops and consolidated revenues approaching SEK 1 billion by 2028, with a geographic footprint covering Sweden's major population centres and transport corridors.",
+        "1": "swe_Our growth is deliberate. We acquire workshops that meet clear quality criteria - strong local reputation, solid financials, and an owner who cares about what happens next. We do not chase volume for its own sake.",
+        "2": "swe_The long-term trajectory is clear: operational maturity, geographic density, and a platform that is attractive to institutional capital - on our terms and our timeline."
+      }
+    },
+    "timeline": {
+      "title": "swe_Our Journey",
+      "milestones": {
+        "0": {
+          "year": "swe_2024",
+          "title": "swe_Founded",
+          "description": "swe_AutoCap Group Sweden AB is established in Stockholm."
+        },
+        "1": {
+          "year": "swe_Oct 2025",
+          "title": "swe_First acquisition",
+          "description": "swe_Däckpoint i Mölndal becomes the first workshop to join the group."
+        },
+        "2": {
+          "year": "swe_Oct 2025",
+          "title": "swe_Second acquisition",
+          "description": "swe_Tumba Gummiverkstad joins - rebranding to Däckgruppen Tumba."
+        },
+        "3": {
+          "year": "swe_Dec 2025",
+          "title": "swe_Third acquisition",
+          "description": "swe_Verksta'n i Öxnered expands the group's reach to Västra Götaland."
+        },
+        "4": {
+          "year": "swe_Jan 2026",
+          "title": "swe_Largest acquisition to date",
+          "description": "swe_Svenska Däckgruppen (7 units in Stockholm) joins after successful reconstruction."
+        },
+        "5": {
+          "year": "swe_Mar 2026",
+          "title": "swe_Continued expansion",
+          "description": "swe_Mölndals Däckservice and Mölndals Bilverkstad acquired."
+        },
+        "6": {
+          "year": "swe_2026–2027",
+          "title": "swe_Scaling phase",
+          "description": "swe_Targeting 25+ workshops across Sweden."
+        },
+        "7": {
+          "year": "swe_2028",
+          "title": "swe_Platform maturity",
+          "description": "swe_Target: ~50 workshops, revenues approaching SEK 1 billion."
+        }
+      }
+    }
+  },
+  "privacyPolicy": {
+    "hero": {
+      "title": "swe_Privacy Policy",
+      "lastUpdated": "swe_Last updated: April 2026",
+      "description": "swe_AutoCap Group is committed to protecting your privacy and personal data. This policy explains how we collect, use, and safeguard your information in compliance with GDPR."
+    },
+    "sections": {
+      "introduction": {
+        "title": "swe_1. Introduction",
+        "content": {
+          "0": "swe_LEGAL CONTENT PENDING: This section will describe AutoCap Group Sweden AB as the data controller, our commitment to privacy, and the scope of this policy.",
+          "1": "swe_Placeholder: AutoCap Group Sweden AB (organization number: TBD) is the data controller responsible for the processing of your personal data. We are committed to protecting your privacy and ensuring transparency in how we handle your information."
+        }
+      },
+      "data-we-collect": {
+        "title": "swe_2. Data We Collect",
+        "content": {
+          "0": "swe_LEGAL CONTENT PENDING: This section will detail the types of personal data we collect, including:",
+          "1": "swe_• Contact information (name, email, phone number)",
+          "2": "swe_• Business information (company name, workshop details for entrepreneurs)",
+          "3": "swe_• Website usage data (cookies, analytics)",
+          "4": "swe_• Communication records (emails, form submissions)",
+          "5": "swe_Placeholder: We collect only the data necessary to provide our services and communicate with you effectively."
+        }
+      },
+      "how-we-use-data": {
+        "title": "swe_3. How We Use Your Data",
+        "content": {
+          "0": "swe_LEGAL CONTENT PENDING: This section will explain the purposes for which we process personal data:",
+          "1": "swe_• To respond to enquiries and provide information about our services",
+          "2": "swe_• To evaluate workshop acquisition opportunities",
+          "3": "swe_• To communicate with investors and stakeholders",
+          "4": "swe_• To improve our website and user experience",
+          "5": "swe_• To comply with legal obligations",
+          "6": "swe_Placeholder: We use your data only for legitimate business purposes and with your consent where required."
+        }
+      },
+      "legal-basis": {
+        "title": "swe_4. Legal Basis for Processing",
+        "content": {
+          "0": "swe_LEGAL CONTENT PENDING: This section will specify the legal basis under GDPR Article 6:",
+          "1": "swe_• Consent: For marketing communications and optional cookies",
+          "2": "swe_• Legitimate interests: For business communications and website analytics",
+          "3": "swe_• Contract performance: For services you have requested",
+          "4": "swe_• Legal obligation: For compliance with Swedish and EU law",
+          "5": "swe_Placeholder: All data processing is conducted in accordance with GDPR requirements."
+        }
+      },
+      "your-rights": {
+        "title": "swe_5. Your Rights",
+        "content": {
+          "0": "swe_LEGAL CONTENT PENDING: This section will detail your rights under GDPR:",
+          "1": "swe_• Right to access your personal data",
+          "2": "swe_• Right to rectification of incorrect data",
+          "3": "swe_• Right to erasure (\"right to be forgotten\")",
+          "4": "swe_• Right to restrict processing",
+          "5": "swe_• Right to data portability",
+          "6": "swe_• Right to object to processing",
+          "7": "swe_• Right to withdraw consent",
+          "8": "swe_Placeholder: You can exercise these rights by contacting us at kontakt@autocapgroup.se."
+        }
+      },
+      "cookies": {
+        "title": "swe_6. Cookie Policy",
+        "content": {
+          "0": "swe_LEGAL CONTENT PENDING: This section will provide detailed information about our use of cookies.",
+          "1": "swe_We use cookies to improve your experience and understand how visitors use our website. You can manage your cookie preferences through our cookie consent banner.",
+          "2": "swe_Cookie categories:",
+          "3": "swe_• Necessary cookies: Required for website functionality (always active)",
+          "4": "swe_• Analytics cookies: Help us understand website usage",
+          "5": "swe_• Marketing cookies: Used for personalized advertising",
+          "6": "swe_Placeholder: See our cookie consent banner for detailed preferences."
+        }
+      },
+      "data-retention": {
+        "title": "swe_7. Data Retention",
+        "content": {
+          "0": "swe_LEGAL CONTENT PENDING: This section will specify how long we retain different types of data.",
+          "1": "swe_Placeholder: We retain personal data only for as long as necessary to fulfill the purposes outlined in this policy or as required by law. General enquiries are typically retained for [X] years, while business relationships may require longer retention periods."
+        }
+      },
+      "data-security": {
+        "title": "swe_8. Data Security",
+        "content": {
+          "0": "swe_LEGAL CONTENT PENDING: This section will describe our security measures.",
+          "1": "swe_Placeholder: We implement appropriate technical and organizational measures to protect your personal data against unauthorized access, alteration, disclosure, or destruction. This includes encryption, access controls, and regular security assessments."
+        }
+      },
+      "third-parties": {
+        "title": "swe_9. Third-Party Services",
+        "content": {
+          "0": "swe_LEGAL CONTENT PENDING: This section will list any third-party services that process data on our behalf.",
+          "1": "swe_Placeholder: We may share your data with trusted third-party service providers who assist us in operating our website and conducting our business, subject to confidentiality obligations and GDPR compliance."
+        }
+      },
+      "changes": {
+        "title": "swe_10. Changes to This Policy",
+        "content": {
+          "0": "swe_LEGAL CONTENT PENDING: This section will explain how we communicate policy updates.",
+          "1": "swe_Placeholder: We may update this privacy policy from time to time. We will notify you of significant changes by posting a notice on our website or by email. The \"Last updated\" date at the top of this policy indicates when it was most recently revised."
+        }
+      }
+    },
+    "contact": {
+      "title": "swe_Contact Us",
+      "description": "swe_If you have questions about this privacy policy or wish to exercise your rights, please contact us:"
+    },
+    "backToTop": "swe_Back to top ↑"
+  },
+  "mediaKit": {
+    "hero": {
+      "headline": "swe_Media Kit",
+      "description": "swe_Download logos, brand guidelines, and high-resolution photos. For press enquiries, contact us at kontakt@autocapgroup.se."
+    },
+    "categories": {
+      "0": {
+        "title": "swe_Logos",
+        "description": "swe_AutoCap Group logos in multiple formats for print and digital use.",
+        "assets": {
+          "0": {
+            "name": "swe_AutoCap Logo (SVG)",
+            "description": "swe_Vector logo for digital use - light background"
+          },
+          "1": {
+            "name": "swe_AutoCap Logo (PNG)",
+            "description": "swe_Raster logo for digital use - light background"
+          },
+          "2": {
+            "name": "swe_AutoCap Logo Dark (SVG)",
+            "description": "swe_Vector logo for digital use - dark background"
+          },
+          "3": {
+            "name": "swe_AutoCap Logo Dark (PNG)",
+            "description": "swe_Raster logo for digital use - dark background"
+          }
+        }
+      },
+      "1": {
+        "title": "swe_Brand Colors",
+        "description": "swe_Official color palette and usage guidelines.",
+        "assets": {
+          "0": {
+            "name": "swe_Brand Colors Reference",
+            "description": "swe_Complete color palette with hex codes and usage guidelines"
+          }
+        }
+      },
+      "2": {
+        "title": "swe_Leadership Photos",
+        "description": "swe_High-resolution photos of AutoCap Group leadership team.",
+        "assets": {
+          "0": {
+            "name": "swe_Leadership Photos Archive",
+            "description": "swe_Professional headshots of David Knape, Nicklas Knape, and board members"
+          }
+        }
+      }
+    },
+    "pressContact": {
+      "title": "swe_Press Enquiries",
+      "description": "swe_For media requests, interview opportunities, or additional information, please contact:"
+    }
+  },
+  "testimonials": {
+    "martin-dackpoint": {
+      "quote": "swe_I'd been running Däckpoint for years and I knew the business inside out. What I didn't have was a plan for the future. When I met David and Nicklas, it felt different from other conversations I'd had. They understood the business, they respected what I'd built, and they were honest about what they wanted to do. My name is still on the door, my team is still here, and I still run the workshop — but now I have backup.",
+      "keyFact": "swe_Däckpoint i Mölndal · AutoCap's founding acquisition · October 2025"
+    },
+    "verkstan-oxnered": {
+      "quote": "swe_Running a workshop in a smaller town means you do everything yourself — tires, admin, marketing, supplier negotiations. When AutoCap approached us, I was sceptical at first. But they didn't want to change what we do. They wanted to take the things off my plate that weren't my strength, so I could focus on what I'm good at. Three months in, I can already see the difference.",
+      "keyFact": "swe_Verksta'n i Öxnered · Expanding AutoCap's reach to Västra Götaland · December 2025"
+    },
+    "svenska-dackgruppen": {
+      "quote": "swe_When we hit difficulties, it was AutoCap who stepped in. They helped us navigate the reconstruction — not as distant observers, but hands-on, with real commitment. They understood the business, they believed in what we'd built, and they put in the work to make sure we came through it. When the reconstruction was complete, joining the group was the natural next step. Our seven workshops now operate under the Däckgruppen name with the stability and backing we needed. That kind of trust isn't something you negotiate — it's something you earn. They earned it.",
+      "keyFact": "swe_7 workshops across Stockholm · AutoCap's largest acquisition · January 2026"
+    },
+    "sectionTitle": "swe_What Workshop Owners Say"
+  },
+  "investorsCase": {
+    "hero": {
+      "title": "swe_The Investment Case",
+      "subtitle": "swe_Building value through consolidation and operational excellence in a fragmented market"
+    },
+    "marketOpportunity": {
+      "title": "swe_Market Opportunity",
+      "consolidationOpportunity": "swe_Sweden's tire service market is highly fragmented with thousands of independent workshops. Top players hold less than 5% market share, creating a significant consolidation opportunity.",
+      "valueCreation": "swe_AutoCap Group is uniquely positioned to capture value through strategic acquisitions, operational efficiency, and platform economics."
+    },
+    "sixPillars": {
+      "sectionTitle": "swe_The AutoCap Strategy — Six pillars of value creation",
+      "pillars": {
+        "0": {
+          "title": "swe_Strategic Acquisitions",
+          "description": "swe_Acquire profitable, well-managed workshops at reasonable multiples. Focus on businesses with strong local brands, loyal customer bases, and proven operations."
+        },
+        "1": {
+          "title": "swe_Procurement Consolidation",
+          "description": "swe_Leverage collective buying power to negotiate better terms with tire manufacturers and suppliers. Reduce cost of goods sold while maintaining quality standards."
+        },
+        "2": {
+          "title": "swe_Operational Efficiency",
+          "description": "swe_Centralize back-office functions (accounting, HR, marketing) to eliminate redundancies. Implement best practices across the network while preserving local autonomy."
+        },
+        "3": {
+          "title": "swe_Data & Analytics",
+          "description": "swe_Build a unified data platform to track performance, optimize inventory, and identify growth opportunities. Make data-driven decisions at scale."
+        },
+        "4": {
+          "title": "swe_Cross-Sell & Partnerships",
+          "description": "swe_Introduce complementary services (wheel alignment, brakes, suspension) and form strategic partnerships with insurance companies and fleet operators."
+        },
+        "5": {
+          "title": "swe_Customer Experience",
+          "description": "swe_Invest in digital booking, transparent pricing, and consistent service quality. Build trust and loyalty across the platform while maintaining local brands."
+        }
+      }
+    },
+    "growthMilestones": {
+      "sectionTitle": "swe_Growth Milestones",
+      "milestones": {
+        "0": {
+          "description": "swe_Platform established. Three founding acquisitions completed."
+        },
+        "1": {
+          "description": "swe_Largest acquisition completed (7-unit Stockholm group)."
+        },
+        "2": {
+          "description": "swe_Scaling phase. Targeting 20+ workshops."
+        },
+        "3": {
+          "description": "swe_Regional expansion. Entering new markets in Sweden."
+        },
+        "4": {
+          "description": "swe_Platform maturity. 50+ workshops with full operational integration."
+        }
+      },
+      "disclaimer": "swe_Detailed financial projections are not published publicly. Qualified investors receive comprehensive financial information through direct dialogue with our investor relations team."
+    }
+  },
+  "common": {
+    "readMore": "swe_Read more",
+    "submit": "swe_Submit",
+    "backToPortfolio": "swe_Back to Portfolio",
+    "home": "swe_Home",
+    "newsMedia": "swe_News & Media",
+    "portfolio": "swe_Portfolio",
+    "workshopLocations": "swe_Workshop Locations",
+    "workshopProfile": "swe_Workshop Profile",
+    "partOfAutoCap": "swe_Part of AutoCap Group since",
+    "visitWorkshopWebsite": "swe_Visit workshop website",
+    "ownWorkshop": "swe_Own a tire service workshop?",
+    "joinAutoCap": "swe_Learn what joining AutoCap Group could mean for you.",
+    "forEntrepreneurs": "swe_For Entrepreneurs"
+  },
+  "footer": {
+    "companySection": "swe_Company",
+    "forYouSection": "swe_For You",
+    "resourcesSection": "swe_Resources",
+    "privacyPolicy": "swe_Privacy Policy",
+    "tagline": "swe_The Nordic Tire Services Platform",
+    "bottomBar": "swe_AutoCap Group Sweden AB · Nybrogatan 7, Stockholm"
+  },
+  "portfolio": {
+    "badge": "swe_12 Workshops",
+    "title": "swe_Our Portfolio",
+    "description": "swe_AutoCap Group's portfolio spans 12 tire service centres across Sweden — from Stockholm's northern suburbs to Gothenburg's industrial zones. Every workshop keeps its local name, its team, and its customer relationships. What changes is what happens behind the scenes: shared procurement, centralised administration, and a network that makes each workshop stronger.",
+    "mapSectionTitle": "swe_Workshop Locations",
+    "detail": {
+      "breadcrumbHome": "swe_Home",
+      "breadcrumbPortfolio": "swe_Portfolio",
+      "backToPortfolio": "swe_Back to Portfolio",
+      "workshopProfileBadge": "swe_Workshop Profile",
+      "partOfGroupSince": "swe_Part of AutoCap Group since {year}",
+      "groupBlurb": "swe_{name} operates independently under its own brand, serving its local community as it always has. As part of AutoCap Group, the team benefits from shared procurement, centralised support services, and access to a growing network of workshops across Sweden.",
+      "visitWebsite": "swe_Visit workshop website",
+      "ctaTitle": "swe_Own a tire service workshop?",
+      "ctaDescription": "swe_Learn what joining AutoCap Group could mean for you.",
+      "ctaButton": "swe_For Entrepreneurs"
+    }
+  },
+  "news": {
+    "title": "swe_News & Media",
+    "description": "swe_Company updates, industry insights, and press coverage",
+    "mediaKitLink": "swe_Media Kit & Press Resources",
+    "emptyState": "swe_No news articles available at the moment.",
+    "emptyStateSubtext": "swe_Check back soon for updates!",
+    "backToNews": "swe_Back to News",
+    "print": "swe_Print",
+    "relatedReading": "swe_Related Reading",
+    "minRead": "swe_{minutes} min read",
+    "breadcrumbHome": "swe_Home",
+    "breadcrumbNews": "swe_News & Media",
+    "categories": {
+      "all": "swe_All",
+      "companyNews": "swe_Company News",
+      "pressRelease": "swe_Press Release",
+      "industryInsights": "swe_Industry Insights",
+      "mediaCoverage": "swe_Media Coverage"
+    }
+  },
+  "cookie": {
+    "bannerText": "swe_We use cookies to improve your experience and analyse site traffic.",
+    "privacyPolicy": "swe_Privacy Policy",
+    "managePreferences": "swe_Manage preferences",
+    "acceptAll": "swe_Accept all",
+    "preferencesTitle": "swe_Cookie Preferences",
+    "preferencesDescription": "swe_Choose which cookies you allow. Necessary cookies are always enabled.",
+    "necessaryTitle": "swe_Necessary Cookies",
+    "necessaryDescription": "swe_Required for the website to function. Cannot be disabled.",
+    "alwaysActive": "swe_Always Active",
+    "analyticsTitle": "swe_Analytics Cookies",
+    "analyticsDescription": "swe_Help us understand how visitors interact with our website.",
+    "marketingTitle": "swe_Marketing Cookies",
+    "marketingDescription": "swe_Used to deliver personalized advertisements relevant to you.",
+    "cancel": "swe_Cancel",
+    "savePreferences": "swe_Save preferences",
+    "settings": "swe_Cookie Settings"
+  }
+}

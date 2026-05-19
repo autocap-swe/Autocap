@@ -1,14 +1,14 @@
-'use client'
+'use client';
 
-import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { MessageCircle } from 'lucide-react'
+import { Link } from '@/i18n/navigation';
+import { motion } from 'framer-motion';
+import { MessageCircle } from 'lucide-react';
 
 interface FooterCtaProps {
-  headline: string
-  subtext: string
-  ctaText: string
-  ctaLink: string
+  headline: string;
+  subtext: string;
+  ctaText: string;
+  ctaLink: string;
 }
 
 export function FooterCta({ headline, subtext, ctaText, ctaLink }: FooterCtaProps) {
@@ -59,5 +59,5 @@ export function FooterCta({ headline, subtext, ctaText, ctaLink }: FooterCtaProp
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

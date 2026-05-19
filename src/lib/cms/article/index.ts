@@ -7,9 +7,8 @@ export async function getArticlesContent(
   revalidate = REVALIDATE_LOW,
   locale?: string
 ): Promise<NewsArticle[]> {
-  return getContent<CmsArticle[], NewsArticle[]>('news-articles', {
+  const options = {
     revalidate,
-    locale,
     tags: ['news-articles'],
     params: {
       'pagination[pageSize]': '100',
@@ -17,7 +16,21 @@ export async function getArticlesContent(
       'populate[heroImage]': 'true',
     },
     mapper: articlesMapper,
+  };
+
+  const results = await getContent<CmsArticle[], NewsArticle[]>('news-articles', {
+    ...options,
+    locale,
   });
+
+  if (results.length === 0 && locale && locale !== 'en') {
+    return getContent<CmsArticle[], NewsArticle[]>('news-articles', {
+      ...options,
+      locale: 'en',
+    });
+  }
+
+  return results;
 }
 
 export async function getArticleBySlugContent(
@@ -25,9 +38,8 @@ export async function getArticleBySlugContent(
   revalidate = REVALIDATE_LOW,
   locale?: string
 ): Promise<NewsArticle | null> {
-  const results = await getContent<CmsArticle[], NewsArticle[]>('news-articles', {
+  const options = {
     revalidate,
-    locale,
     tags: ['news-articles', `news-article:${slug}`],
     params: {
       'filters[slug][$eq]': slug,
@@ -41,6 +53,20 @@ export async function getArticleBySlugContent(
       'pagination[pageSize]': '1',
     },
     mapper: articlesMapper,
+  };
+
+  const results = await getContent<CmsArticle[], NewsArticle[]>('news-articles', {
+    ...options,
+    locale,
   });
+
+  if (!results[0] && locale && locale !== 'en') {
+    const enResults = await getContent<CmsArticle[], NewsArticle[]>('news-articles', {
+      ...options,
+      locale: 'en',
+    });
+    return enResults[0] ?? null;
+  }
+
   return results[0] ?? null;
 }

@@ -87,6 +87,10 @@ export async function getContent<TCms, TFinal = TCms>(
   }
 
   if (!res.ok) {
+    if (res.status === 404 && locale && locale !== 'en') {
+      console.warn(`[CMS] ${slug}: no ${locale} translation — falling back to en`);
+      return getContent<TCms, TFinal>(slug, { ...options, locale: 'en' });
+    }
     const body = await res.text().catch(() => '(unreadable)');
     console.warn(`[CMS] ${slug}: response body →`, body);
     throw unavailable(slug, `HTTP ${res.status}`, res.status);

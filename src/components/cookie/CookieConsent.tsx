@@ -1,35 +1,44 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
-import { Cookie, X } from 'lucide-react'
-import { useCookieConsentContext } from './CookieConsentProvider'
-import type { CookiePreferences } from '@/lib/cookieConsent'
+import { useState, useEffect } from 'react';
+import { Link } from '@/i18n/navigation';
+import { Cookie, X } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import { useCookieConsentContext } from './CookieConsentProvider';
+import type { CookiePreferences } from '@/lib/cookieConsent';
 
 export function CookieConsent() {
-  const context = useCookieConsentContext()
+  const context = useCookieConsentContext();
+  const t = useTranslations('cookie');
 
   // Local state for modal - must be called before any early returns
   const [localPreferences, setLocalPreferences] = useState<CookiePreferences>(
     context?.preferences || { necessary: true, analytics: false, marketing: false }
-  )
+  );
 
   // Sync local preferences when modal opens or global preferences change
   useEffect(() => {
     if (context?.preferences) {
-      setLocalPreferences(context.preferences)
+      setLocalPreferences(context.preferences);
     }
-  }, [context?.preferences, context?.showPreferencesModal])
+  }, [context?.preferences, context?.showPreferencesModal]);
 
   if (!context) {
-    return null
+    return null;
   }
 
-  const { showBanner, showPreferencesModal, acceptAll, openPreferences, closePreferences, setCustomPreferences } = context
+  const {
+    showBanner,
+    showPreferencesModal,
+    acceptAll,
+    openPreferences,
+    closePreferences,
+    setCustomPreferences,
+  } = context;
 
   const handleSavePreferences = () => {
-    setCustomPreferences(localPreferences)
-  }
+    setCustomPreferences(localPreferences);
+  };
 
   return (
     <>
@@ -49,12 +58,12 @@ export function CookieConsent() {
                 </div>
                 <div className="flex-1">
                   <p className="text-sm leading-relaxed text-gray-200 md:text-base">
-                    We use cookies to improve your experience and analyse site traffic.{' '}
+                    {t('bannerText')}{' '}
                     <Link
                       href="/privacy-policy"
                       className="font-semibold text-white underline transition-colors hover:text-[#C8102E]"
                     >
-                      Privacy Policy
+                      {t('privacyPolicy')}
                     </Link>
                   </p>
                 </div>
@@ -66,13 +75,13 @@ export function CookieConsent() {
                   onClick={openPreferences}
                   className="rounded-md border border-gray-600 bg-transparent px-4 py-2 text-sm font-medium text-white transition-colors hover:border-gray-500 hover:bg-gray-800"
                 >
-                  Manage preferences
+                  {t('managePreferences')}
                 </button>
                 <button
                   onClick={acceptAll}
                   className="rounded-md bg-[#C8102E] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#A00D25]"
                 >
-                  Accept all
+                  {t('acceptAll')}
                 </button>
               </div>
             </div>
@@ -91,15 +100,13 @@ export function CookieConsent() {
         >
           <div
             className="w-full max-w-2xl rounded-lg bg-white p-6 shadow-xl md:p-8"
-            onClick={(e) => e.stopPropagation()}
+            onClick={e => e.stopPropagation()}
           >
             {/* Modal Header */}
             <div className="mb-6 flex items-start justify-between">
               <div>
-                <h2 className="text-2xl font-bold text-[#1C1C1E]">Cookie Preferences</h2>
-                <p className="mt-2 text-sm text-gray-600">
-                  Choose which cookies you allow. Necessary cookies are always enabled.
-                </p>
+                <h2 className="text-2xl font-bold text-[#1C1C1E]">{t('preferencesTitle')}</h2>
+                <p className="mt-2 text-sm text-gray-600">{t('preferencesDescription')}</p>
               </div>
               <button
                 onClick={closePreferences}
@@ -116,14 +123,12 @@ export function CookieConsent() {
               <div className="rounded-md border border-gray-200 bg-gray-50 p-4">
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
-                    <h3 className="font-semibold text-[#1C1C1E]">Necessary Cookies</h3>
-                    <p className="mt-1 text-sm text-gray-600">
-                      Required for the website to function. Cannot be disabled.
-                    </p>
+                    <h3 className="font-semibold text-[#1C1C1E]">{t('necessaryTitle')}</h3>
+                    <p className="mt-1 text-sm text-gray-600">{t('necessaryDescription')}</p>
                   </div>
                   <div className="ml-4 flex-shrink-0">
                     <div className="rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-800">
-                      Always Active
+                      {t('alwaysActive')}
                     </div>
                   </div>
                 </div>
@@ -133,17 +138,15 @@ export function CookieConsent() {
               <div className="rounded-md border border-gray-200 p-4">
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
-                    <h3 className="font-semibold text-[#1C1C1E]">Analytics Cookies</h3>
-                    <p className="mt-1 text-sm text-gray-600">
-                      Help us understand how visitors interact with our website.
-                    </p>
+                    <h3 className="font-semibold text-[#1C1C1E]">{t('analyticsTitle')}</h3>
+                    <p className="mt-1 text-sm text-gray-600">{t('analyticsDescription')}</p>
                   </div>
                   <div className="ml-4 flex-shrink-0">
                     <label className="relative inline-flex cursor-pointer items-center">
                       <input
                         type="checkbox"
                         checked={localPreferences.analytics}
-                        onChange={(e) =>
+                        onChange={e =>
                           setLocalPreferences({
                             ...localPreferences,
                             analytics: e.target.checked,
@@ -161,17 +164,15 @@ export function CookieConsent() {
               <div className="rounded-md border border-gray-200 p-4">
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
-                    <h3 className="font-semibold text-[#1C1C1E]">Marketing Cookies</h3>
-                    <p className="mt-1 text-sm text-gray-600">
-                      Used to deliver personalized advertisements relevant to you.
-                    </p>
+                    <h3 className="font-semibold text-[#1C1C1E]">{t('marketingTitle')}</h3>
+                    <p className="mt-1 text-sm text-gray-600">{t('marketingDescription')}</p>
                   </div>
                   <div className="ml-4 flex-shrink-0">
                     <label className="relative inline-flex cursor-pointer items-center">
                       <input
                         type="checkbox"
                         checked={localPreferences.marketing}
-                        onChange={(e) =>
+                        onChange={e =>
                           setLocalPreferences({
                             ...localPreferences,
                             marketing: e.target.checked,
@@ -192,18 +193,18 @@ export function CookieConsent() {
                 onClick={closePreferences}
                 className="rounded-md border border-gray-300 bg-white px-6 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
               >
-                Cancel
+                {t('cancel')}
               </button>
               <button
                 onClick={handleSavePreferences}
                 className="rounded-md bg-[#C8102E] px-6 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#A00D25]"
               >
-                Save preferences
+                {t('savePreferences')}
               </button>
             </div>
           </div>
         </div>
       )}
     </>
-  )
+  );
 }

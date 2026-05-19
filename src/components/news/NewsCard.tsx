@@ -1,7 +1,8 @@
 'use client';
 
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { NewsCategoryBadge } from './NewsCategoryBadge';
 import { NewsImagePlaceholder } from './NewsImagePlaceholder';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
@@ -14,6 +15,7 @@ interface NewsCardProps {
 
 export function NewsCard({ article }: NewsCardProps) {
   const { ref, isInView } = useScrollAnimation();
+  const t = useTranslations('news');
 
   // Format date to human-readable format
   const formatDate = (dateString: string): string => {
@@ -72,7 +74,7 @@ export function NewsCard({ article }: NewsCardProps) {
             <span className="mx-2">•</span>
             <span>{formatDate(article.publishDate)}</span>
             <span className="mx-2">•</span>
-            <span>{article.readTimeMinutes} min read</span>
+            <span>{t('minRead', { minutes: article.readTimeMinutes })}</span>
           </div>
         </div>
       </article>
