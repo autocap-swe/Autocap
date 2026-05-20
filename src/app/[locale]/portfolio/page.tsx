@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { MapPin, Building2 } from 'lucide-react';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { WorkshopMapWrapper } from '@/components/portfolio/WorkshopMapWrapper';
@@ -20,7 +21,15 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
 
   return (
     <>
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#E4E2DE] via-[#D8D6D2] to-[#E4E2DE] py-20 md:py-28">
+      <section className="relative overflow-hidden py-20 md:py-28">
+        <Image
+          src="/images/Portfolio.webp"
+          alt="AutoCap portfolio"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/15" />
         <div className="absolute inset-0 opacity-[0.02]">
           <div
             className="h-full w-full"
@@ -37,13 +46,13 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
             <span className="text-sm font-semibold text-[#C8102E]">{t('badge')}</span>
           </div>
 
-          <h1 className="mb-6 text-5xl font-black text-[#1C1C1E] md:text-6xl lg:text-7xl">
+          <h1 className="mb-6 text-5xl font-black text-white md:text-6xl lg:text-7xl">
             {t('title')}
           </h1>
 
           <div className="mb-8 h-1 w-24 bg-[#C8102E]" />
 
-          <p className="max-w-3xl text-xl leading-relaxed text-gray-700 md:text-2xl">
+          <p className="max-w-3xl text-xl leading-relaxed text-white/90 md:text-2xl">
             {t('description')}
           </p>
         </div>

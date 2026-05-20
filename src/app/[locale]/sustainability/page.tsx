@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { Leaf } from 'lucide-react';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { sustainabilityContent } from '@/content/sustainability';
@@ -23,7 +24,15 @@ export default async function SustainabilityPage({
 
   return (
     <main className="min-h-screen">
-      <section className="relative min-h-[85vh] overflow-hidden bg-gradient-to-br from-[#F5F0EB] via-[#E5E0DB] to-[#F5F0EB]">
+      <section className="relative min-h-[85vh] overflow-hidden">
+        <Image
+          src="/images/Sustainability.webp"
+          alt="AutoCap sustainability"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/15" />
         <div className="absolute inset-0 opacity-[0.03]">
           <div
             className="h-full w-full"
@@ -40,11 +49,11 @@ export default async function SustainabilityPage({
                 <Leaf className="h-12 w-12 text-[#C8102E] md:h-16 md:w-16" strokeWidth={2} />
               </div>
             </div>
-            <h1 className="mb-8 text-5xl font-black leading-[1.1] text-[#1C1C1E] md:text-6xl lg:text-7xl xl:text-8xl">
+            <h1 className="mb-8 text-5xl font-black leading-[1.1] text-white md:text-6xl lg:text-7xl xl:text-8xl">
               {t('hero.headline')}
             </h1>
             <div className="mx-auto mb-8 h-1 w-24 bg-[#C8102E]" />
-            <p className="mx-auto max-w-3xl text-xl leading-relaxed text-gray-700 md:text-2xl md:leading-relaxed">
+            <p className="mx-auto max-w-3xl text-xl leading-relaxed text-white/90 md:text-2xl md:leading-relaxed">
               {t('hero.intro')}
             </p>
           </div>

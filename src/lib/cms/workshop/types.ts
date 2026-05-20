@@ -12,6 +12,7 @@ export interface CmsWorkshop {
   yearAcquired: number;
   localWebsite: string;
   description: string;
+  image: { url: string } | null;
 }
 
 // Page shape — what the frontend renders

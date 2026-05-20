@@ -1,8 +1,9 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, ExternalLink, MapPin, Calendar, Building2 } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Calendar } from 'lucide-react';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { getWorkshopsContent, getWorkshopBySlugContent } from '@/lib/cms/workshop';
+import { WorkshopHero } from '@/components/portfolio/WorkshopHero';
 
 interface WorkshopDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -43,6 +44,15 @@ export default async function WorkshopDetailPage({ params }: WorkshopDetailPageP
 
   return (
     <article className="bg-white">
+      <WorkshopHero
+        name={workshop.name}
+        city={workshop.city}
+        region={workshop.region}
+        imageUrl={workshop.imageUrl ?? null}
+        workshopProfileBadge={t('detail.workshopProfileBadge')}
+      />
+
+      {/* Breadcrumb */}
       <nav className="border-b border-gray-200 bg-gray-50">
         <div className="mx-auto max-w-5xl px-6 py-4 lg:px-8">
           <ol className="flex items-center space-x-2 text-sm">
@@ -72,33 +82,25 @@ export default async function WorkshopDetailPage({ params }: WorkshopDetailPageP
           {t('detail.backToPortfolio')}
         </Link>
 
-        <div className="mb-12">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-[#F5F0EB] px-4 py-2">
-            <Building2 className="h-5 w-5 text-[#C8102E]" />
-            <span className="text-sm font-semibold text-[#1C1C1E]">
-              {t('detail.workshopProfileBadge')}
-            </span>
-          </div>
-
-          <h1 className="mb-6 text-5xl font-black text-[#1C1C1E] md:text-6xl lg:text-7xl">
-            {workshop.name}
-          </h1>
-
-          <div className="mb-8 h-1 w-24 bg-[#C8102E]" />
-
-          <div className="mb-6 flex items-center gap-2 text-xl text-gray-600">
-            <MapPin className="h-5 w-5 text-[#C8102E]" />
-            <span>
-              {workshop.city}, {workshop.region}
-            </span>
-          </div>
-
+        <div className="mb-12 flex flex-wrap items-center gap-4">
           <div className="inline-flex items-center gap-2 rounded-full bg-[#F5F0EB] px-6 py-3">
             <Calendar className="h-5 w-5 text-[#C8102E]" />
             <span className="text-base font-semibold text-[#1C1C1E]">
               {t('detail.partOfGroupSince', { year: workshop.yearAcquired })}
             </span>
           </div>
+
+          {workshop.localWebsite && (
+            <a
+              href={workshop.localWebsite}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-base font-semibold text-[#C8102E] transition-colors hover:text-[#A00D24]"
+            >
+              {t('detail.visitWebsite')}
+              <ExternalLink className="h-4 w-4" />
+            </a>
+          )}
         </div>
 
         <div className="prose prose-lg mb-12 max-w-none">
@@ -110,20 +112,6 @@ export default async function WorkshopDetailPage({ params }: WorkshopDetailPageP
             {t('detail.groupBlurb', { name: workshop.name })}
           </p>
         </div>
-
-        {workshop.localWebsite && (
-          <div className="mb-16">
-            <a
-              href={workshop.localWebsite}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-lg font-semibold text-[#C8102E] transition-colors hover:text-[#A00D24]"
-            >
-              {t('detail.visitWebsite')}
-              <ExternalLink className="h-5 w-5" />
-            </a>
-          </div>
-        )}
 
         <div className="border-t border-gray-200 pt-16">
           <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#D8E4DC] via-[#C8D5CC] to-[#D8E4DC] p-12 text-center">
