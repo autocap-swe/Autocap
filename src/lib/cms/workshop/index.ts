@@ -10,7 +10,7 @@ export async function getWorkshopsContent(
   const options = {
     revalidate,
     tags: ['workshops'],
-    params: { 'pagination[pageSize]': '100' },
+    params: { 'pagination[pageSize]': '100', populate: 'image' },
     mapper: workshopsMapper,
   };
 
@@ -40,6 +40,7 @@ export async function getWorkshopBySlugContent(
     params: {
       'filters[slug][$eq]': slug,
       'pagination[pageSize]': '1',
+      populate: 'image',
     },
     mapper: workshopsMapper,
   };
