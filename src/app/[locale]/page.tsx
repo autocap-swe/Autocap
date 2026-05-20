@@ -7,13 +7,15 @@ import { CeoQuote } from '@/components/home/CeoQuote';
 import { FooterCta } from '@/components/home/FooterCta';
 import { homepageContent, audienceCards } from '@/content/homepage';
 import { getArticlesContent } from '@/lib/cms/article';
+import { getKpiTickerContent } from '@/lib/cms/kpi-ticker';
 import { REVALIDATE_HIGH } from '@/lib/cms/revalidate';
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const [articles, t] = await Promise.all([
+  const [articles, cmsKpis, t] = await Promise.all([
     getArticlesContent(REVALIDATE_HIGH, locale).catch(() => []),
+    getKpiTickerContent(REVALIDATE_HIGH, locale).catch(() => null),
     getTranslations('homepage'),
   ]);
 
@@ -25,12 +27,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     cta2Text: t('hero.cta2Text'),
   };
 
-  const kpis = homepageContent.kpis.map((kpi, i) => ({
-    ...kpi,
-    label: t(`kpis.${i}.label`),
-    ...(kpi.prefix !== undefined && { prefix: t(`kpis.${i}.prefix`) }),
-    ...(kpi.suffix !== undefined && { suffix: t(`kpis.${i}.suffix`) }),
-  }));
+  const kpis =
+    cmsKpis ??
+    homepageContent.kpis.map((kpi, i) => ({
+      ...kpi,
+      label: t(`kpis.${i}.label`),
+      ...(kpi.prefix !== undefined && { prefix: t(`kpis.${i}.prefix`) }),
+      ...(kpi.suffix !== undefined && { suffix: t(`kpis.${i}.suffix`) }),
+    }));
 
   const cards = audienceCards.map((card, i) => ({
     ...card,

@@ -5,6 +5,9 @@ import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Breadcrumb } from '@/components/entrepreneurs/Breadcrumb';
 import { investorsContent } from '@/content/investors';
 import { MetricCard } from '@/components/investors/MetricCard';
+import { getKpiTickerContent } from '@/lib/cms/kpi-ticker';
+
+const KPI_ICONS = ['Building2', 'Users', 'TrendingUp', 'Target'] as const;
 
 export const metadata: Metadata = {
   title: 'Growth Metrics · AutoCap Group',
@@ -20,10 +23,18 @@ export default async function InvestorsMetricsPage({
   setRequestLocale(locale);
   const t = await getTranslations('investors');
 
-  const kpis = investorsContent.metrics.kpis.map((m, i) => ({
-    ...m,
-    label: t(`metrics.kpis.${i}.label`),
-  }));
+  const cmsKpis = await getKpiTickerContent(undefined, locale).catch(() => null);
+
+  const kpis = cmsKpis
+    ? cmsKpis.map((item, i) => ({
+        value: `${item.prefix ?? ''}${item.value}${item.suffix ?? ''}`,
+        label: item.label,
+        icon: KPI_ICONS[i] ?? 'TrendingUp',
+      }))
+    : investorsContent.metrics.kpis.map((m, i) => ({
+        ...m,
+        label: t(`metrics.kpis.${i}.label`),
+      }));
 
   return (
     <main className="min-h-screen">

@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
-import { privacyPolicyContent } from '@/content/privacyPolicy';
+import { getPrivacyPolicyContent } from '@/lib/cms/privacy-policy';
 
 export const metadata: Metadata = {
-  title: privacyPolicyContent.metadata.title,
-  description: privacyPolicyContent.metadata.description,
+  title: 'Privacy Policy · AutoCap Group',
+  description:
+    'AutoCap Group privacy policy — how we collect, use, and protect your personal data in compliance with GDPR.',
 };
 
 export default async function PrivacyPolicyPage({
@@ -17,11 +18,17 @@ export default async function PrivacyPolicyPage({
   setRequestLocale(locale);
   const t = await getTranslations('privacyPolicy');
 
-  const sections = privacyPolicyContent.sections.map(section => ({
-    ...section,
-    title: t(`sections.${section.id}.title`),
-    content: section.content.map((_, ci) => t(`sections.${section.id}.content.${ci}`)),
-  }));
+  const cmsPolicy = await getPrivacyPolicyContent(undefined, locale).catch(() => null);
+
+  const sections = cmsPolicy?.sections ?? [];
+  const contactEmail = cmsPolicy?.contactEmail ?? 'kontakt@autocapgroup.se';
+
+  const lastUpdated = cmsPolicy
+    ? new Date(cmsPolicy.lastUpdated).toLocaleDateString('en-GB', {
+        month: 'long',
+        year: 'numeric',
+      })
+    : null;
 
   return (
     <main className="min-h-screen bg-white">
@@ -30,7 +37,9 @@ export default async function PrivacyPolicyPage({
           <h1 className="mb-4 text-4xl font-black text-[#1C1C1E] md:text-5xl lg:text-6xl">
             {t('hero.title')}
           </h1>
-          <p className="mb-6 text-sm text-gray-500">{t('hero.lastUpdated')}</p>
+          <p className="mb-6 text-sm text-gray-500">
+            {lastUpdated ? `Last updated: ${lastUpdated}` : t('hero.lastUpdated')}
+          </p>
           <p className="text-lg leading-relaxed text-gray-700 md:text-xl">
             {t('hero.description')}
           </p>
@@ -50,7 +59,12 @@ export default async function PrivacyPolicyPage({
                   {section.content.map((paragraph, index) => (
                     <p
                       key={index}
-                      className={`leading-relaxed ${paragraph.includes('LEGAL CONTENT PENDING') || paragraph.includes('Placeholder') ? 'italic text-gray-600' : 'text-gray-700'}`}
+                      className={`whitespace-pre-line leading-relaxed ${
+                        paragraph.includes('LEGAL CONTENT PENDING') ||
+                        paragraph.includes('Placeholder')
+                          ? 'italic text-gray-600'
+                          : 'text-gray-700'
+                      }`}
                     >
                       {paragraph}
                     </p>
@@ -69,10 +83,10 @@ export default async function PrivacyPolicyPage({
           </h2>
           <p className="mb-6 leading-relaxed text-gray-700">{t('contact.description')}</p>
           <a
-            href={`mailto:${privacyPolicyContent.contact.email}`}
+            href={`mailto:${contactEmail}`}
             className="inline-flex items-center text-lg font-semibold text-[#C8102E] transition-colors hover:text-[#A00D25]"
           >
-            {privacyPolicyContent.contact.email}
+            {contactEmail}
           </a>
         </div>
       </section>

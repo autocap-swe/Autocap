@@ -4,20 +4,25 @@ import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { WorkshopMapWrapper } from '@/components/portfolio/WorkshopMapWrapper';
 import { WorkshopGrid } from '@/components/portfolio/WorkshopGrid';
 import { getWorkshopsContent } from '@/lib/cms/workshop';
+import { getKpiTickerContent } from '@/lib/cms/kpi-ticker';
 
 export const metadata = {
   title: 'Our Portfolio · AutoCap Group',
-  description:
-    "12 tire service workshops across Sweden. Explore AutoCap Group's growing portfolio.",
+  description: "AutoCap Group's growing portfolio of tire service workshops across Sweden.",
 };
 
 export default async function PortfolioPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const [workshops, t] = await Promise.all([
+  const [workshops, t, cmsKpis] = await Promise.all([
     getWorkshopsContent(undefined, locale).catch(() => []),
     getTranslations('portfolio'),
+    getKpiTickerContent(undefined, locale).catch(() => null),
   ]);
+
+  const workshopBadgeText = cmsKpis
+    ? t('badge', { count: cmsKpis[0].value })
+    : t('badge', { count: workshops.length });
 
   return (
     <>
@@ -43,7 +48,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mb-8 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2">
             <Building2 className="h-5 w-5 text-[#C8102E]" />
-            <span className="text-sm font-semibold text-[#C8102E]">{t('badge')}</span>
+            <span className="text-sm font-semibold text-[#C8102E]">{workshopBadgeText}</span>
           </div>
 
           <h1 className="mb-6 text-5xl font-black text-white md:text-6xl lg:text-7xl">
@@ -53,7 +58,7 @@ export default async function PortfolioPage({ params }: { params: Promise<{ loca
           <div className="mb-8 h-1 w-24 bg-[#C8102E]" />
 
           <p className="max-w-3xl text-xl leading-relaxed text-white/90 md:text-2xl">
-            {t('description')}
+            {t('description', { count: cmsKpis?.[0].value ?? workshops.length })}
           </p>
         </div>
       </section>
