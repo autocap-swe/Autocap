@@ -339,6 +339,7 @@
     "metricsPage": {
       "badge": "Track Record",
       "title": "Growth Metrics",
+      "milestonesTitle": "Growth Timeline",
       "roadAhead": "The Road Ahead",
       "closingCta": "Ready to discuss the opportunity? Contact us"
     },

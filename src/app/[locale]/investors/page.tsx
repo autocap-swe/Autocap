@@ -2,8 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { TrendingUp } from 'lucide-react';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
-import { investorsContent } from '@/content/investors';
-
 export const metadata = {
   title: 'Investors · AutoCap Group',
   description:
@@ -55,7 +53,7 @@ export default async function InvestorsPage({ params }: { params: Promise<{ loca
           </div>
           <div className="mt-8">
             <Link
-              href={investorsContent.landing.ctaLink}
+              href="/investors/why"
               className="inline-flex items-center gap-3 rounded-xl bg-gradient-to-r from-[#C8102E] to-[#A00D25] px-10 py-5 text-xl font-bold text-white transition-all duration-300 hover:scale-105"
             >
               {t('landing.ctaText')}

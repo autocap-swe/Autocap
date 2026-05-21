@@ -4,7 +4,7 @@ import { TrendingUp } from 'lucide-react';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Breadcrumb } from '@/components/entrepreneurs/Breadcrumb';
 import { InvestmentPillar } from '@/components/investors/InvestmentPillar';
-import { investorsContent } from '@/content/investors';
+import { getInvestmentPillarsContent } from '@/lib/cms/investment-pillars';
 
 export const metadata: Metadata = {
   title: 'Investment Case · AutoCap Group',
@@ -21,11 +21,7 @@ export default async function InvestorsWhyPage({
   setRequestLocale(locale);
   const t = await getTranslations('investors');
 
-  const pillars = investorsContent.pillars.map((p, i) => ({
-    ...p,
-    title: t(`pillars.${i}.title`),
-    description: t(`pillars.${i}.description`),
-  }));
+  const pillars = await getInvestmentPillarsContent(undefined, locale).catch(() => []);
 
   return (
     <main className="min-h-screen">
@@ -41,7 +37,9 @@ export default async function InvestorsWhyPage({
           <div className="mt-8 text-center">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-md">
               <TrendingUp className="h-5 w-5 text-[#C8102E]" />
-              <span className="text-sm font-semibold text-[#C8102E]">{t('whyPage.badge')}</span>
+              <span className="text-sm font-semibold text-[#C8102E]">
+                {pillars.length > 0 ? `${pillars.length} Investment Pillars` : t('whyPage.badge')}
+              </span>
             </div>
             <h1 className="mb-6 text-5xl font-black text-[#1C1C1E] md:text-6xl lg:text-7xl">
               {t('whyPage.title')}
