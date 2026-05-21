@@ -50,6 +50,7 @@ export async function getArticleBySlugContent(
       'populate[fullContent][on][article.list][populate]': '*',
       'populate[fullContent][on][article.callout][populate]': '*',
       'populate[heroImage]': 'true',
+      'populate[relatedArticles][populate][heroImage]': 'true',
       'pagination[pageSize]': '1',
     },
     mapper: articlesMapper,
