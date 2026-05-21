@@ -1,37 +1,54 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { TrendingUp, Target, Zap, Users } from 'lucide-react'
-import { useScrollAnimation } from '@/hooks/useScrollAnimation'
+import { motion } from 'framer-motion';
+import {
+  TrendingUp,
+  Target,
+  Zap,
+  Users,
+  ShoppingCart,
+  Settings,
+  BarChart3,
+  Heart,
+  type LucideIcon,
+} from 'lucide-react';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 interface InvestmentPillarProps {
   pillar: {
-    id: number
-    title: string
-    description: string
-  }
-  index: number
+    id: number;
+    icon?: string;
+    title: string;
+    description: string;
+  };
+  index: number;
 }
 
-// Map pillar IDs to icons
-const iconMap = {
-  1: Target,
-  2: TrendingUp,
-  3: Zap,
-  4: Users,
-}
+const iconMap: Partial<Record<string, LucideIcon>> = {
+  Target,
+  TrendingUp,
+  Zap,
+  Users,
+  ShoppingCart,
+  Settings,
+  BarChart3,
+  Heart,
+};
+
+const fallbackIcons: LucideIcon[] = [Target, TrendingUp, Zap, Users, ShoppingCart, Settings];
 
 export function InvestmentPillar({ pillar, index }: InvestmentPillarProps) {
-  const { ref, isInView } = useScrollAnimation({ threshold: 0.2 })
+  const { ref, isInView } = useScrollAnimation({ threshold: 0.2 });
 
   // Alternate background with subtle gradients
   // Start with Linen White to avoid repeating fjord blue (header is also fjord)
   const bgGradient =
     index % 2 === 0
       ? 'bg-gradient-to-br from-[#F5F0EB] to-[#EDE8E3]'
-      : 'bg-gradient-to-br from-[#C9D8E8] to-[#B8C7D7]'
+      : 'bg-gradient-to-br from-[#C9D8E8] to-[#B8C7D7]';
 
-  const Icon = iconMap[pillar.id as keyof typeof iconMap]
+  const resolved = pillar.icon ? iconMap[pillar.icon] : undefined;
+  const Icon: LucideIcon = resolved ?? fallbackIcons[(pillar.id - 1) % fallbackIcons.length];
 
   return (
     <motion.section
@@ -43,7 +60,13 @@ export function InvestmentPillar({ pillar, index }: InvestmentPillarProps) {
     >
       {/* Subtle pattern overlay */}
       <div className="absolute inset-0 opacity-[0.03]">
-        <div className="h-full w-full" style={{ backgroundImage: 'radial-gradient(circle, #1C1C1E 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
+        <div
+          className="h-full w-full"
+          style={{
+            backgroundImage: 'radial-gradient(circle, #1C1C1E 1px, transparent 1px)',
+            backgroundSize: '24px 24px',
+          }}
+        />
       </div>
 
       <div className="relative mx-auto max-w-5xl px-6 md:px-8">
@@ -74,5 +97,5 @@ export function InvestmentPillar({ pillar, index }: InvestmentPillarProps) {
         </div>
       </div>
     </motion.section>
-  )
+  );
 }

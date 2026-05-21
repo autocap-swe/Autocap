@@ -339,6 +339,7 @@
     "metricsPage": {
       "badge": "swe_Track Record",
       "title": "swe_Growth Metrics",
+      "milestonesTitle": "swe_Growth Timeline",
       "roadAhead": "swe_The Road Ahead",
       "closingCta": "swe_Ready to discuss the opportunity? Contact us"
     },

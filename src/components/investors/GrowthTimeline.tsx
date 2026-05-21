@@ -1,25 +1,23 @@
-import type { GrowthMilestone } from '@/content/investors-case'
-import { CheckCircle2, Circle } from 'lucide-react'
+import type { GrowthMilestone } from '@/types/investors';
+import { CheckCircle2, Circle } from 'lucide-react';
 
 interface GrowthTimelineProps {
-  milestones: readonly GrowthMilestone[]
+  milestones: readonly GrowthMilestone[];
 }
 
 export function GrowthTimeline({ milestones }: GrowthTimelineProps) {
   return (
     <div className="space-y-8">
-      {milestones.map((milestone) => {
-        const isCompleted = milestone.status === 'completed'
-        const Icon = isCompleted ? CheckCircle2 : Circle
+      {milestones.map(milestone => {
+        const isCompleted = milestone.status === 'completed';
+        const Icon = isCompleted ? CheckCircle2 : Circle;
 
         return (
           <div key={milestone.period} className="flex gap-6">
             {/* Icon */}
             <div className="flex-shrink-0">
               <Icon
-                className={`h-8 w-8 ${
-                  isCompleted ? 'text-[#C8102E]' : 'text-gray-400'
-                }`}
+                className={`h-8 w-8 ${isCompleted ? 'text-[#C8102E]' : 'text-gray-400'}`}
                 strokeWidth={2}
               />
             </div>
@@ -38,8 +36,8 @@ export function GrowthTimeline({ milestones }: GrowthTimelineProps) {
               </p>
             </div>
           </div>
-        )
+        );
       })}
     </div>
-  )
+  );
 }

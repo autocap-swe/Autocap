@@ -3,9 +3,10 @@ import Link from 'next/link';
 import { BarChart3 } from 'lucide-react';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Breadcrumb } from '@/components/entrepreneurs/Breadcrumb';
-import { investorsContent } from '@/content/investors';
 import { MetricCard } from '@/components/investors/MetricCard';
+import { GrowthTimeline } from '@/components/investors/GrowthTimeline';
 import { getKpiTickerContent } from '@/lib/cms/kpi-ticker';
+import { getGrowthMilestonesContent } from '@/lib/cms/growth-milestones';
 
 const KPI_ICONS = ['Building2', 'Users', 'TrendingUp', 'Target'] as const;
 
@@ -23,18 +24,16 @@ export default async function InvestorsMetricsPage({
   setRequestLocale(locale);
   const t = await getTranslations('investors');
 
-  const cmsKpis = await getKpiTickerContent(undefined, locale).catch(() => null);
+  const [cmsKpis, milestones] = await Promise.all([
+    getKpiTickerContent(undefined, locale).catch(() => null),
+    getGrowthMilestonesContent(undefined, locale).catch(() => []),
+  ]);
 
-  const kpis = cmsKpis
-    ? cmsKpis.map((item, i) => ({
-        value: `${item.prefix ?? ''}${item.value}${item.suffix ?? ''}`,
-        label: item.label,
-        icon: KPI_ICONS[i] ?? 'TrendingUp',
-      }))
-    : investorsContent.metrics.kpis.map((m, i) => ({
-        ...m,
-        label: t(`metrics.kpis.${i}.label`),
-      }));
+  const kpis = (cmsKpis ?? []).map((item, i) => ({
+    value: `${item.prefix ?? ''}${item.value}${item.suffix ?? ''}`,
+    label: item.label,
+    icon: KPI_ICONS[i] ?? 'TrendingUp',
+  }));
 
   return (
     <main className="min-h-screen">
@@ -81,6 +80,17 @@ export default async function InvestorsMetricsPage({
           </div>
         </div>
       </section>
+
+      {milestones.length > 0 && (
+        <section className="bg-white py-20 md:py-28">
+          <div className="mx-auto max-w-3xl px-6 lg:px-8">
+            <h2 className="mb-12 text-4xl font-black text-[#1C1C1E] md:text-5xl">
+              {t('metricsPage.milestonesTitle')}
+            </h2>
+            <GrowthTimeline milestones={milestones} />
+          </div>
+        </section>
+      )}
 
       <section className="relative overflow-hidden bg-gradient-to-br from-[#F5F0EB] to-[#EDE8E3] py-20 md:py-28">
         <div className="mx-auto max-w-4xl px-6 text-center lg:px-8">
