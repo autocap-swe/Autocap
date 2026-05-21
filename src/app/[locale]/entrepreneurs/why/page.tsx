@@ -4,7 +4,6 @@ import { Sparkles } from 'lucide-react';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Breadcrumb } from '@/components/entrepreneurs/Breadcrumb';
 import { BenefitSection } from '@/components/entrepreneurs/BenefitSection';
-import { entrepreneursContent } from '@/content/entrepreneurs';
 
 export const metadata: Metadata = {
   title: 'Why AutoCap · For Workshop Owners',
@@ -16,8 +15,8 @@ export default async function WhyAutoCapPage({ params }: { params: Promise<{ loc
   setRequestLocale(locale);
   const t = await getTranslations('entrepreneurs');
 
-  const benefits = entrepreneursContent.benefits.map((b, i) => ({
-    ...b,
+  const benefits = [1, 2, 3, 4, 5].map((id, i) => ({
+    id,
     title: t(`benefits.${i}.title`),
     description: t(`benefits.${i}.description`),
   }));
