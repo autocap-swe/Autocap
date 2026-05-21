@@ -58,7 +58,7 @@ export function articleMapper(cms: CmsArticle): NewsArticle {
     fullContent: cms.fullContent
       ? cms.fullContent.map(mapBlock).filter((b): b is ArticleContentBlock => b !== null)
       : undefined,
-    relatedArticles: cms.relatedArticles?.map(articleMapper),
+    relatedArticles: cms.relatedArticles?.slice(0, 3).map(articleMapper),
   };
 }
 
