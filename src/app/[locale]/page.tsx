@@ -27,14 +27,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     cta2Text: t('hero.cta2Text'),
   };
 
-  const kpis =
-    cmsKpis ??
-    homepageContent.kpis.map((kpi, i) => ({
-      ...kpi,
-      label: t(`kpis.${i}.label`),
-      ...(kpi.prefix !== undefined && { prefix: t(`kpis.${i}.prefix`) }),
-      ...(kpi.suffix !== undefined && { suffix: t(`kpis.${i}.suffix`) }),
-    }));
+  const kpis = cmsKpis;
 
   const cards = audienceCards.map((card, i) => ({
     ...card,
@@ -59,7 +52,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   return (
     <>
       <Hero {...hero} />
-      <KpiTicker kpis={kpis} />
+      {kpis && <KpiTicker kpis={kpis} />}
       <AudienceCards cards={cards} />
       <LatestNewsStrip articles={articles} />
       <CeoQuote {...ceoQuote} />
