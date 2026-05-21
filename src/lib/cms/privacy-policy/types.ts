@@ -8,6 +8,7 @@ export interface CmsPrivacyPolicy {
   sections: CmsPrivacySection[];
   lastUpdated: string;
   contactEmail: string;
+  version: string;
 }
 
 export type { PrivacySection, PrivacyPolicy } from '@/types/privacy-policy';

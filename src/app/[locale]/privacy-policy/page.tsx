@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { getPrivacyPolicyContent } from '@/lib/cms/privacy-policy';
+import { PolicyChangeBanner } from '@/components/privacy/PolicyChangeBanner';
 
 export const metadata: Metadata = {
   title: 'Privacy Policy · AutoCap Group',
@@ -32,6 +33,9 @@ export default async function PrivacyPolicyPage({
 
   return (
     <main className="min-h-screen bg-white">
+      {cmsPolicy && (
+        <PolicyChangeBanner version={cmsPolicy.version} lastUpdated={cmsPolicy.lastUpdated} />
+      )}
       <section className="w-full bg-gray-50 py-16 md:py-20">
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
           <h1 className="mb-4 text-4xl font-black text-[#1C1C1E] md:text-5xl lg:text-6xl">
