@@ -3,7 +3,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Handshake } from 'lucide-react';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
-import { entrepreneursContent } from '@/content/entrepreneurs';
 import { TestimonialsSection } from '@/components/entrepreneurs/TestimonialsSection';
 
 export const metadata: Metadata = {
@@ -56,7 +55,7 @@ export default async function EntrepreneursPage({
             {t('landing.subheadline')}
           </p>
           <Link
-            href={entrepreneursContent.landing.ctaLink}
+            href="/entrepreneurs/why"
             className="inline-flex items-center gap-3 rounded-xl bg-gradient-to-r from-[#C8102E] to-[#A00D25] px-10 py-5 text-xl font-bold text-white transition-all duration-300 hover:scale-105"
           >
             {t('landing.ctaText')}

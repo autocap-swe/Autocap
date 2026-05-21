@@ -4,7 +4,7 @@ import { Clock, CheckCircle2 } from 'lucide-react';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Breadcrumb } from '@/components/entrepreneurs/Breadcrumb';
 import { ProcessTimeline } from '@/components/entrepreneurs/ProcessTimeline';
-import { entrepreneursContent } from '@/content/entrepreneurs';
+import { getAcquisitionProcessContent } from '@/lib/cms/acquisition-process';
 
 export const metadata: Metadata = {
   title: 'How It Works · AutoCap Group',
@@ -14,13 +14,16 @@ export const metadata: Metadata = {
 export default async function ProcessPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations('entrepreneurs');
+  const [t, acquisitionProcess] = await Promise.all([
+    getTranslations('entrepreneurs'),
+    getAcquisitionProcessContent(undefined, locale).catch(() => null),
+  ]);
 
-  const steps = entrepreneursContent.process.steps.map((s, i) => ({
-    ...s,
-    title: t(`process.steps.${i}.title`),
-    description: t(`process.steps.${i}.description`),
-    timeline: t(`process.steps.${i}.timeline`),
+  const steps = (acquisitionProcess?.steps ?? []).map(s => ({
+    number: s.stepNumber,
+    title: s.title,
+    description: s.description,
+    timeline: '',
   }));
 
   return (
@@ -79,7 +82,7 @@ export default async function ProcessPage({ params }: { params: Promise<{ locale
             {t('processPage.closingDescription')}
           </p>
           <Link
-            href={entrepreneursContent.process.ctaLink}
+            href="/entrepreneurs/contact"
             className="inline-flex items-center gap-3 rounded-xl bg-gradient-to-r from-[#C8102E] to-[#A00D25] px-10 py-5 text-xl font-bold text-white transition-all duration-300 hover:scale-105"
           >
             {t('process.ctaText')}

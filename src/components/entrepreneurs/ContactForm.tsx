@@ -7,8 +7,14 @@ import {
   entrepreneurFormSchema,
   type EntrepreneurFormData,
 } from '@/lib/validation/entrepreneurForm';
-import { revenueOptions } from '@/content/entrepreneurs';
 import { TurnstileWidget, type TurnstileInstance } from '@/components/contact/TurnstileWidget';
+
+const revenueOptions = [
+  { value: '<5 MSEK', label: 'Less than 5 MSEK' },
+  { value: '5-15 MSEK', label: '5-15 MSEK' },
+  { value: '15-50 MSEK', label: '15-50 MSEK' },
+  { value: '>50 MSEK', label: 'More than 50 MSEK' },
+] as const;
 
 interface ContactFormProps {
   successMessage: string;
