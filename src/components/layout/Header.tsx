@@ -163,7 +163,7 @@ export function Header() {
         {/* Mobile menu */}
         {mobileMenuOpen && (
           <div className="lg:hidden">
-            <div className="space-y-2 pb-6 pt-6">
+            <div className="max-h-[calc(100dvh-5rem)] overflow-y-auto space-y-2 pb-6 pt-6">
               {translatedLinks.map(link => {
                 const isActive = isLinkActive(link);
 
