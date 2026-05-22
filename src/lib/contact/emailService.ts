@@ -6,6 +6,15 @@ function getResend() {
   return new Resend(key);
 }
 
+function getFrom() {
+  return process.env.EMAIL_FROM ?? 'AutoCap <noreply@autocapgroup.se>';
+}
+
+function getCc(): string[] {
+  const cc = process.env.EMAIL_CC;
+  return cc ? [cc] : [];
+}
+
 interface ContactEmailParams {
   name: string;
   email: string;
@@ -17,8 +26,10 @@ export async function sendContactEmail({ name, email, subject, message }: Contac
   const to = process.env.CONTACT_EMAIL_TO ?? 'amar.smajlovic@ministryofprogramming.com';
 
   await getResend().emails.send({
-    from: 'AutoCap Contact Form <onboarding@resend.dev>',
+    from: getFrom(),
     to,
+    cc: getCc(),
+    replyTo: email,
     subject: `New enquiry from ${name}`,
     html: `
       <h2>New Contact Form Submission</h2>
@@ -53,9 +64,10 @@ export async function sendInvestorEmail(params: InvestorEmailParams) {
   const to = investorRecipients[enquiryType] ?? 'amar.smajlovic@ministryofprogramming.com';
 
   await getResend().emails.send({
-    from: 'AutoCap Contact Form <onboarding@resend.dev>',
+    from: getFrom(),
     to,
-
+    cc: getCc(),
+    replyTo: email,
     subject: `[INVESTOR ENQUIRY] ${enquiryType} — ${fullName} (${organisation})`,
     html: `
       <h2>[INVESTOR ENQUIRY] ${enquiryType} Enquiry</h2>
@@ -69,7 +81,6 @@ export async function sendInvestorEmail(params: InvestorEmailParams) {
     `,
   });
 }
-
 
 interface EntrepreneurEmailParams {
   name: string;
@@ -86,9 +97,10 @@ export async function sendEntrepreneurEmail(params: EntrepreneurEmailParams) {
   const { name, workshopName, cityRegion, revenue, email, phone, message } = params;
 
   await getResend().emails.send({
-    from: 'AutoCap Contact Form <onboarding@resend.dev>',
+    from: getFrom(),
     to,
-
+    cc: getCc(),
+    replyTo: email,
     subject: `[ACQUISITION ENQUIRY] ${name} — ${workshopName} (${cityRegion})`,
     html: `
       <h2>[ACQUISITION ENQUIRY] New Workshop Owner Enquiry</h2>
