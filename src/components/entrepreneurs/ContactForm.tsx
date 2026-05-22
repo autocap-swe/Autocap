@@ -193,6 +193,9 @@ export function ContactForm({ successMessage }: ContactFormProps) {
             id="phone"
             className="w-full rounded-md border border-gray-300 px-4 py-3 text-gray-900 focus:border-[#C8102E] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
             placeholder="+46 70 123 4567"
+            onKeyDown={e => {
+              if (e.key.length === 1 && !/[0-9+\-()\s]/.test(e.key)) e.preventDefault();
+            }}
           />
           {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>}
         </div>
