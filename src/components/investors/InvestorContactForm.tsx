@@ -192,6 +192,9 @@ export function InvestorContactForm({ successMessage }: InvestorContactFormProps
             id="phone"
             className="w-full rounded-md border border-gray-300 px-4 py-3 text-gray-900 focus:border-[#C8102E] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
             placeholder="+46 70 123 45 67"
+            onKeyDown={e => {
+              if (e.key.length === 1 && !/[0-9+\-()\s]/.test(e.key)) e.preventDefault();
+            }}
           />
           {errors.phone && <p className="mt-2 text-sm text-[#C8102E]">{errors.phone.message}</p>}
         </div>

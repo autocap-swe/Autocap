@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 const NAME_REGEX = /^[a-zA-ZäöåÄÖÅæøÆØéèêëàâüùûïîÿœ'\- ]+$/;
+const PHONE_REGEX = /^[0-9+\-()\s]+$/;
 
 export const ContactSchema = z.object({
   name: z
@@ -52,7 +53,12 @@ export const EntrepreneurSchema = z.object({
     .toLowerCase()
     .email('Invalid email address')
     .max(254, 'Email is too long'),
-  phone: z.string().trim().min(1, 'Phone is required').max(30, 'Phone number is too long'),
+  phone: z
+    .string()
+    .trim()
+    .min(1, 'Phone is required')
+    .max(30, 'Phone number is too long')
+    .regex(PHONE_REGEX, 'Phone can only contain numbers, +, -, (), and spaces'),
   message: z.string().trim().max(5000, 'Message is too long').optional(),
   gdprConsent: z.literal(true, { error: 'You must accept the privacy policy' }),
 });
@@ -83,7 +89,12 @@ export const InvestorSchema = z.object({
     .toLowerCase()
     .email('Invalid email address')
     .max(254, 'Email is too long'),
-  phone: z.string().trim().min(1, 'Phone is required').max(30, 'Phone number is too long'),
+  phone: z
+    .string()
+    .trim()
+    .min(1, 'Phone is required')
+    .max(30, 'Phone number is too long')
+    .regex(PHONE_REGEX, 'Phone can only contain numbers, +, -, (), and spaces'),
   message: z.string().trim().max(5000, 'Message is too long').optional(),
   gdprConsent: z.literal(true, { error: 'You must accept the privacy policy' }),
 });
