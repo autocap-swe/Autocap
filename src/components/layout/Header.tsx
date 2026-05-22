@@ -103,7 +103,8 @@ export function Header() {
                 // Dropdown menu
                 return (
                   <div key={link.href} className="group relative">
-                    <button
+                    <Link
+                      href={link.href}
                       className={`flex items-center gap-1 text-sm font-medium transition-all ${
                         isActive
                           ? 'text-[#C8102E] border-b-2 border-[#C8102E]'
@@ -112,7 +113,7 @@ export function Header() {
                     >
                       {link.label}
                       <ChevronDown className="h-4 w-4" />
-                    </button>
+                    </Link>
                     {/* Dropdown content */}
                     <div className="absolute left-0 top-full hidden pt-2 group-hover:block">
                       <div className="w-56 rounded-lg bg-white py-2 shadow-lg ring-1 ring-gray-200">
