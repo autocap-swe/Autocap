@@ -738,6 +738,18 @@
       "disclaimer": "swe_Detailed financial projections are not published publicly. Qualified investors receive comprehensive financial information through direct dialogue with our investor relations team."
     }
   },
+  "cookiePolicy": {
+    "hero": {
+      "title": "swe_Cookie Policy",
+      "lastUpdated": "swe_Last updated: May 2026",
+      "description": "swe_AutoCap Group uses cookies and similar technologies to improve your experience on our website. This policy explains what cookies we use and why."
+    },
+    "contact": {
+      "title": "swe_Questions about cookies?",
+      "description": "swe_If you have any questions about how we use cookies, please contact us."
+    },
+    "backToTop": "swe_Back to top"
+  },
   "common": {
     "readMore": "swe_Read more",
     "submit": "swe_Submit",
@@ -758,6 +770,7 @@
     "forYouSection": "swe_For You",
     "resourcesSection": "swe_Resources",
     "privacyPolicy": "swe_Privacy Policy",
+    "cookiePolicy": "swe_Cookie Policy",
     "tagline": "swe_The Nordic Tire Services Platform",
     "bottomBar": "swe_AutoCap Group Sweden AB · Nybrogatan 7, Stockholm"
   },

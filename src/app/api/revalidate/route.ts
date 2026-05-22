@@ -7,6 +7,7 @@ const CONTENT_TYPE_TAGS: Record<string, (slug?: string) => string[]> = {
   'contact-page': () => ['contact-page'],
   'kpi-ticker': () => ['kpi-ticker'],
   'privacy-policy': () => ['privacy-policy'],
+  'cookie-policy': () => ['cookie-policy'],
 };
 
 export async function POST(request: NextRequest) {
