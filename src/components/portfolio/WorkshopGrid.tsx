@@ -1,6 +1,10 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+
+function normalizeText(str: string) {
+  return str.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+}
 import { Building2 } from 'lucide-react';
 import { WorkshopCard } from './WorkshopCard';
 import { WorkshopSearchInput } from './WorkshopSearchInput';
@@ -23,10 +27,10 @@ export function WorkshopGrid({ workshops }: WorkshopGridProps) {
       result = result.filter(w => w.city === selectedCity);
     }
 
-    // Apply search filter (case-insensitive partial match)
+    // Apply search filter (case-insensitive, diacritic-normalized partial match)
     if (searchTerm.trim()) {
-      const lowerSearch = searchTerm.toLowerCase();
-      result = result.filter(w => w.name.toLowerCase().includes(lowerSearch));
+      const normalizedSearch = normalizeText(searchTerm);
+      result = result.filter(w => normalizeText(w.name).includes(normalizedSearch));
     }
 
     return result;
