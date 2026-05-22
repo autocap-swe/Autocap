@@ -104,6 +104,14 @@ export async function Footer() {
                 </Link>
               </li>
               <li>
+                <Link
+                  href="/cookies"
+                  className="text-sm text-gray-400 hover:text-white transition-colors"
+                >
+                  {t('cookiePolicy')}
+                </Link>
+              </li>
+              <li>
                 <CookieSettingsButton />
               </li>
             </ul>
