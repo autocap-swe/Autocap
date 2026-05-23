@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -19,6 +19,13 @@ export function InvestorContactForm({ successMessage }: InvestorContactFormProps
   const [isSuccess, setIsSuccess] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState('');
   const turnstileRef = useRef<TurnstileInstance>(null);
+  const successRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isSuccess && successRef.current) {
+      successRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [isSuccess]);
 
   const {
     register,
@@ -64,7 +71,7 @@ export function InvestorContactForm({ successMessage }: InvestorContactFormProps
 
   if (isSuccess) {
     return (
-      <div className="rounded-lg bg-white p-8 shadow-sm">
+      <div ref={successRef} className="rounded-lg bg-white p-8 shadow-sm">
         <div className="text-center">
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
             <svg

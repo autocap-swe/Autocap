@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
@@ -20,6 +20,13 @@ export function GeneralContactForm({ successMessage, formLabels }: GeneralContac
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState('');
   const turnstileRef = useRef<TurnstileInstance>(null);
+  const successRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isSubmitted && successRef.current) {
+      successRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [isSubmitted]);
 
   const {
     register,
@@ -61,7 +68,7 @@ export function GeneralContactForm({ successMessage, formLabels }: GeneralContac
 
   if (isSubmitted) {
     return (
-      <div className="rounded-lg bg-white p-8 shadow-sm">
+      <div ref={successRef} className="rounded-lg bg-white p-8 shadow-sm">
         <div className="text-center">
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
             <svg
