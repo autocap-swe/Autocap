@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 const NAME_REGEX = /^[a-zA-ZäöåÄÖÅæøÆØéèêëàâüùûïîÿœ'\- ]+$/;
 const SUBJECT_SAFE_REGEX = /^[^<>{}|\\^~[\]`]+$/;
+const PHONE_REGEX = /^[0-9+\-()\s]+$/;
 
 export const generalContactFormSchema = z.object({
   name: z
@@ -15,6 +16,16 @@ export const generalContactFormSchema = z.object({
     .trim()
     .min(1, 'This field is required')
     .email('Please enter a valid email address'),
+  phone: z
+    .string()
+    .trim()
+    .min(1, 'Phone number is required')
+    .min(7, 'Please enter a valid phone number')
+    .regex(
+      PHONE_REGEX,
+      'Phone number can only contain numbers, spaces, +, -, and parentheses'
+    )
+    .optional(),
   subject: z
     .string()
     .trim()
