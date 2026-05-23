@@ -48,7 +48,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           />
         </div>
 
-        <div className="relative flex min-h-[85vh] items-center justify-center px-6 py-24 md:px-8">
+        <div className="relative flex min-h-[85vh] items-center justify-center px-6 py-24 md:px-8 md:py-28 lg:px-12">
           <div className="mx-auto max-w-5xl text-center">
             <div className="mb-8 inline-flex items-center justify-center">
               <div className="rounded-2xl bg-white p-4">
@@ -62,7 +62,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
 
             <div className="mx-auto mb-8 h-1 w-24 bg-[#C8102E]" />
 
-            <p className="mx-auto mb-12 max-w-3xl text-xl leading-relaxed text-gray-700 md:text-2xl md:leading-relaxed">
+            <p className="mx-auto mb-12 max-w-3xl px-4 text-xl leading-relaxed text-gray-700 md:px-8 md:text-2xl md:leading-relaxed">
               {t('hero.subheadline')}
             </p>
 
@@ -75,7 +75,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       </section>
 
       <section className="relative overflow-hidden bg-gradient-to-br from-[#F5F0EB] to-[#EDE8E3] py-20 md:py-28">
-        <div className="mx-auto max-w-4xl px-6 md:px-8">
+        <div className="mx-auto max-w-4xl px-6 md:px-8 lg:px-12">
           <h2 className="mb-12 text-center text-4xl font-black text-[#1C1C1E] md:text-5xl lg:text-6xl">
             {t('story.title')}
           </h2>
@@ -96,7 +96,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       </section>
 
       <section className="relative overflow-hidden bg-gradient-to-br from-[#EDE4D8] via-[#DDD3C8] to-[#EDE4D8] py-20 md:py-28">
-        <div className="mx-auto max-w-4xl px-6 text-center md:px-8">
+        <div className="mx-auto max-w-4xl px-6 text-center md:px-8 lg:px-12">
           <h2 className="mb-12 text-4xl font-black text-[#1C1C1E] md:text-5xl lg:text-6xl">
             {t('mission.title')}
           </h2>
@@ -123,7 +123,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       ))}
 
       <section className="relative overflow-hidden bg-gradient-to-br from-[#F5F0EB] to-[#EDE8E3] py-20 md:py-28">
-        <div className="mx-auto max-w-5xl px-6 md:px-8">
+        <div className="mx-auto max-w-5xl px-6 md:px-8 lg:px-12">
           <h2 className="mb-12 text-center text-4xl font-black text-[#1C1C1E] md:text-5xl lg:text-6xl">
             {t('differentiators.title')}
           </h2>
@@ -144,7 +144,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#1C1C1E] via-[#2C2C2E] to-[#1C1C1E] px-6 py-20 md:px-8 md:py-28">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#1C1C1E] via-[#2C2C2E] to-[#1C1C1E] px-6 py-20 md:px-8 md:py-28 lg:px-12">
         <div className="absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#C8102E] opacity-20 blur-3xl" />
 
         <div className="relative mx-auto max-w-4xl text-center">
@@ -160,7 +160,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
 
           <div className="mx-auto mb-8 h-1 w-24 bg-[#C8102E]" />
 
-          <p className="mx-auto mb-12 max-w-3xl text-xl leading-relaxed text-gray-300 md:text-2xl">
+          <p className="mx-auto mb-12 max-w-3xl px-4 text-xl leading-relaxed text-gray-300 md:px-8 md:text-2xl">
             {t('closing.description')}
           </p>
 
