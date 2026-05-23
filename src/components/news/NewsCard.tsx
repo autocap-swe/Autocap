@@ -69,12 +69,13 @@ export function NewsCard({ article }: NewsCardProps) {
           <p className="mb-4 text-gray-600 line-clamp-3">{article.excerpt}</p>
 
           {/* Footer */}
-          <div className="mt-auto flex items-center text-sm text-gray-600">
-            <span>{article.author}</span>
-            <span className="mx-2">•</span>
-            <span>{formatDate(article.publishDate)}</span>
-            <span className="mx-2">•</span>
-            <span>{t('minRead', { minutes: article.readTimeMinutes })}</span>
+          <div className="mt-auto flex flex-col gap-1 text-sm text-gray-600">
+            <span className="truncate">{article.author}</span>
+            <div className="flex items-center">
+              <span>{formatDate(article.publishDate)}</span>
+              <span className="mx-2">•</span>
+              <span>{t('minRead', { minutes: article.readTimeMinutes })}</span>
+            </div>
           </div>
         </div>
       </article>
