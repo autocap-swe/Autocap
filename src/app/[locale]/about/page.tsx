@@ -136,7 +136,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#C8102E]/10">
                   <CheckCircle2 className="h-6 w-6 text-[#C8102E]" strokeWidth={2.5} />
                 </div>
-                <h3 className="mb-3 text-2xl font-bold text-[#1C1C1E]">{item.title}</h3>
+                <h3 className="mb-3 text-2xl font-bold text-[#1C1C1E] break-words">{item.title}</h3>
                 <p className="text-lg leading-relaxed text-gray-700">{item.description}</p>
               </div>
             ))}
