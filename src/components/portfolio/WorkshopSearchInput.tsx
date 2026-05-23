@@ -1,13 +1,13 @@
-import { Search, X } from 'lucide-react'
-import { Input } from '@/components/ui/atoms/input'
-import { cn } from '@/lib/utils'
+import { Search, X } from 'lucide-react';
+import { Input } from '@/components/ui/atoms/input';
+import { cn } from '@/lib/utils';
 
 interface WorkshopSearchInputProps {
-  value: string
-  onChange: (value: string) => void
-  selectedCity: string
-  onCityChange: (city: string) => void
-  cities: string[]
+  value: string;
+  onChange: (value: string) => void;
+  selectedCity: string;
+  onCityChange: (city: string) => void;
+  cities: string[];
 }
 
 export function WorkshopSearchInput({
@@ -15,12 +15,12 @@ export function WorkshopSearchInput({
   onChange,
   selectedCity,
   onCityChange,
-  cities
+  cities,
 }: WorkshopSearchInputProps) {
-  const allCities = ['All', ...cities]
+  const allCities = ['All', ...cities];
 
   return (
-    <div className="flex gap-3">
+    <div className="flex flex-wrap gap-3 sm:flex-nowrap">
       {/* Search Input Container */}
       <div className="relative flex-1">
         {/* Search Icon */}
@@ -32,10 +32,11 @@ export function WorkshopSearchInput({
         <Input
           type="text"
           value={value}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={e => onChange(e.target.value)}
           placeholder="Search workshops..."
           className={cn(
-            'h-12 w-full bg-white pl-12 pr-12 text-base',
+            'h-12 w-full bg-white pl-12 pr-12 text-base text-gray-900',
+            'placeholder:text-gray-500',
             'focus-visible:border-[#C8102E] focus-visible:ring-[#C8102E]/20'
           )}
         />
@@ -55,19 +56,19 @@ export function WorkshopSearchInput({
       {/* City Dropdown */}
       <select
         value={selectedCity}
-        onChange={(e) => onCityChange(e.target.value)}
+        onChange={e => onCityChange(e.target.value)}
         className={cn(
-          'h-12 min-w-[200px] rounded-md border-2 border-gray-300 bg-white pl-4 pr-10 text-base font-medium text-gray-700',
+          'h-12 w-full min-w-[200px] rounded-md border-2 border-gray-300 bg-white pl-4 pr-10 text-base font-medium text-gray-700 sm:w-auto',
           'transition-colors hover:border-[#C8102E]',
           'focus:border-[#C8102E] focus:outline-none focus:ring-2 focus:ring-[#C8102E]/20'
         )}
       >
-        {allCities.map((city) => (
+        {allCities.map(city => (
           <option key={city} value={city}>
             {city === 'All' ? 'All Cities' : city}
           </option>
         ))}
       </select>
     </div>
-  )
+  );
 }
