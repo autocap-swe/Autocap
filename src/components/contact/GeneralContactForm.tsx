@@ -124,6 +124,26 @@ export function GeneralContactForm({ successMessage, formLabels }: GeneralContac
           {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>}
         </div>
 
+        {/* Phone */}
+        {formLabels.phoneLabel && (
+          <div>
+            <label htmlFor="phone" className="mb-2 block text-sm font-medium text-gray-700">
+              {formLabels.phoneLabel} <span className="text-[#C8102E]">*</span>
+            </label>
+            <input
+              {...register('phone')}
+              type="tel"
+              id="phone"
+              className="w-full rounded-md border border-gray-300 px-4 py-3 text-gray-900 focus:border-[#C8102E] focus:outline-none focus:ring-1 focus:ring-[#C8102E]"
+              placeholder={formLabels.phonePlaceholder}
+              onKeyDown={e => {
+                if (e.key.length === 1 && !/[0-9+\-()\s]/.test(e.key)) e.preventDefault();
+              }}
+            />
+            {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>}
+          </div>
+        )}
+
         {/* Subject */}
         <div>
           <label htmlFor="subject" className="mb-2 block text-sm font-medium text-gray-700">
