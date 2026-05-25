@@ -1,10 +1,10 @@
-import Image from 'next/image'
-import { Linkedin } from 'lucide-react'
-import type { TeamMember } from '@/content/team'
-import { PhotoPlaceholder } from './PhotoPlaceholder'
+import Image from 'next/image';
+import { Linkedin } from 'lucide-react';
+import type { TeamMember } from '@/types/team';
+import { PhotoPlaceholder } from './PhotoPlaceholder';
 
 interface ProfileCardProps {
-  member: TeamMember
+  member: TeamMember;
 }
 
 export function ProfileCard({ member }: ProfileCardProps) {
@@ -53,5 +53,5 @@ export function ProfileCard({ member }: ProfileCardProps) {
         </a>
       )}
     </div>
-  )
+  );
 }
