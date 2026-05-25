@@ -4,7 +4,10 @@ import type { CmsTestimonial } from './types';
 import type { Testimonial } from '@/types/testimonial';
 import { testimonialsMapper } from './mapper';
 
-export async function getTestimonialsContent(revalidate = REVALIDATE_HIGH): Promise<Testimonial[]> {
+export async function getTestimonialsContent(
+  locale?: string,
+  revalidate = REVALIDATE_HIGH
+): Promise<Testimonial[]> {
   return getContent<CmsTestimonial[], Testimonial[]>('testimonials', {
     revalidate,
     tags: ['testimonials'],
@@ -14,5 +17,6 @@ export async function getTestimonialsContent(revalidate = REVALIDATE_HIGH): Prom
       populate: 'ownerPhoto',
     },
     mapper: testimonialsMapper,
+    locale,
   });
 }
