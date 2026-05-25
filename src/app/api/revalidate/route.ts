@@ -4,6 +4,7 @@ import { revalidateTag } from 'next/cache';
 const CONTENT_TYPE_TAGS: Record<string, (slug?: string) => string[]> = {
   'news-article': slug => ['news-articles', ...(slug ? [`news-article:${slug}`] : [])],
   workshop: slug => ['workshops', ...(slug ? [`workshop:${slug}`] : [])],
+  'team-member': () => ['team-members'],
   'contact-page': () => ['contact-page'],
   'kpi-ticker': () => ['kpi-ticker'],
   'privacy-policy': () => ['privacy-policy'],
