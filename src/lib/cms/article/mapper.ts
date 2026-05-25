@@ -32,10 +32,12 @@ function mapBlock(block: CmsArticleBlock): ArticleContentBlock | null {
       return {
         type: 'list',
         style: block.style,
-        items: block.items
-          .split('\n')
-          .map(i => i.trim())
-          .filter(Boolean),
+        items: Array.isArray(block.items)
+          ? block.items.map((i: string) => i.trim()).filter(Boolean)
+          : block.items
+              .split('\n')
+              .map((i: string) => i.trim())
+              .filter(Boolean),
       };
     case 'article.callout':
       return { type: 'callout', variant: block.variant, content: block.content };
