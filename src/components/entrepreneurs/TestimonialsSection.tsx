@@ -1,10 +1,11 @@
 import { getTranslations } from 'next-intl/server';
+import { getLocale } from 'next-intl/server';
 import { getTestimonialsContent } from '@/lib/cms/testimonial';
 import { TestimonialCard } from './TestimonialCard';
 
 export async function TestimonialsSection() {
-  const t = await getTranslations('testimonials');
-  const testimonials = await getTestimonialsContent().catch(() => []);
+  const [t, locale] = await Promise.all([getTranslations('testimonials'), getLocale()]);
+  const testimonials = await getTestimonialsContent(locale).catch(() => []);
 
   return (
     <section className="bg-[#F5F0EB] px-6 py-16 md:px-12 md:py-24">
