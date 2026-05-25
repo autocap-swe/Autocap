@@ -1,15 +1,10 @@
 import { getTranslations } from 'next-intl/server';
-import { testimonialsContent } from '@/content/testimonials';
+import { getTestimonialsContent } from '@/lib/cms/testimonial';
 import { TestimonialCard } from './TestimonialCard';
 
 export async function TestimonialsSection() {
   const t = await getTranslations('testimonials');
-
-  const testimonials = testimonialsContent.testimonials.map(testimonial => ({
-    ...testimonial,
-    quote: t(`${testimonial.id}.quote`),
-    keyFact: t(`${testimonial.id}.keyFact`),
-  }));
+  const testimonials = await getTestimonialsContent().catch(() => []);
 
   return (
     <section className="bg-[#F5F0EB] px-6 py-16 md:px-12 md:py-24">

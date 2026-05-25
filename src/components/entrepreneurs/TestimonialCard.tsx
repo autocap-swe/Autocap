@@ -1,9 +1,9 @@
-import Image from 'next/image'
-import type { Testimonial } from '@/content/testimonials'
-import { PhotoPlaceholder } from '@/components/team/PhotoPlaceholder'
+import Image from 'next/image';
+import type { Testimonial } from '@/types/testimonial';
+import { PhotoPlaceholder } from '@/components/team/PhotoPlaceholder';
 
 interface TestimonialCardProps {
-  testimonial: Testimonial
+  testimonial: Testimonial;
 }
 
 export function TestimonialCard({ testimonial }: TestimonialCardProps) {
@@ -40,5 +40,5 @@ export function TestimonialCard({ testimonial }: TestimonialCardProps) {
         <p className="text-sm font-semibold text-[#C8102E]">{testimonial.keyFact}</p>
       </div>
     </article>
-  )
+  );
 }
