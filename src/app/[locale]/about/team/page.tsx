@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
-import { teamContent } from '@/content/team';
+import { getTeamMembersContent } from '@/lib/cms/team-member';
 import { ProfileCard } from '@/components/team/ProfileCard';
 
 export const metadata: Metadata = {
@@ -14,15 +14,9 @@ export default async function TeamPage({ params }: { params: Promise<{ locale: s
   setRequestLocale(locale);
   const t = await getTranslations('team');
 
-  const translateMember = (member: (typeof teamContent.managementTeam)[0]) => ({
-    ...member,
-    title: t(`members.${member.id}.title`),
-    bio: t(`members.${member.id}.bio`),
-    ...(member.education !== undefined && { education: t(`members.${member.id}.education`) }),
-  });
-
-  const managementTeam = teamContent.managementTeam.map(translateMember);
-  const board = teamContent.board.map(translateMember);
+  const allMembers = await getTeamMembersContent(locale).catch(() => []);
+  const managementTeam = allMembers.filter(m => m.category === 'management');
+  const board = allMembers.filter(m => m.category === 'board');
 
   return (
     <main>
