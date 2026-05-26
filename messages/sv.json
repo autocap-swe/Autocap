@@ -613,50 +613,6 @@
       "headline": "swe_Media Kit",
       "description": "swe_Download logos, brand guidelines, and high-resolution photos. For press enquiries, contact us at kontakt@autocapgroup.se."
     },
-    "categories": {
-      "0": {
-        "title": "swe_Logos",
-        "description": "swe_AutoCap Group logos in multiple formats for print and digital use.",
-        "assets": {
-          "0": {
-            "name": "swe_AutoCap Logo (SVG)",
-            "description": "swe_Vector logo for digital use - light background"
-          },
-          "1": {
-            "name": "swe_AutoCap Logo (PNG)",
-            "description": "swe_Raster logo for digital use - light background"
-          },
-          "2": {
-            "name": "swe_AutoCap Logo Dark (SVG)",
-            "description": "swe_Vector logo for digital use - dark background"
-          },
-          "3": {
-            "name": "swe_AutoCap Logo Dark (PNG)",
-            "description": "swe_Raster logo for digital use - dark background"
-          }
-        }
-      },
-      "1": {
-        "title": "swe_Brand Colors",
-        "description": "swe_Official color palette and usage guidelines.",
-        "assets": {
-          "0": {
-            "name": "swe_Brand Colors Reference",
-            "description": "swe_Complete color palette with hex codes and usage guidelines"
-          }
-        }
-      },
-      "2": {
-        "title": "swe_Leadership Photos",
-        "description": "swe_High-resolution photos of AutoCap Group leadership team.",
-        "assets": {
-          "0": {
-            "name": "swe_Leadership Photos Archive",
-            "description": "swe_Professional headshots of David Knape, Nicklas Knape, and board members"
-          }
-        }
-      }
-    },
     "pressContact": {
       "title": "swe_Press Enquiries",
       "description": "swe_For media requests, interview opportunities, or additional information, please contact:"

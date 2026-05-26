@@ -62,7 +62,8 @@ export async function getContent<TCms, TFinal = TCms>(
   slug: string,
   options: GetContentOptions<TCms, TFinal> = {}
 ): Promise<TFinal> {
-  const { revalidate = 60, params, mapper, locale, tags } = options;
+  const { revalidate = 60, params, mapper, tags } = options;
+  const locale = ['en', 'sv'].includes(options.locale ?? '') ? options.locale : undefined;
 
   const url = new URL(`/api/${slug}`, CMS_API_URL);
   if (params) {

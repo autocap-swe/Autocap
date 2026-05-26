@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
-import { mediaKitContent } from '@/content/media-kit';
+import { getMediaKitCategories } from '@/lib/cms/media-kit-category';
 import { AssetDownloadCard } from '@/components/news/AssetDownloadCard';
 import { PressContact } from '@/components/news/PressContact';
 
 export const metadata: Metadata = {
-  title: mediaKitContent.metadata.title,
-  description: mediaKitContent.metadata.description,
+  title: 'Media Kit · AutoCap Group',
+  description:
+    'Press resources, brand assets, and media contacts for journalists covering AutoCap Group.',
 };
 
 export default async function MediaKitPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -14,16 +15,7 @@ export default async function MediaKitPage({ params }: { params: Promise<{ local
   setRequestLocale(locale);
   const t = await getTranslations('mediaKit');
 
-  const categories = mediaKitContent.categories.map((cat, ci) => ({
-    ...cat,
-    title: t(`categories.${ci}.title`),
-    description: t(`categories.${ci}.description`),
-    assets: cat.assets.map((asset, ai) => ({
-      ...asset,
-      name: t(`categories.${ci}.assets.${ai}.name`),
-      description: t(`categories.${ci}.assets.${ai}.description`),
-    })),
-  }));
+  const categories = await getMediaKitCategories(locale).catch(() => []);
 
   return (
     <main className="min-h-screen">
@@ -42,8 +34,8 @@ export default async function MediaKitPage({ params }: { params: Promise<{ local
       <section className="w-full bg-white py-16 md:py-20">
         <div className="mx-auto max-w-6xl px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-            {categories.map((category, index) => (
-              <AssetDownloadCard key={index} category={category} />
+            {categories.map(category => (
+              <AssetDownloadCard key={category.id} category={category} />
             ))}
           </div>
         </div>
@@ -54,7 +46,7 @@ export default async function MediaKitPage({ params }: { params: Promise<{ local
           <PressContact
             title={t('pressContact.title')}
             description={t('pressContact.description')}
-            email={mediaKitContent.pressContact.email}
+            email="kontakt@autocapgroup.se"
           />
         </div>
       </section>
