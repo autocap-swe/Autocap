@@ -5,13 +5,24 @@ import { getContactContent } from '@/lib/cms/contact';
 import { ContactCard } from '@/components/contact/ContactCard';
 import { GeneralContactForm } from '@/components/contact/GeneralContactForm';
 import { CompanyInfo } from '@/components/contact/CompanyInfo';
+import { buildMetadata } from '@/lib/cms/seo';
 
-export const metadata: Metadata = {
-  title: 'Contact · AutoCap Group',
-  description: 'Get in touch — for workshop owners, investors, media, or general enquiries.',
-};
+type Props = { params: Promise<{ locale: string }> };
 
-export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const content = await getContactContent(undefined, locale).catch(() => null);
+  return buildMetadata(
+    {
+      title: 'Contact · AutoCap Group',
+      description: 'Get in touch — for workshop owners, investors, media, or general enquiries.',
+    },
+    content?.seo,
+    locale
+  );
+}
+
+export default async function ContactPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const content = await getContactContent(undefined, locale).catch(() => null);

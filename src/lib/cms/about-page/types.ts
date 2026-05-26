@@ -1,3 +1,4 @@
+import type { CmsSeo } from '../seo';
 import type { BlocksContent } from '@strapi/blocks-react-renderer';
 import type { StrapiMedia } from '../media';
 
@@ -21,6 +22,7 @@ export interface CmsAboutPage {
   closingTitle: string;
   closingDescription: string;
   heroImage?: StrapiMedia | null;
+  seo?: CmsSeo | null;
 }
 
 export type AboutPageContent = CmsAboutPage;

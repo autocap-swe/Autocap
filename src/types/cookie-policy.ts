@@ -4,6 +4,8 @@ export interface CookiePolicySection {
   content: string[];
 }
 
+import type { CmsSeo } from '@/lib/cms/seo';
+
 export interface CookiePolicy {
   sections: CookiePolicySection[];
   lastUpdated: string;
@@ -11,4 +13,5 @@ export interface CookiePolicy {
   heroDescription?: string;
   contactTitle?: string;
   contactDescription?: string;
+  seo?: CmsSeo | null;
 }

@@ -1,3 +1,4 @@
+import type { CmsSeo } from '../seo';
 import type { BlocksContent } from '@strapi/blocks-react-renderer';
 import type { StrapiMedia } from '../media';
 
@@ -22,6 +23,7 @@ export interface CmsStoryPage {
   timelineTitle: string;
   timelineMilestones: CmsTimelineMilestone[];
   heroImage?: StrapiMedia | null;
+  seo?: CmsSeo | null;
 }
 
 export type StoryPageContent = CmsStoryPage;

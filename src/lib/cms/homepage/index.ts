@@ -12,6 +12,6 @@ export async function getHomepageContent(
     mapper: homepageMapper,
     locale,
     tags: ['homepage'],
-    params: { populate: 'audienceCards,heroVideo' },
+    params: { populate: 'audienceCards,heroVideo,seo' },
   });
 }

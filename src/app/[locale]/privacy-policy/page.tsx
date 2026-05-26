@@ -3,18 +3,25 @@ import Link from 'next/link';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { getPrivacyPolicyContent } from '@/lib/cms/privacy-policy';
 import { PolicyChangeBanner } from '@/components/privacy/PolicyChangeBanner';
+import { buildMetadata } from '@/lib/cms/seo';
 
-export const metadata: Metadata = {
-  title: 'Privacy Policy · AutoCap Group',
-  description:
-    'AutoCap Group privacy policy — how we collect, use, and protect your personal data in compliance with GDPR.',
-};
+type Props = { params: Promise<{ locale: string }> };
 
-export default async function PrivacyPolicyPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const cms = await getPrivacyPolicyContent(undefined, locale).catch(() => null);
+  return buildMetadata(
+    {
+      title: 'Privacy Policy · AutoCap Group',
+      description:
+        'AutoCap Group privacy policy — how we collect, use, and protect your personal data in compliance with GDPR.',
+    },
+    cms?.seo,
+    locale
+  );
+}
+
+export default async function PrivacyPolicyPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations('privacyPolicy');

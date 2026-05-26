@@ -10,7 +10,7 @@ export async function getPrivacyPolicyContent(
   const options = {
     revalidate,
     tags: ['privacy-policy'],
-    params: { populate: 'sections' },
+    params: { populate: 'sections,seo' },
     mapper: privacyPolicyMapper,
   };
 

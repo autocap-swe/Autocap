@@ -9,14 +9,25 @@ import { PullQuote } from '@/components/about/PullQuote';
 import { SteppedTimeline } from '@/components/about/SteppedTimeline';
 import { REVALIDATE_HIGH } from '@/lib/cms/revalidate';
 import { cmsMediaUrl } from '@/lib/cms/media';
+import { buildMetadata } from '@/lib/cms/seo';
 
-export const metadata: Metadata = {
-  title: 'Our Story · AutoCap Group',
-  description:
-    'How two brothers saw an opportunity to build a different kind of tire service group in Sweden.',
-};
+type Props = { params: Promise<{ locale: string }> };
 
-export default async function StoryPage({ params }: { params: Promise<{ locale: string }> }) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const cms = await getStoryPageContent(REVALIDATE_HIGH, locale);
+  return buildMetadata(
+    {
+      title: 'Our Story · AutoCap Group',
+      description:
+        'How two brothers saw an opportunity to build a different kind of tire service group in Sweden.',
+    },
+    cms.seo,
+    locale
+  );
+}
+
+export default async function StoryPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const cms = await getStoryPageContent(REVALIDATE_HIGH, locale);

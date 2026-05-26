@@ -1,3 +1,4 @@
+import type { CmsSeo } from '../seo';
 export interface CmsProcessStep {
   id: number;
   stepNumber: number;
@@ -10,6 +11,7 @@ export interface CmsAcquisitionProcess {
   totalTimeline?: string;
   ctaText?: string;
   steps: CmsProcessStep[];
+  seo?: CmsSeo | null;
 }
 
 export interface ProcessStep {
@@ -24,4 +26,5 @@ export interface AcquisitionProcess {
   totalTimeline: string;
   ctaText: string;
   steps: ProcessStep[];
+  seo?: CmsSeo | null;
 }

@@ -14,6 +14,9 @@ export interface CmsMediaKitCategory {
   assets: CmsMediaAsset[];
 }
 
+import type { CmsSeo } from '../seo';
+
 export interface CmsMediaKitPage {
   categories: CmsMediaKitCategory[];
+  seo?: CmsSeo | null;
 }

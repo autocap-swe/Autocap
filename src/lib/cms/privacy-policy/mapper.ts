@@ -16,5 +16,6 @@ export function privacyPolicyMapper(cms: CmsPrivacyPolicy): PrivacyPolicy {
         .map(p => p.trim())
         .filter(Boolean),
     })),
+    seo: cms.seo,
   };
 }

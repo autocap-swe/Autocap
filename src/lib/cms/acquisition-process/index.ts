@@ -10,7 +10,7 @@ export async function getAcquisitionProcessContent(
   const options = {
     revalidate,
     tags: ['acquisition-process'],
-    params: { populate: 'steps' },
+    params: { populate: 'steps,seo' },
     mapper: acquisitionProcessMapper,
   };
 

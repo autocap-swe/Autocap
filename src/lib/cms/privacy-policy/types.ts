@@ -1,3 +1,4 @@
+import type { CmsSeo } from '../seo';
 export interface CmsPrivacySection {
   sectionId: string;
   title: string;
@@ -12,6 +13,7 @@ export interface CmsPrivacyPolicy {
   heroDescription?: string;
   contactTitle?: string;
   contactDescription?: string;
+  seo?: CmsSeo | null;
 }
 
 export type { PrivacySection, PrivacyPolicy } from '@/types/privacy-policy';

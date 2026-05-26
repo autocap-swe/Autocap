@@ -1,3 +1,4 @@
+import type { CmsSeo } from '../seo';
 import type { StrapiMedia } from '../media';
 
 export interface CmsInvestorsPage {
@@ -9,6 +10,7 @@ export interface CmsInvestorsPage {
   closingBlockTitle?: string;
   closingBlockDescription?: string;
   heroImage?: StrapiMedia | null;
+  seo?: CmsSeo | null;
 }
 
 export type InvestorsPageContent = CmsInvestorsPage;

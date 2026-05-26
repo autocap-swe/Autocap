@@ -5,13 +5,25 @@ import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Breadcrumb } from '@/components/entrepreneurs/Breadcrumb';
 import { ProcessTimeline } from '@/components/entrepreneurs/ProcessTimeline';
 import { getAcquisitionProcessContent } from '@/lib/cms/acquisition-process';
+import { buildMetadata } from '@/lib/cms/seo';
 
-export const metadata: Metadata = {
-  title: 'How It Works · AutoCap Group',
-  description: 'Our clear, respectful acquisition process from first conversation to completion.',
-};
+type Props = { params: Promise<{ locale: string }> };
 
-export default async function ProcessPage({ params }: { params: Promise<{ locale: string }> }) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const cms = await getAcquisitionProcessContent(undefined, locale).catch(() => null);
+  return buildMetadata(
+    {
+      title: 'How It Works · AutoCap Group',
+      description:
+        'Our clear, respectful acquisition process from first conversation to completion.',
+    },
+    cms?.seo,
+    locale
+  );
+}
+
+export default async function ProcessPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const [t, acquisitionProcess] = await Promise.all([

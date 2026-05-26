@@ -4,6 +4,8 @@ export interface PrivacySection {
   content: string[];
 }
 
+import type { CmsSeo } from '@/lib/cms/seo';
+
 export interface PrivacyPolicy {
   sections: PrivacySection[];
   lastUpdated: string;
@@ -12,4 +14,5 @@ export interface PrivacyPolicy {
   heroDescription?: string;
   contactTitle?: string;
   contactDescription?: string;
+  seo?: CmsSeo | null;
 }

@@ -13,6 +13,7 @@ export async function getMediaKitCategories(
     tags: ['media-kit-categories'],
     params: {
       'populate[categories][populate][assets][populate]': 'file',
+      'populate[seo]': 'true',
     },
     mapper: mediaKitPageMapper,
     locale,

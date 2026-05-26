@@ -10,7 +10,7 @@ export async function getCookiePolicyContent(
   const options = {
     revalidate,
     tags: ['cookie-policy'],
-    params: { populate: 'sections' },
+    params: { populate: 'sections,seo' },
     mapper: cookiePolicyMapper,
   };
 

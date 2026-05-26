@@ -1,3 +1,4 @@
+import type { CmsSeo } from '../seo';
 import type { StrapiMedia } from '../media';
 
 export interface CmsBenefitItem {
@@ -20,6 +21,7 @@ export interface CmsEntrepreneursPage {
   closingBlockDescription: string;
   whyPageClosingCta: string;
   heroImage?: StrapiMedia | null;
+  seo?: CmsSeo | null;
 }
 
 export type EntrepreneursPageContent = CmsEntrepreneursPage;

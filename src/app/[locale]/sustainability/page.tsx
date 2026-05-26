@@ -7,18 +7,25 @@ import { setRequestLocale } from 'next-intl/server';
 import { getSustainabilityPageContent } from '@/lib/cms/sustainability-page';
 import { REVALIDATE_HIGH } from '@/lib/cms/revalidate';
 import { cmsMediaUrl } from '@/lib/cms/media';
+import { buildMetadata } from '@/lib/cms/seo';
 
-export const metadata: Metadata = {
-  title: 'Sustainability · AutoCap Group',
-  description:
-    'Our commitment to environmental responsibility across the Nordic tire services platform. Practical steps, honest progress towards sustainability targets.',
-};
+type Props = { params: Promise<{ locale: string }> };
 
-export default async function SustainabilityPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const cms = await getSustainabilityPageContent(REVALIDATE_HIGH, locale);
+  return buildMetadata(
+    {
+      title: 'Sustainability · AutoCap Group',
+      description:
+        'Our commitment to environmental responsibility across the Nordic tire services platform. Practical steps, honest progress towards sustainability targets.',
+    },
+    cms.seo,
+    locale
+  );
+}
+
+export default async function SustainabilityPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const cms = await getSustainabilityPageContent(REVALIDATE_HIGH, locale);
