@@ -2,7 +2,13 @@
 
 import { Link } from '@/i18n/navigation';
 import { motion } from 'framer-motion';
-import type { AudienceCard } from '@/content/homepage';
+interface AudienceCard {
+  headline: string;
+  description: string;
+  ctaText: string;
+  ctaLink: string;
+  backgroundColor: string;
+}
 
 interface AudienceCardsProps {
   cards: AudienceCard[];

@@ -16,12 +16,10 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: WorkshopDetailPageProps) {
   const { locale, slug } = await params;
-  const workshop = await getWorkshopBySlugContent(slug, undefined, locale);
+  const workshop = await getWorkshopBySlugContent(slug, undefined, locale).catch(() => null);
 
   if (!workshop) {
-    return {
-      title: 'Workshop Not Found',
-    };
+    return { title: 'Workshop Not Found' };
   }
 
   return {
@@ -34,7 +32,7 @@ export default async function WorkshopDetailPage({ params }: WorkshopDetailPageP
   const { locale, slug } = await params;
   setRequestLocale(locale);
   const [workshop, t] = await Promise.all([
-    getWorkshopBySlugContent(slug, undefined, locale),
+    getWorkshopBySlugContent(slug, undefined, locale).catch(() => null),
     getTranslations('portfolio'),
   ]);
 

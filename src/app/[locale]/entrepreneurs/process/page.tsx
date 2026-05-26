@@ -48,7 +48,7 @@ export default async function ProcessPage({ params }: { params: Promise<{ locale
             </h1>
             <div className="mx-auto mb-6 h-1 w-24 bg-[#C8102E]" />
             <p className="mx-auto max-w-2xl text-xl leading-relaxed text-gray-700 md:text-2xl">
-              {t('process.intro')}
+              {acquisitionProcess?.intro}
             </p>
           </div>
         </div>
@@ -60,7 +60,9 @@ export default async function ProcessPage({ params }: { params: Promise<{ locale
           <div className="mt-16 text-center">
             <div className="inline-flex items-center gap-3 rounded-2xl bg-white px-8 py-4 shadow-lg">
               <CheckCircle2 className="h-6 w-6 text-green-600" />
-              <span className="text-xl font-bold text-[#C8102E]">{t('process.totalTimeline')}</span>
+              <span className="text-xl font-bold text-[#C8102E]">
+                {acquisitionProcess?.totalTimeline}
+              </span>
             </div>
           </div>
         </div>
@@ -85,7 +87,7 @@ export default async function ProcessPage({ params }: { params: Promise<{ locale
             href="/entrepreneurs/contact"
             className="inline-flex items-center gap-3 rounded-xl bg-gradient-to-r from-[#C8102E] to-[#A00D25] px-10 py-5 text-xl font-bold text-white transition-all duration-300 hover:scale-105"
           >
-            {t('process.ctaText')}
+            {acquisitionProcess?.ctaText}
           </Link>
         </div>
       </section>

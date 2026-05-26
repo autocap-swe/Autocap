@@ -45,7 +45,7 @@ export default async function PrivacyPolicyPage({
             {lastUpdated ? `Last updated: ${lastUpdated}` : t('hero.lastUpdated')}
           </p>
           <p className="text-lg leading-relaxed text-gray-700 md:text-xl">
-            {t('hero.description')}
+            {cmsPolicy?.heroDescription}
           </p>
           <div className="mt-8 h-1 w-24 bg-[#C8102E]" />
         </div>
@@ -83,9 +83,11 @@ export default async function PrivacyPolicyPage({
       <section className="w-full bg-gray-50 py-16 md:py-20">
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
           <h2 className="mb-4 text-2xl font-bold text-[#1C1C1E] md:text-3xl">
-            {t('contact.title')}
+            {cmsPolicy?.contactTitle ?? t('contact.title')}
           </h2>
-          <p className="mb-6 leading-relaxed text-gray-700">{t('contact.description')}</p>
+          <p className="mb-6 leading-relaxed text-gray-700">
+            {cmsPolicy?.contactDescription ?? t('contact.description')}
+          </p>
           <a
             href={`mailto:${contactEmail}`}
             className="inline-flex items-center text-lg font-semibold text-[#C8102E] transition-colors hover:text-[#A00D25]"

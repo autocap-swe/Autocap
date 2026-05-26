@@ -1,62 +1,61 @@
-import { setRequestLocale, getTranslations } from 'next-intl/server';
+export const dynamic = 'force-dynamic';
+
+import { setRequestLocale } from 'next-intl/server';
 import { Hero } from '@/components/home/Hero';
 import { KpiTicker } from '@/components/home/KpiTicker';
 import { AudienceCards } from '@/components/home/AudienceCards';
 import { LatestNewsStrip } from '@/components/home/LatestNewsStrip';
 import { CeoQuote } from '@/components/home/CeoQuote';
 import { FooterCta } from '@/components/home/FooterCta';
-import { homepageContent, audienceCards } from '@/content/homepage';
+import { getHomepageContent } from '@/lib/cms/homepage';
 import { getArticlesContent } from '@/lib/cms/article';
 import { getKpiTickerContent } from '@/lib/cms/kpi-ticker';
 import { REVALIDATE_HIGH } from '@/lib/cms/revalidate';
+import { cmsMediaUrl } from '@/lib/cms/media';
+
+const AUDIENCE_CARD_CONFIG = [
+  { ctaLink: '/entrepreneurs', backgroundColor: '#D8E4DC' },
+  { ctaLink: '/investors', backgroundColor: '#C9D8E8' },
+  { ctaLink: '/portfolio', backgroundColor: '#E4E2DE' },
+];
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const [articles, cmsKpis, t] = await Promise.all([
+  const [cms, articles, cmsKpis] = await Promise.all([
+    getHomepageContent(REVALIDATE_HIGH, locale),
     getArticlesContent(REVALIDATE_HIGH, locale).catch(() => []),
     getKpiTickerContent(REVALIDATE_HIGH, locale).catch(() => null),
-    getTranslations('homepage'),
   ]);
 
-  const hero = {
-    ...homepageContent.hero,
-    headline: t('hero.headline'),
-    subheadline: t('hero.subheadline'),
-    cta1Text: t('hero.cta1Text'),
-    cta2Text: t('hero.cta2Text'),
-  };
-
-  const kpis = cmsKpis;
-
-  const cards = audienceCards.map((card, i) => ({
-    ...card,
-    headline: t(`audienceCards.${i}.headline`),
-    description: t(`audienceCards.${i}.description`),
-    ctaText: t(`audienceCards.${i}.ctaText`),
+  const cards = AUDIENCE_CARD_CONFIG.map((config, i) => ({
+    ...config,
+    headline: cms.audienceCards?.[i]?.headline ?? '',
+    description: cms.audienceCards?.[i]?.description ?? '',
+    ctaText: cms.audienceCards?.[i]?.ctaText ?? '',
   }));
-
-  const ceoQuote = {
-    ...homepageContent.ceoQuote,
-    text: t('ceoQuote.text'),
-    attribution: t('ceoQuote.attribution'),
-  };
-
-  const footerCta = {
-    ...homepageContent.footerCta,
-    headline: t('footerCta.headline'),
-    subtext: t('footerCta.subtext'),
-    ctaText: t('footerCta.ctaText'),
-  };
 
   return (
     <>
-      <Hero {...hero} />
-      {kpis && <KpiTicker kpis={kpis} />}
+      <Hero
+        headline={cms.heroHeadline}
+        subheadline={cms.heroSubheadline}
+        videoUrl={cmsMediaUrl(cms.heroVideo)}
+        cta1Text={cms.heroCta1Text}
+        cta1Link={cms.heroCta1Link}
+        cta2Text={cms.heroCta2Text}
+        cta2Link={cms.heroCta2Link}
+      />
+      {cmsKpis && <KpiTicker kpis={cmsKpis} />}
       <AudienceCards cards={cards} />
       <LatestNewsStrip articles={articles} />
-      <CeoQuote {...ceoQuote} />
-      <FooterCta {...footerCta} />
+      <CeoQuote text={cms.ceoQuoteText} attribution={cms.ceoQuoteAttribution} />
+      <FooterCta
+        headline={cms.footerCtaHeadline}
+        subtext={cms.footerCtaSubtext}
+        ctaText={cms.footerCtaButtonText}
+        ctaLink={cms.footerCtaButtonLink}
+      />
     </>
   );
 }

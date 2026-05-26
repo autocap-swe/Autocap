@@ -5,6 +5,7 @@ import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Breadcrumb } from '@/components/entrepreneurs/Breadcrumb';
 import { InvestmentPillar } from '@/components/investors/InvestmentPillar';
 import { getInvestmentPillarsContent } from '@/lib/cms/investment-pillars';
+import { getInvestorsPageContent } from '@/lib/cms/investors-page';
 
 export const metadata: Metadata = {
   title: 'Investment Case · AutoCap Group',
@@ -21,7 +22,10 @@ export default async function InvestorsWhyPage({
   setRequestLocale(locale);
   const t = await getTranslations('investors');
 
-  const pillars = await getInvestmentPillarsContent(undefined, locale).catch(() => []);
+  const [pillars, investorsPage] = await Promise.all([
+    getInvestmentPillarsContent(undefined, locale).catch(() => []),
+    getInvestorsPageContent(undefined, locale).catch(() => null),
+  ]);
 
   return (
     <main className="min-h-screen">
@@ -66,11 +70,11 @@ export default async function InvestorsWhyPage({
             </div>
           </div>
           <h2 className="mb-6 text-4xl font-black text-white md:text-5xl lg:text-6xl">
-            {t('closingBlock.title')}
+            {investorsPage?.closingBlockTitle}
           </h2>
           <div className="mx-auto mb-8 h-1 w-24 bg-[#C8102E]" />
           <p className="mx-auto mb-12 max-w-3xl text-xl leading-relaxed text-gray-300 md:text-2xl">
-            {t('closingBlock.description')}
+            {investorsPage?.closingBlockDescription}
           </p>
           <Link
             href="/investors/contact"

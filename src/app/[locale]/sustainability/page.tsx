@@ -1,12 +1,17 @@
+export const dynamic = 'force-dynamic';
+
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { Leaf } from 'lucide-react';
-import { setRequestLocale, getTranslations } from 'next-intl/server';
-import { sustainabilityContent } from '@/content/sustainability';
+import { setRequestLocale } from 'next-intl/server';
+import { getSustainabilityPageContent } from '@/lib/cms/sustainability-page';
+import { REVALIDATE_HIGH } from '@/lib/cms/revalidate';
+import { cmsMediaUrl } from '@/lib/cms/media';
 
 export const metadata: Metadata = {
-  title: sustainabilityContent.metadata.title,
-  description: sustainabilityContent.metadata.description,
+  title: 'Sustainability · AutoCap Group',
+  description:
+    'Our commitment to environmental responsibility across the Nordic tire services platform. Practical steps, honest progress towards sustainability targets.',
 };
 
 export default async function SustainabilityPage({
@@ -16,22 +21,20 @@ export default async function SustainabilityPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations('sustainability');
-
-  const focusAreas = sustainabilityContent.whereWeAre.focusAreas.map((_, i) =>
-    t(`whereWeAre.focusAreas.${i}`)
-  );
+  const cms = await getSustainabilityPageContent(REVALIDATE_HIGH, locale);
 
   return (
     <main className="min-h-screen">
       <section className="relative min-h-[85vh] overflow-hidden">
-        <Image
-          src="/images/Sustainability.webp"
-          alt="AutoCap sustainability"
-          fill
-          className="object-cover"
-          priority
-        />
+        {cmsMediaUrl(cms.heroImage) && (
+          <Image
+            src={cmsMediaUrl(cms.heroImage)!}
+            alt="AutoCap sustainability"
+            fill
+            className="object-cover"
+            priority
+          />
+        )}
         <div className="absolute inset-0 bg-black/15" />
         <div className="absolute inset-0 opacity-[0.03]">
           <div
@@ -50,11 +53,11 @@ export default async function SustainabilityPage({
               </div>
             </div>
             <h1 className="mb-8 text-5xl font-black leading-[1.1] text-white md:text-6xl lg:text-7xl xl:text-8xl">
-              {t('hero.headline')}
+              {cms.heroHeadline}
             </h1>
             <div className="mx-auto mb-8 h-1 w-24 bg-[#C8102E]" />
             <p className="mx-auto max-w-3xl text-xl leading-relaxed text-white/90 md:text-2xl md:leading-relaxed">
-              {t('hero.intro')}
+              {cms.heroIntro}
             </p>
           </div>
         </div>
@@ -63,18 +66,18 @@ export default async function SustainabilityPage({
       <section className="relative overflow-hidden bg-gradient-to-br from-white to-gray-50 py-20 md:py-28">
         <div className="mx-auto max-w-4xl px-6 md:px-8">
           <h2 className="mb-12 text-center text-4xl font-black text-[#1C1C1E] md:text-5xl lg:text-6xl">
-            {t('whereWeAre.title')}
+            {cms.whereWeAreTitle}
           </h2>
           <div className="mx-auto mb-8 h-1 w-24 bg-[#C8102E]" />
           <p className="mb-12 text-xl leading-relaxed text-gray-700 md:text-2xl md:leading-relaxed">
-            {t('whereWeAre.description')}
+            {cms.whereWeAreDescription}
           </p>
           <div>
             <p className="mb-6 text-lg font-bold text-[#1C1C1E] md:text-xl">
-              {t('whereWeAre.currentFocusAreas')}
+              {cms.whereWeAreCurrentFocusLabel}
             </p>
             <ul className="space-y-4">
-              {focusAreas.map((area, index) => (
+              {cms.whereWeAreFocusAreas.map((area, index) => (
                 <li
                   key={index}
                   className="flex gap-x-4 text-lg leading-relaxed text-gray-700 md:text-xl"
@@ -83,7 +86,7 @@ export default async function SustainabilityPage({
                     className="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-[#C8102E]"
                     aria-hidden="true"
                   />
-                  <span>{area}</span>
+                  <span>{area.text}</span>
                 </li>
               ))}
             </ul>
@@ -94,15 +97,15 @@ export default async function SustainabilityPage({
       <section className="relative overflow-hidden bg-gradient-to-br from-[#F5F0EB] via-[#E5E0DB] to-[#F5F0EB] py-20 md:py-28">
         <div className="mx-auto max-w-4xl px-6 md:px-8">
           <h2 className="mb-12 text-center text-4xl font-black text-[#1C1C1E] md:text-5xl lg:text-6xl">
-            {t('whereWeAreGoing.title')}
+            {cms.whereWeAreGoingTitle}
           </h2>
           <div className="mx-auto mb-8 h-1 w-24 bg-[#C8102E]" />
           <div className="space-y-6">
             <p className="text-xl leading-relaxed text-gray-700 md:text-2xl md:leading-relaxed">
-              {t('whereWeAreGoing.description')}
+              {cms.whereWeAreGoingDescription}
             </p>
             <p className="text-xl leading-relaxed text-gray-700 md:text-2xl md:leading-relaxed">
-              {t('whereWeAreGoing.statement')}
+              {cms.whereWeAreGoingStatement}
             </p>
           </div>
         </div>
@@ -111,20 +114,20 @@ export default async function SustainabilityPage({
       <section className="relative overflow-hidden bg-gradient-to-br from-white to-gray-50 py-20 md:py-28">
         <div className="mx-auto max-w-4xl px-6 md:px-8">
           <h2 className="mb-12 text-center text-4xl font-black text-[#1C1C1E] md:text-5xl lg:text-6xl">
-            {t('governance.title')}
+            {cms.governanceTitle}
           </h2>
           <div className="mx-auto mb-8 h-1 w-24 bg-[#C8102E]" />
           <div className="space-y-6">
             <p className="text-xl leading-relaxed text-gray-700 md:text-2xl md:leading-relaxed">
-              {t('governance.description')}
+              {cms.governanceDescription}
             </p>
             <p className="text-xl leading-relaxed text-gray-700 md:text-2xl md:leading-relaxed">
-              {t('governance.contactText')}{' '}
+              {cms.governanceContactText}{' '}
               <a
-                href={`mailto:${sustainabilityContent.governance.contactEmail}`}
+                href={`mailto:${cms.governanceContactEmail}`}
                 className="font-bold text-[#C8102E] transition-colors hover:text-[#A00D25]"
               >
-                {sustainabilityContent.governance.contactEmail}
+                {cms.governanceContactEmail}
               </a>
               .
             </p>

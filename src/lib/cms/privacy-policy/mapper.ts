@@ -5,6 +5,9 @@ export function privacyPolicyMapper(cms: CmsPrivacyPolicy): PrivacyPolicy {
     lastUpdated: cms.lastUpdated,
     contactEmail: cms.contactEmail,
     version: cms.version,
+    heroDescription: cms.heroDescription,
+    contactTitle: cms.contactTitle,
+    contactDescription: cms.contactDescription,
     sections: cms.sections.map(section => ({
       id: section.sectionId,
       title: section.title,
