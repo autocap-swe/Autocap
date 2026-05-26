@@ -1,9 +1,13 @@
+export const dynamic = 'force-dynamic';
+
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Sparkles } from 'lucide-react';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Breadcrumb } from '@/components/entrepreneurs/Breadcrumb';
 import { BenefitSection } from '@/components/entrepreneurs/BenefitSection';
+import { getEntrepreneursPageContent } from '@/lib/cms/entrepreneurs-page';
+import { REVALIDATE_HIGH } from '@/lib/cms/revalidate';
 
 export const metadata: Metadata = {
   title: 'Why AutoCap · For Workshop Owners',
@@ -13,12 +17,15 @@ export const metadata: Metadata = {
 export default async function WhyAutoCapPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations('entrepreneurs');
+  const [cms, t] = await Promise.all([
+    getEntrepreneursPageContent(REVALIDATE_HIGH, locale),
+    getTranslations('entrepreneurs'),
+  ]);
 
-  const benefits = [1, 2, 3, 4, 5].map((id, i) => ({
-    id,
-    title: t(`benefits.${i}.title`),
-    description: t(`benefits.${i}.description`),
+  const benefits = cms.benefits.map((b, i) => ({
+    id: i + 1,
+    title: b.title,
+    description: b.description,
   }));
 
   return (
@@ -28,25 +35,24 @@ export default async function WhyAutoCapPage({ params }: { params: Promise<{ loc
           <Breadcrumb
             items={[
               { label: t('breadcrumb.home'), href: '/' },
-              {
-                label: t('breadcrumb.entrepreneurs'),
-                href: '/entrepreneurs',
-              },
-              { label: t('whyPage.title') },
+              { label: t('breadcrumb.entrepreneurs'), href: '/entrepreneurs' },
+              { label: cms.whyPageTitle },
             ]}
           />
           <div className="mt-8 text-center">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-md">
-              <Sparkles className="h-5 w-5 text-[#C8102E]" />
-              <span className="text-sm font-semibold text-[#C8102E]">{t('whyPage.badge')}</span>
-            </div>
+            {cms.whyPageBadge && (
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-md">
+                <Sparkles className="h-5 w-5 text-[#C8102E]" />
+                <span className="text-sm font-semibold text-[#C8102E]">{cms.whyPageBadge}</span>
+              </div>
+            )}
             <h1 className="mb-6 text-5xl font-black text-[#1C1C1E] md:text-6xl lg:text-7xl">
-              {t('whyPage.title')}
+              {cms.whyPageTitle}
             </h1>
             <div className="mx-auto mb-6 h-1 w-24 bg-[#C8102E]" />
             <p className="mx-auto max-w-2xl text-xl leading-relaxed text-gray-700 md:text-2xl">
-              {t('whyPage.intro')}{' '}
-              <span className="font-bold text-[#C8102E]">{t('whyPage.introBold')}</span>
+              {cms.whyPageIntro}{' '}
+              <span className="font-bold text-[#C8102E]">{cms.whyPageIntroBold}</span>
             </p>
           </div>
         </div>
@@ -65,17 +71,17 @@ export default async function WhyAutoCapPage({ params }: { params: Promise<{ loc
             </div>
           </div>
           <h2 className="mb-6 text-4xl font-black text-white md:text-5xl lg:text-6xl">
-            {t('closingBlock.title')}
+            {cms.closingBlockTitle}
           </h2>
           <div className="mx-auto mb-8 h-1 w-24 bg-[#C8102E]" />
           <p className="mx-auto mb-12 max-w-3xl text-xl leading-relaxed text-gray-300 md:text-2xl">
-            {t('closingBlock.description')}
+            {cms.closingBlockDescription}
           </p>
           <Link
             href="/entrepreneurs/contact"
             className="inline-flex items-center gap-3 rounded-xl bg-gradient-to-r from-[#C8102E] to-[#A00D25] px-10 py-5 text-xl font-bold text-white transition-all duration-300 hover:scale-105"
           >
-            {t('whyPage.closingCta')}
+            {cms.whyPageClosingCta}
           </Link>
         </div>
       </section>

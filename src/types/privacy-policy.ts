@@ -9,4 +9,7 @@ export interface PrivacyPolicy {
   lastUpdated: string;
   contactEmail: string;
   version: string;
+  heroDescription?: string;
+  contactTitle?: string;
+  contactDescription?: string;
 }

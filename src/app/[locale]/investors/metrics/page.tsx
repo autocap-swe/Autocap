@@ -24,9 +24,14 @@ export default async function InvestorsMetricsPage({
   setRequestLocale(locale);
   const t = await getTranslations('investors');
 
-  const [cmsKpis, milestones] = await Promise.all([
+  const [cmsKpis, milestonesContent] = await Promise.all([
     getKpiTickerContent(undefined, locale).catch(() => null),
-    getGrowthMilestonesContent(undefined, locale).catch(() => []),
+    getGrowthMilestonesContent(undefined, locale).catch(() => ({
+      milestonesTitle: '',
+      intro: '',
+      roadmap: '',
+      milestones: [],
+    })),
   ]);
 
   const kpis = (cmsKpis ?? []).map((item, i) => ({
@@ -56,7 +61,7 @@ export default async function InvestorsMetricsPage({
             </h1>
             <div className="mx-auto mb-6 h-1 w-24 bg-[#C8102E]" />
             <p className="mx-auto max-w-2xl text-xl leading-relaxed text-gray-700 md:text-2xl">
-              {t('metrics.intro')}
+              {milestonesContent.intro}
             </p>
           </div>
         </div>
@@ -81,13 +86,13 @@ export default async function InvestorsMetricsPage({
         </div>
       </section>
 
-      {milestones.length > 0 && (
+      {milestonesContent.milestones.length > 0 && (
         <section className="bg-white py-20 md:py-28">
           <div className="mx-auto max-w-3xl px-6 lg:px-8">
             <h2 className="mb-12 text-4xl font-black text-[#1C1C1E] md:text-5xl">
-              {t('metricsPage.milestonesTitle')}
+              {milestonesContent.milestonesTitle}
             </h2>
-            <GrowthTimeline milestones={milestones} />
+            <GrowthTimeline milestones={milestonesContent.milestones} />
           </div>
         </section>
       )}
@@ -99,7 +104,7 @@ export default async function InvestorsMetricsPage({
           </h2>
           <div className="mx-auto mb-8 h-1 w-24 bg-[#C8102E]" />
           <p className="mb-12 text-xl leading-relaxed text-gray-700 md:text-2xl">
-            {t('metrics.roadmap')}
+            {milestonesContent.roadmap}
           </p>
           <Link
             href="/investors/contact"

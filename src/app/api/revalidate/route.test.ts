@@ -1,8 +1,10 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+/**
+ * @jest-environment node
+ */
 import { NextRequest } from 'next/server';
 
-vi.mock('next/cache', () => ({
-  revalidateTag: vi.fn(),
+jest.mock('next/cache', () => ({
+  revalidateTag: jest.fn(),
 }));
 
 const SECRET = 'test-secret-abc123';
@@ -24,8 +26,8 @@ function makeRequest(body: unknown, secret: string | null = SECRET): NextRequest
 
 describe('POST /api/revalidate', () => {
   beforeEach(() => {
-    vi.resetModules();
-    vi.clearAllMocks();
+    jest.resetModules();
+    jest.clearAllMocks();
     process.env.REVALIDATE_SECRET = SECRET;
   });
 
@@ -117,5 +119,77 @@ describe('POST /api/revalidate', () => {
     const { GET } = await importRoute();
     const res = await GET();
     expect(res.status).toBe(405);
+  });
+
+  it('revalidates homepage tag when contentType is homepage', async () => {
+    const { revalidateTag } = await import('next/cache');
+    const { POST } = await importRoute();
+
+    const res = await POST(makeRequest({ contentType: 'homepage' }));
+    expect(res.status).toBe(200);
+    const json = await res.json();
+    expect(json.revalidated).toBe(true);
+    expect(json.tags).toEqual(['homepage']);
+    expect(revalidateTag).toHaveBeenCalledWith('homepage');
+  });
+
+  it('revalidates about-page tag when contentType is about-page', async () => {
+    const { revalidateTag } = await import('next/cache');
+    const { POST } = await importRoute();
+
+    const res = await POST(makeRequest({ contentType: 'about-page' }));
+    expect(res.status).toBe(200);
+    const json = await res.json();
+    expect(json.revalidated).toBe(true);
+    expect(json.tags).toEqual(['about-page']);
+    expect(revalidateTag).toHaveBeenCalledWith('about-page');
+  });
+
+  it('revalidates story-page tag when contentType is story-page', async () => {
+    const { revalidateTag } = await import('next/cache');
+    const { POST } = await importRoute();
+
+    const res = await POST(makeRequest({ contentType: 'story-page' }));
+    expect(res.status).toBe(200);
+    const json = await res.json();
+    expect(json.revalidated).toBe(true);
+    expect(json.tags).toEqual(['story-page']);
+    expect(revalidateTag).toHaveBeenCalledWith('story-page');
+  });
+
+  it('revalidates entrepreneurs-page tag when contentType is entrepreneurs-page', async () => {
+    const { revalidateTag } = await import('next/cache');
+    const { POST } = await importRoute();
+
+    const res = await POST(makeRequest({ contentType: 'entrepreneurs-page' }));
+    expect(res.status).toBe(200);
+    const json = await res.json();
+    expect(json.revalidated).toBe(true);
+    expect(json.tags).toEqual(['entrepreneurs-page']);
+    expect(revalidateTag).toHaveBeenCalledWith('entrepreneurs-page');
+  });
+
+  it('revalidates investors-page tag when contentType is investors-page', async () => {
+    const { revalidateTag } = await import('next/cache');
+    const { POST } = await importRoute();
+
+    const res = await POST(makeRequest({ contentType: 'investors-page' }));
+    expect(res.status).toBe(200);
+    const json = await res.json();
+    expect(json.revalidated).toBe(true);
+    expect(json.tags).toEqual(['investors-page']);
+    expect(revalidateTag).toHaveBeenCalledWith('investors-page');
+  });
+
+  it('revalidates sustainability-page tag when contentType is sustainability-page', async () => {
+    const { revalidateTag } = await import('next/cache');
+    const { POST } = await importRoute();
+
+    const res = await POST(makeRequest({ contentType: 'sustainability-page' }));
+    expect(res.status).toBe(200);
+    const json = await res.json();
+    expect(json.revalidated).toBe(true);
+    expect(json.tags).toEqual(['sustainability-page']);
+    expect(revalidateTag).toHaveBeenCalledWith('sustainability-page');
   });
 });

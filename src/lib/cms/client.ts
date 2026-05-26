@@ -68,7 +68,13 @@ export async function getContent<TCms, TFinal = TCms>(
   const url = new URL(`/api/${slug}`, CMS_API_URL);
   if (params) {
     for (const [key, value] of Object.entries(params)) {
-      url.searchParams.set(key, value);
+      if (key === 'populate' && value.includes(',')) {
+        value.split(',').forEach((field, i) => {
+          url.searchParams.set(`populate[${i}]`, field.trim());
+        });
+      } else {
+        url.searchParams.set(key, value);
+      }
     }
   }
   if (locale !== undefined) url.searchParams.set('locale', locale);

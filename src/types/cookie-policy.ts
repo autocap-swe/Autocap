@@ -8,4 +8,7 @@ export interface CookiePolicy {
   sections: CookiePolicySection[];
   lastUpdated: string;
   contactEmail: string;
+  heroDescription?: string;
+  contactTitle?: string;
+  contactDescription?: string;
 }

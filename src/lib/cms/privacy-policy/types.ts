@@ -9,6 +9,9 @@ export interface CmsPrivacyPolicy {
   lastUpdated: string;
   contactEmail: string;
   version: string;
+  heroDescription?: string;
+  contactTitle?: string;
+  contactDescription?: string;
 }
 
 export type { PrivacySection, PrivacyPolicy } from '@/types/privacy-policy';

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { getTeamMembersContent } from '@/lib/cms/team-member';
 import { ProfileCard } from '@/components/team/ProfileCard';
@@ -20,10 +21,18 @@ export default async function TeamPage({ params }: { params: Promise<{ locale: s
 
   return (
     <main>
-      <section className="bg-[#EDE4D8] px-6 py-16 md:px-12 md:py-24">
-        <div className="mx-auto max-w-4xl text-center">
-          <h1 className="mb-6 text-4xl font-bold text-[#1C1C1E] md:text-5xl">{t('hero.title')}</h1>
-          <p className="text-lg leading-relaxed text-gray-700 md:text-xl">
+      <section className="relative overflow-hidden py-20 md:py-28">
+        <Image
+          src="/images/Leadership & Board.webp"
+          alt="Leadership & Board"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="relative mx-auto max-w-4xl px-6 text-center md:px-12">
+          <h1 className="mb-6 text-4xl font-bold text-white md:text-5xl">{t('hero.title')}</h1>
+          <p className="text-lg leading-relaxed text-white/90 md:text-xl">
             {t('hero.description')}
           </p>
         </div>

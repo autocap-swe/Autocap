@@ -7,7 +7,8 @@ import { motion } from 'framer-motion';
 interface HeroProps {
   headline: string;
   subheadline: string;
-  backgroundImage: string;
+  videoUrl?: string;
+  imageUrl?: string;
   cta1Text: string;
   cta1Link: string;
   cta2Text: string;
@@ -17,29 +18,33 @@ interface HeroProps {
 export function Hero({
   headline,
   subheadline,
-  backgroundImage,
+  videoUrl,
+  imageUrl,
   cta1Text,
   cta1Link,
   cta2Text,
   cta2Link,
 }: HeroProps) {
   return (
-    <section className="relative flex h-screen min-h-[600px] items-center justify-center overflow-hidden">
-      {/* Background Video with Overlay */}
+    <section
+      className={`relative flex h-screen min-h-[600px] items-center justify-center overflow-hidden ${!videoUrl && !imageUrl ? 'bg-gradient-to-br from-[#1C1C1E] via-[#2C2C2E] to-[#1C1C1E]' : ''}`}
+    >
+      {/* Background media with overlay */}
       <div className="absolute inset-0 z-0">
-        <video autoPlay loop muted playsInline className="h-full w-full object-cover">
-          <source src="/Landing video.mp4" type="video/mp4" />
-          {/* Fallback image if video doesn't load */}
+        {videoUrl ? (
+          <video autoPlay loop muted playsInline className="h-full w-full object-cover">
+            <source src={videoUrl} type="video/mp4" />
+          </video>
+        ) : imageUrl ? (
           <Image
-            src={backgroundImage}
-            alt="Workshop background"
+            src={imageUrl}
+            alt="Hero background"
             fill
             className="object-cover"
             priority
             sizes="100vw"
           />
-        </video>
-        {/* Dark gradient overlay */}
+        ) : null}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
       </div>
 

@@ -10,6 +10,9 @@ export interface CmsCookiePolicy {
   sections: CmsCookiePolicySection[];
   lastUpdated: string;
   contactEmail: string;
+  heroDescription?: string;
+  contactTitle?: string;
+  contactDescription?: string;
 }
 
 export type { CookiePolicy, CookiePolicySection };
