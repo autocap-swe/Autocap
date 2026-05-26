@@ -9,18 +9,25 @@ import { TestimonialsSection } from '@/components/entrepreneurs/TestimonialsSect
 import { getEntrepreneursPageContent } from '@/lib/cms/entrepreneurs-page';
 import { REVALIDATE_HIGH } from '@/lib/cms/revalidate';
 import { cmsMediaUrl } from '@/lib/cms/media';
+import { buildMetadata } from '@/lib/cms/seo';
 
-export const metadata: Metadata = {
-  title: 'For Workshop Owners · AutoCap Group',
-  description:
-    'Thinking of selling? AutoCap preserves your brand, keeps your team, and offers fair value.',
-};
+type Props = { params: Promise<{ locale: string }> };
 
-export default async function EntrepreneursPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const cms = await getEntrepreneursPageContent(REVALIDATE_HIGH, locale);
+  return buildMetadata(
+    {
+      title: 'For Workshop Owners · AutoCap Group',
+      description:
+        'Thinking of selling? AutoCap preserves your brand, keeps your team, and offers fair value.',
+    },
+    cms.seo,
+    locale
+  );
+}
+
+export default async function EntrepreneursPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const cms = await getEntrepreneursPageContent(REVALIDATE_HIGH, locale);

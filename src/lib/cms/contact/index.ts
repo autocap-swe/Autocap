@@ -20,5 +20,6 @@ export async function getContactContent(
     mapper: contactMapper,
     locale,
     tags: ['contact-page'],
+    params: { populate: 'seo' },
   });
 }

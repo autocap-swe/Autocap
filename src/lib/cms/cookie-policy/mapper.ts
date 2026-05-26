@@ -15,5 +15,6 @@ export function cookiePolicyMapper(cms: CmsCookiePolicy): CookiePolicy {
         .map(p => p.trim())
         .filter(Boolean),
     })),
+    seo: cms.seo,
   };
 }

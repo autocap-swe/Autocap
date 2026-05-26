@@ -8,14 +8,25 @@ import { setRequestLocale } from 'next-intl/server';
 import { getInvestorsPageContent } from '@/lib/cms/investors-page';
 import { REVALIDATE_HIGH } from '@/lib/cms/revalidate';
 import { cmsMediaUrl } from '@/lib/cms/media';
+import { buildMetadata } from '@/lib/cms/seo';
 
-export const metadata: Metadata = {
-  title: 'Investors · AutoCap Group',
-  description:
-    "Consolidating Sweden's fragmented tire service market. Explore the investment case and team.",
-};
+type Props = { params: Promise<{ locale: string }> };
 
-export default async function InvestorsPage({ params }: { params: Promise<{ locale: string }> }) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const cms = await getInvestorsPageContent(REVALIDATE_HIGH, locale);
+  return buildMetadata(
+    {
+      title: 'Investors · AutoCap Group',
+      description:
+        "Consolidating Sweden's fragmented tire service market. Explore the investment case and team.",
+    },
+    cms.seo,
+    locale
+  );
+}
+
+export default async function InvestorsPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const cms = await getInvestorsPageContent(REVALIDATE_HIGH, locale);

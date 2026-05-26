@@ -53,5 +53,6 @@ export function contactMapper(cms: CmsContactPage): ContactContent {
       gdprConsentText: cms.gdprConsentText,
       submitButtonText: cms.submitButtonText,
     },
+    seo: cms.seo,
   };
 }

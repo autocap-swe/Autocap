@@ -1,3 +1,4 @@
+import type { CmsSeo } from '../seo';
 import type { StrapiMedia } from '../media';
 
 export interface CmsAudienceCard {
@@ -22,6 +23,7 @@ export interface CmsHomepage {
   footerCtaButtonText: string;
   footerCtaButtonLink: string;
   heroVideo?: StrapiMedia | null;
+  seo?: CmsSeo | null;
 }
 
 export type HomepageContent = CmsHomepage;

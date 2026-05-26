@@ -1,3 +1,4 @@
+import type { CmsSeo } from '../seo';
 /**
  * Types for the Contact Page — both the Strapi shape and the page shape.
  * Moved from `src/content/contact.ts` (which is deleted in v2).
@@ -24,6 +25,7 @@ export interface CmsContactPage {
   messagePlaceholder: string;
   gdprConsentText: string;
   submitButtonText: string;
+  seo?: CmsSeo | null;
 }
 
 // ---------- Page shape (what the page renders) ----------
@@ -70,4 +72,5 @@ export interface ContactContent {
   };
   companyInfo: CompanyContactInfo;
   formLabels: ContactFormLabels;
+  seo?: CmsSeo | null;
 }

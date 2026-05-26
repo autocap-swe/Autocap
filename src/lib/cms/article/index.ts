@@ -51,6 +51,7 @@ export async function getArticleBySlugContent(
       'populate[fullContent][on][article.callout][populate]': '*',
       'populate[heroImage]': 'true',
       'populate[relatedArticles][populate][heroImage]': 'true',
+      'populate[seo]': 'true',
       'pagination[pageSize]': '1',
     },
     mapper: articlesMapper,

@@ -12,6 +12,6 @@ export async function getAboutPageContent(
     mapper: aboutPageMapper,
     locale,
     tags: ['about-page'],
-    params: { populate: 'differentiators,heroImage' },
+    params: { populate: 'differentiators,heroImage,seo' },
   });
 }

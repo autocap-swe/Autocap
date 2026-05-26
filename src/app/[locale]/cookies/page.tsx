@@ -2,18 +2,25 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { getCookiePolicyContent } from '@/lib/cms/cookie-policy';
+import { buildMetadata } from '@/lib/cms/seo';
 
-export const metadata: Metadata = {
-  title: 'Cookie Policy · AutoCap Group',
-  description:
-    'AutoCap Group cookie policy — how we use cookies and similar technologies on our website.',
-};
+type Props = { params: Promise<{ locale: string }> };
 
-export default async function CookiePolicyPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const cms = await getCookiePolicyContent(undefined, locale).catch(() => null);
+  return buildMetadata(
+    {
+      title: 'Cookie Policy · AutoCap Group',
+      description:
+        'AutoCap Group cookie policy — how we use cookies and similar technologies on our website.',
+    },
+    cms?.seo,
+    locale
+  );
+}
+
+export default async function CookiePolicyPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations('cookiePolicy');

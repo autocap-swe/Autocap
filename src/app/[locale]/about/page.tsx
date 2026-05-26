@@ -8,14 +8,25 @@ import { getAboutPageContent } from '@/lib/cms/about-page';
 import { CmsRichText } from '@/components/ui/CmsRichText';
 import { REVALIDATE_HIGH } from '@/lib/cms/revalidate';
 import { cmsMediaUrl } from '@/lib/cms/media';
+import { buildMetadata } from '@/lib/cms/seo';
 
-export const metadata: Metadata = {
-  title: 'About AutoCap Group · Built by entrepreneurs, run with discipline',
-  description:
-    'Nordic consolidation platform for tire service centres — founder-led, privately held, and built to grow.',
-};
+type Props = { params: Promise<{ locale: string }> };
 
-export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const cms = await getAboutPageContent(REVALIDATE_HIGH, locale);
+  return buildMetadata(
+    {
+      title: 'About AutoCap Group · Built by entrepreneurs, run with discipline',
+      description:
+        'Nordic consolidation platform for tire service centres — founder-led, privately held, and built to grow.',
+    },
+    cms.seo,
+    locale
+  );
+}
+
+export default async function AboutPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const cms = await getAboutPageContent(REVALIDATE_HIGH, locale);

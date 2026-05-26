@@ -13,5 +13,6 @@ export function acquisitionProcessMapper(cms: CmsAcquisitionProcess): Acquisitio
         title: step.title,
         description: step.description,
       })),
+    seo: cms.seo,
   };
 }

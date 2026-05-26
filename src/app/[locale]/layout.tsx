@@ -36,6 +36,34 @@ export default async function LocaleLayout({
   const messages = await getMessages();
   return (
     <html lang={locale} className={inter.variable}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@graph': [
+                {
+                  '@type': 'Organization',
+                  '@id': 'https://autocapgroup.se/#organization',
+                  name: 'AutoCap Group',
+                  url: 'https://autocapgroup.se',
+                  logo: 'https://autocapgroup.se/images/logo.png',
+                  sameAs: ['https://www.linkedin.com/company/autocapgroup'],
+                },
+                {
+                  '@type': 'WebSite',
+                  '@id': 'https://autocapgroup.se/#website',
+                  url: 'https://autocapgroup.se',
+                  name: 'AutoCap Group',
+                  publisher: { '@id': 'https://autocapgroup.se/#organization' },
+                  inLanguage: [locale],
+                },
+              ],
+            }),
+          }}
+        />
+      </head>
       <body className="antialiased">
         <NextIntlClientProvider messages={messages}>
           <CookieConsentProvider>

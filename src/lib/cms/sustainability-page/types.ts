@@ -1,3 +1,4 @@
+import type { CmsSeo } from '../seo';
 import type { StrapiMedia } from '../media';
 
 export interface CmsTextItem {
@@ -19,6 +20,7 @@ export interface CmsSustainabilityPage {
   governanceContactText: string;
   governanceContactEmail: string;
   heroImage?: StrapiMedia | null;
+  seo?: CmsSeo | null;
 }
 
 export type SustainabilityPageContent = CmsSustainabilityPage;

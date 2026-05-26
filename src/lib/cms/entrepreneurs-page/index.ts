@@ -12,6 +12,6 @@ export async function getEntrepreneursPageContent(
     mapper: entrepreneursPageMapper,
     locale,
     tags: ['entrepreneurs-page'],
-    params: { populate: 'benefits,heroImage' },
+    params: { populate: 'benefits,heroImage,seo' },
   });
 }

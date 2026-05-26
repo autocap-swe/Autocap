@@ -7,6 +7,8 @@ import { ArticleHeader } from '@/components/news/ArticleHeader';
 import { ArticleBody } from '@/components/news/ArticleBody';
 import { RelatedArticles } from '@/components/news/RelatedArticles';
 import { ArticleActions } from '@/components/news/ArticleActions';
+import { buildMetadata } from '@/lib/cms/seo';
+import { cmsMediaUrl } from '@/lib/cms/media';
 
 interface ArticleDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -25,15 +27,18 @@ export async function generateMetadata({ params }: ArticleDetailPageProps): Prom
     return { title: 'Article Not Found' };
   }
 
+  const meta = buildMetadata(
+    { title: `${article.title} · AutoCap Group`, description: article.excerpt },
+    article.seo,
+    locale
+  );
   return {
-    title: `${article.title} · AutoCap Group`,
-    description: article.excerpt,
+    ...meta,
     openGraph: {
-      title: article.title,
-      description: article.excerpt,
+      ...meta.openGraph,
       type: 'article',
       publishedTime: article.publishDate,
-      images: article.imageUrl ? [article.imageUrl] : [],
+      images: meta.openGraph?.images ?? (article.imageUrl ? [{ url: article.imageUrl }] : []),
     },
   };
 }

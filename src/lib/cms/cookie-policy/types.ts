@@ -1,3 +1,4 @@
+import type { CmsSeo } from '../seo';
 import type { CookiePolicy, CookiePolicySection } from '@/types/cookie-policy';
 
 export interface CmsCookiePolicySection {
@@ -13,6 +14,7 @@ export interface CmsCookiePolicy {
   heroDescription?: string;
   contactTitle?: string;
   contactDescription?: string;
+  seo?: CmsSeo | null;
 }
 
 export type { CookiePolicy, CookiePolicySection };

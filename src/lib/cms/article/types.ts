@@ -1,3 +1,4 @@
+import type { CmsSeo } from '../seo';
 // Strapi Dynamic Zone block shapes
 interface CmsParagraphBlock {
   __component: 'article.paragraph';
@@ -40,6 +41,7 @@ interface CmsCalloutBlock {
   id: number;
   variant: 'info' | 'highlight';
   content: string;
+  seo?: CmsSeo | null;
 }
 
 export type CmsArticleBlock =
@@ -64,6 +66,7 @@ export interface CmsArticle {
   readTimeMinutes: number;
   fullContent?: CmsArticleBlock[];
   relatedArticles?: CmsArticle[];
+  seo?: CmsSeo | null;
 }
 
 // Frontend content block types
@@ -126,4 +129,5 @@ export interface NewsArticle {
   readTimeMinutes: number;
   fullContent?: ArticleContentBlock[];
   relatedArticles?: NewsArticle[];
+  seo?: CmsSeo | null;
 }
