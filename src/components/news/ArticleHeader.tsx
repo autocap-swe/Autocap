@@ -31,12 +31,13 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
           <h1 className="mb-8 text-5xl font-black text-[#1C1C1E] md:text-6xl lg:text-7xl">
             {article.title}
           </h1>
-          <div className="flex flex-wrap items-center gap-4 text-base text-gray-600">
-            <span>{article.author}</span>
-            <span className="text-gray-400">•</span>
-            <span>{formatDate(article.publishDate)}</span>
-            <span className="text-gray-400">•</span>
-            <span>{t('minRead', { minutes: article.readTimeMinutes })}</span>
+          <div className="flex flex-col gap-1 text-base text-gray-600">
+            <span className="font-medium">{article.author}</span>
+            <div className="flex items-center gap-2">
+              <span>{formatDate(article.publishDate)}</span>
+              <span className="text-gray-400">•</span>
+              <span>{t('minRead', { minutes: article.readTimeMinutes })}</span>
+            </div>
           </div>
           <div className="mt-8 h-1 w-24 bg-[#C8102E]" />
         </div>
@@ -65,12 +66,13 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
         <h1 className="mb-8 text-5xl font-black text-white md:text-6xl lg:text-7xl">
           {article.title}
         </h1>
-        <div className="flex flex-wrap items-center gap-4 text-base text-white/80">
-          <span>{article.author}</span>
-          <span className="text-white/40">•</span>
-          <span>{formatDate(article.publishDate)}</span>
-          <span className="text-white/40">•</span>
-          <span>{t('minRead', { minutes: article.readTimeMinutes })}</span>
+        <div className="flex flex-col gap-1 text-base text-white/80">
+          <span className="font-medium">{article.author}</span>
+          <div className="flex items-center gap-2">
+            <span>{formatDate(article.publishDate)}</span>
+            <span className="text-white/40">•</span>
+            <span>{t('minRead', { minutes: article.readTimeMinutes })}</span>
+          </div>
         </div>
         <div className="mt-8 h-1 w-24 bg-[#C8102E]" />
       </div>
