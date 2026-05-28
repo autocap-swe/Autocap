@@ -2,8 +2,14 @@ import { NextRequest, NextResponse } from 'next/server';
 import { revalidateTag } from 'next/cache';
 
 const CONTENT_TYPE_TAGS: Record<string, (slug?: string) => string[]> = {
-  'news-article': slug => ['news-articles', ...(slug ? [`news-article:${slug}`] : [])],
-  workshop: slug => ['workshops', ...(slug ? [`workshop:${slug}`] : [])],
+  'news-article': slug => [
+    'news-articles',
+    ...(slug ? [`news-article:${slug}`, `news-article:${slug}:en`, `news-article:${slug}:sv`] : []),
+  ],
+  workshop: slug => [
+    'workshops',
+    ...(slug ? [`workshop:${slug}`, `workshop:${slug}:en`, `workshop:${slug}:sv`] : []),
+  ],
   'team-member': () => ['team-members'],
   testimonial: () => ['testimonials'],
   'media-kit-page': () => ['media-kit-categories'],

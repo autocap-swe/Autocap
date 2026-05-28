@@ -38,36 +38,38 @@ export async function getArticleBySlugContent(
   revalidate = REVALIDATE_LOW,
   locale?: string
 ): Promise<NewsArticle | null> {
-  const options = {
-    revalidate,
-    tags: ['news-articles', `news-article:${slug}`],
-    params: {
-      'filters[slug][$eq]': slug,
-      'populate[fullContent][on][article.paragraph][populate]': '*',
-      'populate[fullContent][on][article.heading][populate]': '*',
-      'populate[fullContent][on][article.image][populate]': '*',
-      'populate[fullContent][on][article.quote][populate]': '*',
-      'populate[fullContent][on][article.list][populate]': '*',
-      'populate[fullContent][on][article.callout][populate]': '*',
-      'populate[heroImage]': 'true',
-      'populate[relatedArticles][populate][heroImage]': 'true',
-      'populate[seo]': 'true',
-      'pagination[pageSize]': '1',
-    },
-    mapper: articlesMapper,
+  const localeTag =
+    locale && locale !== 'en' ? `news-article:${slug}:${locale}` : `news-article:${slug}:en`;
+  const params = {
+    'filters[slug][$eq]': slug,
+    'populate[fullContent][on][article.paragraph][populate]': '*',
+    'populate[fullContent][on][article.heading][populate]': '*',
+    'populate[fullContent][on][article.image][populate]': '*',
+    'populate[fullContent][on][article.quote][populate]': '*',
+    'populate[fullContent][on][article.list][populate]': '*',
+    'populate[fullContent][on][article.callout][populate]': '*',
+    'populate[heroImage]': 'true',
+    'populate[relatedArticles][populate][heroImage]': 'true',
+    'populate[seo]': 'true',
+    'pagination[pageSize]': '1',
   };
 
   const results = await getContent<CmsArticle[], NewsArticle[]>('news-articles', {
-    ...options,
+    revalidate,
+    tags: ['news-articles', `news-article:${slug}`, localeTag],
+    params,
+    mapper: articlesMapper,
     locale,
   });
 
   if (!results[0] && locale && locale !== 'en') {
-    const enResults = await getContent<CmsArticle[], NewsArticle[]>('news-articles', {
-      ...options,
+    return getContent<CmsArticle[], NewsArticle[]>('news-articles', {
+      revalidate,
+      tags: ['news-articles', `news-article:${slug}`, `news-article:${slug}:en`],
+      params,
+      mapper: articlesMapper,
       locale: 'en',
-    });
-    return enResults[0] ?? null;
+    }).then(r => r[0] ?? null);
   }
 
   return results[0] ?? null;
