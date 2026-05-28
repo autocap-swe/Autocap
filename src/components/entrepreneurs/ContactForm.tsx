@@ -159,11 +159,11 @@ export function ContactForm({ successMessage }: ContactFormProps) {
           {...register('revenue')}
           className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-[#C8102E] focus:outline-none focus:ring-2 focus:ring-[#C8102E]/20"
         >
-          <option value="">Select range</option>
-          <option value="0-500k">€0 - €500k</option>
-          <option value="500k-1m">€500k - €1M</option>
-          <option value="1m-3m">€1M - €3M</option>
-          <option value="3m+">€3M+</option>
+          <option value="">Select revenue range</option>
+          <option value="<5 MSEK">Less than 5 MSEK</option>
+          <option value="5-15 MSEK">5–15 MSEK</option>
+          <option value="15-50 MSEK">15–50 MSEK</option>
+          <option value=">50 MSEK">More than 50 MSEK</option>
         </select>
         {errors.revenue && <p className="mt-1 text-sm text-red-600">{errors.revenue.message}</p>}
       </div>
