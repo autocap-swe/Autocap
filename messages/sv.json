@@ -20,7 +20,8 @@
     "contact": {
       "title": "Hör av dig",
       "subtext": "Detta är konfidentiellt. Vi delar inte din information med någon utanför vårt förvärvsteam. Inga förpliktelser – bara ett samtal om vad som skulle kunna vara möjligt.",
-      "successMessage": "Tack. Din förfrågan har tagits emot. Någon från vårt team hör av sig inom två arbetsdagar. Allt du delat behandlas strikt konfidentiellt."
+      "successMessage": "Tack. Din förfrågan har tagits emot. Någon från vårt team hör av sig inom två arbetsdagar. Allt du delat behandlas strikt konfidentiellt.",
+      "gdprConsent": "Jag samtycker till att AutoCap Group behandlar mina personuppgifter i syfte att utvärdera ett potentiellt förvärv. Alla förfrågningar behandlas strikt konfidentiellt."
     },
     "trustIndicator": "Konfidentiellt · Inga förpliktelser · Förutsättningslöst samtal",
     "processPage": {
@@ -41,7 +42,8 @@
     "contact": {
       "title": "Investor Relations",
       "subtext": "Intresserad av AutoCap-möjligheten? Vi hör gärna från dig. Alla förfrågningar behandlas konfidentiellt.",
-      "successMessage": "Tack för ditt intresse. Någon från vårt Investor Relations-team hör av sig inom två arbetsdagar. Alla förfrågningar behandlas konfidentiellt."
+      "successMessage": "Tack för ditt intresse. Någon från vårt Investor Relations-team hör av sig inom två arbetsdagar. Alla förfrågningar behandlas konfidentiellt.",
+      "gdprConsent": "Jag samtycker till att AutoCap Group behandlar mina personuppgifter i syfte att hantera investerarrelationer. Alla förfrågningar behandlas konfidentiellt."
     },
     "trustIndicator": "Konfidentiellt · Professionellt · Institutionell nivå",
     "whyPage": {

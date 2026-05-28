@@ -20,7 +20,8 @@
     "contact": {
       "title": "Let's Talk",
       "subtext": "This is confidential. We don't share your information with anyone outside our core acquisition team. There's no obligation — just a conversation about what might be possible.",
-      "successMessage": "Thank you. Your enquiry has been received. A member of our team will be in touch within two business days. Everything you've shared is treated in strict confidence."
+      "successMessage": "Thank you. Your enquiry has been received. A member of our team will be in touch within two business days. Everything you've shared is treated in strict confidence.",
+      "gdprConsent": "I consent to AutoCap Group processing my personal data for the purpose of evaluating a potential acquisition. All enquiries are treated in strict confidence."
     },
     "trustIndicator": "Confidential · No obligation · Free consultation",
     "processPage": {
@@ -41,7 +42,8 @@
     "contact": {
       "title": "Investor Relations",
       "subtext": "Interested in the AutoCap opportunity? We'd like to hear from you. All enquiries are treated confidentially.",
-      "successMessage": "Thank you for your interest. A member of our investor relations team will be in touch within two business days. All enquiries are treated confidentially."
+      "successMessage": "Thank you for your interest. A member of our investor relations team will be in touch within two business days. All enquiries are treated confidentially.",
+      "gdprConsent": "I consent to AutoCap Group processing my personal data for the purpose of investor relations. All enquiries are treated confidentially."
     },
     "trustIndicator": "Confidential · Professional · Institutional-grade",
     "whyPage": {

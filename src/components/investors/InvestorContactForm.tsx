@@ -9,12 +9,14 @@ import {
   type InvestorFormData,
 } from '@/lib/validation/investorForm';
 import { TurnstileWidget, type TurnstileInstance } from '@/components/contact/TurnstileWidget';
+import type { InvestorsFormLabels } from '@/lib/cms/investors-page/types';
 
 interface InvestorContactFormProps {
   successMessage: string;
+  formLabels: InvestorsFormLabels;
 }
 
-export function InvestorContactForm({ successMessage }: InvestorContactFormProps) {
+export function InvestorContactForm({ successMessage, formLabels }: InvestorContactFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState('');
@@ -107,7 +109,7 @@ export function InvestorContactForm({ successMessage }: InvestorContactFormProps
         {/* Name */}
         <div>
           <label htmlFor="name" className="mb-2 block text-sm font-medium text-gray-700">
-            Your name <span className="text-[#C8102E]">*</span>
+            {formLabels.formNameLabel} <span className="text-[#C8102E]">*</span>
           </label>
           <input
             {...register('name')}
@@ -122,7 +124,7 @@ export function InvestorContactForm({ successMessage }: InvestorContactFormProps
         {/* Organization */}
         <div>
           <label htmlFor="organization" className="mb-2 block text-sm font-medium text-gray-700">
-            Organization / Fund <span className="text-[#C8102E]">*</span>
+            {formLabels.formOrganisationLabel} <span className="text-[#C8102E]">*</span>
           </label>
           <input
             {...register('organization')}
@@ -139,7 +141,7 @@ export function InvestorContactForm({ successMessage }: InvestorContactFormProps
         {/* Role */}
         <div>
           <label htmlFor="role" className="mb-2 block text-sm font-medium text-gray-700">
-            Role / Title <span className="text-[#C8102E]">*</span>
+            {formLabels.formRoleLabel} <span className="text-[#C8102E]">*</span>
           </label>
           <input
             {...register('role')}
@@ -154,7 +156,7 @@ export function InvestorContactForm({ successMessage }: InvestorContactFormProps
         {/* Enquiry Type */}
         <div>
           <label htmlFor="enquiryType" className="mb-2 block text-sm font-medium text-gray-700">
-            Enquiry type <span className="text-[#C8102E]">*</span>
+            {formLabels.formEnquiryTypeLabel} <span className="text-[#C8102E]">*</span>
           </label>
           <select
             {...register('enquiryType')}
@@ -176,7 +178,7 @@ export function InvestorContactForm({ successMessage }: InvestorContactFormProps
         {/* Email */}
         <div>
           <label htmlFor="email" className="mb-2 block text-sm font-medium text-gray-700">
-            Email <span className="text-[#C8102E]">*</span>
+            {formLabels.formEmailLabel} <span className="text-[#C8102E]">*</span>
           </label>
           <input
             {...register('email')}
@@ -191,7 +193,7 @@ export function InvestorContactForm({ successMessage }: InvestorContactFormProps
         {/* Phone */}
         <div>
           <label htmlFor="phone" className="mb-2 block text-sm font-medium text-gray-700">
-            Phone <span className="text-[#C8102E]">*</span>
+            {formLabels.formPhoneLabel} <span className="text-[#C8102E]">*</span>
           </label>
           <input
             {...register('phone')}
@@ -209,7 +211,7 @@ export function InvestorContactForm({ successMessage }: InvestorContactFormProps
         {/* Message */}
         <div>
           <label htmlFor="message" className="mb-2 block text-sm font-medium text-gray-700">
-            Investment focus / interest <span className="text-gray-500">(optional)</span>
+            {formLabels.formMessageLabel}
           </label>
           <textarea
             {...register('message')}
@@ -241,9 +243,7 @@ export function InvestorContactForm({ successMessage }: InvestorContactFormProps
               className="mt-1 h-4 w-4 rounded border-gray-300 text-[#C8102E] focus:ring-[#C8102E]"
             />
             <span className="ml-3 text-sm text-gray-700">
-              I consent to AutoCap Group processing my personal data for the purpose of investor
-              relations. All enquiries are treated confidentially.{' '}
-              <span className="text-[#C8102E]">*</span>
+              {formLabels.formGdprConsentText} <span className="text-[#C8102E]">*</span>
             </span>
           </label>
           {errors.gdprConsent && (
@@ -264,7 +264,7 @@ export function InvestorContactForm({ successMessage }: InvestorContactFormProps
           disabled={isSubmitting}
           className="w-full rounded-md bg-[#C8102E] px-8 py-4 text-lg font-semibold text-white transition-all hover:bg-[#A00D25] disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {isSubmitting ? 'Sending...' : 'Submit Enquiry'}
+          {isSubmitting ? 'Sending...' : formLabels.formSubmitButtonText}
         </button>
       </div>
     </form>
