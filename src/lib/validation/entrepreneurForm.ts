@@ -22,7 +22,7 @@ export const entrepreneurFormSchema = z.object({
     .min(1, 'City/region is required')
     .min(2, 'City/region must be at least 2 characters'),
 
-  revenue: z.enum(['<5 MSEK', '5-15 MSEK', '15-50 MSEK', '>50 MSEK'], {
+  revenue: z.enum(['€0 - €500k', '€500k - €1M', '€1M - €3M', '€3M+'], {
     message: 'Please select your approximate annual revenue',
   }),
 
