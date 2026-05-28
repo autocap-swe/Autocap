@@ -1,7 +1,22 @@
 import type { CmsSeo } from '../seo';
 import type { StrapiMedia } from '../media';
 
-export interface CmsInvestorsPage {
+export interface InvestorsFormLabels {
+  contactTitle: string;
+  contactSubtext: string;
+  contactSuccessMessage: string;
+  formNameLabel: string;
+  formEmailLabel: string;
+  formPhoneLabel: string;
+  formOrganisationLabel: string;
+  formRoleLabel: string;
+  formEnquiryTypeLabel: string;
+  formMessageLabel: string;
+  formGdprConsentText: string;
+  formSubmitButtonText: string;
+}
+
+export interface CmsInvestorsPage extends InvestorsFormLabels {
   landingHeadline: string;
   landingSubheadline: string;
   landingCtaText: string;

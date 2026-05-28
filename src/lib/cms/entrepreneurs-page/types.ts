@@ -6,7 +6,22 @@ export interface CmsBenefitItem {
   description: string;
 }
 
-export interface CmsEntrepreneursPage {
+export interface EntrepreneursFormLabels {
+  contactTitle: string;
+  contactSubtext: string;
+  contactSuccessMessage: string;
+  formNameLabel: string;
+  formEmailLabel: string;
+  formPhoneLabel: string;
+  formWorkshopNameLabel: string;
+  formCityRegionLabel: string;
+  formRevenueLabel: string;
+  formMessageLabel: string;
+  formGdprConsentText: string;
+  formSubmitButtonText: string;
+}
+
+export interface CmsEntrepreneursPage extends EntrepreneursFormLabels {
   landingHeadline: string;
   landingSubheadline: string;
   landingCtaText: string;

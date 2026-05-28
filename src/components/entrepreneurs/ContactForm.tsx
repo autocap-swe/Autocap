@@ -6,12 +6,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Send, CheckCircle2 } from 'lucide-react';
 import { EntrepreneurSchema, type EntrepreneurFormData } from '@/lib/contact/schema';
 import { TurnstileWidget } from '@/components/contact/TurnstileWidget';
+import type { EntrepreneursFormLabels } from '@/lib/cms/entrepreneurs-page/types';
 
 interface ContactFormProps {
   successMessage: string;
+  formLabels: EntrepreneursFormLabels;
 }
 
-export function ContactForm({ successMessage }: ContactFormProps) {
+export function ContactForm({ successMessage, formLabels }: ContactFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -83,7 +85,7 @@ export function ContactForm({ successMessage }: ContactFormProps) {
     <form onSubmit={handleSubmit(onSubmit)} className="rounded-2xl bg-white p-8 shadow-xl">
       <div className="mb-6">
         <label htmlFor="name" className="mb-2 block font-semibold text-[#1C1C1E]">
-          Full Name *
+          {formLabels.formNameLabel} *
         </label>
         <input
           id="name"
@@ -96,7 +98,7 @@ export function ContactForm({ successMessage }: ContactFormProps) {
 
       <div className="mb-6">
         <label htmlFor="email" className="mb-2 block font-semibold text-[#1C1C1E]">
-          Email Address *
+          {formLabels.formEmailLabel} *
         </label>
         <input
           id="email"
@@ -109,7 +111,7 @@ export function ContactForm({ successMessage }: ContactFormProps) {
 
       <div className="mb-6">
         <label htmlFor="phone" className="mb-2 block font-semibold text-[#1C1C1E]">
-          Phone Number *
+          {formLabels.formPhoneLabel} *
         </label>
         <input
           id="phone"
@@ -122,7 +124,7 @@ export function ContactForm({ successMessage }: ContactFormProps) {
 
       <div className="mb-6">
         <label htmlFor="workshopName" className="mb-2 block font-semibold text-[#1C1C1E]">
-          Workshop Name *
+          {formLabels.formWorkshopNameLabel} *
         </label>
         <input
           id="workshopName"
@@ -137,7 +139,7 @@ export function ContactForm({ successMessage }: ContactFormProps) {
 
       <div className="mb-6">
         <label htmlFor="cityRegion" className="mb-2 block font-semibold text-[#1C1C1E]">
-          City/Region *
+          {formLabels.formCityRegionLabel} *
         </label>
         <input
           id="cityRegion"
@@ -152,7 +154,7 @@ export function ContactForm({ successMessage }: ContactFormProps) {
 
       <div className="mb-6">
         <label htmlFor="revenue" className="mb-2 block font-semibold text-[#1C1C1E]">
-          Annual Revenue *
+          {formLabels.formRevenueLabel} *
         </label>
         <select
           id="revenue"
@@ -170,7 +172,7 @@ export function ContactForm({ successMessage }: ContactFormProps) {
 
       <div className="mb-6">
         <label htmlFor="message" className="mb-2 block font-semibold text-[#1C1C1E]">
-          Message (Optional)
+          {formLabels.formMessageLabel}
         </label>
         <textarea
           id="message"
@@ -179,6 +181,22 @@ export function ContactForm({ successMessage }: ContactFormProps) {
           className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-[#C8102E] focus:outline-none focus:ring-2 focus:ring-[#C8102E]/20"
         />
         {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>}
+      </div>
+
+      <div className="mb-6">
+        <label className="flex items-start">
+          <input
+            {...register('gdprConsent')}
+            type="checkbox"
+            className="mt-1 h-4 w-4 rounded border-gray-300 text-[#C8102E] focus:ring-[#C8102E]"
+          />
+          <span className="ml-3 text-sm text-gray-700">
+            {formLabels.formGdprConsentText} <span className="text-[#C8102E]">*</span>
+          </span>
+        </label>
+        {errors.gdprConsent && (
+          <p className="mt-1 text-sm text-red-600">{errors.gdprConsent.message}</p>
+        )}
       </div>
 
       <div className="mb-6">
@@ -199,7 +217,7 @@ export function ContactForm({ successMessage }: ContactFormProps) {
         ) : (
           <>
             <Send className="h-5 w-5" />
-            Send Message
+            {formLabels.formSubmitButtonText}
           </>
         )}
       </button>
