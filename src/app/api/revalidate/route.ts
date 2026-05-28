@@ -20,6 +20,8 @@ const CONTENT_TYPE_TAGS: Record<string, (slug?: string) => string[]> = {
   'investment-pillars': () => ['investment-pillars'],
   'privacy-policy': () => ['privacy-policy'],
   'cookie-policy': () => ['cookie-policy'],
+  'team-page': () => ['team-page'],
+  'portfolio-page': () => ['portfolio-page'],
 };
 
 export async function POST(request: NextRequest) {
