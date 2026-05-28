@@ -34,28 +34,33 @@ export async function getWorkshopBySlugContent(
   revalidate = REVALIDATE_LOW,
   locale?: string
 ): Promise<Workshop | null> {
-  const options = {
+  const localeTag =
+    locale && locale !== 'en' ? `workshop:${slug}:${locale}` : `workshop:${slug}:en`;
+
+  const results = await getContent<CmsWorkshop[], Workshop[]>('workshops', {
     revalidate,
-    tags: ['workshops', `workshop:${slug}`],
+    tags: ['workshops', `workshop:${slug}`, localeTag],
     params: {
       'filters[slug][$eq]': slug,
       'pagination[pageSize]': '1',
       populate: 'image',
     },
     mapper: workshopsMapper,
-  };
-
-  const results = await getContent<CmsWorkshop[], Workshop[]>('workshops', {
-    ...options,
     locale,
   });
 
   if (!results[0] && locale && locale !== 'en') {
-    const enResults = await getContent<CmsWorkshop[], Workshop[]>('workshops', {
-      ...options,
+    return getContent<CmsWorkshop[], Workshop[]>('workshops', {
+      revalidate,
+      tags: ['workshops', `workshop:${slug}`, `workshop:${slug}:en`],
+      params: {
+        'filters[slug][$eq]': slug,
+        'pagination[pageSize]': '1',
+        populate: 'image',
+      },
+      mapper: workshopsMapper,
       locale: 'en',
-    });
-    return enResults[0] ?? null;
+    }).then(r => r[0] ?? null);
   }
 
   return results[0] ?? null;
