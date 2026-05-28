@@ -19,7 +19,11 @@ export function workshopMapper(cms: CmsWorkshop): Workshop {
     longitude: cms.longitude,
     status: cms.acquisitionStatus,
     yearAcquired: cms.yearAcquired,
-    localWebsite: cms.localWebsite,
+    localWebsite: cms.localWebsite
+      ? cms.localWebsite.match(/^https?:\/\//)
+        ? cms.localWebsite
+        : `https://${cms.localWebsite}`
+      : cms.localWebsite,
     description: cms.description,
     partnershipNote: cms.partnershipNote ?? null,
     imageUrl: resolveUrl(cms.image?.url),
