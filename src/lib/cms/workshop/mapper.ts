@@ -21,6 +21,7 @@ export function workshopMapper(cms: CmsWorkshop): Workshop {
     yearAcquired: cms.yearAcquired,
     localWebsite: cms.localWebsite,
     description: cms.description,
+    partnershipNote: cms.partnershipNote ?? null,
     imageUrl: resolveUrl(cms.image?.url),
   };
 }
