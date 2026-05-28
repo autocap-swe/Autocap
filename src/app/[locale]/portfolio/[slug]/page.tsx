@@ -105,11 +105,11 @@ export default async function WorkshopDetailPage({ params }: WorkshopDetailPageP
           <p className="text-xl leading-relaxed text-gray-700">{workshop.description}</p>
         </div>
 
-        <div className="mb-12 rounded-2xl bg-gradient-to-br from-[#F5F0EB] to-[#EDE8E3] p-10">
-          <p className="text-lg leading-relaxed text-gray-700">
-            {t('detail.groupBlurb', { name: workshop.name })}
-          </p>
-        </div>
+        {workshop.partnershipNote && (
+          <div className="mb-12 rounded-2xl bg-gradient-to-br from-[#F5F0EB] to-[#EDE8E3] p-10">
+            <p className="text-lg leading-relaxed text-gray-700">{workshop.partnershipNote}</p>
+          </div>
+        )}
 
         <div className="border-t border-gray-200 pt-16">
           <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#D8E4DC] via-[#C8D5CC] to-[#D8E4DC] p-12 text-center">

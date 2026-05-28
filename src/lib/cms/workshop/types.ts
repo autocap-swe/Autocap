@@ -12,6 +12,7 @@ export interface CmsWorkshop {
   yearAcquired: number;
   localWebsite: string;
   description: string;
+  partnershipNote?: string | null;
   image: { url: string } | null;
 }
 
@@ -28,5 +29,6 @@ export interface Workshop {
   yearAcquired: number;
   localWebsite: string;
   description: string;
+  partnershipNote?: string | null;
   imageUrl?: string;
 }

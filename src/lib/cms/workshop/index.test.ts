@@ -18,6 +18,8 @@ const mockCmsWorkshop: CmsWorkshop = {
   yearAcquired: 2025,
   localWebsite: 'https://dackpoint.se',
   description: 'Full-service tire workshop.',
+  partnershipNote: null,
+  image: null,
 };
 
 beforeEach(() => mockedGetContent.mockReset());
