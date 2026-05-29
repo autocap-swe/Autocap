@@ -24,7 +24,7 @@ export function workshopMapper(cms: CmsWorkshop): Workshop {
     latitude: cms.latitude,
     longitude: cms.longitude,
     status: cms.acquisitionStatus,
-    yearAcquired: cms.yearAcquired,
+    yearAcquired: parseInt(cms.yearAcquired, 10),
     localWebsite: cms.localWebsite
       ? cms.localWebsite.match(/^https?:\/\//)
         ? cms.localWebsite
