@@ -43,14 +43,14 @@ export function WorkshopCard({ workshop, index = 0 }: WorkshopCardProps) {
 
         <div className="relative flex flex-col p-8">
           {/* Workshop Name */}
-          <h3 className="mb-3 text-2xl font-bold text-[#1C1C1E] transition-colors group-hover:text-[#C8102E]">
+          <h3 className="mb-3 line-clamp-2 break-words text-xl font-bold text-[#1C1C1E] transition-colors group-hover:text-[#C8102E] sm:text-2xl">
             {workshop.name}
           </h3>
 
           {/* Location */}
-          <div className="mb-6 flex items-center gap-2 text-gray-600">
-            <MapPin className="h-4 w-4 text-[#C8102E]" />
-            <span className="text-base">
+          <div className="mb-6 flex min-w-0 items-center gap-2 text-gray-600">
+            <MapPin className="h-4 w-4 shrink-0 text-[#C8102E]" />
+            <span className="truncate text-base">
               {workshop.city}, {workshop.region}
             </span>
           </div>
