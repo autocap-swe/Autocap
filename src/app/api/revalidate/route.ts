@@ -1,14 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { revalidateTag } from 'next/cache';
 
-const CONTENT_TYPE_TAGS: Record<string, (slug?: string) => string[]> = {
-  'news-article': slug => [
+const CONTENT_TYPE_TAGS: Record<string, (slug?: string, documentId?: string) => string[]> = {
+  'news-article': (slug, documentId) => [
     'news-articles',
     ...(slug ? [`news-article:${slug}`, `news-article:${slug}:en`, `news-article:${slug}:sv`] : []),
+    ...(documentId ? [`news-article:doc:${documentId}`] : []),
   ],
-  workshop: slug => [
+  workshop: (slug, documentId) => [
     'workshops',
     ...(slug ? [`workshop:${slug}`, `workshop:${slug}:en`, `workshop:${slug}:sv`] : []),
+    ...(documentId ? [`workshop:doc:${documentId}`] : []),
   ],
   'team-member': () => ['team-members'],
   testimonial: () => ['testimonials'],
@@ -36,7 +38,13 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   }
 
-  let body: { contentType?: string; slug?: string; model?: string; entry?: { slug?: string } };
+  let body: {
+    contentType?: string;
+    slug?: string;
+    model?: string;
+    entry?: { slug?: string; documentId?: string };
+    documentId?: string;
+  };
   try {
     body = (await request.json()) as typeof body;
   } catch {
@@ -45,6 +53,7 @@ export async function POST(request: NextRequest) {
 
   const contentType = body.contentType ?? body.model;
   const slug = body.slug ?? body.entry?.slug;
+  const documentId = body.documentId ?? body.entry?.documentId;
 
   if (!contentType || !(contentType in CONTENT_TYPE_TAGS)) {
     return NextResponse.json(
@@ -53,7 +62,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const tags = CONTENT_TYPE_TAGS[contentType](slug);
+  const tags = CONTENT_TYPE_TAGS[contentType](slug, documentId);
 
   for (const tag of tags) {
     revalidateTag(tag);
