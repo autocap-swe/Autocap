@@ -52,10 +52,16 @@ export type CmsArticleBlock =
   | CmsListBlock
   | CmsCalloutBlock;
 
+interface CmsLocalization {
+  slug: string;
+  locale: string;
+}
+
 // Strapi shape — what GET /api/articles returns per item
 export interface CmsArticle {
   id: number;
   documentId: string;
+  locale?: string;
   title: string;
   slug: string;
   excerpt: string;
@@ -66,6 +72,7 @@ export interface CmsArticle {
   readTimeMinutes: number;
   fullContent?: CmsArticleBlock[];
   relatedArticles?: CmsArticle[];
+  localizations?: CmsLocalization[];
   seo?: CmsSeo | null;
 }
 
@@ -129,5 +136,7 @@ export interface NewsArticle {
   readTimeMinutes: number;
   fullContent?: ArticleContentBlock[];
   relatedArticles?: NewsArticle[];
+  /** Maps locale code → slug for all published translations of this article */
+  localizedSlugs?: Record<string, string>;
   seo?: CmsSeo | null;
 }

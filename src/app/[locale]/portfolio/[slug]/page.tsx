@@ -4,14 +4,17 @@ import { ArrowLeft, ExternalLink, Calendar } from 'lucide-react';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { getWorkshopsContent, getWorkshopBySlugContent } from '@/lib/cms/workshop';
 import { WorkshopHero } from '@/components/portfolio/WorkshopHero';
+import { ArticleLocalizedPathSetter } from '@/components/news/ArticleLocalizedPathSetter';
 
 interface WorkshopDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
 }
 
-export async function generateStaticParams() {
-  const workshops = await getWorkshopsContent().catch(() => []);
-  return workshops.map(workshop => ({ slug: workshop.slug }));
+export async function generateStaticParams({ params }: { params: { locale?: string } }) {
+  const workshops = await getWorkshopsContent(undefined, params.locale).catch(() => []);
+  return workshops
+    .filter(w => typeof w.slug === 'string' && w.slug.length > 0)
+    .map(w => ({ slug: w.slug as string }));
 }
 
 export async function generateMetadata({ params }: WorkshopDetailPageProps) {
@@ -42,6 +45,13 @@ export default async function WorkshopDetailPage({ params }: WorkshopDetailPageP
 
   return (
     <article className="bg-white">
+      {workshop.localizedSlugs && (
+        <ArticleLocalizedPathSetter
+          localizedSlugs={workshop.localizedSlugs}
+          basePath="/portfolio"
+        />
+      )}
+
       <WorkshopHero
         name={workshop.name}
         city={workshop.city}

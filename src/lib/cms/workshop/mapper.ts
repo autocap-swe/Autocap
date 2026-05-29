@@ -9,6 +9,12 @@ function resolveUrl(url: string | undefined): string | undefined {
 }
 
 export function workshopMapper(cms: CmsWorkshop): Workshop {
+  const localizedSlugs: Record<string, string> = {};
+  if (cms.locale && cms.slug) localizedSlugs[cms.locale] = cms.slug;
+  for (const l of cms.localizations ?? []) {
+    if (l.locale && l.slug) localizedSlugs[l.locale] = l.slug;
+  }
+
   return {
     id: cms.id,
     name: cms.name,
@@ -27,6 +33,7 @@ export function workshopMapper(cms: CmsWorkshop): Workshop {
     description: cms.description,
     partnershipNote: cms.partnershipNote ?? null,
     imageUrl: resolveUrl(cms.image?.url),
+    localizedSlugs: Object.keys(localizedSlugs).length > 0 ? localizedSlugs : undefined,
   };
 }
 

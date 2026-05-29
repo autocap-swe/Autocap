@@ -50,6 +50,8 @@ export async function getArticleBySlugContent(
     'populate[fullContent][on][article.callout][populate]': '*',
     'populate[heroImage]': 'true',
     'populate[relatedArticles][populate][heroImage]': 'true',
+    'populate[localizations][fields][0]': 'slug',
+    'populate[localizations][fields][1]': 'locale',
     'populate[seo]': 'true',
     'pagination[pageSize]': '1',
   };

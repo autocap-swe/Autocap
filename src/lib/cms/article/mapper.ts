@@ -47,6 +47,12 @@ function mapBlock(block: CmsArticleBlock): ArticleContentBlock | null {
 }
 
 export function articleMapper(cms: CmsArticle): NewsArticle {
+  const localizedSlugs: Record<string, string> = {};
+  if (cms.locale && cms.slug) localizedSlugs[cms.locale] = cms.slug;
+  for (const l of cms.localizations ?? []) {
+    if (l.locale && l.slug) localizedSlugs[l.locale] = l.slug;
+  }
+
   return {
     id: cms.id,
     title: cms.title,
@@ -61,6 +67,7 @@ export function articleMapper(cms: CmsArticle): NewsArticle {
       ? cms.fullContent.map(mapBlock).filter((b): b is ArticleContentBlock => b !== null)
       : undefined,
     relatedArticles: cms.relatedArticles?.slice(0, 3).map(articleMapper),
+    localizedSlugs: Object.keys(localizedSlugs).length > 0 ? localizedSlugs : undefined,
     seo: cms.seo,
   };
 }

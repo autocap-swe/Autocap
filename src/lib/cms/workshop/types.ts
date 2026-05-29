@@ -1,7 +1,13 @@
+interface CmsWorkshopLocalization {
+  slug: string;
+  locale: string;
+}
+
 // Strapi shape — what GET /api/workshops returns per item
 export interface CmsWorkshop {
   id: number;
   documentId: string;
+  locale?: string;
   name: string;
   slug: string;
   city: string;
@@ -14,6 +20,7 @@ export interface CmsWorkshop {
   description: string;
   partnershipNote?: string | null;
   image: { url: string } | null;
+  localizations?: CmsWorkshopLocalization[];
 }
 
 // Page shape — what the frontend renders
@@ -31,4 +38,6 @@ export interface Workshop {
   description: string;
   partnershipNote?: string | null;
   imageUrl?: string;
+  /** Maps locale code → slug for all published translations of this workshop */
+  localizedSlugs?: Record<string, string>;
 }
