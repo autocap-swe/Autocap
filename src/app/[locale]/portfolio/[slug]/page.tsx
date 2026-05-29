@@ -129,7 +129,7 @@ export default async function WorkshopDetailPage({ params }: WorkshopDetailPageP
           <div className="inline-flex items-center gap-2 rounded-full bg-[#F5F0EB] px-6 py-3">
             <Calendar className="h-5 w-5 text-[#C8102E]" />
             <span className="text-base font-semibold text-[#1C1C1E]">
-              {t('detail.partOfGroupSince', { year: workshop.yearAcquired })}
+              {t('detail.partOfGroupSince', { year: String(workshop.yearAcquired) })}
             </span>
           </div>
 

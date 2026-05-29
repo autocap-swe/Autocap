@@ -15,7 +15,7 @@ export interface CmsWorkshop {
   latitude: number;
   longitude: number;
   acquisitionStatus: 'acquired' | 'pending' | 'target';
-  yearAcquired: number;
+  yearAcquired: string;
   localWebsite: string;
   description: string;
   partnershipNote?: string | null;
