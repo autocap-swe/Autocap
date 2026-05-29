@@ -44,6 +44,8 @@ export async function getWorkshopBySlugContent(
       'filters[slug][$eq]': slug,
       'pagination[pageSize]': '1',
       populate: 'image',
+      'populate[localizations][fields][0]': 'slug',
+      'populate[localizations][fields][1]': 'locale',
     },
     mapper: workshopsMapper,
     locale,

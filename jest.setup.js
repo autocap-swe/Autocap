@@ -1,6 +1,9 @@
 // Learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
 
+// Expose Next.js public env vars for tests (mirrors .env.local)
+process.env.NEXT_PUBLIC_ENABLE_SV = 'true';
+
 // Mock IntersectionObserver for Framer Motion animations
 global.IntersectionObserver = class IntersectionObserver {
   constructor() {}

@@ -7,6 +7,7 @@ import { Footer } from '@/components/layout/Footer';
 import { BackToTop } from '@/components/layout/BackToTop';
 import { CookieConsent } from '@/components/cookie/CookieConsent';
 import { CookieConsentProvider } from '@/components/cookie/CookieConsentProvider';
+import { LocalizedPathProvider } from '@/contexts/localizedPathContext';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -66,13 +67,15 @@ export default async function LocaleLayout({
       </head>
       <body className="antialiased">
         <NextIntlClientProvider messages={messages}>
-          <CookieConsentProvider>
-            <Header />
-            <main>{children}</main>
-            <Footer />
-            <BackToTop />
-            <CookieConsent />
-          </CookieConsentProvider>
+          <LocalizedPathProvider>
+            <CookieConsentProvider>
+              <Header />
+              <main>{children}</main>
+              <Footer />
+              <BackToTop />
+              <CookieConsent />
+            </CookieConsentProvider>
+          </LocalizedPathProvider>
         </NextIntlClientProvider>
       </body>
     </html>

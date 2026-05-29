@@ -7,16 +7,18 @@ import { ArticleHeader } from '@/components/news/ArticleHeader';
 import { ArticleBody } from '@/components/news/ArticleBody';
 import { RelatedArticles } from '@/components/news/RelatedArticles';
 import { ArticleActions } from '@/components/news/ArticleActions';
+import { ArticleLocalizedPathSetter } from '@/components/news/ArticleLocalizedPathSetter';
 import { buildMetadata } from '@/lib/cms/seo';
-import { cmsMediaUrl } from '@/lib/cms/media';
 
 interface ArticleDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
 }
 
-export async function generateStaticParams() {
-  const articles = await getArticlesContent().catch(() => []);
-  return articles.map(article => ({ slug: article.slug }));
+export async function generateStaticParams({ params }: { params: { locale?: string } }) {
+  const articles = await getArticlesContent(undefined, params.locale).catch(() => []);
+  return articles
+    .filter(a => typeof a.slug === 'string' && a.slug.length > 0)
+    .map(a => ({ slug: a.slug as string }));
 }
 
 export async function generateMetadata({ params }: ArticleDetailPageProps): Promise<Metadata> {
@@ -78,6 +80,10 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
 
   return (
     <article className="bg-white">
+      {article.localizedSlugs && (
+        <ArticleLocalizedPathSetter localizedSlugs={article.localizedSlugs} basePath="/news" />
+      )}
+
       {/* JSON-LD */}
       <script
         type="application/ld+json"

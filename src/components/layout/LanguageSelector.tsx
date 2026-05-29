@@ -1,7 +1,8 @@
 'use client';
 
 import { useLocale } from 'next-intl';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter, usePathname } from '@/i18n/navigation';
+import { useLocalizedPaths } from '@/contexts/localizedPathContext';
 import { useState, useRef, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 
@@ -40,6 +41,7 @@ export function LanguageSelector({ className = '' }: LanguageSelectorProps) {
   const currentLocale = useLocale() as Language;
   const router = useRouter();
   const pathname = usePathname();
+  const { paths: localizedPaths } = useLocalizedPaths();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -59,14 +61,10 @@ export function LanguageSelector({ className = '' }: LanguageSelectorProps) {
   const handleLanguageSelect = (lang: Language) => {
     setIsOpen(false);
     if (lang === currentLocale) return;
-
-    if (lang === 'sv') {
-      router.push(`/sv${pathname}`);
-    } else {
-      // strip /sv prefix to go back to English (root)
-      const withoutSv = pathname.startsWith('/sv') ? pathname.slice(3) || '/' : pathname;
-      router.push(withoutSv);
-    }
+    // Use the localized path for this page if Strapi provided one; otherwise
+    // keep the same pathname (next-intl adds/removes the locale prefix).
+    const targetPath = localizedPaths[lang] ?? pathname;
+    router.push(targetPath, { locale: lang });
   };
 
   return (
