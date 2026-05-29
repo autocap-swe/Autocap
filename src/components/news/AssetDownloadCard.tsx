@@ -1,5 +1,8 @@
+'use client';
+
 import { Download } from 'lucide-react';
 import type { AssetCategory } from '@/types/media-kit';
+import { trackAssetDownload } from '@/lib/analytics';
 
 interface AssetDownloadCardProps {
   category: AssetCategory;
@@ -48,8 +51,13 @@ export function AssetDownloadCard({ category }: AssetDownloadCardProps) {
             </div>
 
             <a
-              href={asset.fileUrl ? `/api/download?url=${encodeURIComponent(asset.fileUrl)}` : '#'}
+              href={
+                asset.fileUrl
+                  ? `/api/download?url=${encodeURIComponent(asset.fileUrl)}&name=${encodeURIComponent(asset.name)}`
+                  : '#'
+              }
               download={!!asset.fileUrl}
+              onClick={() => asset.fileUrl && trackAssetDownload(asset.name, asset.format)}
               className="flex items-center gap-1 rounded-md bg-[#C8102E] px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-[#A00D25]"
               aria-label={`Download ${asset.name}`}
             >

@@ -1,9 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { logRequest } from '@/lib/logger';
 
 export async function GET(request: NextRequest) {
   const url = request.nextUrl.searchParams.get('url');
+  const assetName = request.nextUrl.searchParams.get('name') ?? 'unknown';
 
   if (!url) {
+    logRequest(request, 400);
     return NextResponse.json({ error: 'missing url' }, { status: 400 });
   }
 
@@ -11,10 +14,12 @@ export async function GET(request: NextRequest) {
   try {
     parsed = new URL(url);
   } catch {
+    logRequest(request, 400);
     return NextResponse.json({ error: 'invalid url' }, { status: 400 });
   }
 
   if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
+    logRequest(request, 403);
     return NextResponse.json({ error: 'forbidden' }, { status: 403 });
   }
 
@@ -23,17 +28,51 @@ export async function GET(request: NextRequest) {
     res = await fetch(parsed.toString());
   } catch (err) {
     console.error('[download proxy] fetch failed:', parsed.toString(), err);
+    logRequest(request, 502, { asset: assetName });
     return NextResponse.json({ error: 'fetch failed' }, { status: 502 });
   }
 
   if (!res.ok) {
-    console.error('[download proxy] upstream error:', res.status, parsed.toString());
+    logRequest(request, 502, { asset: assetName });
     return NextResponse.json({ error: 'upstream error' }, { status: 502 });
   }
 
   const filename = parsed.pathname.split('/').pop() ?? 'download';
   const contentType = res.headers.get('content-type') ?? 'application/octet-stream';
   const body = await res.arrayBuffer();
+
+  logRequest(request, 200, {
+    event: 'asset_download',
+    asset: assetName,
+    filename,
+    bytes: body.byteLength,
+  });
+
+  // Fire-and-forget: persist to Strapi for admin reporting
+  const cmsUrl = process.env.CMS_API_URL ?? 'http://localhost:1337';
+  const ip =
+    request.headers.get('cf-connecting-ip') ??
+    request.headers.get('x-forwarded-for')?.split(',')[0].trim() ??
+    'unknown';
+  fetch(`${cmsUrl}/api/download-events`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${process.env.STRAPI_API_TOKEN ?? ''}`,
+    },
+    body: JSON.stringify({
+      data: {
+        assetName,
+        assetUrl: url,
+        filename,
+        bytes: body.byteLength,
+        ip: ip.replace(/\.\d+$/, '.0'),
+        userAgent: request.headers.get('user-agent') ?? '',
+      },
+    }),
+  }).catch(() => {
+    // Non-critical — don't fail the download if Strapi is unavailable
+  });
 
   return new NextResponse(body, {
     headers: {

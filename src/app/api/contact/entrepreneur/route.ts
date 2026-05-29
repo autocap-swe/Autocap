@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { rateLimit, getClientIp } from '@/lib/rate-limit';
 import { verifyTurnstileToken } from '@/lib/captcha/turnstile';
 import { handleEntrepreneurForm } from './handler';
+import { logRequest } from '@/lib/logger';
 
 const LIMIT = 5;
 
@@ -46,6 +47,7 @@ export async function POST(request: NextRequest) {
   }
 
   const { status, body: responseBody } = await handleEntrepreneurForm(body);
+  logRequest(request, status, { event: 'contact_form', form: 'entrepreneur' });
   return NextResponse.json(responseBody, { status, headers: rlHeaders });
 }
 
