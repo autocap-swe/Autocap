@@ -17,6 +17,7 @@ type NavLink = {
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState<string | null>(null);
+  const [desktopDropdownOpen, setDesktopDropdownOpen] = useState<string | null>(null);
   const pathname = usePathname();
   const t = useTranslations('nav');
 
@@ -65,7 +66,7 @@ export function Header() {
       <nav className="mx-auto max-w-7xl px-6 lg:px-8" aria-label="Global">
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}
-          <div className="flex lg:flex-1">
+          <div className="flex xl:flex-1">
             <Link href="/" className="-m-1.5 p-1.5">
               <span className="sr-only">AutoCap Group</span>
               <Image
@@ -78,8 +79,8 @@ export function Header() {
             </Link>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="flex lg:hidden">
+          {/* Mobile/tablet menu button */}
+          <div className="flex xl:hidden">
             <button
               type="button"
               className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
@@ -95,47 +96,68 @@ export function Header() {
           </div>
 
           {/* Desktop navigation */}
-          <div className="hidden lg:flex lg:items-center lg:gap-x-8">
+          <div className="hidden xl:flex xl:items-center xl:gap-x-8">
             {translatedLinks.map(link => {
               const isActive = isLinkActive(link);
 
               if ('submenu' in link && link.submenu) {
-                // Dropdown menu
+                const isOpen = desktopDropdownOpen === link.href;
                 return (
-                  <div key={link.href} className="group relative">
-                    <Link
-                      href={link.href}
+                  <div
+                    key={link.href}
+                    className="relative"
+                    onMouseEnter={() => setDesktopDropdownOpen(link.href)}
+                    onMouseLeave={() => setDesktopDropdownOpen(null)}
+                  >
+                    <div
                       className={`flex items-center gap-1 text-sm font-medium transition-all ${
-                        isActive
-                          ? 'text-[#C8102E] border-b-2 border-[#C8102E]'
-                          : 'text-gray-700 hover:text-[#C8102E]'
+                        isActive ? 'text-[#C8102E]' : 'text-gray-700'
                       }`}
                     >
-                      {link.label}
-                      <ChevronDown className="h-4 w-4" />
-                    </Link>
-                    {/* Dropdown content */}
-                    <div className="absolute left-0 top-full hidden pt-2 group-hover:block">
-                      <div className="w-56 rounded-lg bg-white py-2 shadow-lg ring-1 ring-gray-200">
-                        {link.submenu.map(sublink => {
-                          // Use exact match for submenu items to avoid /about matching /about/team
-                          const isSubmenuActive = pathname === sublink.href;
-                          return (
-                            <Link
-                              key={sublink.href}
-                              href={sublink.href}
-                              className={`block px-4 py-2 text-sm transition-colors ${
-                                isSubmenuActive
-                                  ? 'text-[#C8102E] font-semibold bg-gray-50'
-                                  : 'text-gray-700 hover:bg-gray-100'
-                              }`}
-                            >
-                              {sublink.label}
-                            </Link>
-                          );
-                        })}
-                      </div>
+                      <Link
+                        href={link.href}
+                        className={
+                          isActive ? 'border-b-2 border-[#C8102E]' : 'hover:text-[#C8102E]'
+                        }
+                        onClick={() => setDesktopDropdownOpen(null)}
+                      >
+                        {link.label}
+                      </Link>
+                      <button
+                        type="button"
+                        aria-expanded={isOpen}
+                        aria-label={`${link.label} submenu`}
+                        className="flex items-center hover:text-[#C8102E]"
+                        onClick={() => setDesktopDropdownOpen(isOpen ? null : link.href)}
+                      >
+                        <ChevronDown
+                          className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+                        />
+                      </button>
                     </div>
+                    {isOpen && (
+                      <div className="absolute left-0 top-full z-50 pt-2">
+                        <div className="w-56 rounded-lg bg-white py-2 shadow-lg ring-1 ring-gray-200">
+                          {link.submenu.map(sublink => {
+                            const isSubmenuActive = pathname === sublink.href;
+                            return (
+                              <Link
+                                key={sublink.href}
+                                href={sublink.href}
+                                className={`block px-4 py-2 text-sm transition-colors ${
+                                  isSubmenuActive
+                                    ? 'text-[#C8102E] font-semibold bg-gray-50'
+                                    : 'text-gray-700 hover:bg-gray-100'
+                                }`}
+                                onClick={() => setDesktopDropdownOpen(null)}
+                              >
+                                {sublink.label}
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 );
               }
@@ -156,14 +178,13 @@ export function Header() {
               );
             })}
 
-            {/* Language Selector */}
             {process.env.NEXT_PUBLIC_ENABLE_SV === 'true' && <LanguageSelector className="ml-4" />}
           </div>
         </div>
 
-        {/* Mobile menu */}
+        {/* Mobile/tablet menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden">
+          <div className="xl:hidden">
             <div className="max-h-[calc(100dvh-5rem)] overflow-y-auto space-y-2 pb-6 pt-6">
               {translatedLinks.map(link => {
                 const isActive = isLinkActive(link);
