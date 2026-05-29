@@ -28,7 +28,7 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
           <div className="mb-6">
             <NewsCategoryBadge category={article.category} />
           </div>
-          <h1 className="mb-8 text-5xl font-black text-[#1C1C1E] md:text-6xl lg:text-7xl">
+          <h1 className="mb-8 text-3xl font-black text-[#1C1C1E] sm:text-4xl md:text-5xl lg:text-6xl">
             {article.title}
           </h1>
           <div className="flex flex-col gap-1 text-base text-gray-600">

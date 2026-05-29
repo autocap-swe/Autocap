@@ -12,7 +12,7 @@ interface ArticleBodyProps {
 
 export function ArticleBody({ content }: ArticleBodyProps) {
   return (
-    <article className="mx-auto max-w-3xl py-12">
+    <article className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
       {content.map((block, index) => {
         switch (block.type) {
           case 'paragraph':
