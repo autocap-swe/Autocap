@@ -1,10 +1,45 @@
 import { notFound } from 'next/navigation';
+import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, ExternalLink, Calendar } from 'lucide-react';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { getWorkshopsContent, getWorkshopBySlugContent } from '@/lib/cms/workshop';
 import { WorkshopHero } from '@/components/portfolio/WorkshopHero';
 import { ArticleLocalizedPathSetter } from '@/components/news/ArticleLocalizedPathSetter';
+
+const URL_PATTERN = /https?:\/\/[^\s]+/g;
+
+function renderWithLinks(text: string): ReactNode[] {
+  const parts: ReactNode[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  URL_PATTERN.lastIndex = 0;
+  while ((match = URL_PATTERN.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index));
+    }
+    const url = match[0];
+    parts.push(
+      <a
+        key={match.index}
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-[#C8102E] hover:underline"
+      >
+        {url}
+      </a>
+    );
+    lastIndex = match.index + url.length;
+  }
+
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+
+  return parts;
+}
 
 interface WorkshopDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -112,12 +147,16 @@ export default async function WorkshopDetailPage({ params }: WorkshopDetailPageP
         </div>
 
         <div className="prose prose-lg mb-12 max-w-none">
-          <p className="text-xl leading-relaxed text-gray-700">{workshop.description}</p>
+          <p className="text-xl leading-relaxed text-gray-700">
+            {renderWithLinks(workshop.description)}
+          </p>
         </div>
 
         {workshop.partnershipNote && (
           <div className="mb-12 rounded-2xl bg-gradient-to-br from-[#F5F0EB] to-[#EDE8E3] p-10">
-            <p className="text-lg leading-relaxed text-gray-700">{workshop.partnershipNote}</p>
+            <p className="text-lg leading-relaxed text-gray-700">
+              {renderWithLinks(workshop.partnershipNote!)}
+            </p>
           </div>
         )}
 

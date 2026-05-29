@@ -16,7 +16,14 @@ export function CompanyInfo({ email, address, businessHours }: CompanyContactInf
         {address && (
           <div>
             <p className="text-sm font-medium text-gray-500">Location</p>
-            <p className="text-lg text-gray-700">{address}</p>
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-lg text-[#C8102E] hover:underline"
+            >
+              {address}
+            </a>
           </div>
         )}
 
