@@ -58,7 +58,9 @@ export async function GET(request: NextRequest) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${process.env.STRAPI_API_TOKEN ?? ''}`,
+      ...(process.env.STRAPI_API_TOKEN && {
+        Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
+      }),
     },
     body: JSON.stringify({
       data: {
@@ -70,9 +72,16 @@ export async function GET(request: NextRequest) {
         userAgent: request.headers.get('user-agent') ?? '',
       },
     }),
-  }).catch(() => {
-    // Non-critical — don't fail the download if Strapi is unavailable
-  });
+  })
+    .then(async r => {
+      if (!r.ok) {
+        const text = await r.text().catch(() => '');
+        console.error('[download-event] Strapi POST failed:', r.status, text);
+      }
+    })
+    .catch(err => {
+      console.error('[download-event] Strapi POST error:', err);
+    });
 
   return new NextResponse(body, {
     headers: {
