@@ -24,11 +24,9 @@ export const metadata: Metadata = {
   title: 'AutoCap Group · The Nordic Tire Services Platform',
   description:
     'AutoCap Group acquires and operates independent tire service centres across Sweden. Preserving local brands. Empowering entrepreneurs. Building scale.',
-  ...(process.env.GOOGLE_SITE_VERIFICATION && {
-    verification: {
-      google: process.env.GOOGLE_SITE_VERIFICATION,
-    },
-  }),
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION,
+  },
 };
 
 export default async function LocaleLayout({
