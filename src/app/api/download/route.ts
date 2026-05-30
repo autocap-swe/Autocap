@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse, after } from 'next/server';
 import { logRequest } from '@/lib/logger';
 
 export async function GET(request: NextRequest) {
@@ -48,40 +48,41 @@ export async function GET(request: NextRequest) {
     bytes: body.byteLength,
   });
 
-  // Fire-and-forget: persist to Strapi for admin reporting
   const cmsUrl = process.env.CMS_API_URL ?? 'http://localhost:1337';
   const ip =
     request.headers.get('cf-connecting-ip') ??
     request.headers.get('x-forwarded-for')?.split(',')[0].trim() ??
     'unknown';
-  fetch(`${cmsUrl}/api/download-events`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      ...(process.env.STRAPI_API_TOKEN && {
-        Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
-      }),
-    },
-    body: JSON.stringify({
-      data: {
-        assetName,
-        assetUrl: url,
-        filename,
-        bytes: body.byteLength,
-        ip: ip.replace(/\.\d+$/, '.0'),
-        userAgent: request.headers.get('user-agent') ?? '',
-      },
-    }),
-  })
-    .then(async r => {
+
+  after(async () => {
+    try {
+      const r = await fetch(`${cmsUrl}/api/download-events`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(process.env.STRAPI_API_TOKEN && {
+            Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
+          }),
+        },
+        body: JSON.stringify({
+          data: {
+            assetName,
+            assetUrl: url,
+            filename,
+            bytes: body.byteLength,
+            ip: ip.replace(/\.\d+$/, '.0'),
+            userAgent: request.headers.get('user-agent') ?? '',
+          },
+        }),
+      });
       if (!r.ok) {
         const text = await r.text().catch(() => '');
         console.error('[download-event] Strapi POST failed:', r.status, text);
       }
-    })
-    .catch(err => {
+    } catch (err) {
       console.error('[download-event] Strapi POST error:', err);
-    });
+    }
+  });
 
   return new NextResponse(body, {
     headers: {
