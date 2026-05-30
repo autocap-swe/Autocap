@@ -110,7 +110,7 @@ export function Header() {
                     onMouseLeave={() => setDesktopDropdownOpen(null)}
                   >
                     <div
-                      className={`flex items-center gap-1 text-sm font-medium transition-all ${
+                      className={`flex items-center gap-1 text-sm font-semibold transition-all ${
                         isActive ? 'text-[#C8102E]' : 'text-gray-700'
                       }`}
                     >
@@ -167,7 +167,7 @@ export function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`text-sm font-medium transition-all ${
+                  className={`text-sm font-semibold transition-all ${
                     isActive
                       ? 'text-[#C8102E] border-b-2 border-[#C8102E]'
                       : 'text-gray-700 hover:text-[#C8102E]'
