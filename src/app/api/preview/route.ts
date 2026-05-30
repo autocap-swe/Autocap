@@ -12,7 +12,12 @@ async function getSlugByDocumentId(
   try {
     const res = await fetch(
       `${CMS_API_URL}/api/${type}s/${documentId}?fields=slug&locale=${locale}`,
-      { cache: 'no-store' }
+      {
+        cache: 'no-store',
+        headers: process.env.STRAPI_API_TOKEN
+          ? { Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}` }
+          : {},
+      }
     );
     if (!res.ok) return null;
     const json = await res.json();
@@ -26,6 +31,7 @@ export async function GET(request: NextRequest) {
   const secret = request.nextUrl.searchParams.get('secret');
   const type = request.nextUrl.searchParams.get('type');
   const documentId = request.nextUrl.searchParams.get('documentId');
+  const redirectTo = request.nextUrl.searchParams.get('redirectTo');
   const locale = request.nextUrl.searchParams.get('locale') ?? 'en';
 
   if (!process.env.STRAPI_PREVIEW_SECRET || secret !== process.env.STRAPI_PREVIEW_SECRET) {
@@ -35,6 +41,12 @@ export async function GET(request: NextRequest) {
   const draft = await draftMode();
   draft.enable();
 
+  // Single types — redirectTo is the full path
+  if (redirectTo) {
+    redirect(redirectTo);
+  }
+
+  // Collection types — look up slug by documentId
   if (type === 'news-article' && documentId) {
     const slug = await getSlugByDocumentId('news-article', documentId, locale);
     redirect(`/${locale}/news/${slug ?? documentId}`);
