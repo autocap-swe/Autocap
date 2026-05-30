@@ -3,6 +3,7 @@
 import { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import type { Workshop } from '@/lib/cms/workshop/types';
+import { trackMapMarkerClick } from '@/lib/analytics';
 
 interface WorkshopMapProps {
   workshops: Workshop[];
@@ -70,6 +71,10 @@ export function WorkshopMap({ workshops }: WorkshopMapProps) {
           el.style.cursor = 'pointer';
           el.style.boxShadow = '0 2px 8px rgba(0,0,0,0.2)';
           el.style.transition = 'box-shadow 0.2s, border-width 0.2s';
+
+          el.addEventListener('click', () => {
+            trackMapMarkerClick(workshop.name, workshop.slug ?? '');
+          });
 
           el.addEventListener('mouseenter', () => {
             el.style.boxShadow = '0 4px 12px rgba(200,16,46,0.4)';

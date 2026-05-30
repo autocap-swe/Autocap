@@ -5,6 +5,7 @@ import { useRouter, usePathname } from '@/i18n/navigation';
 import { useLocalizedPaths } from '@/contexts/localizedPathContext';
 import { useState, useRef, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
+import { trackLanguageSwitch } from '@/lib/analytics';
 
 interface LanguageSelectorProps {
   className?: string;
@@ -61,8 +62,7 @@ export function LanguageSelector({ className = '' }: LanguageSelectorProps) {
   const handleLanguageSelect = (lang: Language) => {
     setIsOpen(false);
     if (lang === currentLocale) return;
-    // Use the localized path for this page if Strapi provided one; otherwise
-    // keep the same pathname (next-intl adds/removes the locale prefix).
+    trackLanguageSwitch(currentLocale, lang);
     const targetPath = localizedPaths[lang] ?? pathname;
     router.push(targetPath, { locale: lang });
   };

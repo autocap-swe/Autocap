@@ -9,6 +9,7 @@ import {
 } from '@/lib/validation/generalContactForm';
 import type { ContactFormLabels } from '@/lib/cms/contact/types';
 import { TurnstileWidget, type TurnstileInstance } from './TurnstileWidget';
+import { trackFormSubmit } from '@/lib/analytics';
 
 interface GeneralContactFormProps {
   successMessage: string;
@@ -58,6 +59,7 @@ export function GeneralContactForm({ successMessage, formLabels }: GeneralContac
       }
 
       setIsSubmitted(true);
+      trackFormSubmit('general');
       reset();
     } catch (err) {
       console.error('[Contact] Submission failed:', err);

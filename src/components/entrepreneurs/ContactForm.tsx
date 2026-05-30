@@ -7,6 +7,7 @@ import { Send, CheckCircle2 } from 'lucide-react';
 import { EntrepreneurSchema, type EntrepreneurFormData } from '@/lib/contact/schema';
 import { TurnstileWidget } from '@/components/contact/TurnstileWidget';
 import type { EntrepreneursFormLabels } from '@/lib/cms/entrepreneurs-page/types';
+import { trackFormSubmit } from '@/lib/analytics';
 
 interface ContactFormProps {
   successMessage: string;
@@ -53,6 +54,7 @@ export function ContactForm({ successMessage, formLabels }: ContactFormProps) {
 
       if (response.ok) {
         setSubmitSuccess(true);
+        trackFormSubmit('entrepreneur');
         reset();
         setTurnstileToken(null);
       } else {

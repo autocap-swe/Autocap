@@ -10,6 +10,7 @@ import {
 } from '@/lib/validation/investorForm';
 import { TurnstileWidget, type TurnstileInstance } from '@/components/contact/TurnstileWidget';
 import type { InvestorsFormLabels } from '@/lib/cms/investors-page/types';
+import { trackFormSubmit } from '@/lib/analytics';
 
 interface InvestorContactFormProps {
   successMessage: string;
@@ -64,6 +65,7 @@ export function InvestorContactForm({ successMessage, formLabels }: InvestorCont
 
     if (res.ok) {
       setIsSuccess(true);
+      trackFormSubmit('investor');
       reset();
     } else {
       turnstileRef.current?.reset();
