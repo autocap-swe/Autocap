@@ -9,6 +9,8 @@
  * See `Autocap/docs/specs/cms-integration.md` (v2).
  */
 
+import { draftMode } from 'next/headers';
+
 const CMS_API_URL = process.env.CMS_API_URL || 'http://localhost:1337';
 
 interface StrapiResponse<T> {
@@ -65,6 +67,8 @@ export async function getContent<TCms, TFinal = TCms>(
   const { revalidate = 60, params, mapper, tags } = options;
   const locale = ['en', 'sv'].includes(options.locale ?? '') ? options.locale : undefined;
 
+  const { isEnabled: isDraft } = await draftMode();
+
   const url = new URL(`/api/${slug}`, CMS_API_URL);
   if (params) {
     for (const [key, value] of Object.entries(params)) {
@@ -78,16 +82,23 @@ export async function getContent<TCms, TFinal = TCms>(
     }
   }
   if (locale !== undefined) url.searchParams.set('locale', locale);
+  if (isDraft) url.searchParams.set('status', 'draft');
+
+  const authHeader: Record<string, string> =
+    isDraft && process.env.STRAPI_API_TOKEN
+      ? { Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}` }
+      : {};
 
   let res: Response;
   try {
-    const nextOptions =
-      revalidate === false
+    const nextOptions = isDraft
+      ? { revalidate: 0 as const }
+      : revalidate === false
         ? { revalidate: false as const, ...(tags ? { tags } : {}) }
         : { revalidate, ...(tags ? { tags } : {}) };
     res = await fetch(url.toString(), {
       next: nextOptions,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', ...authHeader },
     });
   } catch (err) {
     throw unavailable(slug, (err as Error).message);
