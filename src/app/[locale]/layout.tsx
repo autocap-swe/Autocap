@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
-import { draftMode } from 'next/headers';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { BackToTop } from '@/components/layout/BackToTop';
@@ -40,7 +39,6 @@ export default async function LocaleLayout({
   const { locale } = await params;
   setRequestLocale(locale);
   const messages = await getMessages();
-  const { isEnabled: isDraft } = await draftMode();
   return (
     <html lang={locale} className={inter.variable}>
       <head>
@@ -72,17 +70,6 @@ export default async function LocaleLayout({
         />
       </head>
       <body className="antialiased">
-        {isDraft && (
-          <div className="fixed bottom-4 left-1/2 z-[9999] -translate-x-1/2 flex items-center gap-3 rounded-full bg-orange-500 px-5 py-2 text-sm font-semibold text-white shadow-lg">
-            <span>Draft Preview</span>
-            <a
-              href={`/api/draft-disable?redirectTo=/${locale}`}
-              className="rounded-full bg-white px-3 py-0.5 text-xs font-bold text-orange-600 hover:bg-orange-100"
-            >
-              Exit
-            </a>
-          </div>
-        )}
         <NextIntlClientProvider messages={messages}>
           <LocalizedPathProvider>
             <CookieConsentProvider>
