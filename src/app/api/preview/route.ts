@@ -38,8 +38,14 @@ export async function GET(request: NextRequest) {
     return new Response('Invalid token', { status: 401 });
   }
 
+  const status = request.nextUrl.searchParams.get('status') ?? 'published';
   const draft = await draftMode();
-  draft.enable();
+
+  if (status === 'draft') {
+    draft.enable();
+  } else {
+    draft.disable();
+  }
 
   // Single types — redirectTo is the full path
   if (redirectTo) {
