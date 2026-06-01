@@ -7,7 +7,7 @@ export const routing = defineRouting({
   locales: svEnabled ? ['en', 'sv'] : ['en'],
   defaultLocale: 'en',
   localePrefix: 'as-needed',
-  localeDetection: false,
+  localeDetection: true,
 });
 
 export default createMiddleware(routing);
