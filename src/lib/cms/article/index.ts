@@ -52,7 +52,7 @@ export async function getArticleBySlugContent(
     'populate[relatedArticles][populate][heroImage]': 'true',
     'populate[localizations][fields][0]': 'slug',
     'populate[localizations][fields][1]': 'locale',
-    'populate[seo]': 'true',
+    'populate[seo][populate][ogImage]': 'true',
     'pagination[pageSize]': '1',
   };
 
