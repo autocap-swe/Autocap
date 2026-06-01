@@ -7,11 +7,12 @@ const CMS_API_URL = process.env.CMS_API_URL ?? 'http://localhost:1337';
 async function getSlugByDocumentId(
   type: string,
   documentId: string,
-  locale: string
+  locale: string,
+  status: string = 'published'
 ): Promise<string | null> {
   try {
     const res = await fetch(
-      `${CMS_API_URL}/api/${type}s/${documentId}?fields=slug&locale=${locale}`,
+      `${CMS_API_URL}/api/${type}s/${documentId}?fields=slug&locale=${locale}&status=${status}`,
       {
         cache: 'no-store',
         headers: process.env.STRAPI_API_TOKEN
@@ -54,12 +55,12 @@ export async function GET(request: NextRequest) {
 
   // Collection types — look up slug by documentId
   if (type === 'news-article' && documentId) {
-    const slug = await getSlugByDocumentId('news-article', documentId, locale);
+    const slug = await getSlugByDocumentId('news-article', documentId, locale, status);
     redirect(`/${locale}/news/${slug ?? documentId}`);
   }
 
   if (type === 'workshop' && documentId) {
-    const slug = await getSlugByDocumentId('workshop', documentId, locale);
+    const slug = await getSlugByDocumentId('workshop', documentId, locale, status);
     redirect(`/${locale}/portfolio/${slug ?? documentId}`);
   }
 
