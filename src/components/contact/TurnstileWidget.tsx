@@ -3,6 +3,7 @@
 import { Turnstile } from '@marsidev/react-turnstile';
 import type { TurnstileInstance } from '@marsidev/react-turnstile';
 import { forwardRef } from 'react';
+import { useLocale } from 'next-intl';
 
 interface TurnstileWidgetProps {
   onToken: (token: string) => void;
@@ -13,6 +14,7 @@ const SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? '';
 
 const TurnstileWidget = forwardRef<TurnstileInstance, TurnstileWidgetProps>(
   ({ onToken, onExpire }, ref) => {
+    const locale = useLocale();
     if (!SITE_KEY) return null;
 
     return (
@@ -21,7 +23,7 @@ const TurnstileWidget = forwardRef<TurnstileInstance, TurnstileWidgetProps>(
         siteKey={SITE_KEY}
         onSuccess={onToken}
         onExpire={onExpire}
-        options={{ theme: 'light', size: 'normal' }}
+        options={{ theme: 'light', size: 'normal', language: locale }}
       />
     );
   }
