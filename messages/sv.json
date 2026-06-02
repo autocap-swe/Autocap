@@ -160,6 +160,10 @@
     "allWorkshops": "Alla verkstäder",
     "searchPlaceholder": "Sök verkstäder...",
     "allCities": "Alla städer",
+    "noWorkshopsFound": "Inga verkstäder hittades",
+    "noResultsForSearchInCity": "Inga resultat för \"{search}\" i {city}",
+    "noResultsForSearch": "Inga resultat för \"{search}\"",
+    "noWorkshopsInCity": "Inga verkstäder i {city}",
     "detail": {
       "breadcrumbHome": "Hem",
       "breadcrumbPortfolio": "Portfölj",

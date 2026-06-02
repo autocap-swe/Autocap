@@ -80,13 +80,13 @@ export function WorkshopGrid({ workshops }: WorkshopGridProps) {
         {filteredWorkshops.length === 0 ? (
           <div className="col-span-full py-20 text-center">
             <Building2 className="mx-auto mb-4 h-16 w-16 text-gray-300" />
-            <h3 className="mb-2 text-xl font-semibold text-gray-700">No workshops found</h3>
+            <h3 className="mb-2 text-xl font-semibold text-gray-700">{t('noWorkshopsFound')}</h3>
             <p className="text-gray-500">
               {searchTerm && selectedCity !== 'All'
-                ? `No results for "${searchTerm}" in ${selectedCity}`
+                ? t('noResultsForSearchInCity', { search: searchTerm, city: selectedCity })
                 : searchTerm
-                  ? `No results for "${searchTerm}"`
-                  : `No workshops in ${selectedCity}`}
+                  ? t('noResultsForSearch', { search: searchTerm })
+                  : t('noWorkshopsInCity', { city: selectedCity })}
             </p>
           </div>
         ) : (

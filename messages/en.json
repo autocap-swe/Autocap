@@ -160,6 +160,10 @@
     "allWorkshops": "All Workshops",
     "searchPlaceholder": "Search workshops...",
     "allCities": "All Cities",
+    "noWorkshopsFound": "No workshops found",
+    "noResultsForSearchInCity": "No results for \"{search}\" in {city}",
+    "noResultsForSearch": "No results for \"{search}\"",
+    "noWorkshopsInCity": "No workshops in {city}",
     "detail": {
       "breadcrumbHome": "Home",
       "breadcrumbPortfolio": "Portfolio",
