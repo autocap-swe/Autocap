@@ -129,7 +129,19 @@
     "visitWorkshopWebsite": "Besök verkstadens hemsida",
     "ownWorkshop": "Äger du en däckverkstad?",
     "joinAutoCap": "Läs om vad det skulle innebära för dig att bli del av AutoCap Group.",
-    "forEntrepreneurs": "För entreprenörer"
+    "forEntrepreneurs": "För entreprenörer",
+    "contactCards": {
+      "investors": {
+        "title": "För investerare",
+        "description": "Är du intresserad av AutoCap-möjligheten? Läs mer om vårt investeringscase och vår tillväxtstrategi.",
+        "cta": "Investerarrelationer "
+      },
+      "workshopOwners": {
+        "title": "För verkstadsägare",
+        "description": "Funderar du på nästa kapitel för din däckverkstad? Låt oss ta ett konfidentiellt samtal.",
+        "cta": "Inled en konversation "
+      }
+    }
   },
   "footer": {
     "companySection": "Bolaget",

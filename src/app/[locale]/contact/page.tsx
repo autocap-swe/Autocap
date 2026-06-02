@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { setRequestLocale } from 'next-intl/server';
+import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { getContactContent } from '@/lib/cms/contact';
 import { ContactCard } from '@/components/contact/ContactCard';
 import { GeneralContactForm } from '@/components/contact/GeneralContactForm';
@@ -25,9 +25,27 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ContactPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const content = await getContactContent(undefined, locale).catch(() => null);
+  const [content, t] = await Promise.all([
+    getContactContent(undefined, locale).catch(() => null),
+    getTranslations({ locale, namespace: 'common' }),
+  ]);
   if (!content) notFound();
-  const { hero, routing, specializedCards, generalInquiry, companyInfo, formLabels } = content;
+  const { hero, routing, generalInquiry, companyInfo, formLabels } = content;
+
+  const specializedCards = [
+    {
+      ...content.specializedCards[0],
+      title: t('contactCards.investors.title'),
+      description: t('contactCards.investors.description'),
+      ctaText: t('contactCards.investors.cta'),
+    },
+    {
+      ...content.specializedCards[1],
+      title: t('contactCards.workshopOwners.title'),
+      description: t('contactCards.workshopOwners.description'),
+      ctaText: t('contactCards.workshopOwners.cta'),
+    },
+  ];
 
   return (
     <main className="min-h-screen bg-gray-50">

@@ -129,7 +129,19 @@
     "visitWorkshopWebsite": "Visit workshop website",
     "ownWorkshop": "Own a tire service workshop?",
     "joinAutoCap": "Learn what joining AutoCap Group could mean for you.",
-    "forEntrepreneurs": "For Entrepreneurs"
+    "forEntrepreneurs": "For Entrepreneurs",
+    "contactCards": {
+      "investors": {
+        "title": "For Investors",
+        "description": "Interested in the AutoCap opportunity? Learn about our investment case and growth strategy.",
+        "cta": "Investor Relations "
+      },
+      "workshopOwners": {
+        "title": "For Workshop Owners",
+        "description": "Thinking about the next chapter for your tire workshop? Let's have a confidential conversation.",
+        "cta": "Start a Conversation "
+      }
+    }
   },
   "footer": {
     "companySection": "Company",
