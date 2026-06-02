@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { ArrowLeft, ExternalLink, Calendar } from 'lucide-react';
@@ -6,6 +7,7 @@ import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { getWorkshopsContent, getWorkshopBySlugContent } from '@/lib/cms/workshop';
 import { WorkshopHero } from '@/components/portfolio/WorkshopHero';
 import { ArticleLocalizedPathSetter } from '@/components/news/ArticleLocalizedPathSetter';
+import { buildMetadata } from '@/lib/cms/seo';
 
 const URL_PATTERN = /https?:\/\/[^\s]+/g;
 
@@ -52,7 +54,7 @@ export async function generateStaticParams({ params }: { params: { locale?: stri
     .map(w => ({ slug: w.slug as string }));
 }
 
-export async function generateMetadata({ params }: WorkshopDetailPageProps) {
+export async function generateMetadata({ params }: WorkshopDetailPageProps): Promise<Metadata> {
   const { locale, slug } = await params;
   const workshop = await getWorkshopBySlugContent(slug, undefined, locale).catch(() => null);
 
@@ -60,9 +62,17 @@ export async function generateMetadata({ params }: WorkshopDetailPageProps) {
     return { title: 'Workshop Not Found' };
   }
 
+  const meta = buildMetadata(
+    { title: `${workshop.name} · AutoCap Group`, description: workshop.description },
+    workshop.seo,
+    locale
+  );
   return {
-    title: `${workshop.name} · AutoCap Group`,
-    description: workshop.description,
+    ...meta,
+    openGraph: {
+      ...meta.openGraph,
+      images: meta.openGraph?.images ?? (workshop.imageUrl ? [{ url: workshop.imageUrl }] : []),
+    },
   };
 }
 

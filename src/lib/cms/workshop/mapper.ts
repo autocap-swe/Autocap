@@ -34,6 +34,7 @@ export function workshopMapper(cms: CmsWorkshop): Workshop {
     partnershipNote: cms.partnershipNote ?? null,
     imageUrl: resolveUrl(cms.image?.url),
     localizedSlugs: Object.keys(localizedSlugs).length > 0 ? localizedSlugs : undefined,
+    seo: cms.seo,
   };
 }
 

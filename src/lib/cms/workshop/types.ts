@@ -1,3 +1,5 @@
+import type { CmsSeo } from '../seo';
+
 interface CmsWorkshopLocalization {
   slug: string;
   locale: string;
@@ -21,6 +23,7 @@ export interface CmsWorkshop {
   partnershipNote?: string | null;
   image: { url: string } | null;
   localizations?: CmsWorkshopLocalization[];
+  seo?: CmsSeo | null;
 }
 
 // Page shape — what the frontend renders
@@ -40,4 +43,5 @@ export interface Workshop {
   imageUrl?: string;
   /** Maps locale code → slug for all published translations of this workshop */
   localizedSlugs?: Record<string, string>;
+  seo?: CmsSeo | null;
 }
