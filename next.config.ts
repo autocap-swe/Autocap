@@ -34,7 +34,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: 'Content-Security-Policy',
-            value: "frame-ancestors 'self' https://cms.autocapgroup.se",
+            value: "frame-ancestors 'self' https://cms.autocapgroup.se http://localhost:1337",
           },
         ],
       },

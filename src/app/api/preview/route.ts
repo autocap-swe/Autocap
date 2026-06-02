@@ -10,22 +10,25 @@ async function getSlugByDocumentId(
   locale: string,
   status: string = 'published'
 ): Promise<string | null> {
-  try {
-    const res = await fetch(
-      `${CMS_API_URL}/api/${type}s/${documentId}?fields=slug&locale=${locale}&status=${status}`,
-      {
-        cache: 'no-store',
-        headers: process.env.STRAPI_API_TOKEN
-          ? { Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}` }
-          : {},
-      }
-    );
-    if (!res.ok) return null;
-    const json = await res.json();
-    return json?.data?.slug ?? null;
-  } catch {
-    return null;
-  }
+  const headers = process.env.STRAPI_API_TOKEN
+    ? { Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}` }
+    : {};
+
+  const tryFetch = async (loc: string): Promise<string | null> => {
+    try {
+      const res = await fetch(
+        `${CMS_API_URL}/api/${type}s?filters[documentId][$eq]=${documentId}&fields[0]=slug&locale=${loc}&status=${status}`,
+        { cache: 'no-store', headers }
+      );
+      if (!res.ok) return null;
+      const json = await res.json();
+      return json?.data?.[0]?.slug ?? null;
+    } catch {
+      return null;
+    }
+  };
+
+  return (await tryFetch(locale)) ?? (locale !== 'en' ? await tryFetch('en') : null);
 }
 
 export async function GET(request: NextRequest) {
