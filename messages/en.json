@@ -145,6 +145,9 @@
     "title": "Our Portfolio",
     "description": "AutoCap Group's portfolio spans {count} tire service centres across Sweden — from Stockholm's northern suburbs to Gothenburg's industrial zones. Every workshop keeps its local name, its team, and its customer relationships. What changes is what happens behind the scenes: shared procurement, centralised administration, and a network that makes each workshop stronger.",
     "mapSectionTitle": "Workshop Locations",
+    "allWorkshops": "All Workshops",
+    "searchPlaceholder": "Search workshops...",
+    "allCities": "All Cities",
     "detail": {
       "breadcrumbHome": "Home",
       "breadcrumbPortfolio": "Portfolio",

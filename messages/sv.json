@@ -145,6 +145,9 @@
     "title": "Vår portfölj",
     "description": "AutoCap Groups portfölj omfattar {count} däckservicecenter i Sverige – från Stockholms norra förorter till Göteborgs industrizoner. Varje verkstad behåller sitt lokala namn, sitt team och sina kundrelationer. Det som förändras är det som sker bakom kulisserna: gemensam inköpskraft, central administration och ett nätverk som gör varje verkstad starkare.",
     "mapSectionTitle": "Verkstäder",
+    "allWorkshops": "Alla verkstäder",
+    "searchPlaceholder": "Sök verkstäder...",
+    "allCities": "Alla städer",
     "detail": {
       "breadcrumbHome": "Hem",
       "breadcrumbPortfolio": "Portfölj",

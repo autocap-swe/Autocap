@@ -8,6 +8,8 @@ interface WorkshopSearchInputProps {
   selectedCity: string;
   onCityChange: (city: string) => void;
   cities: string[];
+  searchPlaceholder: string;
+  allCitiesLabel: string;
 }
 
 export function WorkshopSearchInput({
@@ -16,6 +18,8 @@ export function WorkshopSearchInput({
   selectedCity,
   onCityChange,
   cities,
+  searchPlaceholder,
+  allCitiesLabel,
 }: WorkshopSearchInputProps) {
   const allCities = ['All', ...cities];
 
@@ -33,7 +37,7 @@ export function WorkshopSearchInput({
           type="text"
           value={value}
           onChange={e => onChange(e.target.value)}
-          placeholder="Search workshops..."
+          placeholder={searchPlaceholder}
           className={cn(
             'h-12 w-full bg-white pl-12 pr-12 text-base text-gray-900',
             'placeholder:text-gray-500',
@@ -65,7 +69,7 @@ export function WorkshopSearchInput({
       >
         {allCities.map(city => (
           <option key={city} value={city}>
-            {city === 'All' ? 'All Cities' : city}
+            {city === 'All' ? allCitiesLabel : city}
           </option>
         ))}
       </select>

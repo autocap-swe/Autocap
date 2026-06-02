@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import { useTranslations } from 'next-intl';
 
 function normalizeText(str: string) {
   return str.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
@@ -15,6 +16,7 @@ interface WorkshopGridProps {
 }
 
 export function WorkshopGrid({ workshops }: WorkshopGridProps) {
+  const t = useTranslations('portfolio');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCity, setSelectedCity] = useState('All');
   const cities = useMemo(() => [...new Set(workshops.map(w => w.city))].sort(), [workshops]);
@@ -56,7 +58,7 @@ export function WorkshopGrid({ workshops }: WorkshopGridProps) {
             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white">
               <Building2 className="h-6 w-6 text-[#C8102E]" />
             </div>
-            <h2 className="text-3xl font-bold text-[#1C1C1E] md:text-4xl">All Workshops</h2>
+            <h2 className="text-3xl font-bold text-[#1C1C1E] md:text-4xl">{t('allWorkshops')}</h2>
           </div>
           <div className="h-1 w-24 bg-[#C8102E]" />
         </div>
@@ -69,6 +71,8 @@ export function WorkshopGrid({ workshops }: WorkshopGridProps) {
             selectedCity={selectedCity}
             onCityChange={setSelectedCity}
             cities={cities}
+            searchPlaceholder={t('searchPlaceholder')}
+            allCitiesLabel={t('allCities')}
           />
         </div>
 
