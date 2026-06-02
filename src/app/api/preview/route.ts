@@ -10,7 +10,7 @@ async function getSlugByDocumentId(
   locale: string,
   status: string = 'published'
 ): Promise<string | null> {
-  const headers = process.env.STRAPI_API_TOKEN
+  const headers: Record<string, string> = process.env.STRAPI_API_TOKEN
     ? { Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}` }
     : {};
 
