@@ -66,7 +66,6 @@ export async function sendInvestorEmail(params: InvestorEmailParams) {
   await getResend().emails.send({
     from: getFrom(),
     to,
-    cc: getCc(),
     replyTo: email,
     subject: `[INVESTOR ENQUIRY] ${enquiryType} — ${fullName} (${organisation})`,
     html: `
