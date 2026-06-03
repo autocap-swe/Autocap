@@ -1,9 +1,14 @@
 'use client';
 
+import * as Sentry from '@sentry/nextjs';
 import { AlertCircle, RefreshCw } from 'lucide-react';
+import { useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 
-export default function Error({ reset }: { error: Error; reset: () => void }) {
+export default function Error({ error, reset }: { error: Error; reset: () => void }) {
+  useEffect(() => {
+    Sentry.captureException(error);
+  }, [error]);
   const t = useTranslations('error');
 
   return (
