@@ -66,12 +66,17 @@ export default async function HomePage({ params }: Props) {
       {cmsKpis && <KpiTicker kpis={cmsKpis} />}
       <AudienceCards cards={cards} />
       <LatestNewsStrip articles={articles} />
-      <CeoQuote text={cms.ceoQuoteText} attribution={cms.ceoQuoteAttribution} />
+      <CeoQuote
+        text={cms.ceoQuoteText}
+        attribution={cms.ceoQuoteAttribution}
+        bgImageUrl={cmsMediaUrl(cms.ceoQuoteBgImage)}
+      />
       <FooterCta
         headline={cms.footerCtaHeadline}
         subtext={cms.footerCtaSubtext}
         ctaText={cms.footerCtaButtonText}
         ctaLink={cms.footerCtaButtonLink}
+        bgImageUrl={cmsMediaUrl(cms.footerCtaBgImage)}
       />
     </>
   );

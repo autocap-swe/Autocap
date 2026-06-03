@@ -12,6 +12,9 @@ export async function getSustainabilityPageContent(
     mapper: sustainabilityPageMapper,
     locale,
     tags: ['sustainability-page'],
-    params: { populate: 'whereWeAreFocusAreas,heroImage,seo' },
+    params: {
+      populate:
+        'whereWeAreFocusAreas,heroImage,whereWeAreBgImage,whereWeAreGoingBgImage,governanceBgImage,seo',
+    },
   });
 }

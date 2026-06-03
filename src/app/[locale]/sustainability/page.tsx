@@ -71,7 +71,11 @@ export default async function SustainabilityPage({ params }: Props) {
       </section>
 
       <section className="relative overflow-hidden bg-gradient-to-br from-white to-gray-50 py-20 md:py-28">
-        <div className="mx-auto max-w-4xl px-6 md:px-8">
+        {cmsMediaUrl(cms.whereWeAreBgImage) && (
+          <Image src={cmsMediaUrl(cms.whereWeAreBgImage)!} alt="" fill className="object-cover" />
+        )}
+        {cmsMediaUrl(cms.whereWeAreBgImage) && <div className="absolute inset-0 bg-black/40" />}
+        <div className="relative mx-auto max-w-4xl px-6 md:px-8">
           <h2 className="mb-12 text-center text-4xl font-black text-[#1C1C1E] md:text-5xl lg:text-6xl">
             {cms.whereWeAreTitle}
           </h2>
@@ -102,7 +106,18 @@ export default async function SustainabilityPage({ params }: Props) {
       </section>
 
       <section className="relative overflow-hidden bg-gradient-to-br from-[#F5F0EB] via-[#E5E0DB] to-[#F5F0EB] py-20 md:py-28">
-        <div className="mx-auto max-w-4xl px-6 md:px-8">
+        {cmsMediaUrl(cms.whereWeAreGoingBgImage) && (
+          <Image
+            src={cmsMediaUrl(cms.whereWeAreGoingBgImage)!}
+            alt=""
+            fill
+            className="object-cover"
+          />
+        )}
+        {cmsMediaUrl(cms.whereWeAreGoingBgImage) && (
+          <div className="absolute inset-0 bg-black/40" />
+        )}
+        <div className="relative mx-auto max-w-4xl px-6 md:px-8">
           <h2 className="mb-12 text-center text-4xl font-black text-[#1C1C1E] md:text-5xl lg:text-6xl">
             {cms.whereWeAreGoingTitle}
           </h2>
@@ -119,7 +134,11 @@ export default async function SustainabilityPage({ params }: Props) {
       </section>
 
       <section className="relative overflow-hidden bg-gradient-to-br from-white to-gray-50 py-20 md:py-28">
-        <div className="mx-auto max-w-4xl px-6 md:px-8">
+        {cmsMediaUrl(cms.governanceBgImage) && (
+          <Image src={cmsMediaUrl(cms.governanceBgImage)!} alt="" fill className="object-cover" />
+        )}
+        {cmsMediaUrl(cms.governanceBgImage) && <div className="absolute inset-0 bg-black/40" />}
+        <div className="relative mx-auto max-w-4xl px-6 md:px-8">
           <h2 className="mb-12 text-center text-4xl font-black text-[#1C1C1E] md:text-5xl lg:text-6xl">
             {cms.governanceTitle}
           </h2>

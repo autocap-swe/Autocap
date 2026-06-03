@@ -6,7 +6,9 @@ import { Sparkles } from 'lucide-react';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Breadcrumb } from '@/components/entrepreneurs/Breadcrumb';
 import { BenefitSection } from '@/components/entrepreneurs/BenefitSection';
+import Image from 'next/image';
 import { getEntrepreneursPageContent } from '@/lib/cms/entrepreneurs-page';
+import { cmsMediaUrl } from '@/lib/cms/media';
 import { REVALIDATE_HIGH } from '@/lib/cms/revalidate';
 
 export const metadata: Metadata = {
@@ -63,6 +65,10 @@ export default async function WhyAutoCapPage({ params }: { params: Promise<{ loc
       ))}
 
       <section className="relative overflow-hidden bg-gradient-to-br from-[#1C1C1E] via-[#2C2C2E] to-[#1C1C1E] px-6 py-20 md:px-8 md:py-28">
+        {cmsMediaUrl(cms.closingBgImage) && (
+          <Image src={cmsMediaUrl(cms.closingBgImage)!} alt="" fill className="object-cover" />
+        )}
+        {cmsMediaUrl(cms.closingBgImage) && <div className="absolute inset-0 bg-black/60" />}
         <div className="absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#C8102E] opacity-20 blur-3xl" />
         <div className="relative mx-auto max-w-4xl text-center">
           <div className="mb-8 inline-flex items-center justify-center">

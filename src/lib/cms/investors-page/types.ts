@@ -25,6 +25,7 @@ export interface CmsInvestorsPage extends InvestorsFormLabels {
   closingBlockTitle?: string;
   closingBlockDescription?: string;
   heroImage?: StrapiMedia | null;
+  closingBgImage?: StrapiMedia | null;
   seo?: CmsSeo | null;
 }
 

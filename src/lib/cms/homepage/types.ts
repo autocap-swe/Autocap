@@ -23,6 +23,8 @@ export interface CmsHomepage {
   footerCtaButtonText: string;
   footerCtaButtonLink: string;
   heroVideo?: StrapiMedia | null;
+  ceoQuoteBgImage?: StrapiMedia | null;
+  footerCtaBgImage?: StrapiMedia | null;
   seo?: CmsSeo | null;
 }
 

@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { motion } from 'framer-motion';
 import { MessageCircle } from 'lucide-react';
@@ -9,11 +10,14 @@ interface FooterCtaProps {
   subtext: string;
   ctaText: string;
   ctaLink: string;
+  bgImageUrl?: string | null;
 }
 
-export function FooterCta({ headline, subtext, ctaText, ctaLink }: FooterCtaProps) {
+export function FooterCta({ headline, subtext, ctaText, ctaLink, bgImageUrl }: FooterCtaProps) {
   return (
     <section className="relative overflow-hidden bg-white py-24 md:py-32">
+      {bgImageUrl && <Image src={bgImageUrl} alt="" fill className="object-cover" />}
+      {bgImageUrl && <div className="absolute inset-0 bg-black/40" />}
       {/* Subtle Pattern Overlay */}
       <div className="absolute inset-0 opacity-[0.02]">
         <div

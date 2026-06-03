@@ -36,6 +36,7 @@ export interface CmsEntrepreneursPage extends EntrepreneursFormLabels {
   closingBlockDescription: string;
   whyPageClosingCta: string;
   heroImage?: StrapiMedia | null;
+  closingBgImage?: StrapiMedia | null;
   seo?: CmsSeo | null;
 }
 

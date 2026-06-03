@@ -22,6 +22,9 @@ export interface CmsAboutPage {
   closingTitle: string;
   closingDescription: string;
   heroImage?: StrapiMedia | null;
+  missionBgImage?: StrapiMedia | null;
+  differentiatorsBgImage?: StrapiMedia | null;
+  closingBgImage?: StrapiMedia | null;
   seo?: CmsSeo | null;
 }
 

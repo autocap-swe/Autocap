@@ -12,6 +12,6 @@ export async function getInvestorsPageContent(
     mapper: investorsPageMapper,
     locale,
     tags: ['investors-page'],
-    params: { populate: 'heroImage,seo' },
+    params: { populate: 'heroImage,closingBgImage,seo' },
   });
 }

@@ -1,17 +1,20 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { Quote } from 'lucide-react'
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { Quote } from 'lucide-react';
 
 interface CeoQuoteProps {
-  text: string
-  attribution: string
-  photoUrl?: string
+  text: string;
+  attribution: string;
+  bgImageUrl?: string | null;
 }
 
-export function CeoQuote({ text, attribution }: CeoQuoteProps) {
+export function CeoQuote({ text, attribution, bgImageUrl }: CeoQuoteProps) {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-[#F5F0EB] via-[#EDE8E3] to-[#F5F0EB] py-24 md:py-32">
+      {bgImageUrl && <Image src={bgImageUrl} alt="" fill className="object-cover" />}
+      {bgImageUrl && <div className="absolute inset-0 bg-black/40" />}
       {/* Subtle Pattern Overlay */}
       <div className="absolute inset-0 opacity-[0.02]">
         <div
@@ -51,5 +54,5 @@ export function CeoQuote({ text, attribution }: CeoQuoteProps) {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

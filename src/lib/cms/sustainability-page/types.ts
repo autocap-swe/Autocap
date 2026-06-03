@@ -20,6 +20,9 @@ export interface CmsSustainabilityPage {
   governanceContactText: string;
   governanceContactEmail: string;
   heroImage?: StrapiMedia | null;
+  whereWeAreBgImage?: StrapiMedia | null;
+  whereWeAreGoingBgImage?: StrapiMedia | null;
+  governanceBgImage?: StrapiMedia | null;
   seo?: CmsSeo | null;
 }
 

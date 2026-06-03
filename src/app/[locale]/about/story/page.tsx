@@ -94,8 +94,12 @@ export default async function StoryPage({ params }: Props) {
         </div>
       </section>
 
-      <section className="w-full bg-[#EDE4D8] py-16 md:py-24">
-        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+      <section className="relative w-full bg-[#EDE4D8] py-16 md:py-24">
+        {cmsMediaUrl(cms.timelineBgImage) && (
+          <Image src={cmsMediaUrl(cms.timelineBgImage)!} alt="" fill className="object-cover" />
+        )}
+        {cmsMediaUrl(cms.timelineBgImage) && <div className="absolute inset-0 bg-black/50" />}
+        <div className="relative mx-auto max-w-6xl px-6 lg:px-8">
           <h2 className="mb-12 text-center text-3xl font-black text-[#1C1C1E] md:mb-16 md:text-4xl lg:text-5xl">
             {cms.timelineTitle}
           </h2>

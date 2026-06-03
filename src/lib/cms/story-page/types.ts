@@ -23,6 +23,7 @@ export interface CmsStoryPage {
   timelineTitle: string;
   timelineMilestones: CmsTimelineMilestone[];
   heroImage?: StrapiMedia | null;
+  timelineBgImage?: StrapiMedia | null;
   seo?: CmsSeo | null;
 }
 

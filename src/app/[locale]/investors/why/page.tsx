@@ -4,8 +4,10 @@ import { TrendingUp } from 'lucide-react';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Breadcrumb } from '@/components/entrepreneurs/Breadcrumb';
 import { InvestmentPillar } from '@/components/investors/InvestmentPillar';
+import Image from 'next/image';
 import { getInvestmentPillarsContent } from '@/lib/cms/investment-pillars';
 import { getInvestorsPageContent } from '@/lib/cms/investors-page';
+import { cmsMediaUrl } from '@/lib/cms/media';
 
 export const metadata: Metadata = {
   title: 'Investment Case · AutoCap Group',
@@ -62,6 +64,17 @@ export default async function InvestorsWhyPage({
       ))}
 
       <section className="relative overflow-hidden bg-gradient-to-br from-[#1C1C1E] via-[#2C2C2E] to-[#1C1C1E] px-6 py-20 md:px-8 md:py-28">
+        {cmsMediaUrl(investorsPage?.closingBgImage) && (
+          <Image
+            src={cmsMediaUrl(investorsPage?.closingBgImage)!}
+            alt=""
+            fill
+            className="object-cover"
+          />
+        )}
+        {cmsMediaUrl(investorsPage?.closingBgImage) && (
+          <div className="absolute inset-0 bg-black/60" />
+        )}
         <div className="absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#C8102E] opacity-20 blur-3xl" />
         <div className="relative mx-auto max-w-4xl text-center">
           <div className="mb-8 inline-flex items-center justify-center">

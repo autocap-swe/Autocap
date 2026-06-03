@@ -12,6 +12,6 @@ export async function getStoryPageContent(
     mapper: storyPageMapper,
     locale,
     tags: ['story-page'],
-    params: { populate: 'timelineMilestones,heroImage,seo' },
+    params: { populate: 'timelineMilestones,heroImage,timelineBgImage,seo' },
   });
 }
