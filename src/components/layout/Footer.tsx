@@ -11,7 +11,7 @@ export async function Footer() {
     '/': tNav('home'),
     '/about': tNav('about.label'),
     '/portfolio': tNav('portfolio'),
-    '/entrepreneurs': tNav('entrepreneurs'),
+    '/entrepreneurs': tNav('entrepreneurs.label'),
     '/investors': tNav('investors'),
     '/news': tNav('newsMedia'),
     '/sustainability': tNav('sustainability'),

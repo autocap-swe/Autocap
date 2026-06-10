@@ -42,7 +42,7 @@ export function CeoQuote({ text, attribution, bgImageUrl }: CeoQuoteProps) {
           </div>
 
           <blockquote>
-            <p className="mb-8 text-3xl font-bold leading-relaxed text-[#1C1C1E] md:text-4xl md:leading-relaxed lg:text-5xl lg:leading-relaxed">
+            <p className="mb-8 text-2xl font-bold italic leading-relaxed text-[#1C1C1E] md:text-3xl md:leading-relaxed">
               &ldquo;{text}&rdquo;
             </p>
 

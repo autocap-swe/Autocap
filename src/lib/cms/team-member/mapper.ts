@@ -18,7 +18,8 @@ export function teamMemberMapper(cms: CmsTeamMember): TeamMember {
     education: cms.education ?? undefined,
     photoUrl: resolveUrl(cms.photo?.url),
     linkedInUrl: cms.linkedInUrl ?? undefined,
-    category: cms.category,
+    isManagement: cms.isManagement ?? false,
+    isBoard: cms.isBoard ?? false,
     order: cms.order,
   };
 }

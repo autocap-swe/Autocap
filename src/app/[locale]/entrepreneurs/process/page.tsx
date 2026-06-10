@@ -56,7 +56,7 @@ export default async function ProcessPage({ params }: Props) {
               <span className="text-sm font-semibold text-[#C8102E]">{t('processPage.badge')}</span>
             </div>
             <h1 className="mb-6 text-5xl font-black text-[#1C1C1E] md:text-6xl lg:text-7xl">
-              {t('processPage.title')}
+              {acquisitionProcess?.heading || t('processPage.title')}
             </h1>
             <div className="mx-auto mb-6 h-1 w-24 bg-[#C8102E]" />
             <p className="mx-auto max-w-2xl text-xl leading-relaxed text-gray-700 md:text-2xl">

@@ -2,6 +2,7 @@ import type { CmsAcquisitionProcess, AcquisitionProcess } from './types';
 
 export function acquisitionProcessMapper(cms: CmsAcquisitionProcess): AcquisitionProcess {
   return {
+    heading: cms.heading ?? '',
     intro: cms.intro ?? '',
     totalTimeline: cms.totalTimeline ?? '',
     ctaText: cms.ctaText ?? '',

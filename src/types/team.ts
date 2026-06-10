@@ -6,6 +6,7 @@ export interface TeamMember {
   education?: string;
   photoUrl?: string;
   linkedInUrl?: string;
-  category: 'management' | 'board';
+  isManagement: boolean;
+  isBoard: boolean;
   order: number;
 }
