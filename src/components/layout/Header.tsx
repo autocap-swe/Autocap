@@ -25,7 +25,7 @@ export function Header() {
     '/': t('home'),
     '/about': t('about.label'),
     '/portfolio': t('portfolio'),
-    '/entrepreneurs': t('entrepreneurs'),
+    '/entrepreneurs': t('entrepreneurs.label'),
     '/investors': t('investors'),
     '/news': t('newsMedia'),
     '/sustainability': t('sustainability'),
@@ -36,6 +36,10 @@ export function Header() {
     '/about': t('about.companyOverview'),
     '/about/story': t('about.ourStory'),
     '/about/team': t('about.leadershipBoard'),
+    '/entrepreneurs': t('entrepreneurs.overview'),
+    '/entrepreneurs/process': t('entrepreneurs.howItWorks'),
+    '/entrepreneurs/why': t('entrepreneurs.whyAutoCap'),
+    '/entrepreneurs/contact': t('entrepreneurs.contact'),
   };
 
   const translatedLinks = NAVIGATION_LINKS.map(link => ({

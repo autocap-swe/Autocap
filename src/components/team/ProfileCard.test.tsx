@@ -12,7 +12,8 @@ describe('ProfileCard', () => {
     education: 'B.Sc. Computer Science',
     photoUrl: '/images/team/test-user.jpg',
     linkedInUrl: 'https://linkedin.com/in/testuser',
-    category: 'management',
+    isManagement: true,
+    isBoard: false,
     order: 1,
   };
 
@@ -24,7 +25,8 @@ describe('ProfileCard', () => {
     education: 'M.Sc. Data Protection',
     photoUrl: undefined,
     linkedInUrl: undefined,
-    category: 'board',
+    isManagement: false,
+    isBoard: true,
     order: 2,
   };
 

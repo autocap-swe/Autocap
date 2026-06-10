@@ -7,6 +7,7 @@ export interface CmsProcessStep {
 }
 
 export interface CmsAcquisitionProcess {
+  heading?: string;
   intro?: string;
   totalTimeline?: string;
   ctaText?: string;
@@ -22,6 +23,7 @@ export interface ProcessStep {
 }
 
 export interface AcquisitionProcess {
+  heading: string;
   intro: string;
   totalTimeline: string;
   ctaText: string;

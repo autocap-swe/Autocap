@@ -7,6 +7,7 @@ export interface CmsTeamMember {
   education: string | null;
   photo: { url: string } | null;
   linkedInUrl: string | null;
-  category: 'management' | 'board';
+  isManagement: boolean;
+  isBoard: boolean;
   order: number;
 }

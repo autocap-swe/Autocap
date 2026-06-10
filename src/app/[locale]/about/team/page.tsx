@@ -33,8 +33,8 @@ export default async function TeamPage({ params }: Props) {
     getTeamPageContent(undefined, locale).catch(() => null),
   ]);
 
-  const managementTeam = allMembers.filter(m => m.category === 'management');
-  const board = allMembers.filter(m => m.category === 'board');
+  const managementTeam = allMembers.filter(m => m.isManagement);
+  const board = allMembers.filter(m => m.isBoard);
   const heroImageUrl = cmsMediaUrl(cms?.heroImage);
   const heroTitle = cms?.heroTitle;
   const heroDescription = cms?.heroDescription;
