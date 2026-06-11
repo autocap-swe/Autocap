@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { BarChart3 } from 'lucide-react';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Breadcrumb } from '@/components/entrepreneurs/Breadcrumb';
 import { MetricCard } from '@/components/investors/MetricCard';
@@ -52,8 +51,7 @@ export default async function InvestorsMetricsPage({
             ]}
           />
           <div className="mt-8 text-center">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-md">
-              <BarChart3 className="h-5 w-5 text-[#C8102E]" />
+            <div className="mb-6 inline-flex items-center rounded-full bg-white px-4 py-2 shadow-md">
               <span className="text-sm font-semibold text-[#C8102E]">{t('metricsPage.badge')}</span>
             </div>
             <h1 className="mb-6 text-5xl font-black text-[#1C1C1E] md:text-6xl lg:text-7xl">

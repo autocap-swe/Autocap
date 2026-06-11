@@ -35,7 +35,7 @@ export const NAVIGATION_LINKS = [
     submenu: [
       { label: 'Overview', href: '/entrepreneurs' },
       { label: 'How It Works', href: '/entrepreneurs/process' },
-      { label: 'Why AutoCap', href: '/entrepreneurs/why' },
+      { label: 'Why AutoCap Group', href: '/entrepreneurs/why' },
       { label: 'Contact', href: '/entrepreneurs/contact' },
     ],
   },

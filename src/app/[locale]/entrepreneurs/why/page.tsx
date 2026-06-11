@@ -2,7 +2,6 @@ export const dynamic = 'force-dynamic';
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Sparkles } from 'lucide-react';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Breadcrumb } from '@/components/entrepreneurs/Breadcrumb';
 import { BenefitSection } from '@/components/entrepreneurs/BenefitSection';
@@ -43,8 +42,7 @@ export default async function WhyAutoCapPage({ params }: { params: Promise<{ loc
           />
           <div className="mt-8 text-center">
             {cms.whyPageBadge && (
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-md">
-                <Sparkles className="h-5 w-5 text-[#C8102E]" />
+              <div className="mb-6 inline-flex items-center rounded-full bg-white px-4 py-2 shadow-md">
                 <span className="text-sm font-semibold text-[#C8102E]">{cms.whyPageBadge}</span>
               </div>
             )}
@@ -71,11 +69,6 @@ export default async function WhyAutoCapPage({ params }: { params: Promise<{ loc
         {cmsMediaUrl(cms.closingBgImage) && <div className="absolute inset-0 bg-black/60" />}
         <div className="absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#C8102E] opacity-20 blur-3xl" />
         <div className="relative mx-auto max-w-4xl text-center">
-          <div className="mb-8 inline-flex items-center justify-center">
-            <div className="rounded-xl bg-white/10 p-3 backdrop-blur-sm">
-              <Sparkles className="h-8 w-8 text-[#C8102E]" />
-            </div>
-          </div>
           <h2 className="mb-6 text-4xl font-black text-white md:text-5xl lg:text-6xl">
             {cms.closingBlockTitle}
           </h2>

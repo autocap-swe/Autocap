@@ -2,7 +2,6 @@ export const dynamic = 'force-dynamic';
 
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { Leaf } from 'lucide-react';
 import { setRequestLocale } from 'next-intl/server';
 import { getSustainabilityPageContent } from '@/lib/cms/sustainability-page';
 import { REVALIDATE_HIGH } from '@/lib/cms/revalidate';
@@ -56,11 +55,6 @@ export default async function SustainabilityPage({ params }: Props) {
         </div>
         <div className="relative flex min-h-[85vh] items-center justify-center px-6 py-24 md:px-8">
           <div className="mx-auto max-w-5xl text-center">
-            <div className="mb-8 inline-flex items-center justify-center">
-              <div className="rounded-2xl bg-white p-4">
-                <Leaf className="h-12 w-12 text-[#C8102E] md:h-16 md:w-16" strokeWidth={2} />
-              </div>
-            </div>
             <h1 className="mb-8 text-5xl font-black leading-[1.1] text-white md:text-6xl lg:text-7xl xl:text-8xl">
               {cms.heroHeadline}
             </h1>

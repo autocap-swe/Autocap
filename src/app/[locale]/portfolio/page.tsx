@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { MapPin, Building2 } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { WorkshopMapWrapper } from '@/components/portfolio/WorkshopMapWrapper';
 import { WorkshopGrid } from '@/components/portfolio/WorkshopGrid';
@@ -70,8 +70,7 @@ export default async function PortfolioPage({ params }: Props) {
         </div>
 
         <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mb-8 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2">
-            <Building2 className="h-5 w-5 text-[#C8102E]" />
+          <div className="mb-8 inline-flex items-center rounded-full bg-white px-4 py-2">
             <span className="text-sm font-semibold text-[#C8102E]">{workshopBadgeText}</span>
           </div>
 

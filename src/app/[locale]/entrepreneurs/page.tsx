@@ -3,7 +3,6 @@ export const dynamic = 'force-dynamic';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Handshake } from 'lucide-react';
 import { setRequestLocale } from 'next-intl/server';
 import { TestimonialsSection } from '@/components/entrepreneurs/TestimonialsSection';
 import { getEntrepreneursPageContent } from '@/lib/cms/entrepreneurs-page';
@@ -62,11 +61,6 @@ export default async function EntrepreneursPage({ params }: Props) {
         </div>
 
         <div className="relative mx-auto max-w-5xl px-6 text-center md:px-8">
-          <div className="mb-8 inline-flex items-center justify-center">
-            <div className="rounded-2xl bg-white p-4">
-              <Handshake className="h-12 w-12 text-[#C8102E] md:h-16 md:w-16" strokeWidth={2} />
-            </div>
-          </div>
           <h1 className="mb-8 text-5xl font-black leading-[1.1] text-white md:text-6xl lg:text-7xl xl:text-8xl">
             {cms.landingHeadline}
           </h1>

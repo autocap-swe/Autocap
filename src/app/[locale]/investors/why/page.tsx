@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { TrendingUp } from 'lucide-react';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Breadcrumb } from '@/components/entrepreneurs/Breadcrumb';
 import { InvestmentPillar } from '@/components/investors/InvestmentPillar';
@@ -41,8 +40,7 @@ export default async function InvestorsWhyPage({
             ]}
           />
           <div className="mt-8 text-center">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 shadow-md">
-              <TrendingUp className="h-5 w-5 text-[#C8102E]" />
+            <div className="mb-6 inline-flex items-center rounded-full bg-white px-4 py-2 shadow-md">
               <span className="text-sm font-semibold text-[#C8102E]">
                 {pillars.length > 0 ? `${pillars.length} Investment Pillars` : t('whyPage.badge')}
               </span>
@@ -77,11 +75,6 @@ export default async function InvestorsWhyPage({
         )}
         <div className="absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#C8102E] opacity-20 blur-3xl" />
         <div className="relative mx-auto max-w-4xl text-center">
-          <div className="mb-8 inline-flex items-center justify-center">
-            <div className="rounded-xl bg-white/10 p-3 backdrop-blur-sm">
-              <TrendingUp className="h-8 w-8 text-[#C8102E]" />
-            </div>
-          </div>
           <h2 className="mb-6 text-4xl font-black text-white md:text-5xl lg:text-6xl">
             {investorsPage?.closingBlockTitle}
           </h2>

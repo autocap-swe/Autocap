@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { Link } from '@/i18n/navigation';
-import { Newspaper, FileText } from 'lucide-react';
+import { FileText } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { NewsGrid } from '@/components/news/NewsGrid';
 import { CategoryFilter } from '@/components/news/CategoryFilter';
@@ -27,12 +27,6 @@ export function NewsPageContent({ articles }: NewsPageContentProps) {
     <main className="min-h-screen bg-gray-50">
       <section className="relative flex min-h-[60vh] items-center justify-center px-6 py-24 md:px-8">
         <div className="mx-auto max-w-5xl text-center">
-          <div className="mb-8 inline-flex items-center justify-center">
-            <div className="rounded-2xl bg-white p-4 shadow-sm">
-              <Newspaper className="h-12 w-12 text-[#C8102E] md:h-16 md:w-16" strokeWidth={2} />
-            </div>
-          </div>
-
           <h1 className="mb-8 text-5xl font-black leading-[1.1] text-[#1C1C1E] md:text-6xl lg:text-7xl xl:text-8xl">
             {t('title')}
           </h1>
