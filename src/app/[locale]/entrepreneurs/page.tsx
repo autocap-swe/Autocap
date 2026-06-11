@@ -34,7 +34,11 @@ export default async function EntrepreneursPage({ params }: Props) {
 
   return (
     <main className="relative overflow-hidden">
-      <section className="relative overflow-hidden py-20 md:py-28">
+      <section
+        className={`relative overflow-hidden py-20 md:py-28 ${
+          !cmsMediaUrl(cms.heroImage) ? 'bg-[#1C1C1E]' : ''
+        }`}
+      >
         {cmsMediaUrl(cms.heroImage) && (
           <Image
             src={cmsMediaUrl(cms.heroImage)!}
@@ -44,7 +48,9 @@ export default async function EntrepreneursPage({ params }: Props) {
             priority
           />
         )}
-        <div className="absolute inset-0 bg-black/15" />
+        <div
+          className={`absolute inset-0 ${cmsMediaUrl(cms.heroImage) ? 'bg-black/50' : 'bg-black/0'}`}
+        />
         <div className="absolute inset-0 opacity-[0.03]">
           <div
             className="h-full w-full"

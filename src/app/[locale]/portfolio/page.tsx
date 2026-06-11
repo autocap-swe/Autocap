@@ -47,7 +47,7 @@ export default async function PortfolioPage({ params }: Props) {
   return (
     <>
       <section
-        className={`relative overflow-hidden py-20 md:py-28 ${!heroImageUrl ? 'bg-gradient-to-br from-[#1C1C1E] via-[#2C2C2E] to-[#1C1C1E]' : ''}`}
+        className={`relative overflow-hidden py-20 md:py-28 ${!heroImageUrl ? 'bg-[#1C1C1E]' : ''}`}
       >
         {heroImageUrl && (
           <Image

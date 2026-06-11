@@ -32,7 +32,9 @@ export default async function SustainabilityPage({ params }: Props) {
 
   return (
     <main className="min-h-screen">
-      <section className="relative min-h-[85vh] overflow-hidden">
+      <section
+        className={`relative min-h-[85vh] overflow-hidden ${!cmsMediaUrl(cms.heroImage) ? 'bg-[#1C1C1E]' : ''}`}
+      >
         {cmsMediaUrl(cms.heroImage) && (
           <Image
             src={cmsMediaUrl(cms.heroImage)!}

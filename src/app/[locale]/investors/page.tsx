@@ -32,7 +32,9 @@ export default async function InvestorsPage({ params }: Props) {
   const cms = await getInvestorsPageContent(REVALIDATE_HIGH, locale);
 
   return (
-    <main className="relative min-h-screen overflow-hidden">
+    <main
+      className={`relative min-h-screen overflow-hidden ${!cmsMediaUrl(cms.heroImage) ? 'bg-[#1C1C1E]' : ''}`}
+    >
       {cmsMediaUrl(cms.heroImage) && (
         <Image
           src={cmsMediaUrl(cms.heroImage)!}
