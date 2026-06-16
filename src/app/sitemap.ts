@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 import { getArticlesContent } from '@/lib/cms/article';
 import { getWorkshopsContent } from '@/lib/cms/workshop';
 
-const BASE_URL = 'https://app.autocapgroup.se';
+const BASE_URL = 'https://autocapgroup.se';
 const LOCALES = ['en', 'sv'] as const;
 
 const STATIC_ROUTES = [
