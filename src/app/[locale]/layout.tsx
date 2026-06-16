@@ -24,6 +24,13 @@ export const metadata: Metadata = {
   title: 'AutoCap Group · The Nordic Tire Services Platform',
   description:
     'AutoCap Group acquires and operates independent tire service centres across Sweden. Preserving local brands. Empowering entrepreneurs. Building scale.',
+  icons: {
+    icon: [
+      { url: '/AutoCap_Favicon.png', sizes: '16x16', type: 'image/png' },
+      { url: '/AutoCap_Favicon@2x.png', sizes: '32x32', type: 'image/png' },
+      { url: '/AutoCap_Favicon@3x.png', sizes: '48x48', type: 'image/png' },
+    ],
+  },
   verification: {
     google: process.env.GOOGLE_SITE_VERIFICATION,
   },
