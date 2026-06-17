@@ -6,6 +6,7 @@ export interface CmsAudienceCard {
   headline: string;
   description: string;
   ctaText: string;
+  image?: StrapiMedia | null;
 }
 
 export interface CmsHomepage {

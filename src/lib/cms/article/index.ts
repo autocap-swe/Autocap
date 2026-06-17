@@ -3,11 +3,10 @@ import { REVALIDATE_LOW } from '../revalidate';
 import type { CmsArticle, NewsArticle } from './types';
 import { articlesMapper } from './mapper';
 
-// TEMP: Swedish news article translations are placeholder garbage ("swe_…") in
-// production. Until real Swedish translations are entered, always serve the
-// English article content (even on /sv routes). Flip to false to restore
-// per-locale fetching once translations are in.
-const FORCE_EN_NEWS_CONTENT = true;
+// Stopgap toggle for the placeholder-Swedish ("swe_…") news issue.
+// When true, always serve English article content (even on /sv).
+// Set to false once real Swedish translations are in the CMS so /sv shows them.
+const FORCE_EN_NEWS_CONTENT = false;
 
 export async function getArticlesContent(
   revalidate = REVALIDATE_LOW,

@@ -50,6 +50,7 @@ export default async function HomePage({ params }: Props) {
     headline: cms.audienceCards?.[i]?.headline ?? '',
     description: cms.audienceCards?.[i]?.description ?? '',
     ctaText: cms.audienceCards?.[i]?.ctaText ?? '',
+    imageUrl: cmsMediaUrl(cms.audienceCards?.[i]?.image),
   }));
 
   return (

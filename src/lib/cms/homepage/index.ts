@@ -12,6 +12,12 @@ export async function getHomepageContent(
     mapper: homepageMapper,
     locale,
     tags: ['homepage'],
-    params: { populate: 'audienceCards,heroVideo,ceoQuoteBgImage,footerCtaBgImage,seo' },
+    params: {
+      'populate[audienceCards][populate][image]': 'true',
+      'populate[heroVideo]': 'true',
+      'populate[ceoQuoteBgImage]': 'true',
+      'populate[footerCtaBgImage]': 'true',
+      'populate[seo]': 'true',
+    },
   });
 }
