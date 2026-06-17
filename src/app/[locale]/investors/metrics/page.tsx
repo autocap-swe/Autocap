@@ -54,7 +54,7 @@ export default async function InvestorsMetricsPage({
             <div className="mb-6 inline-flex items-center rounded-full bg-white px-4 py-2 shadow-md">
               <span className="text-sm font-semibold text-[#C8102E]">{t('metricsPage.badge')}</span>
             </div>
-            <h1 className="mb-6 text-5xl font-black text-[#1C1C1E] md:text-6xl lg:text-7xl">
+            <h1 className="mb-6 hyphens-auto break-words text-4xl font-black text-[#1C1C1E] md:text-6xl lg:text-7xl">
               {t('metricsPage.title')}
             </h1>
             <div className="mx-auto mb-6 h-1 w-24 bg-[#C8102E]" />

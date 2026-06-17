@@ -42,7 +42,9 @@ export function WorkshopHero({
           <span className="text-sm font-semibold text-white">{workshopProfileBadge}</span>
         </div>
 
-        <h1 className="mb-4 text-5xl font-black text-white md:text-6xl lg:text-7xl">{name}</h1>
+        <h1 className="mb-4 hyphens-auto break-words text-4xl font-black text-white md:text-6xl lg:text-7xl">
+          {name}
+        </h1>
 
         <div className="flex items-center gap-2 text-xl text-white/80">
           <MapPin className="h-5 w-5 text-[#C8102E]" />

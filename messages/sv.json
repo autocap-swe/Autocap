@@ -201,7 +201,10 @@
       "pressRelease": "Pressmeddelande",
       "industryInsights": "Branschanalys",
       "mediaCoverage": "Pressbevakning"
-    }
+    },
+    "contactHeading": "Kontakt",
+    "aboutHeading": "Om AutoCap Group",
+    "aboutBody": "AutoCap Group är en entreprenörsdriven koncern som investerar i och utvecklar däckverkstäder i Norden. Bolaget har sitt huvudkontor i Stockholm. Affärsmodellen bygger på att förvärva välskötta verkstäder och ge dem tillgång till gemensamma resurser inom flertalet områden såsom logistik, inköp, marknadsföring och utbildning. Samtidigt bevaras den lokala verkstadens entreprenörsanda. Flertalet verkstadsägare blir delägare i koncernen och fortsätter driva sina anläggningar med hög grad av autonomi. AutoCap Group lägger extra vikt vid att bevara och utveckla varje enskild verkstad och dess medarbetare."
   },
   "error": {
     "heading": "Innehållet är tillfälligt otillgängligt.",

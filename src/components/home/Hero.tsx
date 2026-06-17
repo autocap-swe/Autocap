@@ -55,7 +55,7 @@ export function Hero({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
         >
-          <h1 className="mb-6 text-5xl font-black leading-[1.1] tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-8xl">
+          <h1 className="mb-6 hyphens-auto break-words text-4xl font-black leading-[1.1] tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-8xl">
             {headline}
           </h1>
 
@@ -66,16 +66,16 @@ export function Hero({
             {subheadline}
           </p>
 
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-6">
+          <div className="mt-12 flex flex-col flex-wrap items-center justify-center gap-4 sm:flex-row sm:gap-6">
             <Link
               href={cta1Link}
-              className="inline-flex items-center gap-3 rounded-xl bg-gradient-to-r from-[#C8102E] to-[#A00D25] px-10 py-5 text-lg font-bold text-white transition-all duration-300 hover:scale-105"
+              className="inline-flex w-full items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-[#C8102E] to-[#A00D25] px-10 py-5 text-lg font-bold text-white transition-all duration-300 hover:scale-105 sm:w-auto"
             >
               {cta1Text}
             </Link>
             <Link
               href={cta2Link}
-              className="inline-flex items-center gap-3 rounded-xl border-2 border-white bg-white/10 px-10 py-5 text-lg font-bold text-white backdrop-blur-sm transition-all duration-300 hover:bg-white hover:text-gray-900"
+              className="inline-flex w-full items-center justify-center gap-3 rounded-xl border-2 border-white bg-white/10 px-10 py-5 text-lg font-bold text-white backdrop-blur-sm transition-all duration-300 hover:bg-white hover:text-gray-900 sm:w-auto"
             >
               {cta2Text}
             </Link>

@@ -4,11 +4,15 @@ import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { getArticlesContent, getArticleBySlugContent } from '@/lib/cms/article';
 import { ArticleHeader } from '@/components/news/ArticleHeader';
+import { ArticleIngress } from '@/components/news/ArticleIngress';
 import { ArticleBody } from '@/components/news/ArticleBody';
+import { ArticleContact } from '@/components/news/ArticleContact';
+import { ArticleAbout } from '@/components/news/ArticleAbout';
 import { RelatedArticles } from '@/components/news/RelatedArticles';
 import { ArticleActions } from '@/components/news/ArticleActions';
 import { ArticleLocalizedPathSetter } from '@/components/news/ArticleLocalizedPathSetter';
 import { buildMetadata } from '@/lib/cms/seo';
+import { COMPANY_INFO } from '@/lib/constants';
 
 interface ArticleDetailPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -118,8 +122,27 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
         <ArticleActions />
       </div>
 
+      {/* Ingress (lead paragraph) — leads directly into the body */}
+      {article.ingress && <ArticleIngress ingress={article.ingress} />}
+
       {/* Article Body */}
       {article.fullContent && <ArticleBody content={article.fullContent} />}
+
+      {/* About AutoCap Group boilerplate — press releases only */}
+      {article.category === 'Press Release' && <ArticleAbout />}
+
+      {/* Press contact — below the About text; fallback on press releases, opt-in elsewhere */}
+      {(article.category === 'Press Release' ||
+        article.pressContactName ||
+        article.pressContactEmail ||
+        article.pressContactPhone) && (
+        <ArticleContact
+          name={article.pressContactName}
+          email={article.pressContactEmail}
+          phone={article.pressContactPhone}
+          fallbackEmail={article.category === 'Press Release' ? COMPANY_INFO.email : undefined}
+        />
+      )}
 
       {/* Related Articles */}
       <RelatedArticles articles={article.relatedArticles ?? []} />

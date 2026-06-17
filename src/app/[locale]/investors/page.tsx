@@ -56,7 +56,7 @@ export default async function InvestorsPage({ params }: Props) {
 
       <div className="relative flex min-h-[85vh] items-center justify-center px-6 py-24 md:px-8">
         <div className="mx-auto max-w-5xl text-center">
-          <h1 className="mb-8 text-5xl font-black leading-[1.1] text-white md:text-6xl lg:text-7xl xl:text-8xl">
+          <h1 className="mb-8 hyphens-auto break-words text-4xl font-black leading-[1.1] text-white md:text-6xl lg:text-7xl xl:text-8xl">
             {cms.landingHeadline}
           </h1>
           <div className="mx-auto mb-8 h-1 w-24 bg-[#C8102E]" />

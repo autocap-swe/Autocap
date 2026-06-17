@@ -254,7 +254,7 @@ export function Header() {
               {/* Language Selector in Mobile Menu */}
               {process.env.NEXT_PUBLIC_ENABLE_SV === 'true' && (
                 <div className="border-t border-gray-200 pt-4 mt-4">
-                  <LanguageSelector className="justify-center" />
+                  <LanguageSelector variant="inline" onSelect={() => setMobileMenuOpen(false)} />
                 </div>
               )}
             </div>
