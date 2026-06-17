@@ -46,7 +46,7 @@ export default async function WhyAutoCapPage({ params }: { params: Promise<{ loc
                 <span className="text-sm font-semibold text-[#C8102E]">{cms.whyPageBadge}</span>
               </div>
             )}
-            <h1 className="mb-6 text-5xl font-black text-[#1C1C1E] md:text-6xl lg:text-7xl">
+            <h1 className="mb-6 hyphens-auto break-words text-4xl font-black text-[#1C1C1E] md:text-6xl lg:text-7xl">
               {cms.whyPageTitle}
             </h1>
             <div className="mx-auto mb-6 h-1 w-24 bg-[#C8102E]" />

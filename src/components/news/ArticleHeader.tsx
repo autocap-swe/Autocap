@@ -1,14 +1,28 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import type { NewsArticle } from '@/lib/cms/article/types';
+import type { HeroImageFocus, NewsArticle } from '@/lib/cms/article/types';
 import { NewsCategoryBadge } from './NewsCategoryBadge';
 
 interface ArticleHeaderProps {
   article: NewsArticle;
 }
 
+// Full class names so Tailwind keeps them (no dynamic string building)
+const FOCUS_CLASS: Record<HeroImageFocus, string> = {
+  center: 'object-center',
+  top: 'object-top',
+  bottom: 'object-bottom',
+  left: 'object-left',
+  right: 'object-right',
+  'top-left': 'object-left-top',
+  'top-right': 'object-right-top',
+  'bottom-left': 'object-left-bottom',
+  'bottom-right': 'object-right-bottom',
+};
+
 export function ArticleHeader({ article }: ArticleHeaderProps) {
   const t = useTranslations('news');
+  const focusClass = FOCUS_CLASS[article.heroImageFocus ?? 'center'];
 
   const formatDate = (dateString: string): string => {
     const date = new Date(dateString);
@@ -28,7 +42,7 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
           <div className="mb-6">
             <NewsCategoryBadge category={article.category} />
           </div>
-          <h1 className="mb-8 text-3xl font-black text-[#1C1C1E] sm:text-4xl md:text-5xl lg:text-6xl">
+          <h1 className="mb-8 hyphens-auto break-words text-3xl font-black text-[#1C1C1E] sm:text-4xl md:text-5xl lg:text-6xl">
             {article.title}
           </h1>
           <div className="flex flex-col gap-1 text-base text-gray-600">
@@ -52,7 +66,7 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
           src={article.imageUrl!}
           alt={article.title}
           fill
-          className="object-cover object-center"
+          className={`object-cover ${focusClass}`}
           priority
           sizes="100vw"
         />
@@ -63,7 +77,7 @@ export function ArticleHeader({ article }: ArticleHeaderProps) {
         <div className="mb-6">
           <NewsCategoryBadge category={article.category} />
         </div>
-        <h1 className="mb-8 text-5xl font-black text-white md:text-6xl lg:text-7xl">
+        <h1 className="mb-8 hyphens-auto break-words text-4xl font-black text-white md:text-6xl lg:text-7xl">
           {article.title}
         </h1>
         <div className="flex flex-col gap-1 text-base text-white/80">

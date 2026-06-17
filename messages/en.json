@@ -201,7 +201,10 @@
       "pressRelease": "Press Release",
       "industryInsights": "Industry Insights",
       "mediaCoverage": "Media Coverage"
-    }
+    },
+    "contactHeading": "Contact",
+    "aboutHeading": "About AutoCap Group",
+    "aboutBody": "AutoCap Group is an entrepreneur-driven group that invests in and develops tire service centres across the Nordics. The company is headquartered in Stockholm. The business model is built on acquiring well-run workshops and giving them access to shared resources across several areas such as logistics, purchasing, marketing and training. At the same time, the local workshop's entrepreneurial spirit is preserved. Most workshop owners become co-owners in the group and continue to run their operations with a high degree of autonomy. AutoCap Group places particular emphasis on preserving and developing each individual workshop and its employees."
   },
   "error": {
     "heading": "Content temporarily unavailable.",

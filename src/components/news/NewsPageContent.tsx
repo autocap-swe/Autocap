@@ -27,7 +27,7 @@ export function NewsPageContent({ articles }: NewsPageContentProps) {
     <main className="min-h-screen bg-gray-50">
       <section className="relative flex min-h-[60vh] items-center justify-center px-6 py-24 md:px-8">
         <div className="mx-auto max-w-5xl text-center">
-          <h1 className="mb-8 text-5xl font-black leading-[1.1] text-[#1C1C1E] md:text-6xl lg:text-7xl xl:text-8xl">
+          <h1 className="mb-8 hyphens-auto break-words text-4xl font-black leading-[1.1] text-[#1C1C1E] md:text-6xl lg:text-7xl xl:text-8xl">
             {t('title')}
           </h1>
 

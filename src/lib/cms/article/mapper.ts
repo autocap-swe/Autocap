@@ -58,10 +58,15 @@ export function articleMapper(cms: CmsArticle): NewsArticle {
     title: cms.title,
     slug: cms.slug,
     excerpt: cms.excerpt,
+    ingress: cms.ingress,
+    pressContactName: cms.pressContactName,
+    pressContactEmail: cms.pressContactEmail,
+    pressContactPhone: cms.pressContactPhone,
     publishDate: cms.publishDate,
     author: cms.author,
     category: cms.category,
     imageUrl: resolveUrl(cms.heroImage?.url),
+    heroImageFocus: cms.heroImageFocus,
     readTimeMinutes: cms.readTimeMinutes,
     fullContent: cms.fullContent
       ? cms.fullContent.map(mapBlock).filter((b): b is ArticleContentBlock => b !== null)

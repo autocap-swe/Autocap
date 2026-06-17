@@ -57,6 +57,18 @@ interface CmsLocalization {
   locale: string;
 }
 
+// Hero image crop focus → maps to CSS object-position on the frontend
+export type HeroImageFocus =
+  | 'center'
+  | 'top'
+  | 'bottom'
+  | 'left'
+  | 'right'
+  | 'top-left'
+  | 'top-right'
+  | 'bottom-left'
+  | 'bottom-right';
+
 // Strapi shape — what GET /api/articles returns per item
 export interface CmsArticle {
   id: number;
@@ -65,10 +77,15 @@ export interface CmsArticle {
   title: string;
   slug: string;
   excerpt: string;
+  ingress?: string;
+  pressContactName?: string;
+  pressContactEmail?: string;
+  pressContactPhone?: string;
   publishDate: string;
   author: string;
   category: 'Company News' | 'Press Release' | 'Industry Insights' | 'Media Coverage';
   heroImage: { url: string } | null;
+  heroImageFocus?: HeroImageFocus;
   readTimeMinutes: number;
   fullContent?: CmsArticleBlock[];
   relatedArticles?: CmsArticle[];
@@ -128,10 +145,15 @@ export interface NewsArticle {
   id: number;
   title: string;
   excerpt: string;
+  ingress?: string;
+  pressContactName?: string;
+  pressContactEmail?: string;
+  pressContactPhone?: string;
   publishDate: string;
   author: string;
   category: 'Company News' | 'Press Release' | 'Industry Insights' | 'Media Coverage';
   imageUrl?: string;
+  heroImageFocus?: HeroImageFocus;
   slug: string;
   readTimeMinutes: number;
   fullContent?: ArticleContentBlock[];

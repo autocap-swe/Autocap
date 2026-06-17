@@ -45,7 +45,7 @@ export default async function InvestorsWhyPage({
                 {pillars.length > 0 ? `${pillars.length} Investment Pillars` : t('whyPage.badge')}
               </span>
             </div>
-            <h1 className="mb-6 text-5xl font-black text-[#1C1C1E] md:text-6xl lg:text-7xl">
+            <h1 className="mb-6 hyphens-auto break-words text-4xl font-black text-[#1C1C1E] md:text-6xl lg:text-7xl">
               {t('whyPage.title')}
             </h1>
             <div className="mx-auto mb-6 h-1 w-24 bg-[#C8102E]" />

@@ -9,6 +9,14 @@ import { trackLanguageSwitch } from '@/lib/analytics';
 
 interface LanguageSelectorProps {
   className?: string;
+  /**
+   * 'dropdown' (default) renders a floating toggle menu — used on desktop.
+   * 'inline' renders both languages as always-visible rows — used inside the
+   * mobile menu, where a floating dropdown gets clipped by the scroll container.
+   */
+  variant?: 'dropdown' | 'inline';
+  /** Fired after a language is chosen — e.g. to close the mobile menu. */
+  onSelect?: () => void;
 }
 
 type Language = 'en' | 'sv';
@@ -38,7 +46,11 @@ const languages: Record<Language, { flag: React.ReactNode; label: string }> = {
 
 const svEnabled = process.env.NEXT_PUBLIC_ENABLE_SV === 'true';
 
-export function LanguageSelector({ className = '' }: LanguageSelectorProps) {
+export function LanguageSelector({
+  className = '',
+  variant = 'dropdown',
+  onSelect,
+}: LanguageSelectorProps) {
   const currentLocale = useLocale() as Language;
   const router = useRouter();
   const pathname = usePathname();
@@ -61,11 +73,47 @@ export function LanguageSelector({ className = '' }: LanguageSelectorProps) {
 
   const handleLanguageSelect = (lang: Language) => {
     setIsOpen(false);
+    onSelect?.();
     if (lang === currentLocale) return;
     trackLanguageSwitch(currentLocale, lang);
     const targetPath = localizedPaths[lang] ?? pathname;
     router.push(targetPath, { locale: lang });
   };
+
+  if (variant === 'inline') {
+    return (
+      <div
+        role="group"
+        aria-label="Language selector"
+        className={`flex flex-col gap-1 ${className}`.trim()}
+      >
+        {(Object.entries(languages) as [Language, { flag: React.ReactNode; label: string }][]).map(
+          ([code, { flag, label }]) => (
+            <button
+              key={code}
+              type="button"
+              onClick={() => handleLanguageSelect(code)}
+              aria-label={label}
+              aria-current={currentLocale === code ? 'true' : undefined}
+              className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-base font-medium transition-colors ${
+                currentLocale === code
+                  ? 'bg-gray-50 text-[#C8102E] font-semibold'
+                  : 'text-gray-700 hover:bg-gray-100'
+              }`}
+            >
+              <span aria-hidden="true">{flag}</span>
+              <span>{label}</span>
+              {currentLocale === code && (
+                <span className="ml-auto text-[#C8102E]" aria-hidden="true">
+                  ✓
+                </span>
+              )}
+            </button>
+          )
+        )}
+      </div>
+    );
+  }
 
   return (
     <div
