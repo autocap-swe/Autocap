@@ -3,10 +3,17 @@ import { REVALIDATE_LOW } from '../revalidate';
 import type { CmsArticle, NewsArticle } from './types';
 import { articlesMapper } from './mapper';
 
+// TEMP: Swedish news article translations are placeholder garbage ("swe_…") in
+// production. Until real Swedish translations are entered, always serve the
+// English article content (even on /sv routes). Flip to false to restore
+// per-locale fetching once translations are in.
+const FORCE_EN_NEWS_CONTENT = true;
+
 export async function getArticlesContent(
   revalidate = REVALIDATE_LOW,
   locale?: string
 ): Promise<NewsArticle[]> {
+  const effectiveLocale = FORCE_EN_NEWS_CONTENT ? 'en' : locale;
   const options = {
     revalidate,
     tags: ['news-articles'],
@@ -20,10 +27,10 @@ export async function getArticlesContent(
 
   const results = await getContent<CmsArticle[], NewsArticle[]>('news-articles', {
     ...options,
-    locale,
+    locale: effectiveLocale,
   });
 
-  if (results.length === 0 && locale && locale !== 'en') {
+  if (results.length === 0 && effectiveLocale && effectiveLocale !== 'en') {
     return getContent<CmsArticle[], NewsArticle[]>('news-articles', {
       ...options,
       locale: 'en',
@@ -38,8 +45,11 @@ export async function getArticleBySlugContent(
   revalidate = REVALIDATE_LOW,
   locale?: string
 ): Promise<NewsArticle | null> {
+  const effectiveLocale = FORCE_EN_NEWS_CONTENT ? 'en' : locale;
   const localeTag =
-    locale && locale !== 'en' ? `news-article:${slug}:${locale}` : `news-article:${slug}:en`;
+    effectiveLocale && effectiveLocale !== 'en'
+      ? `news-article:${slug}:${effectiveLocale}`
+      : `news-article:${slug}:en`;
   const params = {
     'filters[slug][$eq]': slug,
     'populate[fullContent][on][article.paragraph][populate]': '*',
@@ -61,10 +71,10 @@ export async function getArticleBySlugContent(
     tags: ['news-articles', `news-article:${slug}`, localeTag],
     params,
     mapper: articlesMapper,
-    locale,
+    locale: effectiveLocale,
   });
 
-  if (!results[0] && locale && locale !== 'en') {
+  if (!results[0] && effectiveLocale && effectiveLocale !== 'en') {
     return getContent<CmsArticle[], NewsArticle[]>('news-articles', {
       revalidate,
       tags: ['news-articles', `news-article:${slug}`, `news-article:${slug}:en`],
