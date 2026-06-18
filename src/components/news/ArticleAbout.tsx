@@ -11,10 +11,10 @@ export function ArticleAbout() {
   return (
     <section className="mx-auto max-w-3xl px-4 pb-6 sm:px-6">
       <div className="border-t border-gray-200 pt-6">
-        <h2 className="mb-2 text-sm font-bold uppercase tracking-wide text-[#1C1C1E]">
+        <h2 className="mb-2 text-[10px] font-bold uppercase tracking-wide text-[#1C1C1E]">
           {t('aboutHeading')}
         </h2>
-        <p className="text-sm leading-relaxed text-gray-500">{t('aboutBody')}</p>
+        <p className="text-[10px] leading-relaxed text-gray-500">{t('aboutBody')}</p>
       </div>
     </section>
   );
