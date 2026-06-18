@@ -17,13 +17,13 @@ export function ArticleContact({ name, email, phone, fallbackEmail }: ArticleCon
   const effectiveEmail = email ?? fallbackEmail;
 
   return (
-    <section className="mx-auto max-w-3xl px-4 pt-6 pb-12 sm:px-6">
-      <div className="rounded-xl border border-gray-200 bg-gray-50 p-6">
-        <h2 className="mb-3 text-sm font-bold uppercase tracking-wide text-[#C8102E]">
+    <section className="mx-auto max-w-3xl px-4 pb-10 sm:px-6">
+      <div className="border-t border-gray-200 pt-6">
+        <h2 className="mb-2 text-[10px] font-bold uppercase tracking-wide text-[#C8102E]">
           {t('contactHeading')}
         </h2>
-        <div className="space-y-1 text-base text-[#1C1C1E]">
-          {name && <p className="font-semibold">{name}</p>}
+        <div className="space-y-0.5 text-[10px] leading-relaxed text-gray-500">
+          {name && <p className="font-semibold text-[#1C1C1E]">{name}</p>}
           {effectiveEmail && (
             <p>
               <a href={`mailto:${effectiveEmail}`} className="text-[#C8102E] hover:underline">
