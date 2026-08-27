@@ -88,6 +88,60 @@ describe('groupWorkshopsByCoordinate', () => {
     expect(groupWorkshopsByCoordinate(workshops)).toHaveLength(2);
   });
 
+  // Distances at Mölndal's latitude: 1e-5° of latitude is 1.11 m, 1e-5° of
+  // longitude is 0.60 m. The grouping key rounds to 5 decimals, so the
+  // threshold sits at roughly one metre.
+  const METRES_PER_DEGREE_LAT = 111132;
+
+  function metresNorth(latitude: number, metres: number): number {
+    return latitude + metres / METRES_PER_DEGREE_LAT;
+  }
+
+  it('groups workshops that are sub-metre apart', () => {
+    const workshops = [
+      makeWorkshop({ id: 1, latitude: 57.6557 }),
+      makeWorkshop({ id: 2, latitude: metresNorth(57.6557, 0.5) }),
+    ];
+
+    expect(groupWorkshopsByCoordinate(workshops)).toHaveLength(1);
+  });
+
+  it('keeps workshops a couple of metres apart separate', () => {
+    const workshops = [
+      makeWorkshop({ id: 1, latitude: 57.6557 }),
+      makeWorkshop({ id: 2, latitude: metresNorth(57.6557, 2) }),
+    ];
+
+    expect(groupWorkshopsByCoordinate(workshops)).toHaveLength(2);
+  });
+
+  it('keeps neighbouring addresses separate', () => {
+    const workshops = [
+      makeWorkshop({ id: 1, latitude: 57.6557 }),
+      makeWorkshop({ id: 2, latitude: metresNorth(57.6557, 50) }),
+    ];
+
+    // 50 m apart is two markers — they overlap visually at low zoom, which is
+    // zoom-level clustering's job, not this function's.
+    expect(groupWorkshopsByCoordinate(workshops)).toHaveLength(2);
+  });
+
+  it('buckets by a rounding grid, so the threshold is not a true radius', () => {
+    // 1.11 m apart, but both round to the same key
+    const sameBucket = [
+      makeWorkshop({ id: 1, latitude: 57.655745 }),
+      makeWorkshop({ id: 2, latitude: 57.655755 }),
+    ];
+    expect(groupWorkshopsByCoordinate(sameBucket)).toHaveLength(1);
+
+    // 0.89 m apart, but they straddle a grid line
+    const straddling = [
+      makeWorkshop({ id: 3, latitude: 57.655751 }),
+      makeWorkshop({ id: 4, latitude: 57.655759 }),
+    ];
+    expect(groupWorkshopsByCoordinate(straddling)).toHaveLength(2);
+  });
+
   // AC-006
   it('returns no groups for an empty list', () => {
     expect(groupWorkshopsByCoordinate([])).toEqual([]);

@@ -308,6 +308,34 @@ function so it is unit-tested without a layout engine.
 
 ---
 
+## 11.3 Behaviour at different zoom levels
+
+Grouping runs once, over the data, before any marker reaches the map — it is
+independent of zoom. Concretely:
+
+| Action                      | What happens                                                                                                                     |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Zoom in on a grouped marker | Nothing changes; it stays one marker with its badge, at every zoom level                                                         |
+| Zoom out                    | Markers that are near each other but not grouped do **not** merge; they keep overlapping visually, exactly as before this change |
+| Two workshops ~0.5 m apart  | One marker — they round into the same key                                                                                        |
+| Two workshops ~2 m apart    | Two markers, overlapping until the map is zoomed to street level                                                                 |
+| Two workshops 50 m apart    | Two markers                                                                                                                      |
+
+The threshold is the 5-decimal rounding key: at Mölndal's latitude 1e-5° is
+1.11 m of latitude and 0.60 m of longitude. Because it is a rounding grid and
+not a radius, the cut is not exact — two points 1.11 m apart can share a bucket
+while two points 0.89 m apart can straddle a grid line and split. Covered by
+tests in `groupWorkshopsByCoordinate.test.ts`.
+
+This solves coincident coordinates, which is what §1.2 set out to do. It does
+not solve markers that merely look overlapped when zoomed out — that needs
+zoom-level clustering (Mapbox's `cluster: true` on a GeoJSON source, backed by
+supercluster), listed as a non-goal in §1.3. The two are complementary:
+clustering merges by distance on screen and splits as you zoom in, while this
+grouping holds workshops that share one address together at every zoom.
+
+---
+
 ## 12. Open Questions
 
 - [ ] Should the grouped popup show each workshop's status badge (acquired / pending / target), or keep it to name + link?
