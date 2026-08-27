@@ -291,6 +291,13 @@ production the plain error message is unchanged.
 Marker and popup markup moved to `workshopMarkerContent.ts` so the map and the
 fallback share one implementation rather than a lookalike copy.
 
+The plane supports zoom and pan so overlapping pins can be told apart: `+` / `−`
+buttons, wheel zoom about the cursor, and drag to move, capped at 8×, with a
+"Reset view" control once the view has moved. Zoom scales positions only — pins
+keep their size, as map markers do. The maths lives in `pinPlaneView.ts` as pure
+functions over a `{ scale, x, y }` view expressed in percentages of the plane,
+so it is unit-tested without a layout engine.
+
 The popup anchors the way Mapbox GL does when no `anchor` is set: below the pin
 while it fits, above it otherwise, and pulled towards the nearer side when
 centring would push it past a horizontal edge, with a pointer tip that stays

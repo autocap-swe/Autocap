@@ -129,6 +129,47 @@ describe('WorkshopPinPlane', () => {
     expect(parseFloat(slot.style.top)).toBeCloseTo(50, 5);
   });
 
+  it('spreads the pins apart when zoomed in, without resizing them', () => {
+    const { container } = render(<WorkshopPinPlane workshops={[...molndalTrio, bromma]} />);
+
+    const positions = () =>
+      Array.from(container.querySelectorAll<HTMLElement>('.marker-slot')).map(slot =>
+        parseFloat(slot.style.left)
+      );
+
+    const [beforeA, beforeB] = positions();
+    const markerSize = (container.querySelector('.workshop-marker') as HTMLElement).style.width;
+
+    fireEvent.click(screen.getByLabelText('Zoom in'));
+
+    const [afterA, afterB] = positions();
+    expect(Math.abs(afterA - afterB)).toBeGreaterThan(Math.abs(beforeA - beforeB));
+    // Pins keep their size — only their positions scale, as on a real map
+    expect((container.querySelector('.workshop-marker') as HTMLElement).style.width).toBe(
+      markerSize
+    );
+  });
+
+  it('offers a reset once the view has moved, and hides it again', () => {
+    render(<WorkshopPinPlane workshops={[...molndalTrio, bromma]} />);
+
+    expect(screen.queryByText('Reset view')).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByLabelText('Zoom in'));
+    expect(screen.getByText('Reset view')).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText('Reset view'));
+    expect(screen.queryByText('Reset view')).not.toBeInTheDocument();
+  });
+
+  it('disables zoom out at the starting view', () => {
+    render(<WorkshopPinPlane workshops={[...molndalTrio, bromma]} />);
+
+    expect(screen.getByLabelText('Zoom out')).toBeDisabled();
+    fireEvent.click(screen.getByLabelText('Zoom in'));
+    expect(screen.getByLabelText('Zoom out')).toBeEnabled();
+  });
+
   it('renders nothing but the notice for an empty workshop list', () => {
     const { container } = render(<WorkshopPinPlane workshops={[]} />);
 
