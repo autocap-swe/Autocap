@@ -72,7 +72,7 @@ describe('WorkshopPinPlane', () => {
     fireEvent.click(pin);
     const popup = openPopup(container)!;
     expect(popup.textContent).toContain('3 workshops at this location');
-    expect(popup.style.left).toMatch(/%$/);
+    expect(popup.style.left).toMatch(/px$/);
 
     fireEvent.click(pin);
     expect(openPopup(container)).toBeNull();
@@ -84,6 +84,41 @@ describe('WorkshopPinPlane', () => {
     fireEvent.click(pin);
     fireEvent.keyDown(document, { key: 'Escape' });
     expect(openPopup(container)).toBeNull();
+  });
+
+  it('anchors the popup above and beside a pin near the bottom-left corner', () => {
+    // jsdom reports every box as 0×0, so feed the component real dimensions.
+    // Mölndal is the southernmost workshop, so its pin sits near the bottom of
+    // the plane where a popup below would overflow but one above fits.
+    const sizes = { clientWidth: 800, clientHeight: 600, offsetWidth: 240, offsetHeight: 180 };
+    const originals = Object.keys(sizes).map(prop => [
+      prop,
+      Object.getOwnPropertyDescriptor(HTMLElement.prototype, prop),
+    ]) as [string, PropertyDescriptor | undefined][];
+
+    Object.entries(sizes).forEach(([prop, value]) => {
+      Object.defineProperty(HTMLElement.prototype, prop, {
+        configurable: true,
+        get: () => value,
+      });
+    });
+
+    try {
+      const { container } = render(<WorkshopPinPlane workshops={[...molndalTrio, bromma]} />);
+      fireEvent.click(container.querySelector('.workshop-marker-badge')!.parentElement!);
+
+      const popup = openPopup(container)!;
+      // Mölndal is both the southernmost and the westernmost pin, so the popup
+      // flips above it and is pulled right so it does not cross the left edge.
+      expect(popup.dataset.anchor).toBe('bottom-left');
+      expect(popup.style.transform).toBe('translateX(-22px) translateY(calc(-100% - 25px))');
+      expect(parseFloat(popup.style.top)).toBeGreaterThan(400);
+      expect(parseFloat(popup.style.left)).toBeLessThan(120);
+    } finally {
+      originals.forEach(([prop, descriptor]) => {
+        if (descriptor) Object.defineProperty(HTMLElement.prototype, prop, descriptor);
+      });
+    }
   });
 
   it('handles a single workshop without collapsing the projection', () => {

@@ -291,6 +291,12 @@ production the plain error message is unchanged.
 Marker and popup markup moved to `workshopMarkerContent.ts` so the map and the
 fallback share one implementation rather than a lookalike copy.
 
+The popup anchors the way Mapbox GL does when no `anchor` is set: below the pin
+while it fits, above it otherwise, and pulled towards the nearer side when
+centring would push it past a horizontal edge, with a pointer tip that stays
+over the pin. `resolvePopupAnchor` in `popupAnchor.ts` holds that rule as a pure
+function so it is unit-tested without a layout engine.
+
 ### 11.2 Checklist
 
 - [ ] Implementation complete

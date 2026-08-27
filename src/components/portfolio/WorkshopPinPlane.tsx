@@ -1,12 +1,13 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import type { Workshop } from '@/lib/cms/workshop/types';
 import {
   groupWorkshopsByCoordinate,
   type WorkshopLocationGroup,
 } from './groupWorkshopsByCoordinate';
 import { buildMarkerElement, buildPopupHtml } from './workshopMarkerContent';
+import { anchorStyle, resolvePopupAnchor, tipStyle, type PopupAnchor } from './popupAnchor';
 
 interface WorkshopPinPlaneProps {
   workshops: Workshop[];
@@ -47,20 +48,6 @@ function projectPercent(bounds: Bounds, latitude: number, longitude: number) {
 }
 
 /**
- * Places the popup under its pin, flipping above it in the lower half so it
- * stays inside the plane — the same behaviour Mapbox popups have.
- */
-function popupAnchor(bounds: Bounds, latitude: number, longitude: number): CSSProperties {
-  const { x, y } = projectPercent(bounds, latitude, longitude);
-
-  return {
-    left: `${x}%`,
-    top: `${y}%`,
-    transform: y > 55 ? 'translate(-50%, calc(-100% - 22px))' : 'translate(-50%, 22px)',
-  };
-}
-
-/**
  * Renders the portfolio map's pins and popups without map tiles.
  *
  * Used when Mapbox cannot load — most often on preview deployments, where the
@@ -75,6 +62,42 @@ export function WorkshopPinPlane({ workshops }: WorkshopPinPlaneProps) {
 
   const groups = useMemo(() => groupWorkshopsByCoordinate(workshops), [workshops]);
   const bounds = useMemo(() => (groups.length ? boundsOf(groups) : null), [groups]);
+  const [anchor, setAnchor] = useState<PopupAnchor>({ vertical: 'top', horizontal: 'center' });
+
+  const openGroup = groups.find(group => group.key === openKey) ?? null;
+
+  const pinPixels = useCallback(
+    (group: WorkshopLocationGroup) => {
+      const plane = planeRef.current;
+      if (!plane || !bounds) return null;
+
+      const { x, y } = projectPercent(bounds, group.latitude, group.longitude);
+      return {
+        pinX: (x / 100) * plane.clientWidth,
+        pinY: (y / 100) * plane.clientHeight,
+        planeWidth: plane.clientWidth,
+        planeHeight: plane.clientHeight,
+      };
+    },
+    [bounds]
+  );
+
+  // Measure before paint so the popup never appears at the wrong anchor first.
+  useLayoutEffect(() => {
+    const popup = popupRef.current;
+    if (!openGroup || !popup) return;
+
+    const pin = pinPixels(openGroup);
+    if (!pin) return;
+
+    setAnchor(
+      resolvePopupAnchor({
+        ...pin,
+        popupWidth: popup.offsetWidth,
+        popupHeight: popup.offsetHeight,
+      })
+    );
+  }, [openGroup, pinPixels]);
 
   useEffect(() => {
     const plane = planeRef.current;
@@ -119,7 +142,7 @@ export function WorkshopPinPlane({ workshops }: WorkshopPinPlaneProps) {
     };
   }, []);
 
-  const openGroup = groups.find(group => group.key === openKey) ?? null;
+  const openPin = openGroup ? pinPixels(openGroup) : null;
 
   return (
     <div className="w-full">
@@ -141,14 +164,27 @@ export function WorkshopPinPlane({ workshops }: WorkshopPinPlaneProps) {
             );
           })}
 
-        {bounds && openGroup && (
+        {openGroup && (
           <div
             ref={popupRef}
+            data-testid="workshop-pin-popup"
+            data-anchor={`${anchor.vertical}-${anchor.horizontal}`}
             className="absolute z-10 w-max max-w-[260px]"
-            style={popupAnchor(bounds, openGroup.latitude, openGroup.longitude)}
+            style={anchorStyle(openPin?.pinX ?? 0, openPin?.pinY ?? 0, anchor)}
           >
+            <span
+              aria-hidden="true"
+              className="absolute h-[10px] w-[10px] rotate-45 border border-gray-200 bg-white"
+              style={{
+                ...tipStyle(anchor),
+                borderRightColor: anchor.vertical === 'top' ? 'transparent' : undefined,
+                borderBottomColor: anchor.vertical === 'top' ? 'transparent' : undefined,
+                borderLeftColor: anchor.vertical === 'bottom' ? 'transparent' : undefined,
+                borderTopColor: anchor.vertical === 'bottom' ? 'transparent' : undefined,
+              }}
+            />
             <div
-              className="rounded-lg border border-gray-200 bg-white shadow-xl"
+              className="relative rounded-lg border border-gray-200 bg-white shadow-xl"
               dangerouslySetInnerHTML={{ __html: buildPopupHtml(openGroup) }}
             />
           </div>
