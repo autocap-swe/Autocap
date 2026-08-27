@@ -142,6 +142,32 @@ describe('groupWorkshopsByCoordinate', () => {
     expect(groupWorkshopsByCoordinate(straddling)).toHaveLength(2);
   });
 
+  // The CMS stores latitude and longitude as Strapi's `decimal` type, which
+  // Strapi creates as decimal(10, 2) — two decimal places. At this latitude one
+  // step of 0.01° is 1111 m north-south and 595 m east-west, so the CMS cannot
+  // express two addresses closer than that as different coordinates.
+  describe('with coordinates as the CMS stores them', () => {
+    it('treats two buildings across the street as one location', () => {
+      // 12.0138 and 12.0141 are ~20 m apart but both save as 12.01
+      const workshops = [
+        makeWorkshop({ id: 1, latitude: 57.66, longitude: 12.01 }),
+        makeWorkshop({ id: 2, latitude: 57.66, longitude: 12.01 }),
+      ];
+
+      expect(groupWorkshopsByCoordinate(workshops)).toHaveLength(1);
+    });
+
+    it('separates coordinates that differ by one CMS step', () => {
+      const workshops = [
+        makeWorkshop({ id: 1, latitude: 57.66, longitude: 12.01 }),
+        makeWorkshop({ id: 2, latitude: 57.66, longitude: 12.02 }),
+        makeWorkshop({ id: 3, latitude: 57.66, longitude: 12.03 }),
+      ];
+
+      expect(groupWorkshopsByCoordinate(workshops)).toHaveLength(3);
+    });
+  });
+
   // AC-006
   it('returns no groups for an empty list', () => {
     expect(groupWorkshopsByCoordinate([])).toEqual([]);
