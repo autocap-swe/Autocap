@@ -275,6 +275,24 @@ None.
 
 ## 11. Rollout Plan
 
+### 11.1 Tile-less fallback
+
+The Mapbox public token is URL-restricted to `autocapgroup.se`,
+`www.autocapgroup.se` and `autocapgroup.ministryofprogramming.io`, so the map
+canvas cannot render on a preview deployment — a reviewer opening `/portfolio`
+would only see the "We're having trouble loading the map" box.
+
+When the map fails and `NEXT_PUBLIC_VERCEL_ENV` is not `production`,
+`WorkshopMap` renders `WorkshopPinPlane` instead: the same pins and popups,
+built by the same `buildMarkerElement` and `buildPopupHtml`, positioned by a
+linear projection of the workshop coordinates rather than by map tiles. In
+production the plain error message is unchanged.
+
+Marker and popup markup moved to `workshopMarkerContent.ts` so the map and the
+fallback share one implementation rather than a lookalike copy.
+
+### 11.2 Checklist
+
 - [ ] Implementation complete
 - [ ] All tests passing
 - [ ] Quality gates passed

@@ -1,4 +1,4 @@
-import { act, render } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import type { Workshop } from '@/lib/cms/workshop/types';
 
 interface MockPopup {
@@ -156,6 +156,7 @@ function flushMapInit() {
 
 describe('WorkshopMap', () => {
   const originalToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
+  const originalVercelEnv = process.env.NEXT_PUBLIC_VERCEL_ENV;
 
   beforeEach(() => {
     jest.useFakeTimers();
@@ -168,6 +169,7 @@ describe('WorkshopMap', () => {
   afterEach(() => {
     jest.useRealTimers();
     process.env.NEXT_PUBLIC_MAPBOX_TOKEN = originalToken;
+    process.env.NEXT_PUBLIC_VERCEL_ENV = originalVercelEnv;
   });
 
   // AC-002 / AC-004
@@ -301,6 +303,28 @@ describe('WorkshopMap', () => {
     });
 
     expect(trackMock).toHaveBeenCalledWith('Mölndals Däckservice', 'molndals-dackservice');
+  });
+
+  it('falls back to the pin plane when the map cannot load outside production', () => {
+    delete process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
+
+    const { container } = render(<WorkshopMap workshops={molndalTrio} />);
+    flushMapInit();
+
+    expect(screen.getByTestId('workshop-pin-plane')).toBeInTheDocument();
+    expect(container.querySelector('.workshop-marker-badge')?.textContent).toBe('3');
+    expect(screen.queryByText(/having trouble loading the map/)).not.toBeInTheDocument();
+  });
+
+  it('keeps the plain error message in production', () => {
+    delete process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
+    process.env.NEXT_PUBLIC_VERCEL_ENV = 'production';
+
+    render(<WorkshopMap workshops={molndalTrio} />);
+    flushMapInit();
+
+    expect(screen.getByText(/having trouble loading the map/)).toBeInTheDocument();
+    expect(screen.queryByTestId('workshop-pin-plane')).not.toBeInTheDocument();
   });
 
   // AC-006
