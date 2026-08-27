@@ -212,6 +212,34 @@ describe('WorkshopMap', () => {
     expect(markers[0].lngLat).toEqual([bromma.longitude, bromma.latitude]);
   });
 
+  it('gives each workshop a single line, with the name as the link', () => {
+    render(<WorkshopMap workshops={molndalTrio} />);
+    flushMapInit();
+
+    const html = markers[0].popupHtml ?? '';
+    // No separate "View details" row per entry — that doubled the popup height
+    expect(html).not.toContain('View details');
+    molndalTrio.forEach(workshop => {
+      expect(html).toContain(`>${workshop.name}</a>`);
+    });
+  });
+
+  it('trims stray whitespace out of the location heading', () => {
+    render(
+      <WorkshopMap
+        workshops={[
+          makeWorkshop({ id: 7, city: 'Mölndal ', region: ' Västra Götaland' }),
+          makeWorkshop({ id: 8, city: 'Mölndal ', region: ' Västra Götaland' }),
+        ]}
+      />
+    );
+    flushMapInit();
+
+    const html = markers[0].popupHtml ?? '';
+    expect(html).toContain('Mölndal, Västra Götaland');
+    expect(html).not.toContain('Mölndal ,');
+  });
+
   // AC-007
   it('escapes HTML characters in popup content', () => {
     render(

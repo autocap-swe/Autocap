@@ -21,7 +21,8 @@ function escapeHtml(value: string): string {
 
 export function buildPopupHtml(group: WorkshopLocationGroup): string {
   const [first] = group.workshops;
-  const location = escapeHtml(`${first.city}, ${first.region}`);
+  // CMS values occasionally carry stray whitespace, e.g. "Mölndal , Västra Götaland".
+  const location = escapeHtml([first.city, first.region].map(part => part.trim()).join(', '));
 
   if (group.workshops.length === 1) {
     return `
@@ -33,12 +34,13 @@ export function buildPopupHtml(group: WorkshopLocationGroup): string {
     `;
   }
 
+  // One line per workshop — the name is the link. Two-line entries made a
+  // three-workshop popup tall enough that Mapbox flipped it far above the pin.
   const entries = group.workshops
     .map(
       workshop => `
-        <li style="padding: 8px 0; border-top: 1px solid #E5E5E5;">
-          <p style="font-weight: 600; margin-bottom: 2px; color: #1C1C1E;">${escapeHtml(workshop.name)}</p>
-          <a href="/portfolio/${encodeURIComponent(workshop.slug)}" data-workshop-name="${escapeHtml(workshop.name)}" data-workshop-slug="${escapeHtml(workshop.slug)}" style="color: ${BRAND_RED}; font-weight: 500; font-size: 14px;">View details</a>
+        <li style="border-top: 1px solid #E5E5E5;">
+          <a href="/portfolio/${encodeURIComponent(workshop.slug)}" data-workshop-name="${escapeHtml(workshop.name)}" data-workshop-slug="${escapeHtml(workshop.slug)}" style="display: block; padding: 7px 0; color: ${BRAND_RED}; font-weight: 600; font-size: 14px; line-height: 1.3;">${escapeHtml(workshop.name)}</a>
         </li>
       `
     )
@@ -48,7 +50,7 @@ export function buildPopupHtml(group: WorkshopLocationGroup): string {
     <div style="padding: 8px; max-width: 240px;">
       <h3 style="font-weight: 600; margin-bottom: 2px; color: #1C1C1E;">${location}</h3>
       <p style="color: #666; font-size: 13px;">${group.workshops.length} workshops at this location</p>
-      <ul style="list-style: none; margin: 4px 0 0; padding: 0; max-height: 200px; overflow-y: auto;">${entries}</ul>
+      <ul style="list-style: none; margin: 4px 0 0; padding: 0; max-height: 176px; overflow-y: auto;">${entries}</ul>
     </div>
   `;
 }
