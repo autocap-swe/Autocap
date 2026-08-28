@@ -334,6 +334,12 @@ not a radius, the cut is not exact — two points 1.11 m apart can share a bucke
 while two points 0.89 m apart can straddle a grid line and split. Covered by
 tests in `groupWorkshopsByCoordinate.test.ts`.
 
+This threshold only bites if the CMS can express it. Strapi created the
+`decimal` coordinate columns as numeric(10, 2), which rounded every saved
+coordinate to ~1 km and merged whole cities into one pin; the CMS now stores
+them as `float` (double precision) — see the CMS migration
+`2026082701-workshop-coordinates-precision.js`.
+
 This solves coincident coordinates, which is what §1.2 set out to do. It does
 not solve markers that merely look overlapped when zoomed out — that needs
 zoom-level clustering (Mapbox's `cluster: true` on a GeoJSON source, backed by
