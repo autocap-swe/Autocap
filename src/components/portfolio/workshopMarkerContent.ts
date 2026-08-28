@@ -71,7 +71,12 @@ export function buildMarkerElement(group: WorkshopLocationGroup): HTMLDivElement
       ? `${count} workshops at ${first.city}, ${first.region}`
       : `${first.name}, ${first.city}`
   );
-  el.style.position = 'relative';
+  // No inline `position`. Mapbox positions its markers with
+  // `.mapboxgl-marker { position: absolute }`, and an inline value would beat
+  // that class and drop every marker back into document flow — they would stack
+  // down the map instead of sitting on their coordinates. Both hosts already
+  // give the badge a positioned ancestor: the Mapbox class here, and the
+  // absolutely positioned `.marker-slot` on the tile-less plane.
   el.style.backgroundColor = BRAND_RED;
   el.style.width = `${size}px`;
   el.style.height = `${size}px`;
