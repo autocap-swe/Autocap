@@ -23,7 +23,7 @@ THEN visas "In the group since"/"I gruppen sedan" i stället för "Since"
 AND "Founded"/"Grundad" visas när `yearFounded` finns
 
 ### AC-A5: Sidfot
-THEN finns länk till LinkedIn, org.nr 559215-7357 och raden "IR: Niklas Norén, CFO" med e-postlänk
+THEN finns länk till LinkedIn, org.nr 559215-7357 och raden "IR: David Knape, CEO" med e-postlänk (ändrat från CFO enligt David 2026-11-06)
 
 ### AC-A6: Kontaktsidan svarar
 GIVEN /contact och /sv/contact

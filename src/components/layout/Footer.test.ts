@@ -31,11 +31,11 @@ describe('Footer company details (fas A)', () => {
   it('AC-A5.2: links to the LinkedIn company page', () => {
     expect(COMPANY_INFO.linkedInUrl).toBe('https://www.linkedin.com/company/autocapgroup');
   });
-  it('AC-A5.3: names the CFO as investor relations contact', () => {
+  it('AC-A5.3: names the CEO as investor relations contact (David Knape, 2026-11-06)', () => {
     expect(COMPANY_INFO.investorRelations).toEqual({
-      name: 'Niklas Norén',
-      role: 'CFO',
-      email: 'niklas.noren@autocapgroup.se',
+      name: 'David Knape',
+      role: 'CEO',
+      email: 'david.knape@autocapgroup.se',
     });
     expect(en.footer.investorRelationsLabel).toBe('IR');
     expect(sv.footer.investorRelationsLabel).toBe('IR');

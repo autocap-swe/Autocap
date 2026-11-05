@@ -61,8 +61,8 @@ export const COMPANY_INFO = {
   orgNumber: '559215-7357',
   linkedInUrl: 'https://www.linkedin.com/company/autocapgroup',
   investorRelations: {
-    name: 'Niklas Norén',
-    role: 'CFO',
-    email: 'niklas.noren@autocapgroup.se',
+    name: 'David Knape',
+    role: 'CEO',
+    email: 'david.knape@autocapgroup.se',
   },
 } as const;
