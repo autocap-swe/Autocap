@@ -2,6 +2,18 @@ import { render, screen } from '@testing-library/react';
 import { LatestNewsStrip } from './LatestNewsStrip';
 import type { NewsArticle } from '@/lib/cms/article/types';
 
+jest.mock('next-intl', () => {
+  const en = jest.requireActual('../../../messages/en.json');
+  return {
+    useTranslations: (namespace: string) => (key: string) =>
+      namespace
+        .split('.')
+        .reduce((node: Record<string, unknown>, part) => node[part] as Record<string, unknown>, en)[
+        key
+      ],
+  };
+});
+
 jest.mock('@/components/news/NewsCard', () => ({
   NewsCard: ({ article }: { article: NewsArticle }) => (
     <div data-testid="news-card">

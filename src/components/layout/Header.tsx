@@ -40,6 +40,8 @@ export function Header() {
     '/entrepreneurs/process': t('entrepreneurs.howItWorks'),
     '/entrepreneurs/why': t('entrepreneurs.whyAutoCap'),
     '/entrepreneurs/contact': t('entrepreneurs.contact'),
+    '/news': t('news.overview'),
+    '/news/media-kit': t('news.mediaKit'),
   };
 
   const translatedLinks = NAVIGATION_LINKS.map(link => ({

@@ -42,7 +42,7 @@ export function WorkshopHero({
           <span className="text-sm font-semibold text-white">{workshopProfileBadge}</span>
         </div>
 
-        <h1 className="mb-4 hyphens-auto break-words text-4xl font-black text-white md:text-6xl lg:text-7xl">
+        <h1 className="mb-4 hyphens-manual break-words text-4xl font-black text-white md:text-6xl lg:text-7xl">
           {name}
         </h1>
 

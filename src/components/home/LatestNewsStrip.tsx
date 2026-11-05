@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import { NewsCard } from '@/components/news/NewsCard';
 import type { NewsArticle } from '@/lib/cms/article/types';
 
@@ -6,6 +7,7 @@ interface LatestNewsStripProps {
 }
 
 export function LatestNewsStrip({ articles }: LatestNewsStripProps) {
+  const t = useTranslations('news');
   const latestArticles = [...articles]
     .sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime())
     .slice(0, 3);
@@ -16,7 +18,7 @@ export function LatestNewsStrip({ articles }: LatestNewsStripProps) {
         {/* Section Heading */}
         <div className="mb-12 text-center">
           <h2 className="text-4xl font-black text-[#1C1C1E] md:text-5xl lg:text-6xl">
-            Latest News
+            {t('latestNews')}
           </h2>
           <div className="mx-auto mt-6 h-1 w-24 bg-[#C8102E]" />
         </div>

@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
-import { motion } from 'framer-motion';
 
 interface HeroProps {
   headline: string;
@@ -50,12 +49,8 @@ export function Hero({
 
       {/* Content */}
       <div className="relative z-10 mx-auto max-w-7xl px-6 text-center lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-        >
-          <h1 className="mb-6 hyphens-auto break-words text-4xl font-black leading-[1.1] tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-8xl">
+        <div>
+          <h1 className="mb-6 hyphens-manual break-words text-4xl font-black leading-[1.1] tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-8xl">
             {headline}
           </h1>
 
@@ -80,7 +75,7 @@ export function Hero({
               {cta2Text}
             </Link>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

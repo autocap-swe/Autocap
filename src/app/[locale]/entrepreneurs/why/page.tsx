@@ -1,6 +1,7 @@
 export const dynamic = 'force-dynamic';
 
 import type { Metadata } from 'next';
+import { buildMetadata } from '@/lib/cms/seo';
 import Link from 'next/link';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Breadcrumb } from '@/components/entrepreneurs/Breadcrumb';
@@ -10,10 +11,17 @@ import { getEntrepreneursPageContent } from '@/lib/cms/entrepreneurs-page';
 import { cmsMediaUrl } from '@/lib/cms/media';
 import { REVALIDATE_HIGH } from '@/lib/cms/revalidate';
 
-export const metadata: Metadata = {
-  title: 'Why AutoCap · For Workshop Owners',
-  description: 'Discover what makes AutoCap different from selling to a chain.',
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'seoPages.entrepreneursWhy' });
+  return buildMetadata({ title: t('title'), description: t('description') }, null, locale, {
+    path: '/entrepreneurs/why',
+  });
+}
 
 export default async function WhyAutoCapPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -46,7 +54,7 @@ export default async function WhyAutoCapPage({ params }: { params: Promise<{ loc
                 <span className="text-sm font-semibold text-[#C8102E]">{cms.whyPageBadge}</span>
               </div>
             )}
-            <h1 className="mb-6 hyphens-auto break-words text-4xl font-black text-[#1C1C1E] md:text-6xl lg:text-7xl">
+            <h1 className="mb-6 hyphens-manual break-words text-4xl font-black text-[#1C1C1E] md:text-6xl lg:text-7xl">
               {cms.whyPageTitle}
             </h1>
             <div className="mx-auto mb-6 h-1 w-24 bg-[#C8102E]" />

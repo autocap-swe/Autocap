@@ -1,16 +1,14 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { Store, Users, TrendingUp, Building2, BadgeCheck } from 'lucide-react'
-import { useScrollAnimation } from '@/hooks/useScrollAnimation'
+import { Store, Users, TrendingUp, Building2, BadgeCheck } from 'lucide-react';
 
 interface BenefitSectionProps {
   benefit: {
-    id: number
-    title: string
-    description: string
-  }
-  index: number
+    id: number;
+    title: string;
+    description: string;
+  };
+  index: number;
 }
 
 // Map benefit IDs to icons
@@ -20,31 +18,29 @@ const iconMap = {
   3: TrendingUp,
   4: Building2,
   5: BadgeCheck,
-}
+};
 
 export function BenefitSection({ benefit, index }: BenefitSectionProps) {
-  const { ref, isInView } = useScrollAnimation({ threshold: 0.2 })
-
   // Alternate background with subtle gradients
   // Start with Linen White to avoid repeating green (header is also green)
   const bgGradient =
     index % 2 === 0
       ? 'bg-gradient-to-br from-[#F5F0EB] to-[#EDE8E3]'
-      : 'bg-gradient-to-br from-[#D8E4DC] to-[#C8D5CC]'
+      : 'bg-gradient-to-br from-[#D8E4DC] to-[#C8D5CC]';
 
-  const Icon = iconMap[benefit.id as keyof typeof iconMap]
+  const Icon = iconMap[benefit.id as keyof typeof iconMap];
 
   return (
-    <motion.section
-      ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-      transition={{ duration: 0.7, ease: 'easeOut' }}
-      className={`${bgGradient} relative overflow-hidden py-20 md:py-28`}
-    >
+    <section className={`${bgGradient} relative overflow-hidden py-20 md:py-28`}>
       {/* Subtle pattern overlay */}
       <div className="absolute inset-0 opacity-[0.03]">
-        <div className="h-full w-full" style={{ backgroundImage: 'radial-gradient(circle, #1C1C1E 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
+        <div
+          className="h-full w-full"
+          style={{
+            backgroundImage: 'radial-gradient(circle, #1C1C1E 1px, transparent 1px)',
+            backgroundSize: '24px 24px',
+          }}
+        />
       </div>
 
       <div className="relative mx-auto max-w-5xl px-6 md:px-8">
@@ -74,6 +70,6 @@ export function BenefitSection({ benefit, index }: BenefitSectionProps) {
           </div>
         </div>
       </div>
-    </motion.section>
-  )
+    </section>
+  );
 }

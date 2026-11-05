@@ -2,9 +2,13 @@ export const dynamic = 'force-dynamic';
 
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { CheckCircle2 } from 'lucide-react';
-import { setRequestLocale } from 'next-intl/server';
+import { MapPin } from 'lucide-react';
+import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { getAboutPageContent } from '@/lib/cms/about-page';
+import { getKpiTickerContent } from '@/lib/cms/kpi-ticker';
+import { getWorkshopsContent } from '@/lib/cms/workshop';
+import { KpiTicker } from '@/components/home/KpiTicker';
+import { WorkshopMapWrapper } from '@/components/portfolio/WorkshopMapWrapper';
 import { CmsRichText } from '@/components/ui/CmsRichText';
 import { REVALIDATE_HIGH } from '@/lib/cms/revalidate';
 import { cmsMediaUrl } from '@/lib/cms/media';
@@ -22,14 +26,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         'Nordic consolidation platform for tire service centres — founder-led, privately held, and built to grow.',
     },
     cms.seo,
-    locale
+    locale,
+    { path: '/about', fallbackOgImage: cms.heroImage }
   );
 }
 
 export default async function AboutPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const cms = await getAboutPageContent(REVALIDATE_HIGH, locale);
+  const [cms, kpis, workshops, tPortfolio] = await Promise.all([
+    getAboutPageContent(REVALIDATE_HIGH, locale),
+    getKpiTickerContent(REVALIDATE_HIGH, locale).catch(() => null),
+    getWorkshopsContent(REVALIDATE_HIGH, locale).catch(() => []),
+    getTranslations('portfolio'),
+  ]);
 
   return (
     <main className="min-h-screen">
@@ -47,7 +57,7 @@ export default async function AboutPage({ params }: Props) {
 
         <div className="relative flex min-h-[85vh] items-center justify-center px-6 py-24 md:px-8">
           <div className="mx-auto max-w-5xl text-center">
-            <h1 className="mb-8 hyphens-auto break-words text-4xl font-black leading-[1.1] text-[#1C1C1E] md:text-6xl lg:text-7xl xl:text-8xl">
+            <h1 className="mb-8 hyphens-manual break-words text-4xl font-black leading-[1.1] text-[#1C1C1E] md:text-6xl lg:text-7xl xl:text-8xl">
               {cms.heroHeadline}
             </h1>
 
@@ -101,36 +111,22 @@ export default async function AboutPage({ params }: Props) {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#F5F0EB] to-[#EDE8E3] py-20 md:py-28">
-        {cmsMediaUrl(cms.differentiatorsBgImage) && (
-          <Image
-            src={cmsMediaUrl(cms.differentiatorsBgImage)!}
-            alt=""
-            fill
-            className="object-cover"
-          />
-        )}
-        {cmsMediaUrl(cms.differentiatorsBgImage) && (
-          <div className="absolute inset-0 bg-black/40" />
-        )}
-        <div className="relative mx-auto max-w-5xl px-6 md:px-8">
-          <h2 className="mb-12 text-center text-4xl font-black text-[#1C1C1E] md:text-5xl lg:text-6xl">
-            {cms.differentiatorsSectionTitle}
-          </h2>
-          <div className="mx-auto mb-12 h-1 w-24 bg-[#C8102E]" />
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-            {cms.differentiators.map((item, index) => (
-              <div key={index} className="rounded-2xl border border-gray-200 bg-white p-6 md:p-8">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-[#C8102E]/10">
-                  <CheckCircle2 className="h-6 w-6 text-[#C8102E]" strokeWidth={2.5} />
-                </div>
-                <h3 className="mb-3 text-2xl font-bold text-[#1C1C1E]">{item.title}</h3>
-                <p className="text-lg leading-relaxed text-gray-700">{item.description}</p>
+      {/* "What makes us different" was removed (duplicate of Entrepreneurs/why); key figures and the map show the same point with facts. */}
+      {kpis && <KpiTicker kpis={kpis} />}
+
+      {workshops.length > 0 && (
+        <section className="bg-white py-16 md:py-20">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="mb-8 flex items-center gap-3">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#E4E2DE]">
+                <MapPin className="h-6 w-6 text-[#C8102E]" />
               </div>
-            ))}
+              <h2 className="text-3xl font-bold text-[#1C1C1E]">{tPortfolio('mapSectionTitle')}</h2>
+            </div>
+            <WorkshopMapWrapper workshops={workshops} />
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       <section className="relative overflow-hidden bg-gradient-to-br from-[#1C1C1E] via-[#2C2C2E] to-[#1C1C1E] px-6 py-20 md:px-8 md:py-28">
         {cmsMediaUrl(cms.closingBgImage) && (

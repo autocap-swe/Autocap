@@ -5,7 +5,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/api/', '/_next/'],
+      // /_next/ must stay crawlable: Google needs the CSS and JS to render pages.
+      disallow: ['/api/'],
     },
     sitemap: 'https://autocapgroup.se/sitemap.xml',
   };

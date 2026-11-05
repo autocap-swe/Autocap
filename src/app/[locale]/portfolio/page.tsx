@@ -21,7 +21,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: "AutoCap Group's growing portfolio of tire service workshops across Sweden.",
     },
     cms?.seo,
-    locale
+    locale,
+    { path: '/portfolio', fallbackOgImage: cms?.heroImage }
   );
 }
 
@@ -75,7 +76,7 @@ export default async function PortfolioPage({ params }: Props) {
           </div>
 
           {heroTitle && (
-            <h1 className="mb-6 hyphens-auto break-words text-4xl font-black text-white md:text-6xl lg:text-7xl">
+            <h1 className="mb-6 hyphens-manual break-words text-4xl font-black text-white md:text-6xl lg:text-7xl">
               {heroTitle}
             </h1>
           )}

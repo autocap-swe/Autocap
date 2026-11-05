@@ -128,4 +128,29 @@ describe('ProfileCard', () => {
       expect(title.className).toContain('text-[#C8102E]');
     });
   });
+
+  describe('Fas A (2026-11): board presentation and e-mail', () => {
+    it('AC-A3.1: shows no initials circle when showPlaceholder is false and there is no photo', () => {
+      const { container } = render(
+        <ProfileCard member={mockMemberWithoutPhoto} showPlaceholder={false} />
+      );
+      expect(container.querySelector('img')).toBeNull();
+      expect(screen.queryByText('NP')).not.toBeInTheDocument();
+    });
+
+    it('AC-A3.2: uses the title override and hides the bio for a manager shown on the board', () => {
+      render(<ProfileCard member={mockMemberWithPhoto} titleOverride="Board Member" hideBio />);
+      expect(screen.getByText('Board Member')).toBeInTheDocument();
+      expect(screen.queryByText('Chief Test Officer')).not.toBeInTheDocument();
+      expect(screen.queryByText(mockMemberWithPhoto.bio)).not.toBeInTheDocument();
+    });
+
+    it('AC-A3.3: renders a mailto link when the member has an e-mail', () => {
+      render(<ProfileCard member={{ ...mockMemberWithPhoto, email: 'test@autocapgroup.se' }} />);
+      expect(screen.getByText('test@autocapgroup.se').closest('a')).toHaveAttribute(
+        'href',
+        'mailto:test@autocapgroup.se'
+      );
+    });
+  });
 });

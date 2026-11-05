@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
-import { motion } from 'framer-motion';
 import { MessageCircle } from 'lucide-react';
 
 interface FooterCtaProps {
@@ -30,12 +29,7 @@ export function FooterCta({ headline, subtext, ctaText, ctaLink, bgImageUrl }: F
       </div>
 
       <div className="relative mx-auto max-w-4xl px-6 text-center lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
+        <div>
           {/* Icon Badge */}
           <div className="mb-8 inline-flex items-center justify-center">
             <div className="rounded-xl bg-[#F5F0EB] p-3">
@@ -60,7 +54,7 @@ export function FooterCta({ headline, subtext, ctaText, ctaLink, bgImageUrl }: F
           >
             {ctaText}
           </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

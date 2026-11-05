@@ -1,9 +1,4 @@
-'use client';
-
-import { useEffect } from 'react';
 import { Building2, Users, TrendingUp, Target } from 'lucide-react';
-import { useCountUp } from '@/hooks/useCountUp';
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 interface Kpi {
   value: number;
@@ -19,29 +14,14 @@ interface KpiTickerProps {
 const iconMap = [Building2, Users, TrendingUp, Target];
 
 function KpiCard({ kpi, index }: { kpi: Kpi; index: number }) {
-  const counter = useCountUp({
-    end: kpi.value,
-    duration: 2000,
-    prefix: kpi.prefix,
-    suffix: kpi.suffix,
-  });
-
-  const { ref, isInView } = useScrollAnimation({ threshold: 0.3 });
-
-  useEffect(() => {
-    if (isInView && !counter.hasAnimated) {
-      counter.animate();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isInView, counter.hasAnimated, counter.animate]);
+  // Rendered as the final figure in the HTML: no count-up from 0, so crawlers,
+  // screenshots and readers without JavaScript see the real number.
+  const displayValue = `${kpi.prefix ?? ''}${kpi.value}${kpi.suffix ?? ''}`;
 
   const Icon = iconMap[index];
 
   return (
-    <div
-      ref={ref as React.RefObject<HTMLDivElement>}
-      className="group relative flex min-w-0 flex-col items-center p-6 text-center xl:p-8"
-    >
+    <div className="group relative flex min-w-0 flex-col items-center p-6 text-center xl:p-8">
       {/* Icon Badge */}
       <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-xl bg-white/5 backdrop-blur-sm transition-all duration-300 group-hover:bg-white/10">
         <Icon className="h-8 w-8 text-[#C8102E]" strokeWidth={2} />
@@ -49,7 +29,7 @@ function KpiCard({ kpi, index }: { kpi: Kpi; index: number }) {
 
       {/* Counter */}
       <div className="mb-3 whitespace-nowrap text-4xl font-black text-white md:text-5xl xl:text-6xl">
-        {counter.value}
+        {displayValue}
       </div>
 
       {/* Decorative Line */}

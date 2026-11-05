@@ -16,7 +16,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         'AutoCap Group cookie policy — how we use cookies and similar technologies on our website.',
     },
     cms?.seo,
-    locale
+    locale,
+    { path: '/cookies' }
   );
 }
 
@@ -31,7 +32,7 @@ export default async function CookiePolicyPage({ params }: Props) {
   const contactEmail = cmsPolicy?.contactEmail ?? 'kontakt@autocapgroup.se';
 
   const lastUpdated = cmsPolicy
-    ? new Date(cmsPolicy.lastUpdated).toLocaleDateString('en-GB', {
+    ? new Date(cmsPolicy.lastUpdated).toLocaleDateString(locale === 'sv' ? 'sv-SE' : 'en-GB', {
         month: 'long',
         year: 'numeric',
       })

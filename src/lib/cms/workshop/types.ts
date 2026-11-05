@@ -18,6 +18,7 @@ export interface CmsWorkshop {
   longitude: number;
   acquisitionStatus: 'acquired' | 'pending' | 'target';
   yearAcquired: string;
+  yearFounded?: string | null;
   localWebsite: string;
   description: string;
   partnershipNote?: string | null;
@@ -37,6 +38,8 @@ export interface Workshop {
   longitude: number;
   status: 'acquired' | 'pending' | 'target';
   yearAcquired: number;
+  /** Year the business was founded, when known. */
+  yearFounded?: number;
   localWebsite: string;
   description: string;
   partnershipNote?: string | null;

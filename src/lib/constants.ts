@@ -40,7 +40,14 @@ export const NAVIGATION_LINKS = [
     ],
   },
   { label: 'Investors', href: '/investors' },
-  { label: 'News & Media', href: '/news' },
+  {
+    label: 'News & Media',
+    href: '/news',
+    submenu: [
+      { label: 'News', href: '/news' },
+      { label: 'Media Kit', href: '/news/media-kit' },
+    ],
+  },
   { label: 'Sustainability', href: '/sustainability' },
   { label: 'Contact', href: '/contact' },
 ] as const;
@@ -50,4 +57,12 @@ export const COMPANY_INFO = {
   address: 'Nybrogatan 7, Stockholm',
   tagline: "Sweden's tire services platform",
   email: 'kontakt@autocapgroup.se',
+  /** Verified against Bolagsverket data (allabolag.se) 2026-11-06. */
+  orgNumber: '559215-7357',
+  linkedInUrl: 'https://www.linkedin.com/company/autocapgroup',
+  investorRelations: {
+    name: 'Niklas Norén',
+    role: 'CFO',
+    email: 'niklas.noren@autocapgroup.se',
+  },
 } as const;

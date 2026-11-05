@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { buildMetadata } from '@/lib/cms/seo';
 import Link from 'next/link';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Breadcrumb } from '@/components/entrepreneurs/Breadcrumb';
@@ -9,10 +10,17 @@ import { getGrowthMilestonesContent } from '@/lib/cms/growth-milestones';
 
 const KPI_ICONS = ['Building2', 'Users', 'TrendingUp', 'Target'] as const;
 
-export const metadata: Metadata = {
-  title: 'Growth Metrics · AutoCap Group',
-  description: "Track AutoCap's growth from founding to 12 workshops and beyond.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'seoPages.investorsMetrics' });
+  return buildMetadata({ title: t('title'), description: t('description') }, null, locale, {
+    path: '/investors/metrics',
+  });
+}
 
 export default async function InvestorsMetricsPage({
   params,
@@ -54,7 +62,7 @@ export default async function InvestorsMetricsPage({
             <div className="mb-6 inline-flex items-center rounded-full bg-white px-4 py-2 shadow-md">
               <span className="text-sm font-semibold text-[#C8102E]">{t('metricsPage.badge')}</span>
             </div>
-            <h1 className="mb-6 hyphens-auto break-words text-4xl font-black text-[#1C1C1E] md:text-6xl lg:text-7xl">
+            <h1 className="mb-6 hyphens-manual break-words text-4xl font-black text-[#1C1C1E] md:text-6xl lg:text-7xl">
               {t('metricsPage.title')}
             </h1>
             <div className="mx-auto mb-6 h-1 w-24 bg-[#C8102E]" />

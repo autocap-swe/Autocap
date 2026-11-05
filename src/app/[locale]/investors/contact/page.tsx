@@ -1,14 +1,22 @@
 import type { Metadata } from 'next';
+import { buildMetadata } from '@/lib/cms/seo';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Breadcrumb } from '@/components/entrepreneurs/Breadcrumb';
 import { InvestorContactForm } from '@/components/investors/InvestorContactForm';
 import { getInvestorsPageContent } from '@/lib/cms/investors-page';
 import { REVALIDATE_HIGH } from '@/lib/cms/revalidate';
 
-export const metadata: Metadata = {
-  title: 'Investor Relations · AutoCap Group',
-  description: 'Interested in the AutoCap opportunity? Contact our investor relations team.',
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'seoPages.investorsContact' });
+  return buildMetadata({ title: t('title'), description: t('description') }, null, locale, {
+    path: '/investors/contact',
+  });
+}
 
 export default async function InvestorsContactPage({
   params,

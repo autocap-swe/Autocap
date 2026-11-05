@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import {
   MessageCircle,
   FileText,
@@ -17,7 +16,8 @@ interface ProcessStepProps {
     description: string;
     timeline: string;
   };
-  index: number;
+  /** @deprecated Ignored; entrance animations were removed. */
+  index?: number;
   isLast?: boolean;
 }
 
@@ -30,17 +30,11 @@ const iconMap = {
   6: PartyPopper,
 };
 
-export function ProcessStep({ step, index, isLast = false }: ProcessStepProps) {
+export function ProcessStep({ step, isLast = false }: ProcessStepProps) {
   const Icon = iconMap[step.number as keyof typeof iconMap];
 
   return (
-    <motion.div
-      initial={{ opacity: 0, x: -16 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.45, delay: index * 0.08 }}
-      className="relative flex gap-6 md:gap-8"
-    >
+    <div className="relative flex gap-6 md:gap-8">
       {/* Step number circle — sits on top of the vertical line */}
       <div className="relative z-10 flex-shrink-0">
         <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#C8102E] to-[#A00D25] shadow-lg ring-4 ring-[#F5F0EB]">
@@ -67,6 +61,6 @@ export function ProcessStep({ step, index, isLast = false }: ProcessStepProps) {
           )}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

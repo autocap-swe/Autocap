@@ -11,7 +11,7 @@ import { ArticleAbout } from '@/components/news/ArticleAbout';
 import { RelatedArticles } from '@/components/news/RelatedArticles';
 import { ArticleActions } from '@/components/news/ArticleActions';
 import { ArticleLocalizedPathSetter } from '@/components/news/ArticleLocalizedPathSetter';
-import { buildMetadata } from '@/lib/cms/seo';
+import { buildMetadata, localizedSlugPath } from '@/lib/cms/seo';
 import { COMPANY_INFO } from '@/lib/constants';
 
 interface ArticleDetailPageProps {
@@ -36,7 +36,14 @@ export async function generateMetadata({ params }: ArticleDetailPageProps): Prom
   const meta = buildMetadata(
     { title: `${article.title} · AutoCap Group`, description: article.excerpt },
     article.seo,
-    locale
+    locale,
+    {
+      paths: {
+        en: localizedSlugPath('/news', article.localizedSlugs, 'en', locale, slug),
+        sv: localizedSlugPath('/news', article.localizedSlugs, 'sv', locale, slug),
+      },
+      fallbackOgImage: article.imageUrl,
+    }
   );
   return {
     ...meta,
@@ -44,7 +51,6 @@ export async function generateMetadata({ params }: ArticleDetailPageProps): Prom
       ...meta.openGraph,
       type: 'article',
       publishedTime: article.publishDate,
-      images: meta.openGraph?.images ?? (article.imageUrl ? [{ url: article.imageUrl }] : []),
     },
   };
 }

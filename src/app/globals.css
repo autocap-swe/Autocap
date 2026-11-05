@@ -1,6 +1,6 @@
-@import "tailwindcss";
-@import "tw-animate-css";
-@import "mapbox-gl/dist/mapbox-gl.css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'mapbox-gl/dist/mapbox-gl.css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -119,5 +119,12 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  /* Headings never break words with automatic hyphens (Swedish compounds split badly). */
+  h1,
+  h2,
+  h3 {
+    hyphens: manual;
+    overflow-wrap: break-word;
   }
 }
