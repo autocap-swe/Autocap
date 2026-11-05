@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const cms = await getHomepageContent(REVALIDATE_HIGH, locale);
   return buildMetadata(
     {
-      title: 'AutoCap Group · Nordic Tire Services Platform',
+      title: "AutoCap Group · Sweden's tire services platform",
       description: 'AutoCap acquires and grows tire service workshops across the Nordic region.',
     },
     cms.seo,
