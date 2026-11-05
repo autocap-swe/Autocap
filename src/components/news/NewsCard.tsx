@@ -52,7 +52,7 @@ export function NewsCard({ article }: NewsCardProps) {
           </div>
 
           {/* Title */}
-          <h2 className="mb-3 text-xl font-bold text-[#1C1C1E] line-clamp-2">{article.title}</h2>
+          <h2 className="mb-3 text-lg font-bold sm:text-xl text-[#1C1C1E] line-clamp-2">{article.title}</h2>
 
           {/* Excerpt */}
           <p className="mb-4 text-gray-600 line-clamp-3">{article.excerpt}</p>

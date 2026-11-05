@@ -7,6 +7,12 @@
 GIVEN en H1–H3
 THEN gäller `hyphens: manual` globalt, och klassen `hyphens-auto` används inte
 
+### AC-A1b: Inga ord delas på mobil
+GIVEN en mobil med bredd 360–414 px
+THEN delas inget ord i H1–H3 över två rader, och sidan scrollar inte i sidled
+AND H1 och stora H2 skalas ned på skärmar ≤ 480 px så att långa svenska sammansättningar får plats
+(Kontrollerat med Playwright på 26 sidor, EN och SV, i bredderna 320, 360, 375, 390 och 414 px. Enda träffen är vid 320 px och gäller en nyhetsrubrik som redan klipps efter två rader.)
+
 ### AC-A2: Inga inskrollningseffekter; nyckeltal står rätt i HTML
 GIVEN rubriker, nyckeltal och brödtext
 THEN syns de direkt utan fade/slide
