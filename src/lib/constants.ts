@@ -48,6 +48,6 @@ export const NAVIGATION_LINKS = [
 export const COMPANY_INFO = {
   name: 'AutoCap Group Sweden AB',
   address: 'Nybrogatan 7, Stockholm',
-  tagline: 'The Nordic Tire Services Platform',
+  tagline: "Sweden's tire services platform",
   email: 'kontakt@autocapgroup.se',
 } as const;

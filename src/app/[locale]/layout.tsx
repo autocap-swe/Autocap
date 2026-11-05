@@ -21,7 +21,7 @@ export function generateStaticParams() {
 }
 
 export const metadata: Metadata = {
-  title: 'AutoCap Group · The Nordic Tire Services Platform',
+  title: "AutoCap Group · Sweden's tire services platform",
   description:
     'AutoCap Group acquires and operates independent tire service centres across Sweden. Preserving local brands. Empowering entrepreneurs. Building scale.',
   icons: {
