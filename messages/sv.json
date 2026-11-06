@@ -83,7 +83,10 @@
       "description": "AutoCap Group leds av ett team med djup erfarenhet inom M&A, företagsbyggande, fordonseftermarknad och operativ genomföring. Vår styrelse bidrar med ytterligare expertis inom investering, bolagsstyrning och strategisk tillväxt."
     },
     "managementTeam": {
-      "title": "Ledningsgrupp"
+      "title": "Koncernledning"
+    },
+    "groupFunctions": {
+      "title": "Koncernfunktioner"
     },
     "board": {
       "title": "Styrelse",

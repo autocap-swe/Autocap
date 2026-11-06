@@ -83,7 +83,10 @@
       "description": "AutoCap Group is led by a team with deep experience in M&A, company building, automotive aftermarket, and operational execution. Our board brings additional expertise in investment, governance, and strategic growth."
     },
     "managementTeam": {
-      "title": "Management Team"
+      "title": "Group management"
+    },
+    "groupFunctions": {
+      "title": "Group functions"
     },
     "board": {
       "title": "Board of Directors",
