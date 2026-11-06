@@ -6,6 +6,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { formatLongDate } from '@/lib/format-date';
 import { NewsCategoryBadge } from './NewsCategoryBadge';
 import { NewsImagePlaceholder } from './NewsImagePlaceholder';
+import { imageFocusClass } from './image-focus';
 import type { NewsArticle } from '@/lib/cms/article/types';
 import { cn } from '@/lib/utils';
 
@@ -37,7 +38,7 @@ export function NewsCard({ article }: NewsCardProps) {
               src={article.imageUrl}
               alt={article.title}
               fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              className={`object-cover ${imageFocusClass(article.heroImageFocus)} transition-transform duration-300 group-hover:scale-105`}
             />
           ) : (
             <NewsImagePlaceholder />
