@@ -31,6 +31,10 @@ AND "Founded"/"Grundad" visas när `yearFounded` finns
 ### AC-A5: Sidfot
 THEN finns länk till LinkedIn, org.nr 559215-7357 och raden "IR: David Knape, CEO" med e-postlänk (ändrat från CFO enligt David 2026-11-06)
 
+### AC-A5.4: Nordisk positionering (David 2026-11-06)
+THEN lyder sloganen och reservtitlarna "The Nordic tire services platform" / "Den nordiska plattformen för däckservice"
+AND faktapåståenden om var verkstäderna finns ("across Sweden") står kvar
+
 ### AC-A6: Kontaktsidan svarar
 GIVEN /contact och /sv/contact
 THEN är svarstiden under 1 s (uppmätt 0,17–0,55 s 2026-11-06; ingen kodändring behövdes)

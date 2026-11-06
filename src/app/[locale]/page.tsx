@@ -23,12 +23,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return buildMetadata(
     locale === 'sv'
       ? {
-          title: 'AutoCap Group · Sveriges plattform för däckservice',
+          title: 'AutoCap Group · Den nordiska plattformen för däckservice',
           description:
             'AutoCap Group förvärvar och utvecklar däckverkstäder i Sverige. Lokala namn och team behålls, med en stark grupp i ryggen.',
         }
       : {
-          title: "AutoCap Group · Sweden's tire services platform",
+          title: 'AutoCap Group · The Nordic tire services platform',
           description:
             'AutoCap Group acquires and develops tire service workshops across Sweden. Local names and teams stay, with a strong group behind them.',
         },

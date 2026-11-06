@@ -19,8 +19,9 @@ describe.each([
 });
 
 describe('Footer tagline (en)', () => {
-  it('AC-003: positions AutoCap as Swedish, not Nordic', () => {
-    expect(en.footer.tagline).not.toMatch(/nordic/i);
+  it('AC-003: positions AutoCap as the Nordic platform (David 2026-11-06)', () => {
+    expect(en.footer.tagline).toMatch(/nordic/i);
+    expect(sv.footer.tagline).toMatch(/nordiska/i);
   });
 });
 

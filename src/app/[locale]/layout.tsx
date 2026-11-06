@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: 'AutoCap Group' }],
   },
-  title: "AutoCap Group · Sweden's tire services platform",
+  title: 'AutoCap Group · The Nordic tire services platform',
   description:
     'AutoCap Group acquires and operates independent tire service centres across Sweden. Preserving local brands. Empowering entrepreneurs. Building scale.',
   icons: {

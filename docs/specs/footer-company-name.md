@@ -22,3 +22,5 @@ THEN innehåller de inte "Nordic"
 | AC-001 | src/components/layout/Footer.test.ts | shows the company name exactly once | PASSED |
 | AC-002 | src/components/layout/Footer.test.ts | shows the street address | PASSED |
 | AC-003 | src/components/layout/Footer.test.ts | positions AutoCap as Swedish, not Nordic | PASSED |
+
+**Ändrat 2026-11-06:** David beslutade att AutoCap ska positioneras som nordisk överallt ("The Nordic tire services platform" / "Den nordiska plattformen för däckservice"). AC-003 är ersatt av AC-A5.4 i `fas-a-ratta.md`.
