@@ -19,7 +19,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         'Our clear, respectful acquisition process from first conversation to completion.',
     },
     cms?.seo,
-    locale
+    locale,
+    { path: '/entrepreneurs/process' }
   );
 }
 
@@ -55,7 +56,7 @@ export default async function ProcessPage({ params }: Props) {
               <Clock className="h-5 w-5 text-[#C8102E]" />
               <span className="text-sm font-semibold text-[#C8102E]">{t('processPage.badge')}</span>
             </div>
-            <h1 className="mb-6 hyphens-auto break-words text-4xl font-black text-[#1C1C1E] md:text-6xl lg:text-7xl">
+            <h1 className="mb-6 hyphens-manual break-words text-4xl font-black text-[#1C1C1E] md:text-6xl lg:text-7xl">
               {acquisitionProcess?.heading || t('processPage.title')}
             </h1>
             <div className="mx-auto mb-6 h-1 w-24 bg-[#C8102E]" />

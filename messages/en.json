@@ -20,7 +20,11 @@
     "sustainability": "Sustainability",
     "contact": "Contact",
     "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "news": {
+      "overview": "News",
+      "mediaKit": "Media Kit"
+    }
   },
   "entrepreneurs": {
     "contact": {
@@ -82,8 +86,10 @@
       "title": "Management Team"
     },
     "board": {
-      "title": "Board of Directors"
-    }
+      "title": "Board of Directors",
+      "memberTitle": "Board Member"
+    },
+    "emailLabel": "E-mail"
   },
   "privacyPolicy": {
     "hero": {
@@ -155,8 +161,12 @@
     "resourcesSection": "Resources",
     "privacyPolicy": "Privacy Policy",
     "cookiePolicy": "Cookie Policy",
-    "tagline": "Sweden's tire services platform",
-    "bottomBar": "Nybrogatan 7, Stockholm"
+    "tagline": "The Nordic tire services platform",
+    "bottomBar": "Nybrogatan 7, Stockholm",
+    "orgNumberLabel": "Corp. ID",
+    "investorRelationsLabel": "IR",
+    "investorRelationsAria": "Investor relations",
+    "linkedInAria": "AutoCap Group on LinkedIn"
   },
   "portfolio": {
     "badge": "{count} Workshops",
@@ -181,6 +191,10 @@
       "ctaTitle": "Own a tire service workshop?",
       "ctaDescription": "Learn what joining AutoCap Group could mean for you.",
       "ctaButton": "For Entrepreneurs"
+    },
+    "card": {
+      "founded": "Founded",
+      "inGroupSince": "In the group since"
     }
   },
   "news": {
@@ -204,7 +218,8 @@
     },
     "contactHeading": "Contact",
     "aboutHeading": "About AutoCap Group",
-    "aboutBody": "AutoCap Group is an entrepreneur-driven group that invests in and develops tire service centres across the Nordics. The company is headquartered in Stockholm. The business model is built on acquiring well-run workshops and giving them access to shared resources across several areas such as logistics, purchasing, marketing and training. At the same time, the local workshop's entrepreneurial spirit is preserved. Most workshop owners become co-owners in the group and continue to run their operations with a high degree of autonomy. AutoCap Group places particular emphasis on preserving and developing each individual workshop and its employees."
+    "aboutBody": "AutoCap Group is an entrepreneur-driven group that invests in and develops tire service centres across the Nordics. The company is headquartered in Stockholm. The business model is built on acquiring well-run workshops and giving them access to shared resources across several areas such as logistics, purchasing, marketing and training. At the same time, the local workshop's entrepreneurial spirit is preserved. Most workshop owners become co-owners in the group and continue to run their operations with a high degree of autonomy. AutoCap Group places particular emphasis on preserving and developing each individual workshop and its employees.",
+    "latestNews": "Latest News"
   },
   "error": {
     "heading": "Content temporarily unavailable.",
@@ -228,5 +243,35 @@
     "cancel": "Cancel",
     "savePreferences": "Save preferences",
     "settings": "Cookie Settings"
+  },
+  "seoPages": {
+    "entrepreneursWhy": {
+      "title": "Why sell to AutoCap Group · For workshop owners",
+      "description": "What makes AutoCap different from selling to a chain: your name stays on the door, your team stays, and you get a group behind you."
+    },
+    "investorsWhy": {
+      "title": "Investment case · AutoCap Group",
+      "description": "The AutoCap investment case: a fragmented market, recurring tire service revenue and a buy-and-build platform built to scale."
+    },
+    "news": {
+      "title": "News & Media · AutoCap Group",
+      "description": "Company news, acquisitions and press releases from AutoCap Group."
+    },
+    "mediaKit": {
+      "title": "Media Kit · AutoCap Group",
+      "description": "Logos, brand colours and press contacts for journalists covering AutoCap Group."
+    },
+    "entrepreneursContact": {
+      "title": "Sell your tire workshop · Contact AutoCap Group",
+      "description": "Start a confidential conversation about your workshop's future with AutoCap Group."
+    },
+    "investorsContact": {
+      "title": "Investor relations · AutoCap Group",
+      "description": "Contact AutoCap Group's investor relations about the investment opportunity."
+    },
+    "investorsMetrics": {
+      "title": "Growth metrics · AutoCap Group",
+      "description": "AutoCap Group's growth from founding to today, measured in workshops, people and revenue."
+    }
   }
 }

@@ -108,12 +108,14 @@ describe('KpiTicker', () => {
     expect(section).toHaveClass('to-[#1C1C1E]');
   });
 
-  it('renders initial KPI values as zero before animation', () => {
+  it('renders the final KPI values without a count-up animation (fas A)', () => {
     render(<KpiTicker kpis={mockKpis} />);
 
-    // Values should start at 0 before animation triggers
-    const zeroValues = screen.getAllByText(/^0/);
-    expect(zeroValues.length).toBeGreaterThanOrEqual(4);
+    expect(screen.getByText('10000+')).toBeInTheDocument();
+    expect(screen.getByText('500000+')).toBeInTheDocument();
+    expect(screen.getByText('95+')).toBeInTheDocument();
+    expect(screen.getByText('99.9%')).toBeInTheDocument();
+    expect(screen.queryByText(/^0/)).not.toBeInTheDocument();
   });
 
   it('renders correct icons for each KPI', () => {
@@ -150,27 +152,6 @@ describe('KpiTicker', () => {
     expect(kpiCards.length).toBeGreaterThanOrEqual(4);
   });
 
-  it('respects prefers-reduced-motion for animations', () => {
-    // Mock prefers-reduced-motion: reduce
-    (window.matchMedia as jest.Mock).mockImplementation((query: string) => ({
-      matches: query === '(prefers-reduced-motion: reduce)',
-      media: query,
-      onchange: null,
-      addListener: jest.fn(),
-      removeListener: jest.fn(),
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-      dispatchEvent: jest.fn()
-    }));
-
-    render(<KpiTicker kpis={mockKpis} />);
-
-    // With reduced motion, isInView is set to true immediately
-    // But counters still need to be triggered, so they show 0 initially
-    const zeroValues = screen.getAllByText(/^0/);
-    expect(zeroValues.length).toBeGreaterThanOrEqual(4);
-  });
-
   it('has proper semantic HTML structure', () => {
     const { container } = render(<KpiTicker kpis={mockKpis} />);
 
@@ -186,11 +167,7 @@ describe('KpiTicker', () => {
   it('displays correct suffix formatting', () => {
     render(<KpiTicker kpis={mockKpis} />);
 
-    // Check that suffixes are applied (counters start at 0, so we see 0+ and 0%)
-    const plusSuffixes = screen.getAllByText(/0\+/);
-    expect(plusSuffixes.length).toBe(3); // Three KPIs have + suffix
-
-    const percentSuffix = screen.getByText(/0%/);
-    expect(percentSuffix).toBeInTheDocument(); // One KPI has % suffix
+    expect(screen.getAllByText(/\+$/).length).toBe(3); // Three KPIs have + suffix
+    expect(screen.getByText(/%$/)).toBeInTheDocument(); // One KPI has % suffix
   });
 });

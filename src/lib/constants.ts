@@ -40,7 +40,14 @@ export const NAVIGATION_LINKS = [
     ],
   },
   { label: 'Investors', href: '/investors' },
-  { label: 'News & Media', href: '/news' },
+  {
+    label: 'News & Media',
+    href: '/news',
+    submenu: [
+      { label: 'News', href: '/news' },
+      { label: 'Media Kit', href: '/news/media-kit' },
+    ],
+  },
   { label: 'Sustainability', href: '/sustainability' },
   { label: 'Contact', href: '/contact' },
 ] as const;
@@ -48,6 +55,14 @@ export const NAVIGATION_LINKS = [
 export const COMPANY_INFO = {
   name: 'AutoCap Group Sweden AB',
   address: 'Nybrogatan 7, Stockholm',
-  tagline: "Sweden's tire services platform",
+  tagline: 'The Nordic tire services platform',
   email: 'kontakt@autocapgroup.se',
+  /** Verified against Bolagsverket data (allabolag.se) 2026-11-06. */
+  orgNumber: '559215-7357',
+  linkedInUrl: 'https://www.linkedin.com/company/autocapgroup',
+  investorRelations: {
+    name: 'David Knape',
+    role: 'CEO',
+    email: 'david.knape@autocapgroup.se',
+  },
 } as const;

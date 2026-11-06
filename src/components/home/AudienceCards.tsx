@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
-import { motion } from 'framer-motion';
 interface AudienceCard {
   headline: string;
   description: string;
@@ -22,13 +21,7 @@ export function AudienceCards({ cards }: AudienceCardsProps) {
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {cards.map((card, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
+            <div key={index}>
               <Link
                 href={card.ctaLink}
                 className="group flex h-full flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
@@ -55,7 +48,7 @@ export function AudienceCards({ cards }: AudienceCardsProps) {
                   </div>
                 </div>
               </Link>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

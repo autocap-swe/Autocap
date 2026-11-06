@@ -17,7 +17,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         'AutoCap Group privacy policy — how we collect, use, and protect your personal data in compliance with GDPR.',
     },
     cms?.seo,
-    locale
+    locale,
+    { path: '/privacy-policy' }
   );
 }
 
@@ -32,7 +33,7 @@ export default async function PrivacyPolicyPage({ params }: Props) {
   const contactEmail = cmsPolicy?.contactEmail ?? 'kontakt@autocapgroup.se';
 
   const lastUpdated = cmsPolicy
-    ? new Date(cmsPolicy.lastUpdated).toLocaleDateString('en-GB', {
+    ? new Date(cmsPolicy.lastUpdated).toLocaleDateString(locale === 'sv' ? 'sv-SE' : 'en-GB', {
         month: 'long',
         year: 'numeric',
       })

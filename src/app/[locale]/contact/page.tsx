@@ -18,7 +18,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: 'Get in touch — for workshop owners, investors, media, or general enquiries.',
     },
     content?.seo,
-    locale
+    locale,
+    { path: '/contact' }
   );
 }
 

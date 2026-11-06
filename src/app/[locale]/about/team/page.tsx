@@ -19,7 +19,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         'Meet the team behind AutoCap Group — entrepreneurs, industry veterans, and investors.',
     },
     cms?.seo,
-    locale
+    locale,
+    { path: '/about/team', fallbackOgImage: cms?.heroImage }
   );
 }
 
@@ -71,7 +72,7 @@ export default async function TeamPage({ params }: Props) {
           </h2>
           <div className="grid gap-8 md:grid-cols-2">
             {managementTeam.map(member => (
-              <ProfileCard key={member.id} member={member} />
+              <ProfileCard key={member.id} member={member} emailLabel={t('emailLabel')} />
             ))}
           </div>
         </div>
@@ -84,7 +85,14 @@ export default async function TeamPage({ params }: Props) {
           </h2>
           <div className="grid gap-8 md:grid-cols-2">
             {board.map(member => (
-              <ProfileCard key={member.id} member={member} />
+              <ProfileCard
+                key={member.id}
+                member={{ ...member, email: undefined }}
+                titleOverride={member.isManagement ? t('board.memberTitle') : undefined}
+                hideBio={member.isManagement}
+                showPlaceholder={false}
+                emailLabel={t('emailLabel')}
+              />
             ))}
           </div>
         </div>

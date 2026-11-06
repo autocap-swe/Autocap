@@ -20,7 +20,11 @@
     "sustainability": "Hållbarhet",
     "contact": "Kontakt",
     "openMenu": "Öppna meny",
-    "closeMenu": "Stäng meny"
+    "closeMenu": "Stäng meny",
+    "news": {
+      "overview": "Nyheter",
+      "mediaKit": "Mediekit"
+    }
   },
   "entrepreneurs": {
     "contact": {
@@ -82,8 +86,10 @@
       "title": "Ledningsgrupp"
     },
     "board": {
-      "title": "Styrelse"
-    }
+      "title": "Styrelse",
+      "memberTitle": "Styrelseledamot"
+    },
+    "emailLabel": "E-post"
   },
   "privacyPolicy": {
     "hero": {
@@ -155,8 +161,12 @@
     "resourcesSection": "Resurser",
     "privacyPolicy": "Integritetspolicy",
     "cookiePolicy": "Cookiepolicy",
-    "tagline": "Sveriges däckserviceplattform — lokalt drivet, gemensamt starkt.",
-    "bottomBar": "Nybrogatan 7, Stockholm"
+    "tagline": "Den nordiska plattformen för däckservice — lokalt drivet, gemensamt starkt.",
+    "bottomBar": "Nybrogatan 7, Stockholm",
+    "orgNumberLabel": "Org.nr",
+    "investorRelationsLabel": "IR",
+    "investorRelationsAria": "Investerarrelationer",
+    "linkedInAria": "AutoCap Group på LinkedIn"
   },
   "portfolio": {
     "badge": "{count} verkstäder",
@@ -181,6 +191,10 @@
       "ctaTitle": "Äger du en däckverkstad?",
       "ctaDescription": "Läs om vad det skulle innebära för dig att bli del av AutoCap Group.",
       "ctaButton": "För entreprenörer"
+    },
+    "card": {
+      "founded": "Grundad",
+      "inGroupSince": "I gruppen sedan"
     }
   },
   "news": {
@@ -204,7 +218,8 @@
     },
     "contactHeading": "Kontakt",
     "aboutHeading": "Om AutoCap Group",
-    "aboutBody": "AutoCap Group är en entreprenörsdriven koncern som investerar i och utvecklar däckverkstäder i Norden. Bolaget har sitt huvudkontor i Stockholm. Affärsmodellen bygger på att förvärva välskötta verkstäder och ge dem tillgång till gemensamma resurser inom flertalet områden såsom logistik, inköp, marknadsföring och utbildning. Samtidigt bevaras den lokala verkstadens entreprenörsanda. Flertalet verkstadsägare blir delägare i koncernen och fortsätter driva sina anläggningar med hög grad av autonomi. AutoCap Group lägger extra vikt vid att bevara och utveckla varje enskild verkstad och dess medarbetare."
+    "aboutBody": "AutoCap Group är en entreprenörsdriven koncern som investerar i och utvecklar däckverkstäder i Norden. Bolaget har sitt huvudkontor i Stockholm. Affärsmodellen bygger på att förvärva välskötta verkstäder och ge dem tillgång till gemensamma resurser inom flertalet områden såsom logistik, inköp, marknadsföring och utbildning. Samtidigt bevaras den lokala verkstadens entreprenörsanda. Flertalet verkstadsägare blir delägare i koncernen och fortsätter driva sina anläggningar med hög grad av autonomi. AutoCap Group lägger extra vikt vid att bevara och utveckla varje enskild verkstad och dess medarbetare.",
+    "latestNews": "Senaste nytt"
   },
   "error": {
     "heading": "Innehållet är tillfälligt otillgängligt.",
@@ -228,5 +243,35 @@
     "cancel": "Avbryt",
     "savePreferences": "Spara inställningar",
     "settings": "Cookie-inställningar"
+  },
+  "seoPages": {
+    "entrepreneursWhy": {
+      "title": "Varför sälja till AutoCap Group · För verkstadsägare",
+      "description": "Det här skiljer AutoCap från att sälja till en kedja: namnet sitter kvar på dörren, teamet stannar och du får en grupp i ryggen."
+    },
+    "investorsWhy": {
+      "title": "Investeringscase · AutoCap Group",
+      "description": "AutoCaps investeringscase: en fragmenterad marknad, återkommande intäkter från däckservice och en buy-and-build-plattform byggd för att skala."
+    },
+    "news": {
+      "title": "Nyheter och press · AutoCap Group",
+      "description": "Bolagsnyheter, förvärv och pressmeddelanden från AutoCap Group."
+    },
+    "mediaKit": {
+      "title": "Mediekit · AutoCap Group",
+      "description": "Logotyper, varumärkesfärger och presskontakter för journalister som skriver om AutoCap Group."
+    },
+    "entrepreneursContact": {
+      "title": "Sälja däckverkstad · Kontakta AutoCap Group",
+      "description": "Starta ett konfidentiellt samtal om din verkstads framtid med AutoCap Group."
+    },
+    "investorsContact": {
+      "title": "Investerarrelationer · AutoCap Group",
+      "description": "Kontakta AutoCap Groups investerarrelationer om investeringsmöjligheten."
+    },
+    "investorsMetrics": {
+      "title": "Tillväxt i siffror · AutoCap Group",
+      "description": "AutoCap Groups tillväxt från start till i dag, mätt i verkstäder, medarbetare och omsättning."
+    }
   }
 }

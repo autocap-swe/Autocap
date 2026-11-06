@@ -1,14 +1,22 @@
 import type { Metadata } from 'next';
+import { buildMetadata } from '@/lib/cms/seo';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Breadcrumb } from '@/components/entrepreneurs/Breadcrumb';
 import { ContactForm } from '@/components/entrepreneurs/ContactForm';
 import { getEntrepreneursPageContent } from '@/lib/cms/entrepreneurs-page';
 import { REVALIDATE_HIGH } from '@/lib/cms/revalidate';
 
-export const metadata: Metadata = {
-  title: 'Contact Us · For Workshop Owners',
-  description: "Start a confidential conversation about your workshop's future.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'seoPages.entrepreneursContact' });
+  return buildMetadata({ title: t('title'), description: t('description') }, null, locale, {
+    path: '/entrepreneurs/contact',
+  });
+}
 
 export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

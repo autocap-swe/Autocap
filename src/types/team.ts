@@ -6,6 +6,7 @@ export interface TeamMember {
   education?: string;
   photoUrl?: string;
   linkedInUrl?: string;
+  email?: string;
   isManagement: boolean;
   isBoard: boolean;
   order: number;

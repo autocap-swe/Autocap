@@ -7,7 +7,7 @@ import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { getWorkshopsContent, getWorkshopBySlugContent } from '@/lib/cms/workshop';
 import { WorkshopHero } from '@/components/portfolio/WorkshopHero';
 import { ArticleLocalizedPathSetter } from '@/components/news/ArticleLocalizedPathSetter';
-import { buildMetadata } from '@/lib/cms/seo';
+import { buildMetadata, localizedSlugPath } from '@/lib/cms/seo';
 
 const URL_PATTERN = /https?:\/\/[^\s]+/g;
 
@@ -65,15 +65,16 @@ export async function generateMetadata({ params }: WorkshopDetailPageProps): Pro
   const meta = buildMetadata(
     { title: `${workshop.name} · AutoCap Group`, description: workshop.description },
     workshop.seo,
-    locale
+    locale,
+    {
+      paths: {
+        en: localizedSlugPath('/portfolio', workshop.localizedSlugs, 'en', locale, slug),
+        sv: localizedSlugPath('/portfolio', workshop.localizedSlugs, 'sv', locale, slug),
+      },
+      fallbackOgImage: workshop.imageUrl,
+    }
   );
-  return {
-    ...meta,
-    openGraph: {
-      ...meta.openGraph,
-      images: meta.openGraph?.images ?? (workshop.imageUrl ? [{ url: workshop.imageUrl }] : []),
-    },
-  };
+  return meta;
 }
 
 export default async function WorkshopDetailPage({ params }: WorkshopDetailPageProps) {

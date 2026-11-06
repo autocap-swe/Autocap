@@ -1,14 +1,21 @@
 import type { Metadata } from 'next';
+import { buildMetadata } from '@/lib/cms/seo';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { getMediaKitCategories } from '@/lib/cms/media-kit-category';
 import { AssetDownloadCard } from '@/components/news/AssetDownloadCard';
 import { PressContact } from '@/components/news/PressContact';
 
-export const metadata: Metadata = {
-  title: 'Media Kit · AutoCap Group',
-  description:
-    'Press resources, brand assets, and media contacts for journalists covering AutoCap Group.',
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'seoPages.mediaKit' });
+  return buildMetadata({ title: t('title'), description: t('description') }, null, locale, {
+    path: '/news/media-kit',
+  });
+}
 
 export default async function MediaKitPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

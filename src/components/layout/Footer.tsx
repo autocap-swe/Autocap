@@ -1,5 +1,6 @@
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
+import { Linkedin } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import { COMPANY_INFO, NAVIGATION_LINKS } from '@/lib/constants';
 import { CookieSettingsButton } from '@/components/cookie/CookieSettingsButton';
@@ -45,6 +46,16 @@ export async function Footer() {
               />
             </div>
             <p className="text-xs text-gray-400 leading-relaxed">{t('tagline')}</p>
+            <a
+              href={COMPANY_INFO.linkedInUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t('linkedInAria')}
+              className="mt-4 inline-flex items-center gap-2 text-sm text-gray-400 transition-colors hover:text-gray-200"
+            >
+              <Linkedin className="h-4 w-4" aria-hidden="true" />
+              <span>LinkedIn</span>
+            </a>
           </div>
 
           {/* Company links */}
@@ -127,7 +138,17 @@ export async function Footer() {
         {/* Bottom bar */}
         <div className="mt-8 border-t border-gray-700/40 pt-6">
           <p className="text-xs text-gray-400 text-center md:text-left">
-            {COMPANY_INFO.name} · {t('bottomBar')} — {t('tagline')}
+            {COMPANY_INFO.name} · {t('orgNumberLabel')} {COMPANY_INFO.orgNumber} · {t('bottomBar')}{' '}
+            — {t('tagline')}
+          </p>
+          <p className="mt-2 text-xs text-gray-400 text-center md:text-left">
+            <span aria-label={t('investorRelationsAria')}>{t('investorRelationsLabel')}:</span>{' '}
+            <a
+              href={`mailto:${COMPANY_INFO.investorRelations.email}`}
+              className="transition-colors hover:text-gray-200 hover:underline"
+            >
+              {COMPANY_INFO.investorRelations.name}, {COMPANY_INFO.investorRelations.role}
+            </a>
           </p>
         </div>
       </div>

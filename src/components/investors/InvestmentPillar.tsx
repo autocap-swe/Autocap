@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import {
   TrendingUp,
   Target,
@@ -12,7 +11,6 @@ import {
   Heart,
   type LucideIcon,
 } from 'lucide-react';
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 interface InvestmentPillarProps {
   pillar: {
@@ -38,8 +36,6 @@ const iconMap: Partial<Record<string, LucideIcon>> = {
 const fallbackIcons: LucideIcon[] = [Target, TrendingUp, Zap, Users, ShoppingCart, Settings];
 
 export function InvestmentPillar({ pillar, index }: InvestmentPillarProps) {
-  const { ref, isInView } = useScrollAnimation({ threshold: 0.2 });
-
   // Alternate background with subtle gradients
   // Start with Linen White to avoid repeating fjord blue (header is also fjord)
   const bgGradient =
@@ -51,13 +47,7 @@ export function InvestmentPillar({ pillar, index }: InvestmentPillarProps) {
   const Icon: LucideIcon = resolved ?? fallbackIcons[(pillar.id - 1) % fallbackIcons.length];
 
   return (
-    <motion.section
-      ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-      transition={{ duration: 0.7, ease: 'easeOut' }}
-      className={`${bgGradient} relative overflow-hidden py-20 md:py-28`}
-    >
+    <section className={`${bgGradient} relative overflow-hidden py-20 md:py-28`}>
       {/* Subtle pattern overlay */}
       <div className="absolute inset-0 opacity-[0.03]">
         <div
@@ -96,6 +86,6 @@ export function InvestmentPillar({ pillar, index }: InvestmentPillarProps) {
           </div>
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 }

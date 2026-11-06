@@ -1,17 +1,15 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { Store, Users, TrendingUp, Target, BadgeCheck } from 'lucide-react'
-import { useScrollAnimation } from '@/hooks/useScrollAnimation'
+import { Store, Users, TrendingUp, Target, BadgeCheck } from 'lucide-react';
 
 interface ValueCardProps {
   value: {
-    id: number
-    title: string
-    description: string
-    icon: string
-  }
-  index: number
+    id: number;
+    title: string;
+    description: string;
+    icon: string;
+  };
+  index: number;
 }
 
 // Map value icons to components
@@ -21,28 +19,20 @@ const iconMap = {
   TrendingUp: TrendingUp,
   Target: Target,
   BadgeCheck: BadgeCheck,
-}
+};
 
 export function ValueCard({ value, index }: ValueCardProps) {
-  const { ref, isInView } = useScrollAnimation({ threshold: 0.2 })
-
   // Alternate background with subtle gradients
   // Start with Linen White
   const bgGradient =
     index % 2 === 0
       ? 'bg-gradient-to-br from-[#F5F0EB] to-[#EDE8E3]'
-      : 'bg-gradient-to-br from-[#D8E4DC] to-[#C8D5CC]'
+      : 'bg-gradient-to-br from-[#D8E4DC] to-[#C8D5CC]';
 
-  const Icon = iconMap[value.icon as keyof typeof iconMap]
+  const Icon = iconMap[value.icon as keyof typeof iconMap];
 
   return (
-    <motion.section
-      ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-      transition={{ duration: 0.7, ease: 'easeOut' }}
-      className={`${bgGradient} relative overflow-hidden py-20 md:py-28`}
-    >
+    <section className={`${bgGradient} relative overflow-hidden py-20 md:py-28`}>
       {/* Subtle pattern overlay */}
       <div className="absolute inset-0 opacity-[0.03]">
         <div
@@ -81,6 +71,6 @@ export function ValueCard({ value, index }: ValueCardProps) {
           </div>
         </div>
       </div>
-    </motion.section>
-  )
+    </section>
+  );
 }

@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 import { Quote } from 'lucide-react';
 
 interface CeoQuoteProps {
@@ -27,13 +26,7 @@ export function CeoQuote({ text, attribution, bgImageUrl }: CeoQuoteProps) {
       </div>
 
       <div className="relative mx-auto max-w-5xl px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center"
-        >
+        <div className="text-center">
           {/* Quote Icon */}
           <div className="mb-8 inline-flex items-center justify-center">
             <div className="rounded-xl bg-white p-3">
@@ -51,7 +44,7 @@ export function CeoQuote({ text, attribution, bgImageUrl }: CeoQuoteProps) {
 
             <footer className="text-xl font-semibold text-[#1C1C1E]/70">— {attribution}</footer>
           </blockquote>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

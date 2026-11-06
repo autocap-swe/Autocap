@@ -11,6 +11,11 @@ import { REVALIDATE_HIGH } from '@/lib/cms/revalidate';
 import { cmsMediaUrl } from '@/lib/cms/media';
 import { buildMetadata } from '@/lib/cms/seo';
 
+function isSameHeading(a?: string | null, b?: string | null): boolean {
+  const normalise = (value?: string | null) => (value ?? '').trim().toLowerCase();
+  return normalise(a) !== '' && normalise(a) === normalise(b);
+}
+
 type Props = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -23,7 +28,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         'How two brothers saw an opportunity to build a different kind of tire service group in Sweden.',
     },
     cms.seo,
-    locale
+    locale,
+    { path: '/about/story', fallbackOgImage: cms.heroImage }
   );
 }
 
@@ -57,9 +63,12 @@ export default async function StoryPage({ params }: Props) {
 
       <section className="w-full bg-[#F5F0EB] py-16 md:py-24">
         <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <h2 className="mb-8 text-3xl font-black text-[#1C1C1E] md:mb-12 md:text-4xl lg:text-5xl">
-            {cms.openingHeadline}
-          </h2>
+          {/* The hero already shows this headline when the two are identical; avoid a repeated heading. */}
+          {!isSameHeading(cms.openingHeadline, cms.heroHeadline) && (
+            <h2 className="mb-8 text-3xl font-black text-[#1C1C1E] md:mb-12 md:text-4xl lg:text-5xl">
+              {cms.openingHeadline}
+            </h2>
+          )}
           <div className="prose prose-xl max-w-none text-gray-700">
             <CmsRichText content={cms.openingContent} />
           </div>

@@ -9,6 +9,8 @@ import { CookieConsent } from '@/components/cookie/CookieConsent';
 import { CookieConsentProvider } from '@/components/cookie/CookieConsentProvider';
 import { LocalizedPathProvider } from '@/contexts/localizedPathContext';
 import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics';
+import { COMPANY_INFO } from '@/lib/constants';
+import { DEFAULT_OG_IMAGE, SITE_URL } from '@/lib/cms/seo';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -21,7 +23,11 @@ export function generateStaticParams() {
 }
 
 export const metadata: Metadata = {
-  title: "AutoCap Group · Sweden's tire services platform",
+  metadataBase: new URL(SITE_URL),
+  openGraph: {
+    images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: 'AutoCap Group' }],
+  },
+  title: 'AutoCap Group · The Nordic tire services platform',
   description:
     'AutoCap Group acquires and operates independent tire service centres across Sweden. Preserving local brands. Empowering entrepreneurs. Building scale.',
   icons: {
@@ -57,19 +63,35 @@ export default async function LocaleLayout({
               '@graph': [
                 {
                   '@type': 'Organization',
-                  '@id': 'https://autocapgroup.se/#organization',
+                  '@id': `${SITE_URL}/#organization`,
                   name: 'AutoCap Group',
-                  url: 'https://autocapgroup.se',
-                  logo: 'https://autocapgroup.se/images/logo.png',
-                  sameAs: ['https://www.linkedin.com/company/autocapgroup'],
+                  legalName: COMPANY_INFO.name,
+                  url: SITE_URL,
+                  logo: `${SITE_URL}/logos/autocap-dark.png`,
+                  image: DEFAULT_OG_IMAGE,
+                  email: COMPANY_INFO.email,
+                  identifier: {
+                    '@type': 'PropertyValue',
+                    propertyID: 'Organisationsnummer',
+                    value: COMPANY_INFO.orgNumber,
+                  },
+                  address: {
+                    '@type': 'PostalAddress',
+                    streetAddress: 'Nybrogatan 7',
+                    postalCode: '114 34',
+                    addressLocality: 'Stockholm',
+                    addressCountry: 'SE',
+                  },
+                  areaServed: 'SE',
+                  sameAs: [COMPANY_INFO.linkedInUrl],
                 },
                 {
                   '@type': 'WebSite',
                   '@id': 'https://autocapgroup.se/#website',
-                  url: 'https://autocapgroup.se',
+                  url: SITE_URL,
                   name: 'AutoCap Group',
-                  publisher: { '@id': 'https://autocapgroup.se/#organization' },
-                  inLanguage: [locale],
+                  publisher: { '@id': `${SITE_URL}/#organization` },
+                  inLanguage: locale === 'sv' ? 'sv-SE' : 'en',
                 },
               ],
             }),

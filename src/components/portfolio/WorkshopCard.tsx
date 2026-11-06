@@ -2,24 +2,22 @@
 
 import { Link } from '@/i18n/navigation';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 import { MapPin, Calendar } from 'lucide-react';
 import type { Workshop } from '@/lib/cms/workshop/types';
 import { WorkshopImagePlaceholder } from './WorkshopImagePlaceholder';
 
 interface WorkshopCardProps {
   workshop: Workshop;
+  /** @deprecated Ignored; entrance animations were removed. */
   index?: number;
 }
 
-export function WorkshopCard({ workshop, index = 0 }: WorkshopCardProps) {
+export function WorkshopCard({ workshop }: WorkshopCardProps) {
+  const t = useTranslations('portfolio.card');
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration: 0.4, delay: index * 0.05 }}
-    >
+    <div>
       <Link
         href={`/portfolio/${workshop.slug}`}
         className="group relative block h-full overflow-hidden rounded-2xl border border-gray-200 bg-white transition-all duration-300 hover:-translate-y-2 hover:border-[#C8102E]/20 hover:shadow-xl"
@@ -55,17 +53,22 @@ export function WorkshopCard({ workshop, index = 0 }: WorkshopCardProps) {
             </span>
           </div>
 
-          {/* Year Badge */}
-          <div className="mt-auto">
+          {/* Founded / In the group since */}
+          <dl className="mt-auto flex flex-wrap gap-2">
+            {workshop.yearFounded ? (
+              <div className="inline-flex items-center gap-2 rounded-full bg-[#F5F0EB] px-4 py-2">
+                <dt className="text-sm text-gray-600">{t('founded')}</dt>
+                <dd className="text-sm font-semibold text-[#1C1C1E]">{workshop.yearFounded}</dd>
+              </div>
+            ) : null}
             <div className="inline-flex items-center gap-2 rounded-full bg-[#F5F0EB] px-4 py-2">
-              <Calendar className="h-4 w-4 text-[#C8102E]" />
-              <span className="text-sm font-semibold text-[#1C1C1E]">
-                Since {workshop.yearAcquired}
-              </span>
+              <Calendar className="h-4 w-4 text-[#C8102E]" aria-hidden="true" />
+              <dt className="text-sm text-gray-600">{t('inGroupSince')}</dt>
+              <dd className="text-sm font-semibold text-[#1C1C1E]">{workshop.yearAcquired}</dd>
             </div>
-          </div>
+          </dl>
         </div>
       </Link>
-    </motion.div>
+    </div>
   );
 }
