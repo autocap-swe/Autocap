@@ -24,7 +24,9 @@
     "news": {
       "overview": "Nyheter",
       "mediaKit": "Mediekit"
-    }
+    },
+    "ourCompanies": "Våra bolag",
+    "newsShort": "Nyheter"
   },
   "entrepreneurs": {
     "contact": {
@@ -166,7 +168,8 @@
     "orgNumberLabel": "Org.nr",
     "investorRelationsLabel": "IR",
     "investorRelationsAria": "Investerarrelationer",
-    "linkedInAria": "AutoCap Group på LinkedIn"
+    "linkedInAria": "AutoCap Group på LinkedIn",
+    "investorsMediaSection": "Investerare & media"
   },
   "portfolio": {
     "badge": "{count} verkstäder",

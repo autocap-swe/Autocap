@@ -1,157 +1,101 @@
 import { Link } from '@/i18n/navigation';
-import Image from 'next/image';
-import { Linkedin } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
-import { COMPANY_INFO, NAVIGATION_LINKS } from '@/lib/constants';
+import { COMPANY_INFO } from '@/lib/constants';
 import { CookieSettingsButton } from '@/components/cookie/CookieSettingsButton';
+import { Container } from '@/components/ds';
+import { Wordmark } from './Wordmark';
+
+const columnLink = 'text-on-dark-2 no-underline transition-colors hover:text-white';
 
 export async function Footer() {
   const [t, tNav] = await Promise.all([getTranslations('footer'), getTranslations('nav')]);
+  const year = new Date().getFullYear();
+  const ir = COMPANY_INFO.investorRelations;
 
-  const navLabel: Record<string, string> = {
-    '/': tNav('home'),
-    '/about': tNav('about.label'),
-    '/portfolio': tNav('portfolio'),
-    '/entrepreneurs': tNav('entrepreneurs.label'),
-    '/investors': tNav('investors'),
-    '/news': tNav('newsMedia'),
-    '/sustainability': tNav('sustainability'),
-    '/contact': tNav('contact'),
-  };
-
-  const translatedLinks = NAVIGATION_LINKS.map(link => ({
-    href: link.href,
-    label: navLabel[link.href] ?? link.label,
-  }));
-
-  const footerSections = {
-    company: translatedLinks.slice(0, 3),
-    forYou: translatedLinks.slice(3, 5),
-    resources: translatedLinks.slice(5),
-  };
+  const columns = [
+    {
+      title: t('companySection'),
+      links: [
+        { href: '/portfolio', label: tNav('ourCompanies') },
+        { href: '/about/team', label: tNav('about.leadershipBoard') },
+        { href: '/about/story', label: tNav('about.ourStory') },
+        { href: '/sustainability', label: tNav('sustainability') },
+      ],
+    },
+    {
+      title: tNav('entrepreneurs.label'),
+      links: [
+        { href: '/entrepreneurs', label: tNav('entrepreneurs.overview') },
+        { href: '/entrepreneurs/process', label: tNav('entrepreneurs.howItWorks') },
+        { href: '/entrepreneurs/contact', label: tNav('entrepreneurs.contact') },
+      ],
+    },
+    {
+      title: t('investorsMediaSection'),
+      links: [
+        { href: '/investors', label: tNav('investors') },
+        { href: '/news', label: tNav('newsShort') },
+        { href: '/news/media-kit', label: tNav('news.mediaKit') },
+        { href: '/contact', label: tNav('contact') },
+      ],
+    },
+  ];
 
   return (
-    <footer className="bg-[#1C1C1E] text-gray-300">
-      <div className="mx-auto max-w-7xl px-6 py-10 lg:px-8 lg:py-12">
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-4 lg:gap-8">
-          {/* Company info */}
-          <div className="md:col-span-1">
-            <div className="mb-4">
-              <Image
-                src="/logos/autocap-white.png"
-                alt="AutoCap Group"
-                width={128}
-                height={32}
-                className="h-8 w-auto"
-              />
-            </div>
-            <p className="text-xs text-gray-400 leading-relaxed">{t('tagline')}</p>
+    <footer className="bg-ink text-[14px] text-on-dark-2">
+      <Container className="pb-12 pt-10 lg:pt-12">
+        <div className="grid grid-cols-1 gap-8 pb-10 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr]">
+          <div className="flex flex-col gap-2">
+            <span>
+              {COMPANY_INFO.name} · {t('orgNumberLabel')} {COMPANY_INFO.orgNumber}
+            </span>
+            <span>{t('bottomBar')}</span>
+            <span>
+              <span aria-label={t('investorRelationsAria')}>{t('investorRelationsLabel')}:</span>{' '}
+              <a href={`mailto:${ir.email}`} className={columnLink}>
+                {ir.name}, {ir.role}
+              </a>
+            </span>
             <a
               href={COMPANY_INFO.linkedInUrl}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={t('linkedInAria')}
-              className="mt-4 inline-flex items-center gap-2 text-sm text-gray-400 transition-colors hover:text-gray-200"
+              className="text-white no-underline hover:text-red"
             >
-              <Linkedin className="h-4 w-4" aria-hidden="true" />
-              <span>LinkedIn</span>
+              LinkedIn →
             </a>
           </div>
-
-          {/* Company links */}
-          <div>
-            <h3 className="text-sm font-medium mb-3 uppercase tracking-wide text-gray-300">
-              {t('companySection')}
-            </h3>
-            <ul className="space-y-2">
-              {footerSections.company.map(link => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-gray-400 hover:text-gray-200 transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* For You links */}
-          <div>
-            <h3 className="text-sm font-medium mb-3 uppercase tracking-wide text-gray-300">
-              {t('forYouSection')}
-            </h3>
-            <ul className="space-y-2">
-              {footerSections.forYou.map(link => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-gray-400 hover:text-gray-200 transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Resources links */}
-          <div>
-            <h3 className="text-sm font-medium mb-3 uppercase tracking-wide text-gray-300">
-              {t('resourcesSection')}
-            </h3>
-            <ul className="space-y-2">
-              {footerSections.resources.map(link => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-gray-400 hover:text-gray-200 transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-              <li>
-                <Link
-                  href="/privacy-policy"
-                  className="text-sm text-gray-400 hover:text-gray-200 transition-colors"
-                >
-                  {t('privacyPolicy')}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/cookies"
-                  className="text-sm text-gray-400 hover:text-gray-200 transition-colors"
-                >
-                  {t('cookiePolicy')}
-                </Link>
-              </li>
-              <li>
-                <CookieSettingsButton />
-              </li>
-            </ul>
-          </div>
+          {columns.map(column => (
+            <div key={column.title} className="flex flex-col gap-2">
+              <h2 className="m-0 text-[14px] font-semibold tracking-normal text-white">{column.title}</h2>
+              <ul className="m-0 flex list-none flex-col gap-2 p-0">
+                {column.links.map(link => (
+                  <li key={link.href}>
+                    <Link href={link.href} className={columnLink}>
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-8 border-t border-gray-700/40 pt-6">
-          <p className="text-xs text-gray-400 text-center md:text-left">
-            {COMPANY_INFO.name} · {t('orgNumberLabel')} {COMPANY_INFO.orgNumber} · {t('bottomBar')}{' '}
-            — {t('tagline')}
-          </p>
-          <p className="mt-2 text-xs text-gray-400 text-center md:text-left">
-            <span aria-label={t('investorRelationsAria')}>{t('investorRelationsLabel')}:</span>{' '}
-            <a
-              href={`mailto:${COMPANY_INFO.investorRelations.email}`}
-              className="transition-colors hover:text-gray-200 hover:underline"
-            >
-              {COMPANY_INFO.investorRelations.name}, {COMPANY_INFO.investorRelations.role}
-            </a>
+        <div className="flex flex-wrap items-end justify-between gap-4 border-t border-rule-dark pt-7">
+          <Wordmark className="text-[3.25rem] leading-[0.9] tracking-[-0.04em] text-white sm:text-[5rem] lg:text-[7rem]" />
+          <p className="m-0 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
+            <span>© {year} {COMPANY_INFO.name}</span>
+            <Link href="/privacy-policy" className={columnLink}>
+              {t('privacyPolicy')}
+            </Link>
+            <Link href="/cookies" className={columnLink}>
+              {t('cookiePolicy')}
+            </Link>
+            <CookieSettingsButton />
           </p>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 }

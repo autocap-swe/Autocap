@@ -24,7 +24,9 @@
     "news": {
       "overview": "News",
       "mediaKit": "Media Kit"
-    }
+    },
+    "ourCompanies": "Our companies",
+    "newsShort": "News"
   },
   "entrepreneurs": {
     "contact": {
@@ -166,7 +168,8 @@
     "orgNumberLabel": "Corp. ID",
     "investorRelationsLabel": "IR",
     "investorRelationsAria": "Investor relations",
-    "linkedInAria": "AutoCap Group on LinkedIn"
+    "linkedInAria": "AutoCap Group on LinkedIn",
+    "investorsMediaSection": "Investors & media"
   },
   "portfolio": {
     "badge": "{count} Workshops",

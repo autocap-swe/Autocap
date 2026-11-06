@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Manrope } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { Header } from '@/components/layout/Header';
@@ -12,10 +12,11 @@ import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics';
 import { COMPANY_INFO } from '@/lib/constants';
 import { DEFAULT_OG_IMAGE, SITE_URL } from '@/lib/cms/seo';
 
-const inter = Inter({
+const manrope = Manrope({
   subsets: ['latin'],
+  weight: ['300', '400', '500', '600'],
   display: 'swap',
-  variable: '--font-inter',
+  variable: '--font-manrope',
 });
 
 export function generateStaticParams() {
@@ -53,7 +54,7 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
   const messages = await getMessages();
   return (
-    <html lang={locale} className={inter.variable}>
+    <html lang={locale} className={manrope.variable}>
       <head>
         <script
           type="application/ld+json"

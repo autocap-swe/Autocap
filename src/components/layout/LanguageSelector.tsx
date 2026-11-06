@@ -14,7 +14,7 @@ interface LanguageSelectorProps {
    * 'inline' renders both languages as always-visible rows — used inside the
    * mobile menu, where a floating dropdown gets clipped by the scroll container.
    */
-  variant?: 'dropdown' | 'inline';
+  variant?: 'dropdown' | 'inline' | 'toggle';
   /** Fired after a language is chosen — e.g. to close the mobile menu. */
   onSelect?: () => void;
 }
@@ -79,6 +79,23 @@ export function LanguageSelector({
     const targetPath = localizedPaths[lang] ?? pathname;
     router.push(targetPath, { locale: lang });
   };
+
+  if (variant === 'toggle') {
+    const other: Language = currentLocale === 'sv' ? 'en' : 'sv';
+    return (
+      <div role="group" aria-label="Language selector" className={className}>
+        <button
+          type="button"
+          onClick={() => handleLanguageSelect(other)}
+          aria-label={languages[other].label}
+          lang={other}
+          className="min-h-11 px-1 text-sm font-medium uppercase text-current opacity-70 transition-opacity hover:opacity-100"
+        >
+          {other}
+        </button>
+      </div>
+    );
+  }
 
   if (variant === 'inline') {
     return (

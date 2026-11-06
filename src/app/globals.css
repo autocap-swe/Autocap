@@ -4,10 +4,26 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ─── AutoCap v2 design tokens (claude/hq/2026-11-06-webb-designspec.md) ─── */
+@theme {
+  --color-ink: #111111;
+  --color-ink-2: #1e1d1b;
+  --color-rule-dark: #2a2927;
+  --color-rule-dark-2: #3d3a35;
+  --color-red: #c8102e;
+  --color-birch: #f4f1ec;
+  --color-fjord: #e6edf3;
+  --color-rule: #e5e1da;
+  --color-text-2: #5a5753;
+  --color-text-3: #8c877f;
+  --color-on-dark-2: #bdb8af;
+  --breakpoint-xs: 375px;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-manrope), system-ui, sans-serif;
   --font-mono: var(--font-geist-mono);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -143,7 +159,8 @@ p {
   text-wrap: pretty;
 }
 @media (max-width: 480px) {
-  h1 {
+  /* Legacy headings only; v2 roles (t-hero, t-h1) carry their own mobile sizes. */
+  h1:not(.t-hero, .t-h1) {
     font-size: min(2.25rem, 8.4vw);
     line-height: 1.12;
   }
@@ -152,4 +169,51 @@ p {
     font-size: min(1.875rem, 7.6vw);
     line-height: 1.15;
   }
+}
+
+/* ─── v2 typography roles. Mobile first; desktop sizes from lg. ─── */
+@utility t-hero {
+  font-size: 2.75rem; line-height: 1; font-weight: 300; letter-spacing: -0.03em;
+  @media (width >= 64rem) { font-size: 5rem; }
+}
+@utility t-h1 {
+  font-size: 2.5rem; line-height: 1.02; font-weight: 300; letter-spacing: -0.03em;
+  @media (width >= 64rem) { font-size: 4rem; }
+}
+@utility t-h2 {
+  font-size: 2rem; line-height: 1.05; font-weight: 300; letter-spacing: -0.03em;
+  @media (width >= 64rem) { font-size: 3rem; }
+}
+@utility t-h2-sm {
+  font-size: 2rem; line-height: 1.1; font-weight: 300; letter-spacing: -0.03em;
+  @media (width >= 64rem) { font-size: 2.5rem; }
+}
+@utility t-h3 {
+  font-size: 1.375rem; line-height: 1.2; font-weight: 500; letter-spacing: -0.02em;
+  @media (width >= 64rem) { font-size: 1.5rem; }
+}
+@utility t-figure-xl {
+  font-size: 3.5rem; line-height: 1; font-weight: 300; letter-spacing: -0.04em;
+  @media (width >= 64rem) { font-size: 5.5rem; }
+}
+@utility t-figure-lg {
+  font-size: 3.5rem; line-height: 1; font-weight: 300; letter-spacing: -0.04em;
+  @media (width >= 64rem) { font-size: 4.5rem; }
+}
+@utility t-figure-md {
+  font-size: 3.5rem; line-height: 1; font-weight: 300; letter-spacing: -0.04em;
+}
+@utility t-eyebrow {
+  font-size: 0.8125rem; line-height: 1.3; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+}
+@utility t-lead {
+  font-size: 1.0625rem; line-height: 1.55; font-weight: 400;
+  @media (width >= 64rem) { font-size: 1.25rem; }
+}
+@utility t-body {
+  font-size: 1rem; line-height: 1.55; font-weight: 400;
+  @media (width >= 64rem) { font-size: 1.0625rem; }
+}
+@utility t-meta {
+  font-size: 0.8125rem; line-height: 1.4; font-weight: 400;
 }
