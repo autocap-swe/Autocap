@@ -1,29 +1,18 @@
 import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 import { formatLongDate } from '@/lib/format-date';
-import type { HeroImageFocus, NewsArticle } from '@/lib/cms/article/types';
+import type { NewsArticle } from '@/lib/cms/article/types';
+import { imageFocusClass } from './image-focus';
 import { NewsCategoryBadge } from './NewsCategoryBadge';
 
 interface ArticleHeaderProps {
   article: NewsArticle;
 }
 
-// Full class names so Tailwind keeps them (no dynamic string building)
-const FOCUS_CLASS: Record<HeroImageFocus, string> = {
-  center: 'object-center',
-  top: 'object-top',
-  bottom: 'object-bottom',
-  left: 'object-left',
-  right: 'object-right',
-  'top-left': 'object-left-top',
-  'top-right': 'object-right-top',
-  'bottom-left': 'object-left-bottom',
-  'bottom-right': 'object-right-bottom',
-};
 
 export function ArticleHeader({ article }: ArticleHeaderProps) {
   const t = useTranslations('news');
-  const focusClass = FOCUS_CLASS[article.heroImageFocus ?? 'center'];
+  const focusClass = imageFocusClass(article.heroImageFocus);
 
   const locale = useLocale();
   const formatDate = (dateString: string): string => formatLongDate(dateString, locale);
