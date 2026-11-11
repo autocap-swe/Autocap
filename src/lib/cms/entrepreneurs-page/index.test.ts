@@ -34,7 +34,7 @@ describe('getEntrepreneursPageContent — wiring', () => {
     const [slug, options] = mockedGetContent.mock.calls[0];
     expect(slug).toBe('entrepreneurs-page');
     expect(typeof options!.mapper).toBe('function');
-    expect(options!.params?.populate).toBe('benefits');
+    expect(options!.params?.populate).toContain('benefits');
   });
 });
 

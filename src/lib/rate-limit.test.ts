@@ -1,10 +1,8 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-
 let rateLimit: typeof import('./rate-limit').rateLimit;
 let getClientIp: typeof import('./rate-limit').getClientIp;
 
 beforeEach(async () => {
-  vi.resetModules();
+  jest.resetModules();
   ({ rateLimit, getClientIp } = await import('./rate-limit'));
 });
 
@@ -33,15 +31,15 @@ describe('rateLimit', () => {
   });
 
   it('resets after the window expires', () => {
-    vi.useFakeTimers();
+    jest.useFakeTimers();
     for (let i = 0; i < 5; i++) rateLimit('1.2.3.7', 5);
     expect(rateLimit('1.2.3.7', 5).success).toBe(false);
 
-    vi.advanceTimersByTime(60_001);
+    jest.advanceTimersByTime(60_001);
     const result = rateLimit('1.2.3.7', 5);
     expect(result.success).toBe(true);
     expect(result.remaining).toBe(4);
-    vi.useRealTimers();
+    jest.useRealTimers();
   });
 
   it('namespaces by limit so different routes do not share counters', () => {

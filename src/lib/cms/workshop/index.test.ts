@@ -15,7 +15,7 @@ const mockCmsWorkshop: CmsWorkshop = {
   latitude: 57.6557,
   longitude: 12.0138,
   acquisitionStatus: 'acquired',
-  yearAcquired: 2025,
+  yearAcquired: '2025',
   localWebsite: 'https://dackpoint.se',
   description: 'Full-service tire workshop.',
   partnershipNote: null,

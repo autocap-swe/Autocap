@@ -30,3 +30,8 @@ if (typeof window !== 'undefined')
       dispatchEvent: jest.fn(),
     })),
   });
+
+// jsdom has no layout engine and does not implement scrolling.
+if (typeof window !== 'undefined') {
+  window.HTMLElement.prototype.scrollIntoView = jest.fn();
+}

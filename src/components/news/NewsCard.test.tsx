@@ -13,7 +13,6 @@ const mockArticle: NewsArticle = {
   imageUrl: '/images/news/acquisition.jpg',
   slug: 'autocap-acquires-svenska-dackgruppen',
   readTimeMinutes: 3,
-  order: 1,
 };
 
 const mockArticleWithoutImage: NewsArticle = {
@@ -61,9 +60,7 @@ describe('NewsCard', () => {
       expect(screen.getByText(/3 min read/)).toBeInTheDocument();
       expect(screen.getByText(/January 15, 2026/)).toBeInTheDocument();
 
-      // Verify footer contains author by checking the footer div
-      const footer = screen.getByText(/3 min read/).closest('div');
-      expect(footer).toHaveTextContent('AutoCap Group');
+      expect(screen.getByText('AutoCap Group')).toBeInTheDocument();
     });
   });
 

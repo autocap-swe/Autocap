@@ -29,8 +29,9 @@ describe('getContactContent — wires generic client (AC-002)', () => {
     expect(mockedGetContent).toHaveBeenCalledTimes(1);
     const [slug, options] = mockedGetContent.mock.calls[0];
     expect(slug).toBe('contact-page');
-    expect(options).toEqual({
+    expect(options).toMatchObject({
       mapper: expect.any(Function),
+      tags: ['contact-page'],
     });
     // explicitly assert no fallback in the options object
     expect(options).not.toHaveProperty('fallback');

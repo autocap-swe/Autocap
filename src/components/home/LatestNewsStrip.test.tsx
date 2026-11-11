@@ -33,7 +33,6 @@ const mockArticles: NewsArticle[] = [
     author: 'Author',
     category: 'Company News',
     readTimeMinutes: 3,
-    order: 1,
   },
   {
     id: 2,
@@ -44,7 +43,6 @@ const mockArticles: NewsArticle[] = [
     author: 'Author',
     category: 'Company News',
     readTimeMinutes: 3,
-    order: 2,
   },
   {
     id: 3,
@@ -55,7 +53,6 @@ const mockArticles: NewsArticle[] = [
     author: 'Author',
     category: 'Company News',
     readTimeMinutes: 3,
-    order: 3,
   },
   {
     id: 4,
@@ -66,7 +63,6 @@ const mockArticles: NewsArticle[] = [
     author: 'Author',
     category: 'Company News',
     readTimeMinutes: 3,
-    order: 4,
   },
   {
     id: 5,
@@ -77,7 +73,6 @@ const mockArticles: NewsArticle[] = [
     author: 'Author',
     category: 'Company News',
     readTimeMinutes: 3,
-    order: 5,
   },
 ];
 

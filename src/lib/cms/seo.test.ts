@@ -83,7 +83,10 @@ describe('Sitemap static routes (fas A)', () => {
   }
 
   it('AC-SEO-6: lists exactly the static pages that exist', () => {
-    const actual = pageRoutes(join(process.cwd(), 'src/app/[locale]')).sort();
+    // The design-system reference page exists on preview deployments only and is never indexed.
+    const actual = pageRoutes(join(process.cwd(), 'src/app/[locale]'))
+      .filter(route => route !== '/design-system')
+      .sort();
     expect([...STATIC_ROUTES].sort()).toEqual(actual);
   });
 });

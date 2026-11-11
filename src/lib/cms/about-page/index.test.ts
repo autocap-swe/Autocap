@@ -46,7 +46,7 @@ describe('getAboutPageContent — wiring', () => {
     await getAboutPageContent();
 
     const [, options] = mockedGetContent.mock.calls[0];
-    expect(options!.params?.populate).toBe('differentiators');
+    expect(options!.params?.populate).toContain('differentiators');
   });
 });
 

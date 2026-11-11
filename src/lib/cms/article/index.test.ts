@@ -16,7 +16,6 @@ const mockCmsArticle: CmsArticle = {
   category: 'Press Release',
   heroImage: { url: 'https://cdn.example.com/hero.jpg' },
   readTimeMinutes: 3,
-  order: 1,
   tags: ['acquisition'],
 };
 

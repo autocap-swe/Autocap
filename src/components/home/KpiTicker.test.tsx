@@ -133,7 +133,7 @@ describe('KpiTicker', () => {
     const gridContainer = container.querySelector('.grid');
     expect(gridContainer).toHaveClass('grid-cols-1'); // Mobile: 1 column
     expect(gridContainer).toHaveClass('sm:grid-cols-2'); // Small screens: 2 columns
-    expect(gridContainer).toHaveClass('lg:grid-cols-4'); // Desktop: 4 columns
+    expect(gridContainer).toHaveClass('xl:grid-cols-4'); // Wide screens: 4 columns
   });
 
   it('applies correct spacing and padding', () => {

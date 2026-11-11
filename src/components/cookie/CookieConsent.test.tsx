@@ -1,5 +1,14 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { CookieConsent } from './CookieConsent'
+import { CookieConsentProvider } from './CookieConsentProvider'
+
+// The banner reads its state from the provider that wraps the whole site.
+const renderBanner = () =>
+  render(
+    <CookieConsentProvider>
+      <CookieConsent />
+    </CookieConsentProvider>
+  )
 import { saveConsentData, getAcceptedAllPreferences } from '@/lib/cookieConsent'
 
 // Mock localStorage
@@ -31,21 +40,21 @@ describe('CookieConsent Component', () => {
 
   describe('AC-001: Banner appears on first visit', () => {
     it('shows banner when no consent exists', async () => {
-      render(<CookieConsent />)
+      renderBanner()
       await waitFor(() => {
         expect(screen.getByRole('dialog', { name: /cookie consent banner/i })).toBeInTheDocument()
       })
     })
 
     it('displays cookie message', async () => {
-      render(<CookieConsent />)
+      renderBanner()
       await waitFor(() => {
         expect(screen.getByText(/We use cookies/i)).toBeInTheDocument()
       })
     })
 
     it('shows Cookie icon', async () => {
-      const { container } = render(<CookieConsent />)
+      const { container } = renderBanner()
       await waitFor(() => {
         const icon = container.querySelector('svg.lucide-cookie')
         expect(icon).toBeInTheDocument()
@@ -55,7 +64,7 @@ describe('CookieConsent Component', () => {
 
   describe('AC-002: "Accept all" saves consent and hides banner', () => {
     it('hides banner after clicking Accept all', async () => {
-      render(<CookieConsent />)
+      renderBanner()
 
       await waitFor(() => {
         expect(screen.getByRole('dialog', { name: /cookie consent banner/i })).toBeInTheDocument()
@@ -70,7 +79,7 @@ describe('CookieConsent Component', () => {
     })
 
     it('saves consent to localStorage', async () => {
-      render(<CookieConsent />)
+      renderBanner()
 
       await waitFor(() => {
         const acceptButton = screen.getByRole('button', { name: /accept all/i })
@@ -84,7 +93,7 @@ describe('CookieConsent Component', () => {
     })
 
     it('accepts all cookie categories', async () => {
-      render(<CookieConsent />)
+      renderBanner()
 
       await waitFor(() => {
         const acceptButton = screen.getByRole('button', { name: /accept all/i })
@@ -103,7 +112,7 @@ describe('CookieConsent Component', () => {
 
   describe('AC-003: "Manage preferences" opens modal', () => {
     it('opens preferences modal', async () => {
-      render(<CookieConsent />)
+      renderBanner()
 
       await waitFor(() => {
         const manageButton = screen.getByRole('button', { name: /manage preferences/i })
@@ -116,7 +125,7 @@ describe('CookieConsent Component', () => {
     })
 
     it('modal has category toggles', async () => {
-      render(<CookieConsent />)
+      renderBanner()
 
       await waitFor(() => {
         const manageButton = screen.getByRole('button', { name: /manage preferences/i })
@@ -131,7 +140,7 @@ describe('CookieConsent Component', () => {
     })
 
     it('shows close button in modal', async () => {
-      render(<CookieConsent />)
+      renderBanner()
 
       await waitFor(() => {
         const manageButton = screen.getByRole('button', { name: /manage preferences/i })
@@ -146,7 +155,7 @@ describe('CookieConsent Component', () => {
 
   describe('AC-004: Privacy Policy link', () => {
     it('displays Privacy Policy link', async () => {
-      render(<CookieConsent />)
+      renderBanner()
 
       await waitFor(() => {
         const link = screen.getByRole('link', { name: /privacy policy/i })
@@ -155,7 +164,7 @@ describe('CookieConsent Component', () => {
     })
 
     it('Privacy Policy link points to correct page', async () => {
-      render(<CookieConsent />)
+      renderBanner()
 
       await waitFor(() => {
         const link = screen.getByRole('link', { name: /privacy policy/i })
@@ -167,7 +176,7 @@ describe('CookieConsent Component', () => {
   describe('AC-005: Respects existing consent', () => {
     it('does not show banner if valid consent exists', async () => {
       saveConsentData('accepted', getAcceptedAllPreferences())
-      render(<CookieConsent />)
+      renderBanner()
 
       await waitFor(() => {
         expect(screen.queryByRole('dialog', { name: /cookie consent banner/i })).not.toBeInTheDocument()
@@ -176,7 +185,7 @@ describe('CookieConsent Component', () => {
 
     it('respects rejected consent', async () => {
       saveConsentData('rejected', { necessary: true, analytics: false, marketing: false })
-      render(<CookieConsent />)
+      renderBanner()
 
       await waitFor(() => {
         expect(screen.queryByRole('dialog', { name: /cookie consent banner/i })).not.toBeInTheDocument()
@@ -185,7 +194,7 @@ describe('CookieConsent Component', () => {
 
     it('respects custom consent', async () => {
       saveConsentData('custom', { necessary: true, analytics: true, marketing: false })
-      render(<CookieConsent />)
+      renderBanner()
 
       await waitFor(() => {
         expect(screen.queryByRole('dialog', { name: /cookie consent banner/i })).not.toBeInTheDocument()
@@ -203,7 +212,7 @@ describe('CookieConsent Component', () => {
       }
       localStorage.setItem('autocap_cookie_consent', JSON.stringify(expiredData))
 
-      render(<CookieConsent />)
+      renderBanner()
 
       await waitFor(() => {
         expect(screen.getByRole('dialog', { name: /cookie consent banner/i })).toBeInTheDocument()
@@ -213,7 +222,7 @@ describe('CookieConsent Component', () => {
 
   describe('AC-007: Keyboard navigable', () => {
     it('Accept all button is keyboard accessible', async () => {
-      render(<CookieConsent />)
+      renderBanner()
 
       await waitFor(() => {
         const acceptButton = screen.getByRole('button', { name: /accept all/i })
@@ -222,7 +231,7 @@ describe('CookieConsent Component', () => {
     })
 
     it('Manage preferences button is keyboard accessible', async () => {
-      render(<CookieConsent />)
+      renderBanner()
 
       await waitFor(() => {
         const manageButton = screen.getByRole('button', { name: /manage preferences/i })
@@ -231,7 +240,7 @@ describe('CookieConsent Component', () => {
     })
 
     it('modal close button is keyboard accessible', async () => {
-      render(<CookieConsent />)
+      renderBanner()
 
       await waitFor(() => {
         const manageButton = screen.getByRole('button', { name: /manage preferences/i })
@@ -247,7 +256,7 @@ describe('CookieConsent Component', () => {
 
   describe('AC-008: No z-index conflict with BackToTop', () => {
     it('banner has z-40', async () => {
-      const { container } = render(<CookieConsent />)
+      const { container } = renderBanner()
 
       await waitFor(() => {
         const banner = container.querySelector('.z-40')
@@ -256,7 +265,7 @@ describe('CookieConsent Component', () => {
     })
 
     it('modal has higher z-index than banner', async () => {
-      const { container } = render(<CookieConsent />)
+      const { container } = renderBanner()
 
       await waitFor(() => {
         const manageButton = screen.getByRole('button', { name: /manage preferences/i })
@@ -272,7 +281,7 @@ describe('CookieConsent Component', () => {
 
   describe('AC-009: Does not block critical CTAs', () => {
     it('banner is positioned at bottom', async () => {
-      const { container } = render(<CookieConsent />)
+      const { container } = renderBanner()
 
       await waitFor(() => {
         const banner = container.querySelector('.fixed.bottom-0')
@@ -281,7 +290,7 @@ describe('CookieConsent Component', () => {
     })
 
     it('banner does not cover viewport', async () => {
-      const { container } = render(<CookieConsent />)
+      const { container } = renderBanner()
 
       await waitFor(() => {
         const banner = container.querySelector('.fixed')
@@ -292,7 +301,7 @@ describe('CookieConsent Component', () => {
 
   describe('AC-010: GDPR compliant', () => {
     it('necessary cookies are always enabled in modal', async () => {
-      render(<CookieConsent />)
+      renderBanner()
 
       await waitFor(() => {
         const manageButton = screen.getByRole('button', { name: /manage preferences/i })
@@ -305,7 +314,7 @@ describe('CookieConsent Component', () => {
     })
 
     it('analytics cookies can be toggled', async () => {
-      render(<CookieConsent />)
+      renderBanner()
 
       await waitFor(() => {
         const manageButton = screen.getByRole('button', { name: /manage preferences/i })
@@ -320,7 +329,7 @@ describe('CookieConsent Component', () => {
     })
 
     it('marketing cookies can be toggled', async () => {
-      render(<CookieConsent />)
+      renderBanner()
 
       await waitFor(() => {
         const manageButton = screen.getByRole('button', { name: /manage preferences/i })
@@ -336,7 +345,7 @@ describe('CookieConsent Component', () => {
 
   describe('Banner Styling', () => {
     it('has Nordic Black background', async () => {
-      const { container } = render(<CookieConsent />)
+      const { container } = renderBanner()
 
       await waitFor(() => {
         const banner = container.querySelector('.bg-\\[\\#1C1C1E\\]')
@@ -345,7 +354,7 @@ describe('CookieConsent Component', () => {
     })
 
     it('Accept button has AutoCap Red background', async () => {
-      render(<CookieConsent />)
+      renderBanner()
 
       await waitFor(() => {
         const acceptButton = screen.getByRole('button', { name: /accept all/i })
@@ -356,7 +365,7 @@ describe('CookieConsent Component', () => {
 
   describe('Modal Functionality', () => {
     it('closes modal on close button click', async () => {
-      render(<CookieConsent />)
+      renderBanner()
 
       await waitFor(() => {
         const manageButton = screen.getByRole('button', { name: /manage preferences/i })
@@ -374,7 +383,7 @@ describe('CookieConsent Component', () => {
     })
 
     it('closes modal on cancel button click', async () => {
-      render(<CookieConsent />)
+      renderBanner()
 
       await waitFor(() => {
         const manageButton = screen.getByRole('button', { name: /manage preferences/i })
@@ -391,8 +400,8 @@ describe('CookieConsent Component', () => {
       })
     })
 
-    it('closes modal and saves consent on Accept all in modal', async () => {
-      render(<CookieConsent />)
+    it('closes modal and banner on Accept all while the modal is open', async () => {
+      renderBanner()
 
       await waitFor(() => {
         const manageButton = screen.getByRole('button', { name: /manage preferences/i })
@@ -400,8 +409,9 @@ describe('CookieConsent Component', () => {
       })
 
       await waitFor(() => {
-        const modalAcceptButton = screen.getAllByRole('button', { name: /accept all/i })[1]
-        fireEvent.click(modalAcceptButton)
+        // The preferences modal has no button of its own for this; the banner's stays reachable.
+        const acceptButton = screen.getAllByRole('button', { name: /accept all/i }).at(-1) as HTMLElement
+        fireEvent.click(acceptButton)
       })
 
       await waitFor(() => {
@@ -413,7 +423,7 @@ describe('CookieConsent Component', () => {
 
   describe('Accessibility', () => {
     it('banner has role="dialog"', async () => {
-      render(<CookieConsent />)
+      renderBanner()
 
       await waitFor(() => {
         const banner = screen.getByRole('dialog', { name: /cookie consent banner/i })
@@ -422,7 +432,7 @@ describe('CookieConsent Component', () => {
     })
 
     it('modal has role="dialog" and aria-modal', async () => {
-      render(<CookieConsent />)
+      renderBanner()
 
       await waitFor(() => {
         const manageButton = screen.getByRole('button', { name: /manage preferences/i })

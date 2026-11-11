@@ -151,7 +151,7 @@ describe('Root 404 Page', () => {
 
     it('decorative line uses AutoCap Red', () => {
       const { container } = render(<NotFound />)
-      const line = container.querySelector('.via-\\[\\#C8102E\\]')
+      const line = container.querySelector('.bg-\\[\\#C8102E\\]')
       expect(line).toBeInTheDocument()
     })
 

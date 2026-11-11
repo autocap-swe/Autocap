@@ -6,6 +6,11 @@
 
 import { getContent, CmsUnavailableError } from './client';
 
+// getContent asks Next.js whether editor preview is on; outside a request that call throws.
+jest.mock('next/headers', () => ({
+  draftMode: async () => ({ isEnabled: false }),
+}));
+
 const originalFetch = global.fetch;
 
 beforeEach(() => {
@@ -95,7 +100,7 @@ describe('getContent — error paths (AC-006)', () => {
   });
 
   it('throws CmsUnavailableError on non-2xx response', async () => {
-    global.fetch = jest.fn().mockResolvedValue({ ok: false, status: 500 });
+    global.fetch = jest.fn().mockResolvedValue({ ok: false, text: async () => '', status: 500 });
 
     await expect(getContent('contact-page')).rejects.toThrow(CmsUnavailableError);
     expect(console.warn).toHaveBeenCalledWith(
@@ -136,7 +141,7 @@ describe('getContent — error paths (AC-006)', () => {
   });
 
   it('attaches the underlying status to the error', async () => {
-    global.fetch = jest.fn().mockResolvedValue({ ok: false, status: 503 });
+    global.fetch = jest.fn().mockResolvedValue({ ok: false, text: async () => '', status: 503 });
 
     try {
       await getContent('contact-page');
@@ -165,7 +170,7 @@ describe('getContent — mapper (AC-001)', () => {
   });
 
   it('still throws when CMS fails (mapper does not rescue)', async () => {
-    global.fetch = jest.fn().mockResolvedValue({ ok: false, status: 500 });
+    global.fetch = jest.fn().mockResolvedValue({ ok: false, text: async () => '', status: 500 });
 
     await expect(getContent<Cms, Final>('x', { mapper })).rejects.toThrow(CmsUnavailableError);
   });

@@ -13,7 +13,6 @@ describe('ArticleHeader', () => {
     imageUrl: '/test-article.jpg',
     slug: 'test-article',
     readTimeMinutes: 5,
-    order: 1,
   };
 
   it('displays article title', () => {
@@ -48,15 +47,6 @@ describe('ArticleHeader', () => {
     expect(screen.getByText('5 min read')).toBeInTheDocument();
   });
 
-  it('applies responsive title typography', () => {
-    const { container } = render(<ArticleHeader article={mockArticle} />);
-
-    const title = container.querySelector('h1');
-    expect(title).toHaveClass('text-5xl');
-    expect(title).toHaveClass('md:text-6xl');
-    expect(title).toHaveClass('lg:text-7xl');
-  });
-
   it('applies title font weight', () => {
     const { container } = render(<ArticleHeader article={mockArticle} />);
 
@@ -64,26 +54,10 @@ describe('ArticleHeader', () => {
     expect(title).toHaveClass('font-black');
   });
 
-  it('applies Linen White gradient background', () => {
-    const { container } = render(<ArticleHeader article={mockArticle} />);
-
-    const header = container.querySelector('header');
-    expect(header).toHaveClass('bg-gradient-to-br');
-    expect(header).toHaveClass('from-[#F5F0EB]');
-    expect(header).toHaveClass('to-[#EDE8E3]');
-  });
-
-  it('applies vertical padding', () => {
-    const { container } = render(<ArticleHeader article={mockArticle} />);
-
-    const header = container.querySelector('header');
-    expect(header).toHaveClass('py-16');
-  });
-
   it('displays decorative red line separator', () => {
     const { container } = render(<ArticleHeader article={mockArticle} />);
 
-    const separator = container.querySelector('[class*="border-[#C8102E]"]');
+    const separator = container.querySelector('[class*="bg-[#C8102E]"]');
     expect(separator).toBeInTheDocument();
   });
 

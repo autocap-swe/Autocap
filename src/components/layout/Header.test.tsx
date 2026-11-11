@@ -56,7 +56,8 @@ describe('Header - LanguageSelector Integration', () => {
     it('renders navigation links', () => {
       render(<Header />)
 
-      const homeLink = screen.getByRole('link', { name: /home/i })
+      // The logotype is the link home.
+      const homeLink = screen.getByRole('link', { name: /autocap group/i })
       expect(homeLink).toBeInTheDocument()
     })
 

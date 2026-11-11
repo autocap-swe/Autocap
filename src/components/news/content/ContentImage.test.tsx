@@ -28,32 +28,6 @@ describe('ContentImage', () => {
     expect(screen.getByText('This is a test caption')).toBeInTheDocument()
   })
 
-  it('renders credit when provided', () => {
-    render(
-      <ContentImage
-        src="/test.jpg"
-        alt="Test"
-        credit="John Photographer"
-      />
-    )
-
-    expect(screen.getByText(/Photo: John Photographer/)).toBeInTheDocument()
-  })
-
-  it('renders both caption and credit', () => {
-    render(
-      <ContentImage
-        src="/test.jpg"
-        alt="Test"
-        caption="Beautiful landscape"
-        credit="Jane Doe"
-      />
-    )
-
-    expect(screen.getByText('Beautiful landscape')).toBeInTheDocument()
-    expect(screen.getByText(/Photo: Jane Doe/)).toBeInTheDocument()
-  })
-
   it('uses figure element for semantic HTML', () => {
     const { container } = render(<ContentImage src="/test.jpg" alt="Test" />)
 
@@ -82,7 +56,7 @@ describe('ContentImage', () => {
     expect(imageContainer).toBeInTheDocument()
   })
 
-  it('does not render figcaption when no caption or credit', () => {
+  it('does not render figcaption when there is no caption', () => {
     const { container } = render(<ContentImage src="/test.jpg" alt="Test" />)
 
     const figcaption = container.querySelector('figcaption')

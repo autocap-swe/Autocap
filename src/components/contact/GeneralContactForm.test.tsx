@@ -20,9 +20,15 @@ const mockFormLabels: ContactFormLabels = {
 describe('GeneralContactForm', () => {
   const mockSuccessMessage = "Thank you! We'll get back to you soon.";
 
+  const mockFetch = jest.fn();
+
   beforeEach(() => {
-    // Clear console.log mock before each test
-    jest.spyOn(console, 'log').mockImplementation();
+    // The form posts to the site's own API; answer after a short delay so the loading state shows.
+    mockFetch.mockReset();
+    mockFetch.mockImplementation(
+      () => new Promise(resolve => setTimeout(() => resolve({ ok: true, json: async () => ({ success: true }) }), 50))
+    );
+    global.fetch = mockFetch as unknown as typeof fetch;
   });
 
   afterEach(() => {
@@ -103,8 +109,8 @@ describe('GeneralContactForm', () => {
       const emailInput = screen.getByLabelText(/email/i);
       await user.clear(emailInput);
       await user.type(emailInput, 'invalid-email');
-      await user.type(screen.getByLabelText(/subject/i), 'Test');
-      await user.type(screen.getByLabelText(/message/i), 'Test message');
+      await user.type(screen.getByLabelText(/subject/i), 'Test enquiry');
+      await user.type(screen.getByLabelText(/message/i), 'A test message long enough to pass validation.');
       await user.click(screen.getByLabelText(/agree.*privacy policy/i));
 
       const submitButton = screen.getByRole('button', { name: /send message/i });
@@ -162,7 +168,7 @@ describe('GeneralContactForm', () => {
       await user.type(nameInput, 'John Doe');
       await user.type(emailInput, 'john@example.com');
       await user.type(subjectInput, 'Test');
-      await user.type(messageInput, 'Test message');
+      await user.type(messageInput, 'A test message long enough to pass validation.');
 
       const submitButton = screen.getByRole('button', { name: /send message/i });
       await user.click(submitButton);
@@ -174,8 +180,7 @@ describe('GeneralContactForm', () => {
   });
 
   describe('AC-009: Form Submission Success', () => {
-    it('logs form data to console on successful submission', async () => {
-      const consoleLogSpy = jest.spyOn(console, 'log');
+    it('posts the form data to the contact API', async () => {
       const user = userEvent.setup();
       render(
         <GeneralContactForm successMessage={mockSuccessMessage} formLabels={mockFormLabels} />
@@ -196,18 +201,14 @@ describe('GeneralContactForm', () => {
       const submitButton = screen.getByRole('button', { name: /send message/i });
       await user.click(submitButton);
 
-      await waitFor(() => {
-        expect(consoleLogSpy).toHaveBeenCalledWith(
-          expect.stringContaining('General Contact Enquiry'),
-          expect.objectContaining({
-            data: expect.objectContaining({
-              name: 'John Doe',
-              email: 'john@example.com',
-              subject: 'Partnership',
-              message: 'Interested in partnership',
-            }),
-          })
-        );
+      await waitFor(() => expect(mockFetch).toHaveBeenCalledTimes(1));
+      const [url, request] = mockFetch.mock.calls[0];
+      expect(url).toBe('/api/contact/general');
+      expect(JSON.parse(request.body)).toMatchObject({
+        name: 'John Doe',
+        email: 'john@example.com',
+        subject: 'Partnership',
+        message: 'Interested in partnership',
       });
     });
 
@@ -226,7 +227,7 @@ describe('GeneralContactForm', () => {
       await user.type(nameInput, 'John Doe');
       await user.type(emailInput, 'john@example.com');
       await user.type(subjectInput, 'Test');
-      await user.type(messageInput, 'Test message');
+      await user.type(messageInput, 'A test message long enough to pass validation.');
       await user.click(gdprCheckbox);
 
       const submitButton = screen.getByRole('button', { name: /send message/i });
@@ -244,8 +245,8 @@ describe('GeneralContactForm', () => {
 
       await user.type(screen.getByLabelText(/^name/i), 'John Doe');
       await user.type(screen.getByLabelText(/email/i), 'john@example.com');
-      await user.type(screen.getByLabelText(/subject/i), 'Test');
-      await user.type(screen.getByLabelText(/message/i), 'Test message');
+      await user.type(screen.getByLabelText(/subject/i), 'Test enquiry');
+      await user.type(screen.getByLabelText(/message/i), 'A test message long enough to pass validation.');
       await user.click(screen.getByLabelText(/agree.*privacy policy/i));
 
       const submitButton = screen.getByRole('button', { name: /send message/i });
@@ -271,8 +272,8 @@ describe('GeneralContactForm', () => {
       // Fill and submit form
       await user.type(screen.getByLabelText(/^name/i), 'John Doe');
       await user.type(screen.getByLabelText(/email/i), 'john@example.com');
-      await user.type(screen.getByLabelText(/subject/i), 'Test');
-      await user.type(screen.getByLabelText(/message/i), 'Test message');
+      await user.type(screen.getByLabelText(/subject/i), 'Test enquiry');
+      await user.type(screen.getByLabelText(/message/i), 'A test message long enough to pass validation.');
       await user.click(screen.getByLabelText(/agree.*privacy policy/i));
       await user.click(screen.getByRole('button', { name: /send message/i }));
 

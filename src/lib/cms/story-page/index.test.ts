@@ -37,7 +37,7 @@ describe('getStoryPageContent — wiring', () => {
     const [slug, options] = mockedGetContent.mock.calls[0];
     expect(slug).toBe('story-page');
     expect(typeof options!.mapper).toBe('function');
-    expect(options!.params?.populate).toBe('timelineMilestones');
+    expect(options!.params?.populate).toContain('timelineMilestones');
   });
 });
 

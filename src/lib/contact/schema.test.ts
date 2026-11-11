@@ -71,6 +71,7 @@ const validInvestorPayload = {
   role: 'Managing Partner',
   enquiryType: 'Investment',
   email: 'erik@nordiccapital.se',
+  phone: '+46 70 123 45 67',
   message: 'Interested in co-investment opportunities.',
   gdprConsent: true as const,
 };

@@ -36,7 +36,7 @@ describe('getSustainabilityPageContent — wiring', () => {
     const [slug, options] = mockedGetContent.mock.calls[0];
     expect(slug).toBe('sustainability-page');
     expect(typeof options!.mapper).toBe('function');
-    expect(options!.params?.populate).toBe('whereWeAreFocusAreas');
+    expect(options!.params?.populate).toContain('whereWeAreFocusAreas');
   });
 });
 

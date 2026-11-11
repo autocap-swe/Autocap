@@ -135,7 +135,10 @@ describe('AssetDownloadCard Component', () => {
     it('download buttons have correct href when fileUrl provided', () => {
       render(<AssetDownloadCard category={mockCategory} />);
       const svgButton = screen.getByLabelText('Download AutoCap Logo (SVG)');
-      expect(svgButton).toHaveAttribute('href', '/media-kit/logo-autocap-light.svg');
+      // Downloads go through /api/download so that each one is logged.
+      expect(svgButton.getAttribute('href')).toContain(
+        `/api/download?url=${encodeURIComponent('/media-kit/logo-autocap-light.svg')}`
+      );
     });
 
     it('download buttons fall back to # when no fileUrl', () => {

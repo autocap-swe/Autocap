@@ -18,7 +18,6 @@ const mockArticles: NewsArticle[] = [
     category: 'Company News',
     slug: 'article-2',
     readTimeMinutes: 5,
-    order: 2,
   },
   {
     id: 3,
@@ -29,7 +28,6 @@ const mockArticles: NewsArticle[] = [
     category: 'Press Release',
     slug: 'article-3',
     readTimeMinutes: 4,
-    order: 3,
   },
 ];
 
