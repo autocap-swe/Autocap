@@ -5,7 +5,7 @@ import { Eyebrow } from './Eyebrow';
 import { RedRule } from './RedRule';
 import { HeroVideoPlayer } from './HeroVideoPlayer';
 
-const MEDIA_CLASS = 'absolute inset-0 h-full w-full object-cover opacity-70 saturate-[0.6] contrast-[1.05]';
+const MEDIA_CLASS = 'absolute inset-0 h-full w-full object-cover';
 
 interface HeroVideoProps {
   videoUrl?: string;
@@ -23,10 +23,14 @@ interface HeroVideoProps {
 export function HeroVideo({ videoUrl, posterUrl, eyebrow, title, lead, children }: HeroVideoProps) {
   return (
     <section className="relative flex min-h-[640px] flex-col overflow-hidden bg-ink text-white lg:min-h-[760px]">
-      {posterUrl && (
-        <Image src={posterUrl} alt="" fill priority sizes="100vw" className={MEDIA_CLASS} />
-      )}
-      {videoUrl && <HeroVideoPlayer src={videoUrl} className={MEDIA_CLASS} />}
+      {/* One dimmed layer: the video sits on top of the still at full strength, so the two
+          never show through each other. */}
+      <div className="absolute inset-0 opacity-70 saturate-[0.6] contrast-[1.05]">
+        {posterUrl && (
+          <Image src={posterUrl} alt="" fill priority sizes="100vw" className="object-cover" />
+        )}
+        {videoUrl && <HeroVideoPlayer src={videoUrl} className={MEDIA_CLASS} />}
+      </div>
       <div
         aria-hidden="true"
         className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,17,17,0.35)_0%,rgba(17,17,17,0.1)_40%,rgba(17,17,17,0.75)_100%)]"
