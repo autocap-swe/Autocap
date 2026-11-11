@@ -132,9 +132,9 @@ describe('InvestorSchema', () => {
 
 describe('ANNUAL_REVENUE_RANGES', () => {
   it('offers the seller form ranges in SEK, not EUR', () => {
-    expect(ANNUAL_REVENUE_RANGES).toHaveLength(4);
+    expect(ANNUAL_REVENUE_RANGES).toHaveLength(3);
     for (const range of ANNUAL_REVENUE_RANGES) {
-      expect(range.startsWith('SEK ')).toBe(true);
+      expect(range).toContain('SEK ');
       expect(AnnualRevenue.safeParse(range).success).toBe(true);
     }
     expect(AnnualRevenue.safeParse('€1M - €3M').success).toBe(false);

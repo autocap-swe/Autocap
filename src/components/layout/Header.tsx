@@ -80,7 +80,7 @@ export function Header({ overlay }: { overlay?: boolean }) {
     <header className={shell}>
       <nav aria-label="Global" className="mx-auto flex h-[76px] max-w-[1440px] items-center justify-between gap-6 px-5 lg:px-16">
         <Link href="/" className="no-underline">
-          <Wordmark className="text-xl" />
+          <Wordmark tone={isOverlay ? 'white' : 'dark'} className="h-8" />
         </Link>
 
         <ul className="m-0 hidden list-none items-center gap-8 p-0 xl:flex">

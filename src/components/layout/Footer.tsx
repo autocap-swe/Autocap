@@ -83,7 +83,7 @@ export async function Footer() {
         </div>
 
         <div className="flex flex-wrap items-end justify-between gap-4 border-t border-rule-dark pt-7">
-          <Wordmark className="text-[3.25rem] leading-[0.9] tracking-[-0.04em] text-white sm:text-[5rem] lg:text-[7rem]" />
+          <Wordmark tone="white" className="h-14 sm:h-20 lg:h-28" />
           <p className="m-0 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
             <span>© {year} {COMPANY_INFO.name}</span>
             <Link href="/privacy-policy" className={columnLink}>

@@ -79,7 +79,10 @@ export default async function CompaniesPage({ params }: Props) {
         ...(company.ledBy ? [{ label: tCompany('ledBy'), value: company.ledBy }] : []),
         ...(company.tireHotel ? [{ label: tCompany('tireHotel'), value: '✓' }] : []),
       ],
-      sites: company.workshops.map(w => w.name.replace(/^Däckgruppen /, '')),
+      sites: company.workshops.map(w => ({
+        label: count > 1 ? w.name.replace(/^Däckgruppen /, '') : tCompany('workshopPage'),
+        href: `/portfolio/${w.slug}`,
+      })),
       website: company.website ? { href: company.website, label: hostLabel(company.website) } : undefined,
       imageUrl: company.imageUrl,
     };
@@ -131,6 +134,7 @@ export default async function CompaniesPage({ params }: Props) {
               tireHotel: company.tireHotel,
             }))}
             hrefBase="#"
+            filters={['all', 'east', 'west']}
             labels={{
               all: tFilters('all'),
               east: tFilters('east'),

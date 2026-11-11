@@ -14,7 +14,7 @@ export interface Company {
   /** Earliest year a workshop in the company joined the group. */
   since?: number;
   founded?: number;
-  /** Only stated where the source confirms it (design sketch / published copy). */
+  /** Every workshop in the group runs a tire hotel (CEO, 2026-11-11). */
   tireHotel: boolean;
   /** Only people already named publicly on the site. */
   ledBy?: string;
@@ -26,7 +26,6 @@ interface CompanyRule {
   name: string;
   match: (workshop: Workshop) => boolean;
   city: string;
-  tireHotel?: boolean;
   ledBy?: string;
   founded?: number;
   withinDackgruppen?: boolean;
@@ -47,7 +46,6 @@ const RULES: CompanyRule[] = [
     name: 'Däckgruppen',
     match: w => w.name.startsWith('Däckgruppen'),
     city: 'Stockholm',
-    tireHotel: true,
     ledBy: 'Fredrik Agrell, CEO',
   },
   {
@@ -108,7 +106,7 @@ export function groupCompanies(workshops: Workshop[]): Company[] {
       imageUrl: own.find(w => w.imageUrl)?.imageUrl,
       since: own.length ? Math.min(...own.map(w => w.yearAcquired)) : undefined,
       founded: first?.yearFounded ?? rule.founded,
-      tireHotel: rule.tireHotel ?? false,
+      tireHotel: true,
       ledBy: rule.ledBy,
       withinDackgruppen: rule.withinDackgruppen,
     };

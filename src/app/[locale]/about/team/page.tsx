@@ -5,7 +5,7 @@ import { Eyebrow, LeadershipPanel, PageHeader, Section, type Leader } from '@/co
 import { getTeamMembersContent } from '@/lib/cms/team-member';
 import { getTeamPageContent } from '@/lib/cms/team-page';
 import { buildMetadata } from '@/lib/cms/seo';
-import { BOARD_FALLBACK, EMAIL_FALLBACK, PORTRAIT_FALLBACK } from '@/lib/v2/people';
+import { EMAIL_FALLBACK, PORTRAIT_FALLBACK } from '@/lib/v2/people';
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -60,22 +60,13 @@ export default async function TeamPage({ params }: Props) {
   ];
 
   const boardFromCms = members.filter(member => member.isBoard);
-  const board = [
-    ...boardFromCms.map(member => ({
+  const board = boardFromCms.map(member => ({
       id: String(member.id),
       name: member.name,
       role: member.isManagement ? t('boardMember') : member.title,
       text: member.isManagement ? `${member.title}. ${t('bioUnderLeadership')}` : member.bio,
       photoUrl: PORTRAIT_FALLBACK[member.name] ?? member.photoUrl,
-    })),
-    ...BOARD_FALLBACK.filter(extra => !boardFromCms.some(member => member.name === extra.name)).map(extra => ({
-      id: extra.name,
-      name: extra.name,
-      role: t('boardMember'),
-      text: t(extra.bioKey),
-      photoUrl: undefined as string | undefined,
-    })),
-  ];
+    }));
 
   return (
     <>
@@ -90,7 +81,7 @@ export default async function TeamPage({ params }: Props) {
       <Section tone="birch">
         <Eyebrow className="mb-2">{t('boardEyebrow')}</Eyebrow>
         <h2 className="t-h2-sm m-0 mb-7">{t('boardTitle')}</h2>
-        <ul className="m-0 grid list-none grid-cols-1 gap-5 p-0 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="m-0 grid list-none grid-cols-1 gap-5 p-0 sm:grid-cols-2 lg:grid-cols-3">
           {board.map(member => (
             <li key={member.id} className="flex flex-col bg-white">
               <div className="relative h-[260px] bg-rule">
@@ -99,7 +90,7 @@ export default async function TeamPage({ params }: Props) {
                     src={member.photoUrl}
                     alt={`${member.name}, ${member.role}`}
                     fill
-                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                     className="object-cover object-top saturate-[0.85]"
                   />
                 )}

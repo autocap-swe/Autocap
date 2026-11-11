@@ -26,7 +26,7 @@ export const ContactSchema = z.object({
 export type ContactFormData = z.infer<typeof ContactSchema>;
 
 /** Annual revenue ranges the seller form offers. Swedish workshops report in SEK. */
-export const ANNUAL_REVENUE_RANGES = ['SEK 0–5m', 'SEK 5–10m', 'SEK 10–30m', 'SEK 30m+'] as const;
+export const ANNUAL_REVENUE_RANGES = ['Under SEK 10m', 'SEK 10–30m', 'SEK 30m+'] as const;
 
 export const AnnualRevenue = z.enum(ANNUAL_REVENUE_RANGES, {
   error: 'Invalid revenue range',

@@ -43,9 +43,8 @@ describe('companies (AC-V2-C1, AC-V2-C2)', () => {
     expect(groupCompanies([pending])).toEqual([]);
   });
 
-  it('marks tire hotel only where confirmed', () => {
+  it('marks tire hotel for every company', () => {
     const companies = groupCompanies(workshops);
-    expect(companies.find(c => c.key === 'dackgruppen')?.tireHotel).toBe(true);
-    expect(companies.find(c => c.key === 'dackpoint')?.tireHotel).toBe(false);
+    expect(companies.every(c => c.tireHotel)).toBe(true);
   });
 });

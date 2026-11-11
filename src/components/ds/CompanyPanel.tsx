@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { Link } from '@/i18n/navigation';
 import { Eyebrow } from './Eyebrow';
 
 export interface CompanyView {
@@ -12,8 +13,8 @@ export interface CompanyView {
   regionLabel: string;
   description: string;
   facts: { label: string; value: string }[];
-  /** Site names when the company has more than one workshop. */
-  sites: string[];
+  /** One link per workshop, to its own page. */
+  sites: { label: string; href: string }[];
   website?: { href: string; label: string };
   imageUrl?: string;
 }
@@ -76,12 +77,16 @@ export function CompanyPanel({ companies, sitesLabel }: { companies: CompanyView
                 <dd className="m-0">{fact.value}</dd>
               </div>
             ))}
-            {selected.sites.length > 1 && (
-              <div className="contents">
-                <dt className="text-text-3">{sitesLabel}</dt>
-                <dd className="m-0">{selected.sites.join(' · ')}</dd>
-              </div>
-            )}
+            <div className="contents">
+              <dt className="text-text-3">{sitesLabel}</dt>
+              <dd className="m-0 flex flex-wrap gap-x-4 gap-y-1">
+                {selected.sites.map(site => (
+                  <Link key={site.href} href={site.href} className="text-white underline decoration-red underline-offset-4 hover:text-on-dark-2">
+                    {site.label}
+                  </Link>
+                ))}
+              </dd>
+            </div>
           </dl>
           {selected.website && (
             <a

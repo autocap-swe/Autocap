@@ -345,7 +345,8 @@
       "website": "Webbplats",
       "withinDackgruppen": "inom Däckgruppen",
       "tireHotel": "Däckhotell",
-      "sites": "Anläggningar"
+      "sites": "Anläggningar",
+      "workshopPage": "Verkstadens sida"
     },
     "investors": {
       "eyebrow": "Investerare",
@@ -437,7 +438,6 @@
       "bioUnderLeadership": "Bio under Ledning.",
       "jolantaTitle": "Group Accounting Manager",
       "jolantaBio": "Mer än 20 års erfarenhet av redovisning, varav sju år som ansvarig för moderbolagsredovisningen i Bilia. Ansvarar för redovisning, konsolidering och koncernrapportering när koncernen tar ekonomifunktionen i egen regi.",
-      "karlBio": "Erfaren företagsledare, investerare och entreprenör.",
       "auditor": "Revisor",
       "legal": "Juridisk rådgivare, M&A"
     },

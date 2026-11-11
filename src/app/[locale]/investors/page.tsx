@@ -14,7 +14,6 @@ import { REVALIDATE_HIGH } from '@/lib/cms/revalidate';
 import { buildMetadata } from '@/lib/cms/seo';
 import { COMPANY_INFO } from '@/lib/constants';
 import { countByRegion, groupCompanies } from '@/lib/v2/companies';
-import { BOARD_FALLBACK } from '@/lib/v2/people';
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -101,7 +100,6 @@ export default async function InvestorsPage({ params }: Props) {
   const boardFromCms = members.filter(member => member.isBoard);
   const board = [
     ...boardFromCms.map(member => member.name),
-    ...BOARD_FALLBACK.filter(extra => !boardFromCms.some(member => member.name === extra.name)).map(extra => extra.name),
   ];
   const chair = boardFromCms.find(member => /chair|ordf/i.test(member.title))?.name;
   const ir = COMPANY_INFO.investorRelations;

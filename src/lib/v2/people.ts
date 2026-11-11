@@ -3,9 +3,6 @@
  * does not hold yet. Replace with CMS data when the entries exist; CMS values always win.
  */
 
-/** Board members missing from the CMS. Karl Ehn: board per INDEX; bio kept general by decision. */
-export const BOARD_FALLBACK: { name: string; bioKey: 'karlBio' }[] = [{ name: 'Karl Ehn', bioKey: 'karlBio' }];
-
 /** Contact e-mail for CEO, CFO and Head of M&A until the CMS e-mail field is filled in. */
 export const EMAIL_FALLBACK: Record<string, string> = {
   'David Knape': 'david.knape@autocapgroup.se',

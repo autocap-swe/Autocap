@@ -1,8 +1,15 @@
-/** Text wordmark "AutoCap Group" (600 + 300). Inherits colour; size via className. */
-export function Wordmark({ className = '' }: { className?: string }) {
+import Image from 'next/image';
+
+/** The AutoCap Group logotype. `tone` picks the file for the background; height via className. */
+export function Wordmark({ tone = 'dark', className = '' }: { tone?: 'dark' | 'white'; className?: string }) {
   return (
-    <span className={`font-semibold tracking-[-0.01em] ${className}`}>
-      AutoCap <span className="font-light">Group</span>
-    </span>
+    <Image
+      src={tone === 'white' ? '/logos/autocap-white.png' : '/logos/autocap-dark.png'}
+      alt="AutoCap Group"
+      width={1970}
+      height={480}
+      priority
+      className={`w-auto ${className}`}
+    />
   );
 }
