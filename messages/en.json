@@ -276,5 +276,215 @@
       "title": "Growth metrics · AutoCap Group",
       "description": "AutoCap Group's growth from founding to today, measured in workshops, people and revenue."
     }
+  },
+  "v2": {
+    "home": {
+      "eyebrow": "Nordic tire services investment platform",
+      "title": "Building the Nordic tire services platform",
+      "lead": "We acquire profitable, owner-led tire workshops and keep what makes them work: the name, the team and the customers.",
+      "cta1": "Thinking of selling?",
+      "cta2": "The investment case",
+      "doorOwners": {
+        "eyebrow": "For workshop owners",
+        "title": "Your name stays on the door.",
+        "text": "Retirement, growth or a stronger partner. We buy the whole company, keep the brand and the team, and you stay an owner in the group if you want to.",
+        "link": "What we look for"
+      },
+      "doorInvestors": {
+        "eyebrow": "For investors",
+        "title": "A fragmented market. A platform built to consolidate it.",
+        "text": "2,200 companies, the largest under 5 %. Non-discretionary, recurring revenue. Board, auditor and monthly reporting in place.",
+        "link": "The investment case"
+      },
+      "facts": {
+        "workshops": "Workshops\nin Sweden",
+        "companies": "Companies acquired\nin 15 months",
+        "people": "People\nin the group",
+        "regions": "Regions: East\nand West/Central",
+        "dateLine": "Figures as of November 2026 · Updated when a deal is announced"
+      },
+      "companies": {
+        "eyebrow": "Our companies",
+        "title": "Seven local brands. One platform.",
+        "all": "All {count} workshops",
+        "featuredText": "Stockholm's largest independent tire group. Seven workshops, tire hotel at every site. Led by Fredrik Agrell."
+      },
+      "photoBand": {
+        "eyebrow": "Owners who stay",
+        "title": "The people who built the workshops still own them."
+      },
+      "quotes": {
+        "title": "What the owners say",
+        "joined": "joined {date}"
+      },
+      "news": {
+        "eyebrow": "Latest",
+        "title": "News",
+        "all": "All news",
+        "followTitle": "Follow the platform",
+        "followText": "News when we announce an acquisition, and the media kit for investors, advisers, banks and media.",
+        "followCta": "Media kit"
+      }
+    },
+    "filters": {
+      "all": "All",
+      "east": "East",
+      "west": "West/Central",
+      "tireHotel": "Tire hotel",
+      "label": "Filter companies"
+    },
+    "regions": {
+      "east": "Region East",
+      "west": "Region West/Central"
+    },
+    "company": {
+      "founded": "Founded",
+      "since": "In the group since",
+      "ledBy": "Led by",
+      "workshops": "{count, plural, one {# workshop} other {# workshops}}",
+      "website": "Website",
+      "withinDackgruppen": "within Däckgruppen",
+      "tireHotel": "Tire hotel",
+      "sites": "Sites"
+    },
+    "investors": {
+      "eyebrow": "Investors",
+      "title": "Building the Nordic tire services platform",
+      "lead": "AutoCap Group is consolidating Sweden's independent tire service industry. 13 workshops across 7 companies acquired in 15 months, around SEK 200 million in revenue, local brands and teams retained.",
+      "anchors": {
+        "case": "Investment case",
+        "model": "Model",
+        "governance": "Governance",
+        "contact": "IR contact"
+      },
+      "facts": {
+        "workshops": "Workshops",
+        "companies": "Companies\nin 15 months",
+        "revenue": "MSEK\nrevenue",
+        "regions": "Regions"
+      },
+      "case": {
+        "eyebrow": "Why AutoCap",
+        "title": "The investment case",
+        "p1Title": "Fragmented market, consolidation opportunity",
+        "p1Text": "Around 2,200 companies service tires in Sweden; about 97 % turn over less than SEK 100 million and the largest players hold under 5 %. The market is worth around SEK 15 billion and growing. Few owners have a succession plan – we acquire local leaders and keep their brands.",
+        "p1Bar": "Largest players' share",
+        "p1BarValue": "<5 % of ~SEK 15bn",
+        "p2Title": "Resilient, recurring revenue business",
+        "p2Text": "Tire services are non-discretionary and safety-critical. Every car needs two tire changes a year, and tire hotels, around 38 % of the market, keep customers coming back to the same workshop season after season. Stable, cash-generative and predictable.",
+        "p2Bar": "Tire hotel share",
+        "p2BarValue": "~38 % of market",
+        "p3Title": "Roll-up playbook with proven economics",
+        "p3Text": "13 workshops in 7 companies acquired in 15 months, in Stockholm, Gothenburg and Vänersborg. Sellers reinvest in AutoCap shares, so the people who built the workshops stay owners. Shared procurement, central finance and digital systems lift margins, and local brands and teams stay.",
+        "p4Title": "Experienced team",
+        "p4Text": "Our leadership combines fifteen years inside the European tire industry, two decades of company building and M&A, CFO experience from listed and PE-backed groups, and more than 30 years of running tire workshops. Backed by a board with deep experience in M&A, financing and company building."
+      },
+      "model": {
+        "eyebrow": "The model",
+        "title": "How we acquire",
+        "s1Title": "Buy 100 %, keep the brand",
+        "s1Text": "Profitable, owner-led workshops with a local reputation. Name, team and customers stay.",
+        "s2Title": "Owners reinvest",
+        "s2Text": "Sellers become shareholders in the group. The people who built the workshops stay owners.",
+        "s3Title": "Add the platform",
+        "s3Text": "Central finance, procurement, digital systems and a regional organisation: East and West/Central."
+      },
+      "cluster": {
+        "eyebrow": "Cluster strategy",
+        "title": "Density, not footprint",
+        "text1": "We do not buy workshops one by one across the map. We build clusters of workshops in a region, close enough to share tire hotels, logistics, staff in peak season and purchasing. Each region has its own leadership, so the platform can absorb new acquisitions without management becoming the bottleneck.",
+        "text2": "Two regions today, drawn along county borders. New regions open where a lead workshop can anchor a cluster.",
+        "eastText": "workshops · Stockholm, Uppsala, Västmanland, Södermanland, Östergötland",
+        "westText": "workshops · Västra Götaland, Örebro, Jönköping and westwards",
+        "b1Title": "Clusters, not dots",
+        "b1Text": "Workshops close enough to work as one unit",
+        "b2Title": "Shared in-region",
+        "b2Text": "Tire hotel capacity, transport, seasonal staff, purchasing",
+        "b3Title": "Regional leadership",
+        "b3Text": "Every acquisition integrated locally in its first 100 days"
+      },
+      "gov": {
+        "eyebrow": "Governance",
+        "title": "Run like an institution from day one",
+        "text": "AutoCap Group Sweden AB is majority-owned by its founders and the entrepreneurs who have joined the group, with a board, external audit and a monthly and quarterly reporting rhythm.",
+        "board": "Board of Directors",
+        "chair": "Chair",
+        "auditor": "Auditor",
+        "auditorValue": "Brahe Revision · Stefan Malmberg, authorised public accountant",
+        "legal": "Legal advisers, M&A",
+        "legalValue": "TM & Partners · Philip Rämsell",
+        "structure": "Group structure",
+        "structureValue": "100 % ownership of all acquired companies",
+        "management": "Management",
+        "teamLink": "Leadership & Board"
+      },
+      "ir": {
+        "eyebrow": "Investor relations",
+        "title": "Privately held. Open to the right conversation.",
+        "text": "We do not publish financial reports. Qualified investors, lenders and advisers can request the company presentation. All enquiries are treated confidentially.",
+        "formTitle": "Request the company presentation",
+        "success": "Thank you for your interest. Someone from our Investor Relations team will be in touch within two business days. All enquiries are treated confidentially."
+      }
+    },
+    "team": {
+      "eyebrow": "About · Leadership & Board",
+      "title": "Leadership",
+      "lead": "Fifteen years inside the European tire industry, two decades of company building and M&A, CFO experience from listed and PE-backed groups, and 30+ years running tire workshops.",
+      "listLabel": "Leadership team",
+      "boardEyebrow": "Governance",
+      "boardTitle": "Board of Directors",
+      "boardMember": "Board Member",
+      "bioUnderLeadership": "Bio under Leadership.",
+      "jolantaTitle": "Group Accounting Manager",
+      "jolantaBio": "More than 20 years in accounting, including seven years leading parent-company accounting at Bilia. Responsible for accounting, consolidation and group reporting as the group brings its finance function in-house.",
+      "karlBio": "Experienced business leader, investor and entrepreneur.",
+      "auditor": "Auditor",
+      "legal": "Legal advisers, M&A"
+    },
+    "companiesPage": {
+      "eyebrow": "Our companies",
+      "title": "{workshops} workshops. {brands} local brands.",
+      "lead": "Every company keeps its own name, team and customers. AutoCap adds finance, purchasing, systems and a regional organisation.",
+      "regionNote": "New regions are added as clusters of three or more workshops form.",
+      "brandsTitle": "The brands",
+      "detailTitle": "The companies",
+      "mapLabel": "Map of all workshops",
+      "desc": {
+        "dackgruppen": "Stockholm's largest independent tire group. Seven workshops in Bromma, Brunna, Sollentuna, Solna, Täby, Tyresö and Vasastan, with a tire hotel at every site."
+      }
+    },
+    "entrepreneurs": {
+      "eyebrow": "For workshop owners",
+      "compareTitle": "What changes and what stays",
+      "compareStay": "Stays with you",
+      "compareAdd": "AutoCap adds",
+      "stay1": "Your name on the door",
+      "stay2": "Your team and your customers",
+      "stay3": "Day-to-day decisions in the workshop",
+      "stay4": "Ownership, through shares in the group",
+      "add1": "Central finance and reporting",
+      "add2": "Group purchasing terms",
+      "add3": "Digital systems and booking",
+      "add4": "A regional organisation to lean on",
+      "weeksTitle": "Week 1 to 12: from first call to closing",
+      "w1": "Weeks 1–2",
+      "w1Text": "First call, confidentiality agreement and an indicative valuation.",
+      "w2": "Weeks 3–6",
+      "w2Text": "Letter of intent and review of the business together with you.",
+      "w3": "Weeks 7–12",
+      "w3Text": "Share purchase agreement, closing and reinvestment in AutoCap shares.",
+      "daysTitle": "The first 100 days",
+      "d1": "Day 1–30",
+      "d1Text": "Introduction for the team. Nothing changes for customers.",
+      "d2": "Day 31–60",
+      "d2Text": "Finance, reporting and purchasing move onto the group platform.",
+      "d3": "Day 61–100",
+      "d3Text": "Systems, pricing and a joint plan for the workshop's next year.",
+      "quotesTitle": "Owners who have joined",
+      "formTitle": "Start with a conversation",
+      "formLead": "Tell us about your workshop. Everything you share is confidential, and a first call commits you to nothing.",
+      "processLink": "The process in detail",
+      "draftNote": "Indicative timeline. Every transaction is planned together with the owner."
+    }
   }
 }

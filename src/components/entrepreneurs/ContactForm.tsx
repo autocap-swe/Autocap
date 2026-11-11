@@ -1,5 +1,6 @@
 'use client';
 
+import { ANNUAL_REVENUE_RANGES } from '@/lib/contact/schema';
 import { useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -71,7 +72,7 @@ export function ContactForm({ successMessage, formLabels }: ContactFormProps) {
 
   if (submitSuccess) {
     return (
-      <div ref={successRef} className="rounded-2xl bg-white p-8 text-center shadow-xl">
+      <div ref={successRef} className="bg-white p-6 text-center lg:p-8">
         <div className="mb-4 inline-flex items-center justify-center">
           <div className="rounded-full bg-green-100 p-3">
             <CheckCircle2 className="h-8 w-8 text-green-600" />
@@ -84,7 +85,7 @@ export function ContactForm({ successMessage, formLabels }: ContactFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="rounded-2xl bg-white p-8 shadow-xl">
+    <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-6 lg:p-8">
       <div className="mb-6">
         <label htmlFor="name" className="mb-2 block font-semibold text-[#1C1C1E]">
           {formLabels.formNameLabel} *
@@ -164,10 +165,11 @@ export function ContactForm({ successMessage, formLabels }: ContactFormProps) {
           className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-[#C8102E] focus:outline-none focus:ring-2 focus:ring-[#C8102E]/20"
         >
           <option value="">Select range</option>
-          <option value="€0 - €500k">€0 - €500k</option>
-          <option value="€500k - €1M">€500k - €1M</option>
-          <option value="€1M - €3M">€1M - €3M</option>
-          <option value="€3M+">€3M+</option>
+          {ANNUAL_REVENUE_RANGES.map(range => (
+            <option key={range} value={range}>
+              {range}
+            </option>
+          ))}
         </select>
         {errors.revenue && <p className="mt-1 text-sm text-red-600">{errors.revenue.message}</p>}
       </div>

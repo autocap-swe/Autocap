@@ -75,7 +75,7 @@ export function InvestorContactForm({ successMessage, formLabels }: InvestorCont
 
   if (isSuccess) {
     return (
-      <div ref={successRef} className="rounded-lg bg-white p-8 shadow-sm">
+      <div ref={successRef} className="bg-white p-6 lg:p-8">
         <div className="text-center">
           <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
             <svg
@@ -106,7 +106,7 @@ export function InvestorContactForm({ successMessage, formLabels }: InvestorCont
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="rounded-lg bg-white p-8 shadow-sm">
+    <form onSubmit={handleSubmit(onSubmit)} className="bg-white p-6 lg:p-8">
       <div className="space-y-6">
         {/* Name */}
         <div>

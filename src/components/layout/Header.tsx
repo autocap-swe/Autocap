@@ -14,7 +14,7 @@ interface NavItem {
 }
 
 /** Pages whose hero is a full-bleed video or photo: the header sits transparent on top. */
-export const OVERLAY_PATHS: readonly string[] = [];
+export const OVERLAY_PATHS: readonly string[] = ['/'];
 
 function useNavItems(): NavItem[] {
   const t = useTranslations('nav');

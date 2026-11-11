@@ -1,4 +1,4 @@
-import { ContactSchema, InvestorSchema } from './schema';
+import { ANNUAL_REVENUE_RANGES, AnnualRevenue, ContactSchema, InvestorSchema } from './schema';
 
 const validPayload = {
   name: 'Anna Lindqvist',
@@ -127,5 +127,16 @@ describe('InvestorSchema', () => {
   it('rejects an empty role', () => {
     const result = InvestorSchema.safeParse({ ...validInvestorPayload, role: '' });
     expect(result.success).toBe(false);
+  });
+});
+
+describe('ANNUAL_REVENUE_RANGES', () => {
+  it('offers the seller form ranges in SEK, not EUR', () => {
+    expect(ANNUAL_REVENUE_RANGES).toHaveLength(4);
+    for (const range of ANNUAL_REVENUE_RANGES) {
+      expect(range.startsWith('SEK ')).toBe(true);
+      expect(AnnualRevenue.safeParse(range).success).toBe(true);
+    }
+    expect(AnnualRevenue.safeParse('€1M - €3M').success).toBe(false);
   });
 });

@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { ANNUAL_REVENUE_RANGES } from '@/lib/contact/schema';
 
 const NAME_REGEX = /^[a-zA-ZäöåÄÖÅæøÆØéèêëàâüùûïîÿœ'\- ]+$/;
 
@@ -22,7 +23,7 @@ export const entrepreneurFormSchema = z.object({
     .min(1, 'City/region is required')
     .min(2, 'City/region must be at least 2 characters'),
 
-  revenue: z.enum(['€0 - €500k', '€500k - €1M', '€1M - €3M', '€3M+'], {
+  revenue: z.enum(ANNUAL_REVENUE_RANGES, {
     message: 'Please select your approximate annual revenue',
   }),
 

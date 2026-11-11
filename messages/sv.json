@@ -276,5 +276,215 @@
       "title": "Tillväxt i siffror · AutoCap Group",
       "description": "AutoCap Groups tillväxt från start till i dag, mätt i verkstäder, medarbetare och omsättning."
     }
+  },
+  "v2": {
+    "home": {
+      "eyebrow": "Nordisk investeringsplattform för däckservice",
+      "title": "Vi bygger den nordiska plattformen för däckservice",
+      "lead": "Vi förvärvar lönsamma, ägarledda däckverkstäder och behåller det som får dem att fungera: namnet, teamet och kunderna.",
+      "cta1": "Funderar du på att sälja?",
+      "cta2": "Investeringscaset",
+      "doorOwners": {
+        "eyebrow": "För verkstadsägare",
+        "title": "Ditt namn sitter kvar på dörren.",
+        "text": "Pension, tillväxt eller en starkare partner. Vi köper hela bolaget, behåller varumärket och teamet, och du blir kvar som ägare i gruppen om du vill.",
+        "link": "Vad vi letar efter"
+      },
+      "doorInvestors": {
+        "eyebrow": "För investerare",
+        "title": "En fragmenterad marknad. En plattform byggd för att konsolidera den.",
+        "text": "2 200 bolag, de största under 5 %. Nödvändiga och återkommande intäkter. Styrelse, revisor och månadsrapportering på plats.",
+        "link": "Investeringscaset"
+      },
+      "facts": {
+        "workshops": "Verkstäder\ni Sverige",
+        "companies": "Bolag förvärvade\npå 15 månader",
+        "people": "Medarbetare\ni gruppen",
+        "regions": "Regioner: Öst\noch Väst/Mellan",
+        "dateLine": "Siffror per november 2026 · Uppdateras när en affär offentliggörs"
+      },
+      "companies": {
+        "eyebrow": "Våra bolag",
+        "title": "Sju lokala varumärken. En plattform.",
+        "all": "Alla {count} verkstäder",
+        "featuredText": "Stockholms största oberoende däckgrupp. Sju verkstäder med däckhotell på varje anläggning. Leds av Fredrik Agrell."
+      },
+      "photoBand": {
+        "eyebrow": "Ägare som stannar",
+        "title": "De som byggde verkstäderna äger dem fortfarande."
+      },
+      "quotes": {
+        "title": "Vad ägarna säger",
+        "joined": "anslöt {date}"
+      },
+      "news": {
+        "eyebrow": "Senaste",
+        "title": "Nyheter",
+        "all": "Alla nyheter",
+        "followTitle": "Följ plattformen",
+        "followText": "Nyheter när vi offentliggör ett förvärv, och mediekit för investerare, rådgivare, banker och media.",
+        "followCta": "Mediekit"
+      }
+    },
+    "filters": {
+      "all": "Alla",
+      "east": "Öst",
+      "west": "Väst/Mellan",
+      "tireHotel": "Däckhotell",
+      "label": "Filtrera bolag"
+    },
+    "regions": {
+      "east": "Region Öst",
+      "west": "Region Väst/Mellan"
+    },
+    "company": {
+      "founded": "Grundat",
+      "since": "I gruppen sedan",
+      "ledBy": "Leds av",
+      "workshops": "{count, plural, one {# verkstad} other {# verkstäder}}",
+      "website": "Webbplats",
+      "withinDackgruppen": "inom Däckgruppen",
+      "tireHotel": "Däckhotell",
+      "sites": "Anläggningar"
+    },
+    "investors": {
+      "eyebrow": "Investerare",
+      "title": "Vi bygger den nordiska plattformen för däckservice",
+      "lead": "AutoCap Group konsoliderar Sveriges oberoende däckservicebransch. 13 verkstäder i 7 bolag förvärvade på 15 månader, cirka 200 mkr i omsättning, lokala varumärken och team kvar.",
+      "anchors": {
+        "case": "Investeringscaset",
+        "model": "Modellen",
+        "governance": "Bolagsstyrning",
+        "contact": "IR-kontakt"
+      },
+      "facts": {
+        "workshops": "Verkstäder",
+        "companies": "Bolag\npå 15 månader",
+        "revenue": "mkr\nomsättning",
+        "regions": "Regioner"
+      },
+      "case": {
+        "eyebrow": "Varför AutoCap",
+        "title": "Investeringscaset",
+        "p1Title": "Fragmenterad marknad, möjlighet att konsolidera",
+        "p1Text": "Omkring 2 200 bolag arbetar med däckservice i Sverige. Cirka 97 % omsätter under 100 mkr och de största aktörerna har under 5 %. Marknaden är värd runt 15 miljarder kronor och växer. Få ägare har en plan för generationsskifte – vi förvärvar lokala ledare och behåller deras varumärken.",
+        "p1Bar": "De största aktörernas andel",
+        "p1BarValue": "<5 % av ~15 mdkr",
+        "p2Title": "Stabil verksamhet med återkommande intäkter",
+        "p2Text": "Däckservice är nödvändig och säkerhetskritisk. Varje bil behöver två däckbyten om året, och däckhotellen, cirka 38 % av marknaden, gör att kunderna återkommer till samma verkstad säsong efter säsong. Stabilt, kassagenererande och förutsägbart.",
+        "p2Bar": "Däckhotellens andel",
+        "p2BarValue": "~38 % av marknaden",
+        "p3Title": "Beprövad modell för förvärv och integration",
+        "p3Text": "13 verkstäder i 7 bolag förvärvade på 15 månader, i Stockholm, Göteborg och Vänersborg. Säljarna återinvesterar i AutoCap-aktier, så de som byggt verkstäderna förblir ägare. Samordnade inköp, central ekonomi och digitala system lyfter marginalerna, och lokala varumärken och team blir kvar.",
+        "p4Title": "Erfaret team",
+        "p4Text": "Ledningen förenar femton år i den europeiska däckbranschen, två decennier av bolagsbyggande och förvärv, CFO-erfarenhet från noterade och PE-ägda koncerner och mer än 30 år av att driva däckverkstäder. Med en styrelse med djup erfarenhet av förvärv, finansiering och bolagsbyggande."
+      },
+      "model": {
+        "eyebrow": "Modellen",
+        "title": "Så förvärvar vi",
+        "s1Title": "Köp 100 %, behåll varumärket",
+        "s1Text": "Lönsamma, ägarledda verkstäder med lokalt gott rykte. Namn, team och kunder blir kvar.",
+        "s2Title": "Ägarna återinvesterar",
+        "s2Text": "Säljarna blir aktieägare i gruppen. De som byggt verkstäderna förblir ägare.",
+        "s3Title": "Lägg till plattformen",
+        "s3Text": "Central ekonomi, inköp, digitala system och en regional organisation: Öst och Väst/Mellan."
+      },
+      "cluster": {
+        "eyebrow": "Klusterstrategi",
+        "title": "Täthet, inte utbredning",
+        "text1": "Vi köper inte verkstäder en och en över kartan. Vi bygger kluster av verkstäder i en region, tillräckligt nära varandra för att dela däckhotell, logistik, personal under högsäsong och inköp. Varje region har egen ledning, så att plattformen kan ta emot nya förvärv utan att ledningen blir en flaskhals.",
+        "text2": "Två regioner i dag, dragna längs länsgränserna. Nya regioner öppnas där en ledande verkstad kan förankra ett kluster.",
+        "eastText": "verkstäder · Stockholm, Uppsala, Västmanland, Södermanland, Östergötland",
+        "westText": "verkstäder · Västra Götaland, Örebro, Jönköping och västerut",
+        "b1Title": "Kluster, inte punkter",
+        "b1Text": "Verkstäder nära nog att fungera som en enhet",
+        "b2Title": "Delat inom regionen",
+        "b2Text": "Däckhotellkapacitet, transporter, säsongspersonal, inköp",
+        "b3Title": "Regional ledning",
+        "b3Text": "Varje förvärv integreras lokalt under sina första 100 dagar"
+      },
+      "gov": {
+        "eyebrow": "Bolagsstyrning",
+        "title": "Drivs som en institution från första dagen",
+        "text": "AutoCap Group Sweden AB ägs till majoriteten av grundarna och de entreprenörer som anslutit sig till gruppen, med styrelse, extern revision och rapportering varje månad och kvartal.",
+        "board": "Styrelse",
+        "chair": "ordförande",
+        "auditor": "Revisor",
+        "auditorValue": "Brahe Revision · Stefan Malmberg, auktoriserad revisor",
+        "legal": "Juridisk rådgivare, M&A",
+        "legalValue": "TM & Partners · Philip Rämsell",
+        "structure": "Koncernstruktur",
+        "structureValue": "100 % ägande i alla förvärvade bolag",
+        "management": "Ledning",
+        "teamLink": "Ledning och styrelse"
+      },
+      "ir": {
+        "eyebrow": "Investerarrelationer",
+        "title": "Privatägt. Öppet för rätt samtal.",
+        "text": "Vi publicerar inga finansiella rapporter. Kvalificerade investerare, långivare och rådgivare kan begära bolagspresentationen. Alla förfrågningar behandlas konfidentiellt.",
+        "formTitle": "Begär bolagspresentationen",
+        "success": "Tack för ditt intresse. Någon från vårt Investor Relations-team hör av sig inom två arbetsdagar. Alla förfrågningar behandlas konfidentiellt."
+      }
+    },
+    "team": {
+      "eyebrow": "Om oss · Ledning och styrelse",
+      "title": "Ledning",
+      "lead": "Femton år i den europeiska däckbranschen, två decennier av bolagsbyggande och förvärv, CFO-erfarenhet från noterade och PE-ägda koncerner och mer än 30 år av att driva däckverkstäder.",
+      "listLabel": "Ledningsgrupp",
+      "boardEyebrow": "Bolagsstyrning",
+      "boardTitle": "Styrelse",
+      "boardMember": "Styrelseledamot",
+      "bioUnderLeadership": "Bio under Ledning.",
+      "jolantaTitle": "Group Accounting Manager",
+      "jolantaBio": "Mer än 20 års erfarenhet av redovisning, varav sju år som ansvarig för moderbolagsredovisningen i Bilia. Ansvarar för redovisning, konsolidering och koncernrapportering när koncernen tar ekonomifunktionen i egen regi.",
+      "karlBio": "Erfaren företagsledare, investerare och entreprenör.",
+      "auditor": "Revisor",
+      "legal": "Juridisk rådgivare, M&A"
+    },
+    "companiesPage": {
+      "eyebrow": "Våra bolag",
+      "title": "{workshops} verkstäder. {brands} lokala varumärken.",
+      "lead": "Varje bolag behåller sitt eget namn, sitt team och sina kunder. AutoCap tillför ekonomi, inköp, system och en regional organisation.",
+      "regionNote": "Nya regioner tillkommer när kluster om tre eller fler verkstäder bildas.",
+      "brandsTitle": "Varumärkena",
+      "detailTitle": "Bolagen",
+      "mapLabel": "Karta över alla verkstäder",
+      "desc": {
+        "dackgruppen": "Stockholms största oberoende däckgrupp. Sju verkstäder i Bromma, Brunna, Sollentuna, Solna, Täby, Tyresö och Vasastan, med däckhotell på varje anläggning."
+      }
+    },
+    "entrepreneurs": {
+      "eyebrow": "För verkstadsägare",
+      "compareTitle": "Vad som ändras och vad som består",
+      "compareStay": "Stannar hos dig",
+      "compareAdd": "AutoCap tillför",
+      "stay1": "Ditt namn på dörren",
+      "stay2": "Ditt team och dina kunder",
+      "stay3": "De dagliga besluten i verkstaden",
+      "stay4": "Ägande, genom aktier i gruppen",
+      "add1": "Central ekonomi och rapportering",
+      "add2": "Gruppens inköpsvillkor",
+      "add3": "Digitala system och bokning",
+      "add4": "En regional organisation att luta sig mot",
+      "weeksTitle": "Vecka 1 till 12: från första samtal till tillträde",
+      "w1": "Vecka 1–2",
+      "w1Text": "Första samtal, sekretessavtal och en indikativ värdering.",
+      "w2": "Vecka 3–6",
+      "w2Text": "Avsiktsförklaring och genomgång av verksamheten tillsammans med dig.",
+      "w3": "Vecka 7–12",
+      "w3Text": "Aktieöverlåtelseavtal, tillträde och återinvestering i AutoCap-aktier.",
+      "daysTitle": "De första 100 dagarna",
+      "d1": "Dag 1–30",
+      "d1Text": "Introduktion för teamet. Ingenting ändras för kunderna.",
+      "d2": "Dag 31–60",
+      "d2Text": "Ekonomi, rapportering och inköp flyttar till gruppens plattform.",
+      "d3": "Dag 61–100",
+      "d3Text": "System, prissättning och en gemensam plan för verkstadens nästa år.",
+      "quotesTitle": "Ägare som har gått med",
+      "formTitle": "Börja med ett samtal",
+      "formLead": "Berätta om din verkstad. Allt du delar är konfidentiellt och ett första samtal förpliktar inte till något.",
+      "processLink": "Processen i detalj",
+      "draftNote": "Vägledande tidslinje. Varje affär planeras tillsammans med ägaren."
+    }
   }
 }

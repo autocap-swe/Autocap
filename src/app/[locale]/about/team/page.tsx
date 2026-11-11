@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { setRequestLocale, getTranslations } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { Eyebrow, LeadershipPanel, PageHeader, Section, type Leader } from '@/components/ds';
 import { getTeamMembersContent } from '@/lib/cms/team-member';
 import { getTeamPageContent } from '@/lib/cms/team-page';
-import { ProfileCard } from '@/components/team/ProfileCard';
 import { buildMetadata } from '@/lib/cms/seo';
-import { cmsMediaUrl } from '@/lib/cms/media';
+import { BOARD_FALLBACK, EMAIL_FALLBACK, PORTRAIT_FALLBACK } from '@/lib/v2/people';
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -27,76 +27,107 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function TeamPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
-
-  const [allMembers, t, cms] = await Promise.all([
+  const [t, tInv, members] = await Promise.all([
+    getTranslations('v2.team'),
+    getTranslations('v2.investors.gov'),
     getTeamMembersContent(locale).catch(() => []),
-    getTranslations('team'),
-    getTeamPageContent(undefined, locale).catch(() => null),
   ]);
 
-  const managementTeam = allMembers.filter(m => m.isManagement);
-  const board = allMembers.filter(m => m.isBoard);
-  const heroImageUrl = cmsMediaUrl(cms?.heroImage);
-  const heroTitle = cms?.heroTitle;
-  const heroDescription = cms?.heroDescription;
+  const management = members.filter(member => member.isManagement);
+  const leaders: Leader[] = [
+    ...management.map(member => ({
+      id: member.id,
+      name: member.name,
+      title: member.title,
+      bio: member.bio,
+      education: member.education,
+      email: member.email ?? EMAIL_FALLBACK[member.name],
+      linkedInUrl: member.linkedInUrl,
+      photoUrl: PORTRAIT_FALLBACK[member.name] ?? member.photoUrl,
+    })),
+    // Group Accounting Manager is not in the CMS yet; text from the published news item.
+    ...(management.length > 0
+      ? [
+          {
+            id: 'jolanta-kelly',
+            name: 'Jolanta Kelly',
+            title: t('jolantaTitle'),
+            bio: t('jolantaBio'),
+            photoUrl: PORTRAIT_FALLBACK['Jolanta Kelly'],
+          },
+        ]
+      : []),
+  ];
+
+  const boardFromCms = members.filter(member => member.isBoard);
+  const board = [
+    ...boardFromCms.map(member => ({
+      id: String(member.id),
+      name: member.name,
+      role: member.isManagement ? t('boardMember') : member.title,
+      text: member.isManagement ? `${member.title}. ${t('bioUnderLeadership')}` : member.bio,
+      photoUrl: PORTRAIT_FALLBACK[member.name] ?? member.photoUrl,
+    })),
+    ...BOARD_FALLBACK.filter(extra => !boardFromCms.some(member => member.name === extra.name)).map(extra => ({
+      id: extra.name,
+      name: extra.name,
+      role: t('boardMember'),
+      text: t(extra.bioKey),
+      photoUrl: undefined as string | undefined,
+    })),
+  ];
 
   return (
-    <main>
-      <section
-        className={`relative overflow-hidden py-20 md:py-28 ${!heroImageUrl ? 'bg-gradient-to-br from-[#1C1C1E] via-[#2C2C2E] to-[#1C1C1E]' : ''}`}
-      >
-        {heroImageUrl && (
-          <Image
-            src={heroImageUrl}
-            alt="Leadership & Board"
-            fill
-            className="object-cover"
-            priority
-          />
-        )}
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="relative mx-auto max-w-4xl px-6 text-center md:px-12">
-          {heroTitle && (
-            <h1 className="mb-6 text-4xl font-bold text-white md:text-5xl">{heroTitle}</h1>
-          )}
-          {heroDescription && (
-            <p className="text-lg leading-relaxed text-white/90 md:text-xl">{heroDescription}</p>
-          )}
+    <>
+      <PageHeader eyebrow={t('eyebrow')} title={t('title')} lead={t('lead')} />
+
+      <section className="border-b border-rule bg-white">
+        <div className="mx-auto max-w-[1440px]">
+          <LeadershipPanel leaders={leaders} listLabel={t('listLabel')} />
         </div>
       </section>
 
-      <section className="bg-white px-6 py-16 md:px-12 md:py-24">
-        <div className="mx-auto max-w-6xl">
-          <h2 className="mb-12 text-center text-3xl font-bold text-[#1C1C1E] md:text-4xl">
-            {t('managementTeam.title')}
-          </h2>
-          <div className="grid gap-8 md:grid-cols-2">
-            {managementTeam.map(member => (
-              <ProfileCard key={member.id} member={member} emailLabel={t('emailLabel')} />
+      <Section tone="birch">
+        <Eyebrow className="mb-2">{t('boardEyebrow')}</Eyebrow>
+        <h2 className="t-h2-sm m-0 mb-7">{t('boardTitle')}</h2>
+        <ul className="m-0 grid list-none grid-cols-1 gap-5 p-0 sm:grid-cols-2 lg:grid-cols-4">
+          {board.map(member => (
+            <li key={member.id} className="flex flex-col bg-white">
+              <div className="relative h-[260px] bg-rule">
+                {member.photoUrl && (
+                  <Image
+                    src={member.photoUrl}
+                    alt={`${member.name}, ${member.role}`}
+                    fill
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                    className="object-cover object-top saturate-[0.85]"
+                  />
+                )}
+              </div>
+              <div className="flex flex-col gap-1 p-5">
+                <strong className="text-lg font-semibold">{member.name}</strong>
+                <span className="t-meta text-red">{member.role}</span>
+                <span className="mt-1.5 text-sm leading-[1.5] text-text-2">{member.text}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <table className="mt-8 w-full max-w-[720px] border-collapse text-[15px]">
+          <tbody>
+            {[
+              [t('auditor'), tInv('auditorValue')],
+              [t('legal'), tInv('legalValue')],
+            ].map(([label, value]) => (
+              <tr key={label} className="border-t border-on-dark-2 last:border-b">
+                <th scope="row" className="py-3 pr-6 text-left align-top font-semibold">
+                  {label}
+                </th>
+                <td className="py-3 text-text-2">{value}</td>
+              </tr>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-gray-50 px-6 py-16 md:px-12 md:py-24">
-        <div className="mx-auto max-w-6xl">
-          <h2 className="mb-12 text-center text-3xl font-bold text-[#1C1C1E] md:text-4xl">
-            {t('board.title')}
-          </h2>
-          <div className="grid gap-8 md:grid-cols-2">
-            {board.map(member => (
-              <ProfileCard
-                key={member.id}
-                member={{ ...member, email: undefined }}
-                titleOverride={member.isManagement ? t('board.memberTitle') : undefined}
-                hideBio={member.isManagement}
-                showPlaceholder={false}
-                emailLabel={t('emailLabel')}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-    </main>
+          </tbody>
+        </table>
+      </Section>
+    </>
   );
 }
