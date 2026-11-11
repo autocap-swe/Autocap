@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import type { Metadata } from 'next';
 import { Manrope } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
@@ -100,18 +101,26 @@ export default async function LocaleLayout({
         />
       </head>
       <body className="antialiased">
-        <NextIntlClientProvider messages={messages}>
-          <LocalizedPathProvider>
-            <CookieConsentProvider>
-              <Header />
-              <main>{children}</main>
-              <Footer />
-              <BackToTop />
-              <CookieConsent />
-              <GoogleAnalytics />
-            </CookieConsentProvider>
-          </LocalizedPathProvider>
-        </NextIntlClientProvider>
+        {/* Partial mitigation for React error 418. While the page hydrates, a second piece of
+            work can arrive (Next.js retrying its hidden metadata placeholder at the top of
+            <body>). React then restarts, loses its place before <main> and re-renders the whole
+            document. Inside a boundary the page hydrates as a separate, later step, which makes
+            the collision rarer: 61 of 200 loads failed without it and 19 of 200 with it, at
+            80 ms network latency. It does not remove the cause, which is inside the framework. */}
+        <Suspense fallback={null}>
+          <NextIntlClientProvider messages={messages}>
+            <LocalizedPathProvider>
+              <CookieConsentProvider>
+                <Header />
+                <main>{children}</main>
+                <Footer />
+                <BackToTop />
+                <CookieConsent />
+                <GoogleAnalytics />
+              </CookieConsentProvider>
+            </LocalizedPathProvider>
+          </NextIntlClientProvider>
+        </Suspense>
       </body>
     </html>
   );
