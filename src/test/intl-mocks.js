@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports -- Jest setup files are CommonJS */
 /**
  * Default next-intl mocks for component tests: real English messages, no provider needed.
  * A test file that calls jest.mock('next-intl', …) itself replaces these.
