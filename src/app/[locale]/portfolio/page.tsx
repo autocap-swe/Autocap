@@ -113,7 +113,7 @@ export default async function CompaniesPage({ params }: Props) {
             </ul>
             <p className="t-meta m-0 text-text-3">{t('regionNote')}</p>
           </div>
-          <div aria-label={t('mapLabel')} className="relative min-h-[420px] bg-fjord lg:min-h-full [&>*]:absolute [&>*]:inset-0 [&>*]:h-full">
+          <div aria-label={t('mapLabel')} className="flex flex-col justify-center bg-fjord px-5 py-6 text-sm text-text-2 lg:px-8">
             <WorkshopMapWrapper workshops={workshops} />
           </div>
         </div>

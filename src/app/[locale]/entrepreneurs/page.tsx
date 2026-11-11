@@ -61,7 +61,8 @@ export default async function EntrepreneursPage({ params }: Props) {
     <>
       <PageHeader eyebrow={t('eyebrow')} title={cms.landingHeadline} lead={cms.landingSubheadline}>
         <div className="mt-2 flex flex-wrap items-center gap-6">
-          <ButtonLink href="#talk">{cms.landingCtaText}</ButtonLink>
+          <ButtonLink href="#talk">{t('talkCta')}</ButtonLink>
+          <ArrowLink href={cms.landingCtaLink}>{cms.landingCtaText}</ArrowLink>
           <ArrowLink href="/entrepreneurs/process">{t('processLink')}</ArrowLink>
         </div>
       </PageHeader>
@@ -108,7 +109,7 @@ export default async function EntrepreneursPage({ params }: Props) {
       <section id="talk" className="scroll-mt-20 bg-birch text-ink">
         <Container className="grid grid-cols-1 gap-10 py-12 lg:grid-cols-[1fr_1.2fr] lg:py-[72px]">
           <div className="flex flex-col gap-4">
-            <Eyebrow>{cms.landingCtaText}</Eyebrow>
+            <Eyebrow>{t('formEyebrow')}</Eyebrow>
             <h2 className="t-h2 m-0">{t('formTitle')}</h2>
             <p className="t-lead m-0 max-w-[440px] text-text-2">{t('formLead')}</p>
           </div>

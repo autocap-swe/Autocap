@@ -484,7 +484,9 @@
       "formTitle": "Start with a conversation",
       "formLead": "Tell us about your workshop. Everything you share is confidential, and a first call commits you to nothing.",
       "processLink": "The process in detail",
-      "draftNote": "Indicative timeline. Every transaction is planned together with the owner."
+      "draftNote": "Indicative timeline. Every transaction is planned together with the owner.",
+      "talkCta": "Start a conversation",
+      "formEyebrow": "Let's talk"
     }
   }
 }

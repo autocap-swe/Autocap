@@ -484,7 +484,9 @@
       "formTitle": "Börja med ett samtal",
       "formLead": "Berätta om din verkstad. Allt du delar är konfidentiellt och ett första samtal förpliktar inte till något.",
       "processLink": "Processen i detalj",
-      "draftNote": "Vägledande tidslinje. Varje affär planeras tillsammans med ägaren."
+      "draftNote": "Vägledande tidslinje. Varje affär planeras tillsammans med ägaren.",
+      "talkCta": "Börja med ett samtal",
+      "formEyebrow": "Kontakt"
     }
   }
 }
