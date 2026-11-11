@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic';
-
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
@@ -25,6 +23,7 @@ import { REVALIDATE_HIGH } from '@/lib/cms/revalidate';
 import { cmsMediaUrl } from '@/lib/cms/media';
 import { buildMetadata } from '@/lib/cms/seo';
 import { groupCompanies } from '@/lib/v2/companies';
+import { heroVideoSource } from '@/lib/v2/hero-video';
 import { formatMonthYear } from '@/lib/v2/short-date';
 
 type Props = { params: Promise<{ locale: string }> };
@@ -63,6 +62,7 @@ export default async function HomePage({ params }: Props) {
     getTestimonialsContent(locale).catch(() => []),
   ]);
 
+  const heroVideo = heroVideoSource(cmsMediaUrl(cms.heroVideo));
   const companies = groupCompanies(workshops);
   const workshopCount = companies.reduce((sum, company) => sum + company.workshops.length, 0);
   const featured = companies.find(company => company.key === 'dackgruppen') ?? companies[0];
@@ -83,7 +83,8 @@ export default async function HomePage({ params }: Props) {
   return (
     <>
       <HeroVideo
-        videoUrl={cmsMediaUrl(cms.heroVideo)}
+        videoUrl={heroVideo.src}
+        posterUrl={heroVideo.poster}
         eyebrow={t('eyebrow')}
         title={t('title')}
         lead={t('lead')}

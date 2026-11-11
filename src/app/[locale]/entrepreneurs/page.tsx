@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic';
-
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { ArrowLink, ButtonLink, Container, Eyebrow, PageHeader, Quotes, Section } from '@/components/ds';

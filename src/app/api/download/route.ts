@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse, after } from 'next/server';
 import { logRequest } from '@/lib/logger';
+import { cmsBaseUrl } from '@/lib/cms/base-url';
 
 export async function GET(request: NextRequest) {
   const url = request.nextUrl.searchParams.get('url');
@@ -48,7 +49,7 @@ export async function GET(request: NextRequest) {
     bytes: body.byteLength,
   });
 
-  const cmsUrl = process.env.CMS_API_URL ?? 'http://localhost:1337';
+  const cmsUrl = cmsBaseUrl();
   const ip =
     request.headers.get('cf-connecting-ip') ??
     request.headers.get('x-forwarded-for')?.split(',')[0].trim() ??

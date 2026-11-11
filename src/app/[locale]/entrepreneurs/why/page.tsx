@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic';
-
 import type { Metadata } from 'next';
 import { buildMetadata } from '@/lib/cms/seo';
 import Link from 'next/link';

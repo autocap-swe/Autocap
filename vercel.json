@@ -1,0 +1,12 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "regions": ["fra1"],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.autocapgroup.se" }],
+      "destination": "https://autocapgroup.se/:path*",
+      "permanent": true
+    }
+  ]
+}

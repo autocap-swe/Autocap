@@ -1,18 +1,18 @@
 import type { NextConfig } from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
 import { withSentryConfig } from '@sentry/nextjs';
+import { securityHeaders } from './src/lib/security/headers';
+
+const isDevelopment = process.env.NODE_ENV === 'development';
 
 const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '1337',
-        pathname: '/uploads/**',
-      },
+      ...(isDevelopment
+        ? [{ protocol: 'http' as const, hostname: 'localhost', port: '1337', pathname: '/uploads/**' }]
+        : []),
       {
         protocol: 'https',
         hostname: 'autocap-strapi.fra1.digitaloceanspaces.com',
@@ -31,12 +31,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/:path*',
-        headers: [
-          {
-            key: 'Content-Security-Policy',
-            value: "frame-ancestors 'self' https://cms.autocapgroup.se http://localhost:1337",
-          },
-        ],
+        headers: securityHeaders({ development: isDevelopment, sentryDsn: process.env.NEXT_PUBLIC_SENTRY_DSN }),
       },
     ];
   },

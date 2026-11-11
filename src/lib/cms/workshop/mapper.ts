@@ -1,6 +1,7 @@
 import type { CmsWorkshop, Workshop } from './types';
+import { cmsBaseUrl } from '@/lib/cms/base-url';
 
-const CMS_URL = (process.env.CMS_API_URL ?? 'http://localhost:1337').replace(/\/$/, '');
+const CMS_URL = cmsBaseUrl();
 
 function resolveUrl(url: string | undefined): string | undefined {
   if (!url) return undefined;

@@ -1,7 +1,8 @@
 import type { CmsMediaKitPage, CmsMediaKitCategory, CmsMediaAsset } from './types';
 import type { AssetCategory, MediaAsset } from '@/types/media-kit';
+import { cmsBaseUrl } from '@/lib/cms/base-url';
 
-const CMS_URL = (process.env.CMS_API_URL ?? 'http://localhost:1337').replace(/\/$/, '');
+const CMS_URL = cmsBaseUrl();
 
 function resolveUrl(url: string | undefined | null): string | undefined {
   if (!url) return undefined;

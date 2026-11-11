@@ -10,8 +10,9 @@
  */
 
 import { draftMode } from 'next/headers';
+import { cmsBaseUrl } from '@/lib/cms/base-url';
 
-const CMS_API_URL = process.env.CMS_API_URL || 'http://localhost:1337';
+const CMS_API_URL = cmsBaseUrl();
 
 interface StrapiResponse<T> {
   data: T | null;
