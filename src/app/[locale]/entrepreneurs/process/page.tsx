@@ -12,12 +12,9 @@ type Props = { params: Promise<{ locale: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const cms = await getAcquisitionProcessContent(undefined, locale).catch(() => null);
+  const t = await getTranslations({ locale, namespace: 'seoPages.entrepreneursProcess' });
   return buildMetadata(
-    {
-      title: 'How It Works · AutoCap Group',
-      description:
-        'Our clear, respectful acquisition process from first conversation to completion.',
-    },
+    { title: t('title'), description: t('description') },
     cms?.seo,
     locale,
     { path: '/entrepreneurs/process' }

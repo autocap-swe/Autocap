@@ -11,7 +11,7 @@ import { getKpiTickerContent } from '@/lib/cms/kpi-ticker';
 import { getWorkshopsContent } from '@/lib/cms/workshop';
 import { getTeamMembersContent } from '@/lib/cms/team-member';
 import { REVALIDATE_HIGH } from '@/lib/cms/revalidate';
-import { buildMetadata } from '@/lib/cms/seo';
+import { buildMetadata, OG_IMAGES } from '@/lib/cms/seo';
 import { COMPANY_INFO } from '@/lib/constants';
 import { countByRegion, groupCompanies } from '@/lib/v2/companies';
 
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         },
     cms.seo,
     locale,
-    { path: '/investors', fallbackOgImage: cms.heroImage }
+    { path: '/investors', fallbackOgImage: OG_IMAGES.investors }
   );
 }
 

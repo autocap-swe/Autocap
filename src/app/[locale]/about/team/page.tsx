@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     cms?.seo,
     locale,
-    { path: '/about/team', fallbackOgImage: cms?.heroImage }
+    { path: '/about/team' }
   );
 }
 

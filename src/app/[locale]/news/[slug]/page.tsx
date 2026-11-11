@@ -83,7 +83,7 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
       name: 'AutoCap Group',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://autocapgroup.se/logo.png',
+        url: 'https://autocapgroup.se/logos/autocap-dark.png',
       },
     },
   };

@@ -9,12 +9,9 @@ type Props = { params: Promise<{ locale: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const cms = await getCookiePolicyContent(undefined, locale).catch(() => null);
+  const t = await getTranslations({ locale, namespace: 'seoPages.cookies' });
   return buildMetadata(
-    {
-      title: 'Cookie Policy · AutoCap Group',
-      description:
-        'AutoCap Group cookie policy — how we use cookies and similar technologies on our website.',
-    },
+    { title: t('title'), description: t('description') },
     cms?.seo,
     locale,
     { path: '/cookies' }

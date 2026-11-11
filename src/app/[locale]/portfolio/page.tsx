@@ -4,7 +4,7 @@ import { CompanyPanel, Container, Eyebrow, LogoWall, RedRule, type CompanyView }
 import { WorkshopMapWrapper } from '@/components/portfolio/WorkshopMapWrapper';
 import { getWorkshopsContent } from '@/lib/cms/workshop';
 import { getPortfolioPageContent } from '@/lib/cms/portfolio-page';
-import { buildMetadata } from '@/lib/cms/seo';
+import { buildMetadata, OG_IMAGES } from '@/lib/cms/seo';
 import { countByRegion, groupCompanies, type Company } from '@/lib/v2/companies';
 
 type Props = { params: Promise<{ locale: string }> };
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         },
     cms?.seo,
     locale,
-    { path: '/portfolio', fallbackOgImage: cms?.heroImage }
+    { path: '/portfolio', fallbackOgImage: OG_IMAGES.companies }
   );
 }
 

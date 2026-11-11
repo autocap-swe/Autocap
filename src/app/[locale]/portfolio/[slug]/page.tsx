@@ -7,7 +7,8 @@ import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { getWorkshopsContent, getWorkshopBySlugContent } from '@/lib/cms/workshop';
 import { WorkshopHero } from '@/components/portfolio/WorkshopHero';
 import { ArticleLocalizedPathSetter } from '@/components/news/ArticleLocalizedPathSetter';
-import { buildMetadata, localizedSlugPath } from '@/lib/cms/seo';
+import { buildMetadata, localeUrl, localizedSlugPath } from '@/lib/cms/seo';
+import { workshopJsonLd } from '@/lib/seo/workshop-json-ld';
 
 const URL_PATTERN = /https?:\/\/[^\s]+/g;
 
@@ -97,6 +98,13 @@ export default async function WorkshopDetailPage({ params }: WorkshopDetailPageP
           basePath="/portfolio"
         />
       )}
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(workshopJsonLd(workshop, localeUrl(locale, `/portfolio/${slug}`))),
+        }}
+      />
 
       <WorkshopHero
         name={workshop.name}

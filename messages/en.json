@@ -275,6 +275,14 @@
     "investorsMetrics": {
       "title": "Growth metrics · AutoCap Group",
       "description": "AutoCap Group's growth from founding to today, measured in workshops, people and revenue."
+    },
+    "entrepreneursProcess": {
+      "title": "How It Works · AutoCap Group",
+      "description": "Our clear, respectful acquisition process from first conversation to completion."
+    },
+    "cookies": {
+      "title": "Cookie Policy · AutoCap Group",
+      "description": "AutoCap Group cookie policy — how we use cookies and similar technologies on our website."
     }
   },
   "v2": {

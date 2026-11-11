@@ -7,7 +7,7 @@ import { ContactForm } from '@/components/entrepreneurs/ContactForm';
 import { getEntrepreneursPageContent } from '@/lib/cms/entrepreneurs-page';
 import { getTestimonialsContent } from '@/lib/cms/testimonial';
 import { REVALIDATE_HIGH } from '@/lib/cms/revalidate';
-import { buildMetadata } from '@/lib/cms/seo';
+import { buildMetadata, OG_IMAGES } from '@/lib/cms/seo';
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     cms.seo,
     locale,
-    { path: '/entrepreneurs', fallbackOgImage: cms.heroImage }
+    { path: '/entrepreneurs', fallbackOgImage: OG_IMAGES.entrepreneurs }
   );
 }
 

@@ -11,6 +11,12 @@ export interface CmsSeo {
 const SITE_NAME = 'AutoCap Group';
 export const SITE_URL = 'https://autocapgroup.se';
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/og/autocap-og.jpg`;
+/** Branded 1200×630 share images per main section (v2 design). */
+export const OG_IMAGES = {
+  investors: `${SITE_URL}/og/investors-og.jpg`,
+  entrepreneurs: `${SITE_URL}/og/entrepreneurs-og.jpg`,
+  companies: `${SITE_URL}/og/companies-og.jpg`,
+} as const;
 
 /** Path per language; leave a language out when the page has no translation. */
 export type LocalizedPaths = { en?: string; sv?: string };
